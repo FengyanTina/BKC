@@ -6,8 +6,6 @@ export default function App() {
       
       <div className='card'>
         <div className='contentbef'>
-            
-          <h3>Card One </h3>
         </div>
         <div className='content'>
         <h2>01</h2>
