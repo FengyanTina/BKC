@@ -17,7 +17,7 @@ public class UserController : ControllerBase
     {
         return await _context.Users.ToListAsync();
     }
-    
+
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUser(int id)
     {
@@ -39,7 +39,6 @@ public class UserController : ControllerBase
             return BadRequest("Invalid UserType");
         }
 
-        // Your logic to save the user to the database
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
