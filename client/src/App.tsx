@@ -3,7 +3,7 @@ import './App.css'
 export default function App() {
   return (
     <div className='container'>
-      
+       
       <div className='card'>
         <div className='contentbef'>
         </div>
