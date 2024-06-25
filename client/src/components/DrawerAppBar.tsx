@@ -77,12 +77,10 @@ export default function DrawerAppBar(props: Props) {
           >
           <img src={HuvudloggaBKC3} alt="Logo" style={{ maxHeight: 50, marginRight: 10 }} />
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Tabs />
-          </Box>
-           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          
+           <Box sx={{ display: { xs: 'none', sm: 'block' , '&:focus': { outline: 'none' }} }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: 'black' }}>
+              <Button key={item} sx={{ color: 'black', '&:focus': { outline: 'none' } }}>
                 {item}
               </Button>
             ))}
