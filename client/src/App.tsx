@@ -1,9 +1,11 @@
 import './App.css'
+import DrawerAppBar from './components/DrawerAppBar'
+import Varhistoria from './assets/Varhistoria.jpg'
 
 export default function App() {
   return (
-    <div className='container'>
-       
+    <div className='container' style={{ backgroundImage: `url(${Varhistoria})`,backgroundSize: 'cover' }}>
+       <DrawerAppBar></DrawerAppBar>
       <div className='card'>
         <div className='contentbef'>
         </div>
