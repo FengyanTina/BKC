@@ -6,18 +6,12 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import HuvudloggaBKC3 from '../assets/Huvudlogga-BKC3.png'; 
 import ScheduleMenuItems from './ScheduleMenuItems';
 import ServiceMenuItems from './ServiceMenuItems';
-import MenuListComposition from './ScheduleMenuItems';
-import ScheduleMenuListComposition from './ScheduleMenuItems';
 import ActivitiesMenuItems from './ActivitiesMenuItems';
 
 
@@ -30,7 +24,7 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ['Schedule', 'Services', 'Activities'];
+// const navItems = ['Schedule', 'Services', 'Activities'];
 
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
