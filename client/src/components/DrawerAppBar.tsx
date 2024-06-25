@@ -13,8 +13,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Tabs from './Tabs';
 import HuvudloggaBKC3 from '../assets/Huvudlogga-BKC3.png'; 
+import ScheduleMenuItems from './ScheduleMenuItems';
+import ServiceMenuItems from './ServiceMenuItems';
+import MenuListComposition from './ScheduleMenuItems';
+import ScheduleMenuListComposition from './ScheduleMenuItems';
+import ActivitiesMenuItems from './ActivitiesMenuItems';
 
 
 interface Props {
@@ -31,6 +35,7 @@ const navItems = ['Schedule', 'Services', 'Activities'];
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -43,13 +48,16 @@ export default function DrawerAppBar(props: Props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
+      <ScheduleMenuItems/>
+            <ServiceMenuItems/>
+            <ActivitiesMenuItems/>
+        {/* {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
-        ))}
+        ))} */}
       </List>
     </Box>
   );
@@ -77,13 +85,15 @@ export default function DrawerAppBar(props: Props) {
           >
           <img src={HuvudloggaBKC3} alt="Logo" style={{ maxHeight: 50, marginRight: 10 }} />
           </Typography>
-          
-           <Box sx={{ display: { xs: 'none', sm: 'block' , '&:focus': { outline: 'none' }} }}>
-            {navItems.map((item) => (
+           <Box sx={{ display: { xs: 'none', sm: 'flex',gap: '50px', '&:focus': { outline: 'none' } } }}>
+            <ScheduleMenuItems/>
+            <ServiceMenuItems/>
+            <ActivitiesMenuItems/>
+            {/* {navItems.map((item) => (
               <Button key={item} sx={{ color: 'black', '&:focus': { outline: 'none' } }}>
                 {item}
               </Button>
-            ))}
+            ))} */}
           </Box> 
         </Toolbar>
       </AppBar>

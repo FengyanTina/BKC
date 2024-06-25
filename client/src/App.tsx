@@ -3,6 +3,8 @@ import DrawerAppBar from './components/DrawerAppBar'
 import Varhistoria from './assets/Varhistoria.jpg'
 import { Outlet } from "react-router";
 import { Box, Link, Typography } from '@mui/material';
+import AppBarMenuList from './components/AppBarMenuList';
+import ScheduleMenuItems from './components/ScheduleMenuItems';
 
 export default function App() {
   
@@ -14,9 +16,9 @@ export default function App() {
     minHeight={"100%"}
     
   >
-    <DrawerAppBar />
+    
     <div className='container' style={{ backgroundImage: `url(${Varhistoria})`,backgroundSize: 'cover' }}>
-       <DrawerAppBar></DrawerAppBar>
+       <DrawerAppBar/>
       <div className='card'>
         <div className='contentbef'>
         </div>
