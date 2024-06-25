@@ -1,10 +1,8 @@
 import './App.css'
-import DrawerAppBar from './components/DrawerAppBar'
+import DrawerAppBar from './components/appBar/DrawerAppBar'
 import Varhistoria from './assets/Varhistoria.jpg'
 import { Outlet } from "react-router";
 import { Box, Link, Typography } from '@mui/material';
-import AppBarMenuList from './components/AppBarMenuList';
-import ScheduleMenuItems from './components/ScheduleMenuItems';
 
 export default function App() {
   
