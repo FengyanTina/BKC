@@ -3,6 +3,7 @@ import DrawerAppBar from './components/appBar/DrawerAppBar'
 import Varhistoria from './assets/Varhistoria.jpg'
 import { Outlet } from "react-router";
 import { Box, Link, Typography } from '@mui/material';
+import RollingSection from './components/common/RollingSection';
 
 export default function App() {
   
@@ -20,26 +21,27 @@ export default function App() {
       <div className='card'>
         <div className='contentbef'>
         </div>
-        <div className='content'>
-        <h2>01</h2>
+        <div className='content1'>
+       
           <h3>Card One</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit... </p>
           <a href='/'>Read More</a>
         </div>
       </div>
+      <div>
+      <RollingSection/>
+      </div>
       <div className='card'>
         <div className='content'>
-        <h2>02</h2>
           <h3>Card Two</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...Lorem ipsum dolor sit amet, consectetur adipiscing elit...Lorem ipsum dolor sit amet, consectetur adipiscing elit..adipiscing elit..</p>
           <a href='/'>Read More</a>
         </div>
       </div>
       <div className='card'>
         <div className='content'>
-        <h2>03</h2>
           <h3>Card Three</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
           <a href='/'>Read More</a>
         </div>
       
@@ -51,7 +53,7 @@ export default function App() {
           <Typography variant="h2">01</Typography>
           <Typography variant="h3">Card One</Typography>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
           </Typography>
           <Link href='/'>Read More</Link>
         </Box>
@@ -61,7 +63,7 @@ export default function App() {
           <Typography variant="h2">02</Typography>
           <Typography variant="h3">Card Two</Typography>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
           </Typography>
           <Link href='/'>Read More</Link>
         </Box>
@@ -71,7 +73,7 @@ export default function App() {
           <Typography variant="h2">03</Typography>
           <Typography variant="h3">Card Three</Typography>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
           </Typography>
           <Link href='/'>Read More</Link>
         </Box>
@@ -82,36 +84,36 @@ export default function App() {
     >
       <Outlet />
     </Box>
-    {/* <div className='container' style={{ backgroundImage: `url(${Varhistoria})`,backgroundSize: 'cover' }}>
+    <div className='container' style={{ backgroundImage: `url(${Varhistoria})`,backgroundSize: 'cover' }}>
        <DrawerAppBar></DrawerAppBar>
       <div className='card'>
         <div className='contentbef'>
         </div>
-        <div className='content'>
-        <h2>01</h2>
+        <div className='content1'>
+        
           <h3>Card One</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit... </p> */}
           <a href='/'>Read More</a>
         </div>
       </div>
       <div className='card'>
         <div className='content'>
-        <h2>02</h2>
+       
           <h3>Card Two</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit... </p>
           <a href='/'>Read More</a>
         </div>
       </div>
       <div className='card'>
         <div className='content'>
-        <h2>03</h2>
+       
           <h3>Card Three</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit... </p>
           <a href='/'>Read More</a>
         </div>
       
       </div>
-    </div> */}
+    </div>
     </Box>
   );
 }

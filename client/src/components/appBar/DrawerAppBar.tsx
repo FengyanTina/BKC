@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import HuvudloggaBKC3 from '../assets/Huvudlogga-BKC3.png'; 
+import HuvudloggaBKC3 from '../../assets/Huvudlogga-BKC3.png'; 
 import ScheduleMenuItems from './ScheduleMenuItems';
 import ServiceMenuItems from './ServiceMenuItems';
 import ActivitiesMenuItems from './ActivitiesMenuItems';
