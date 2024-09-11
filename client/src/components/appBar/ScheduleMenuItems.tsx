@@ -77,13 +77,20 @@ export default function ScheduleMenuListComposition() {
                   placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
-              <Paper>
+              <Paper
+               elevation={0} // Remove shadow
+                sx={{
+                backgroundColor: 'transparent', // Make the background transparent
+                boxShadow: 'none', // Remove box shadow
+                //backdropFilter: 'blur(5px)',
+              }}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
                     id="composition-menu"
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
+                   
                   >
                     <MenuItem onClick={handleClose}>Calendar</MenuItem>
                   </MenuList>
