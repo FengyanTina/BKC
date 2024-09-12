@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
+import Mission from "../../assets/Mission.png";
+import Varhistoria from "../../assets/Varhistoria.jpg";
 
 
 const RollingSection = () => {
   const topics = [
-    { title: "Topic 1: React Hooks", url: "/react-hooks" },
-    { title: "Topic 2: JavaScript ES6 Features", url: "/js-es6" },
-    { title: "Topic 3: CSS Grid & Flexbox", url: "/css-grid-flexbox" },
-    { title: "Topic 4: Understanding Redux", url: "/redux" },
-    { title: "Topic 5: TypeScript with React", url: "/typescript-react" },
+    { title: "Topic 1: React Hooks", url: "/react-hooks", backgroundImage: PrayerBible  },
+    { title: "Topic 2: JavaScript ES6 Features", url: "/js-es6",backgroundImage: Mission },
+    { title: "Topic 3: CSS Grid & Flexbox", url: "/css-grid-flexbox",backgroundImage: PrayerBible   },
+    { title: "Topic 4: Understanding Redux", url: "/redux",backgroundImage: Mission },
+    { title: "Topic 5: TypeScript with React", url: "/typescript-react",backgroundImage: Varhistoria },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,9 +42,24 @@ const RollingSection = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onClick={() => handleClick(topics[currentIndex].url)} // Handle click
-      style={{ cursor: "pointer" }} // Change cursor to pointer
+      style={{ 
+        cursor: "pointer", 
+        backgroundImage: `url(${topics[currentIndex].backgroundImage})`,
+        backgroundSize: "cover", // Ensure background image covers the entire section
+        backgroundPosition: "center", // Center the background image
+        backgroundRepeat: "no-repeat", // Do not repeat the background image
+        height: "200px", // Adjust the height as needed
+        color: "white", // Adjust text color for better contrast
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+      }} 
     >
-      <h1>{topics[currentIndex].title}</h1>
+      <h3 
+      style={{ 
+       
+      }} >{topics[currentIndex].title}</h3>
     </div>
   );
 };

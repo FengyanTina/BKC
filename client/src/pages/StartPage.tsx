@@ -47,35 +47,60 @@ const divStyle5: React.CSSProperties = {
 };
 export default function StartPage() {
   return (
-    <Box
-    display={"flex"}
-    flexDirection={"column"}
-    justifyContent={"space-between"} 
-    >
+    <Box display={"flex"} flexDirection={"column"}>
       <Box
-         className="container"
-         sx={{
-           backgroundImage: `url(${PrayerBible})`,
-           backgroundSize: "cover",
-           backgroundPosition: "center",
-           backgroundRepeat: "no-repeat",        
-           position: "relative",
-         }}
+        className="container"
+        sx={{
+          backgroundImage: `url(${PrayerBible})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "relative",
+          display: "flex",
+        }}
       >
-        <Box className="card">
-          <Box className="content1">
-            <Typography variant="h3">Card One</Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit...{" "}
-            </Typography>
-            <Link href="/">Read More</Link>
-          </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            "& a": {
+              position: "relative",
+              paddingLeft: "20px", // Add padding to make room for the line
+              marginBottom: "20px", // Space between the links
+              textDecoration: "none", // Remove underline from links
+              color: "black", // Set text color
+              fontSize: "18px", // Adjust font size as needed
+            },
+            "& a::before": {
+              content: '""',
+              position: "absolute",
+              left: 0,
+              top: "50%",
+              width: "4px", // Width of the vertical line
+              height: "20px", // Height of the vertical line
+              backgroundColor: "black", // Color of the vertical line
+              transform: "translateY(-50%)", // Center the line vertically with respect to the text
+            },
+          }}
+        >
+          <Link href="/">About Us</Link>
+          <Link href="/">New Here</Link>
         </Box>
 
-        <Box className="card">
-          <Box className="content1">
-            <RollingSection />
-          </Box>
+        <Box
+          sx={{
+            width: "300px", // Set fixed width
+            height: "200px", // Set fixed height
+            overflow: "hidden", // Hide overflow content to prevent layout issues
+            position: "relative", // Ensure that any absolute positioned elements are contained
+            border: "1px solid #ddd", // Optional: Add border for visual clarity
+            borderRadius: "8px", // Optional: Add border radius for rounded corners
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)", // Optional: Add shadow for visual depth
+            marginLeft: "20px", // Margin from the left side
+            transform: "translateX(-30px)", // Adjust this value to shift left
+          }}
+        >
+          <RollingSection />
         </Box>
       </Box>
 
