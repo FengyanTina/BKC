@@ -68,6 +68,27 @@ export default function ServiceMenuListComposition() {
           placement="bottom-start"
           transition
           disablePortal
+          modifiers={[
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 10], // Vertical offset to move the menu below the button
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                altBoundary: true,
+                tether: false,
+              },
+            },
+            {
+              name: 'flip',
+              options: {
+                fallbackPlacements: [], // Prevent flipping to maintain positioning
+              },
+            },
+          ]}
         >
           {({ TransitionProps, placement }) => (
             <Grow
@@ -77,13 +98,30 @@ export default function ServiceMenuListComposition() {
                   placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
-              <Paper>
+              <Paper
+                sx={{
+                    position: 'absolute', // Position the Paper absolutely relative to the Popper
+                    width: anchorRef.current ? anchorRef.current.clientWidth : 'auto', 
+
+                    boxShadow: 'none', // Optional: Remove shadow if desired
+                    backgroundColor: 'white', // Optional: Set a background color
+                    transform: 'translateX(-50%)', // Center the Paper horizontally
+                    left: '50%', // Center the Paper horizontally relative to the Popper
+                    zIndex: 1300, // Ensure the Paper is on top of other elements
+                  }}
+             >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
                     id="composition-menu"
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column', // Stack menu items vertically
+                        alignItems: 'center', // Center items within the Paper
+                       // Add padding for aesthetics
+                      }}
                   >
                     <MenuItem onClick={handleClose}>SudayServices</MenuItem>
                     <MenuItem onClick={handleClose}>SundaySchool</MenuItem>

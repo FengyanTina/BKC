@@ -13,6 +13,7 @@ import HuvudloggaBKC3 from '../../assets/Huvudlogga-BKC3.png';
 import ScheduleMenuItems from './ScheduleMenuItems';
 import ServiceMenuItems from './ServiceMenuItems';
 import ActivitiesMenuItems from './ActivitiesMenuItems';
+import TabDrawer from './TabDrawer';
 
 
 interface Props {
@@ -29,11 +30,16 @@ const drawerWidth = 240;
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+    setDrawerOpen((prevOpen) => !prevOpen);
   };
+
+
+//   const handleDrawerToggle = () => {
+//     setMobileOpen((prevState) => !prevState);
+//   };
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -61,6 +67,7 @@ export default function DrawerAppBar(props: Props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      <div>
       <AppBar component="nav" sx={{ backgroundColor: 'transparent', // Make the background transparent
                 boxShadow: 'none',}}>
         <Toolbar>
@@ -73,6 +80,7 @@ export default function DrawerAppBar(props: Props) {
           >
             <MenuIcon />
           </IconButton>
+          
           <Typography
             variant="h6"
             component="div"
@@ -80,18 +88,21 @@ export default function DrawerAppBar(props: Props) {
           >
           <img src={HuvudloggaBKC3} alt="Logo" style={{ maxHeight: 50, marginRight: 10 }} />
           </Typography>
-           <Box sx={{ display: { xs: 'none', sm: 'flex',gap: '50px', '&:focus': { outline: 'none' } } }}>
+           <Box sx={{ 
+           display: { xs: 'none', sm: 'flex' },
+           gap: '50px',
+           justifyContent: 'center', // Center the MenuItems
+           flexGrow: 1, // Allow the Box to grow to occupy space and center its content
+           '&:focus': { outline: 'none' },
+            }}>
             <ScheduleMenuItems/>
             <ServiceMenuItems/>
             <ActivitiesMenuItems/>
-            {/* {navItems.map((item) => (
-              <Button key={item} sx={{ color: 'black', '&:focus': { outline: 'none' } }}>
-                {item}
-              </Button>
-            ))} */}
           </Box> 
         </Toolbar>
       </AppBar>
+      <TabDrawer open={drawerOpen} onClose={handleDrawerToggle} />
+          </div>
       <nav>
         <Drawer
           container={container}
