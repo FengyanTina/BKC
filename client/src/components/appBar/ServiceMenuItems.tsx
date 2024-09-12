@@ -1,12 +1,12 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Stack from "@mui/material/Stack";
 
 export default function ServiceMenuListComposition() {
   const [open, setOpen] = React.useState(false);
@@ -28,10 +28,10 @@ export default function ServiceMenuListComposition() {
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setOpen(false);
     }
   }
@@ -48,16 +48,15 @@ export default function ServiceMenuListComposition() {
 
   return (
     <Stack direction="row" spacing={2}>
-
       <div>
         <Button
           ref={anchorRef}
           id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
+          aria-controls={open ? "composition-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          sx={{ color: 'black', '&:focus': { outline: 'none' } }}
+          sx={{ color: "black", "&:focus": { outline: "none" } }}
         >
           Services
         </Button>
@@ -70,20 +69,20 @@ export default function ServiceMenuListComposition() {
           disablePortal
           modifiers={[
             {
-              name: 'offset',
+              name: "offset",
               options: {
                 offset: [0, 10], // Vertical offset to move the menu below the button
               },
             },
             {
-              name: 'preventOverflow',
+              name: "preventOverflow",
               options: {
                 altBoundary: true,
                 tether: false,
               },
             },
             {
-              name: 'flip',
+              name: "flip",
               options: {
                 fallbackPlacements: [], // Prevent flipping to maintain positioning
               },
@@ -95,21 +94,22 @@ export default function ServiceMenuListComposition() {
               {...TransitionProps}
               style={{
                 transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  placement === "bottom-start" ? "left top" : "left bottom",
               }}
             >
               <Paper
                 sx={{
-                    position: 'absolute', // Position the Paper absolutely relative to the Popper
-                    width: anchorRef.current ? anchorRef.current.clientWidth : 'auto', 
-
-                    boxShadow: 'none', // Optional: Remove shadow if desired
-                    backgroundColor: 'white', // Optional: Set a background color
-                    transform: 'translateX(-50%)', // Center the Paper horizontally
-                    left: '50%', // Center the Paper horizontally relative to the Popper
-                    zIndex: 1300, // Ensure the Paper is on top of other elements
-                  }}
-             >
+                  position: "absolute", // Position the Paper absolutely relative to the Popper
+                  width: anchorRef.current
+                    ? anchorRef.current.clientWidth
+                    : "auto",
+                  boxShadow: "none", // Optional: Remove shadow if desired
+                  backgroundColor: "transparent", // Optional: Set a background color
+                  transform: "translateX(-50%)", // Center the Paper horizontally
+                  left: "50%", // Center the Paper horizontally relative to the Popper
+                  zIndex: 1300, // Ensure the Paper is on top of other elements
+                }}
+              >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
@@ -117,11 +117,10 @@ export default function ServiceMenuListComposition() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column', // Stack menu items vertically
-                        alignItems: 'center', // Center items within the Paper
-                       // Add padding for aesthetics
-                      }}
+                      display: "flex",
+                      flexDirection: "column", // Stack menu items vertically
+                      alignItems: "center", // Center items within the Paper
+                    }}
                   >
                     <MenuItem onClick={handleClose}>SudayServices</MenuItem>
                     <MenuItem onClick={handleClose}>SundaySchool</MenuItem>

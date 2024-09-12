@@ -77,13 +77,32 @@ export default function ActivitiesMenuListComposition() {
                   placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
-              <Paper>
+              <Paper
+               elevation={0} // Remove shadow
+               sx={{
+                 backgroundColor: "transparent", // Make the background transparent
+                 //backdropFilter: 'blur(5px)',
+                 position: "absolute", // Position the Paper absolutely relative to the Popper
+                 width: anchorRef.current
+                   ? anchorRef.current.clientWidth
+                   : "auto",
+                 boxShadow: "none", // Optional: Remove shadow if desired
+                 transform: "translateX(-50%)", // Center the Paper horizontally
+                 left: "50%", // Center the Paper horizontally relative to the Popper
+                 zIndex: 1300,
+               }}
+              >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
                     id="composition-menu"
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column", // Stack menu items vertically
+                        alignItems: "center", // Center items within the Paper
+                      }}
                   >
                     <MenuItem onClick={handleClose}>BKCKids</MenuItem>
                     <MenuItem onClick={handleClose}>HomeGroup</MenuItem>

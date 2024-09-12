@@ -25,34 +25,15 @@
 
 
   
-  body::after
-  {
-    content:'';
-    position:absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height:100%;
-  } 
 
   /* Full screen background container */
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh; 
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1; /* Ensure the background stays behind all content */
-  }
-  
+
   .container {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
-    flex-wrap: wrap;
+    
     width: 100%; /* Ensure container takes up full width */
    /* Limit container width for content centering */
     height: 100vh;
@@ -70,14 +51,12 @@
   } */
   body::after
   {
-    content:'';
+   
     position:absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height:100%;
-   
-   
+    height:100%; 
   } 
   
   /* .container {
@@ -173,7 +152,7 @@
     position: relative;
     width: 280px;
     height: auto; /* Allow height to adjust based on content */
-    margin: 30px;
+    margin: 20px;
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     background: rgba(188, 168, 168, 0.1);
@@ -187,7 +166,7 @@
   }
   
   .container .card .content {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     transform: translateY(100px);
     opacity: 1;
@@ -199,15 +178,7 @@
     opacity: 1;
   }
   
-  .container .card .content h2 {
-    position: absolute;
-    top: -200px;
-    right: 30px;
-    font-size: 8em;
-    color: rgba(126, 113, 86, 0.52);
-    pointer-events: none;
-  }
-  
+
   .container .card .content h3 {
     font-size: 1.8em;
     color: #faf9f9;
@@ -296,40 +267,3 @@
     filter: blur(10px);
     z-index: 0;
   }
-  
-  .cross-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-image: url('/path-to-cross-overlay.svg');
-    width: 200px;  /* Adjust as needed */
-    height: 200px; /* Adjust as needed */
-    opacity: 0.1;
-    z-index: 1;
-  }
-  .cross-overlay {
-    position: absolute; /* So that it can be positioned over the parent div */
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center it */
-    width: 200px; /* Set width and height */
-    height: 200px;
-    
-    background-size: contain; /* Ensure the image fits within the div */
-    background-repeat: no-repeat;
-    opacity: 0.1; /* Make it semi-transparent */
-  }
-  
-  .verse-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 10vw;
-    color: rgba(255, 255, 255, 0.8); /* Light text, semi-transparent */
-    text-align: center;
-    z-index: 1;
-  }
-  
-  

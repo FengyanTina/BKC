@@ -7,16 +7,22 @@ import AdminPage from "./pages/AdminPage.tsx";
 import HomeGroupPage from "./pages/activities/HomeGroupPage.tsx";
 import BKCKidsPage from "./pages/activities/BKCKidsPage.tsx";
 import CalendarPage from "./pages/schedules/CalendarPage.tsx";
+import ServicesMainPage from "./pages/services/ServicesMainPage.tsx";
+import SchedulesMainPage from "./pages/schedules/SchedulesMainPage.tsx";
+import ActivitiesMainPage from "./pages/activities/ActivitesMainPage.tsx";
+import StartPage from "./pages/StartPage.tsx";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "homeGroup", element: <HomeGroupPage /> },
-      { path: "bkcKids", element: <BKCKidsPage /> },
+        { path: "home", element: <StartPage /> },
+      { path: "services", element: <ServicesMainPage /> },
+      { path: "schedules", element: <SchedulesMainPage /> },
       { path: "admin", element: <AdminPage /> },
-      { path: "calendar", element: <CalendarPage /> },
+      { path: "activities", element: <ActivitiesMainPage /> },
     ],
   },
 ]);

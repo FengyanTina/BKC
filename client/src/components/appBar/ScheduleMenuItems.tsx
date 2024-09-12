@@ -1,12 +1,12 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Stack from "@mui/material/Stack";
 
 export default function ScheduleMenuListComposition() {
   const [open, setOpen] = React.useState(false);
@@ -28,10 +28,10 @@ export default function ScheduleMenuListComposition() {
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       setOpen(false);
     }
   }
@@ -48,16 +48,15 @@ export default function ScheduleMenuListComposition() {
 
   return (
     <Stack direction="row" spacing={2}>
-
       <div>
         <Button
           ref={anchorRef}
           id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
+          aria-controls={open ? "composition-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          sx={{ color: 'black', '&:focus': { outline: 'none' } }}
+          sx={{ color: "black", "&:focus": { outline: "none" } }}
         >
           Schedule
         </Button>
@@ -74,25 +73,24 @@ export default function ScheduleMenuListComposition() {
               {...TransitionProps}
               style={{
                 transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                  placement === "bottom-start" ? "left top" : "left bottom",
               }}
             >
               <Paper
-               elevation={0} // Remove shadow
+                elevation={0} // Remove shadow
                 sx={{
-               backgroundColor: 'transparent', // Make the background transparent
-               
-                //backdropFilter: 'blur(5px)',
-                position: 'absolute', // Position the Paper absolutely relative to the Popper
-                width: anchorRef.current ? anchorRef.current.clientWidth : 'auto', 
-        
-                boxShadow: 'none', // Optional: Remove shadow if desired
-                
-                transform: 'translateX(-50%)', // Center the Paper horizontally
-                left: '50%', // Center the Paper horizontally relative to the Popper
-                zIndex: 1300,
-                
-              }}>
+                  backgroundColor: "transparent", // Make the background transparent
+                  //backdropFilter: 'blur(5px)',
+                  position: "absolute", // Position the Paper absolutely relative to the Popper
+                  width: anchorRef.current
+                    ? anchorRef.current.clientWidth
+                    : "auto",
+                  boxShadow: "none", // Optional: Remove shadow if desired
+                  transform: "translateX(-50%)", // Center the Paper horizontally
+                  left: "50%", // Center the Paper horizontally relative to the Popper
+                  zIndex: 1300,
+                }}
+              >
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
@@ -100,11 +98,11 @@ export default function ScheduleMenuListComposition() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column', // Stack menu items vertically
-                        alignItems: 'center', // Center items within the Paper
-                       // Add padding for aesthetics
-                      }}
+                      display: "flex",
+                      flexDirection: "column", // Stack menu items vertically
+                      alignItems: "center", // Center items within the Paper
+                      // Add padding for aesthetics
+                    }}
                   >
                     <MenuItem onClick={handleClose}>Calendar</MenuItem>
                   </MenuList>
