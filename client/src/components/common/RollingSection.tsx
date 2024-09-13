@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
+import Conference from "../../assets/Conference.jpg";
 import Mission from "../../assets/Mission.png";
-import Varhistoria from "../../assets/Varhistoria.jpg";
-
+import Prayer from "../../assets/Prayer.jpg";
+import Worship from "../../assets/Worship.jpeg";
+import Bible from "../../assets/Bible.jpg";
 
 const RollingSection = () => {
   const topics = [
-    { title: "Topic 1: React Hooks", url: "/react-hooks", backgroundImage: PrayerBible  },
-    { title: "Topic 2: JavaScript ES6 Features", url: "/js-es6",backgroundImage: Mission },
-    { title: "Topic 3: CSS Grid & Flexbox", url: "/css-grid-flexbox",backgroundImage: PrayerBible   },
-    { title: "Topic 4: Understanding Redux", url: "/redux",backgroundImage: Mission },
-    { title: "Topic 5: TypeScript with React", url: "/typescript-react",backgroundImage: Varhistoria },
+    { title: "Topic 1: Prayers", url: "/react-hooks", backgroundImage: Prayer  },
+    { title: "Topic 2: Worship", url: "/js-es6",backgroundImage: Worship },
+    { title: "Topic 3: Bible Study", url: "/css-grid-flexbox",backgroundImage: Bible   },
+    { title: "Topic 4: Baptism", url: "/redux",backgroundImage: Mission },
+    { title: "Topic 5: Conferences", url: "/typescript-react",backgroundImage: Conference },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,7 +39,6 @@ const RollingSection = () => {
 
   return (
     <div
-      className="rolling-section"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onClick={() => handleClick(topics[currentIndex].url)} // Handle click
@@ -48,18 +48,18 @@ const RollingSection = () => {
         backgroundSize: "cover", // Ensure background image covers the entire section
         backgroundPosition: "center", // Center the background image
         backgroundRepeat: "no-repeat", // Do not repeat the background image
-        height: "200px", // Adjust the height as needed
+        width: "100%", // Take full width of the container
+        height: "100%", // Take full height of the container
         color: "white", // Adjust text color for better contrast
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
+        overflow:'hidden',
       }} 
     >
-      <h3 
-      style={{ 
-       
-      }} >{topics[currentIndex].title}</h3>
+        
+      <h3 >{topics[currentIndex].title}</h3>
     </div>
   );
 };

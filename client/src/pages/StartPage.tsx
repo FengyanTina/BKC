@@ -2,7 +2,7 @@ import "../App.css";
 import DrawerAppBar from "../components/appBar/DrawerAppBar";
 import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
 import { Outlet } from "react-router";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Grid, Link, Typography } from "@mui/material";
 import RollingSection from "../components/common/RollingSection";
 import TabBar from "../components/appBar/TabBar";
 
@@ -47,63 +47,82 @@ const divStyle5: React.CSSProperties = {
 };
 export default function StartPage() {
   return (
-    <Box display={"flex"} flexDirection={"column"}>
-      <Box
-        className="container"
+     <Box display="flex" flexDirection="column">
+    <Grid
+    spacing={2}
+    direction={{ xs: "column", sm: "row" }}
+      sx={{
+        backgroundImage: `url(${PrayerBible})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+        width: "100%", // Full width of the container
+        height: "100vh", // Full viewport height
+      }}
+    >
+      {/* Link Section */}
+      <Grid
         sx={{
-          backgroundImage: `url(${PrayerBible})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          position: "relative",
           display: "flex",
+          flexDirection: "column",
+          "& a": {
+            position: "relative",
+            paddingLeft: "20px", // Space for the vertical line
+            marginBottom: "20px", // Space between the links
+            textDecoration: "none", // No underline
+            color: "black",
+            fontSize: "18px", // Adjust font size
+          },
+          "& a::before": {
+            content: '""',
+            position: "absolute",
+            left: 0,
+            top: "50%",
+            width: "4px", // Vertical line width
+            height: "20px", // Vertical line height
+            backgroundColor: "black", // Line color
+            transform: "translateY(-50%)", // Center line vertically
+          },
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            "& a": {
-              position: "relative",
-              paddingLeft: "20px", // Add padding to make room for the line
-              marginBottom: "20px", // Space between the links
-              textDecoration: "none", // Remove underline from links
-              color: "black", // Set text color
-              fontSize: "18px", // Adjust font size as needed
-            },
-            "& a::before": {
-              content: '""',
-              position: "absolute",
-              left: 0,
-              top: "50%",
-              width: "4px", // Width of the vertical line
-              height: "20px", // Height of the vertical line
-              backgroundColor: "black", // Color of the vertical line
-              transform: "translateY(-50%)", // Center the line vertically with respect to the text
-            },
-          }}
-        >
-          <Link href="/">About Us</Link>
-          <Link href="/">New Here</Link>
-        </Box>
+        <Link href="/">Our Vision</Link>
+        <Link href="/">New Here</Link>
+        <Link href="/">Contact Us</Link>
+      </Grid>
 
-        <Box
-          sx={{
-            width: "300px", // Set fixed width
-            height: "200px", // Set fixed height
-            overflow: "hidden", // Hide overflow content to prevent layout issues
-            position: "relative", // Ensure that any absolute positioned elements are contained
-            border: "1px solid #ddd", // Optional: Add border for visual clarity
-            borderRadius: "8px", // Optional: Add border radius for rounded corners
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)", // Optional: Add shadow for visual depth
-            marginLeft: "20px", // Margin from the left side
-            transform: "translateX(-30px)", // Adjust this value to shift left
-          }}
-        >
-          <RollingSection />
-        </Box>
-      </Box>
-
+      {/* Rolling Section */}
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        sx={{
+          width: {
+            xs: "100%", // Full width on small screens
+            sm: "300px", // Adjust width for tablets
+            md: "400px", // Width for larger screens
+          },
+          height: {
+            xs: "200px", // Adjust height for small screens
+            sm: "250px", // Tablet height
+            md: "300px", // Desktop height
+          },
+          border: "1px solid #ddd", // Border for clarity
+          borderRadius: "8px", // Rounded corners
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Soft shadow
+          overflow: "hidden", // Prevent overflow
+          display: "flex", // Flexbox to center content
+          justifyContent: "center", // Horizontal centering
+        }}
+      >
+        <RollingSection />
+      </Grid>
+      <Grid></Grid>
+    </Grid>
+ 
+      {/* 
       <Box className="card">
         <Box className="contentbef"></Box>
         <Box className="content">
@@ -166,7 +185,7 @@ export default function StartPage() {
             <a href="/">Read More</a>
           </div>
         </div>
-      </div>
+      </div> */}
     </Box>
   );
 }
