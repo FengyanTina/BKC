@@ -7,7 +7,9 @@ import Grid from '@mui/material/Grid2';
 import worshipHands from "../assets/worshipHands.jpg";
 import edward from "../assets/edward.jpg";
 import BethelWorship from "../assets/BethelWorship.jpg";
-import Footer from "../components/common/Footer";
+import Footer from "../components/footer/Footer";
+
+
 
 export default function StartPage() {
   return (
@@ -103,9 +105,9 @@ export default function StartPage() {
         <EventCard title={"Prayer Metting"} image={edward} description={"Time"}/>
         </Grid>
       </Grid>
-    <Footer />
+   
+    <Footer/>
     </Box>
-    
       {/* 
       <Box className="card">
         <Box className="contentbef"></Box>

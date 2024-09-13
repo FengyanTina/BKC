@@ -2,9 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import { SocialIcon } from 'react-social-icons'
 
 const Footer: React.FC = () => {
   return (
@@ -15,7 +13,6 @@ const Footer: React.FC = () => {
         color: 'black', // White text color
         padding: '20px',
         textAlign: 'center',
-     
         bottom: 0,
         left: 0,
         display: 'flex',
@@ -39,6 +36,12 @@ const Footer: React.FC = () => {
         <Link href="#" color="inherit" sx={{ mx: 1 }}>
           Contact Us
         </Link>
+      </Box>
+      <Box>
+      <SocialIcon network="pinterest"  style={{ height: 25, width: 25 }} />
+      <SocialIcon  url="https://instagram.com" network="instagram" style={{ height: 25, width: 25 }} />
+      
+      <SocialIcon url="https://facebook.com" network="facebook" style={{ height: 25, width: 25 }} />
       </Box>
     </Box>
   );
