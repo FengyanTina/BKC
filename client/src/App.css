@@ -267,3 +267,32 @@
     filter: blur(10px);
     z-index: 0;
   }
+  /* styles.css */
+.outline {
+    color: white; /* Unfortunately you can't use transparent here … */
+    text-shadow:
+	   -1px -1px 0 #635e5e,  
+		1px -1px 0 #646060,
+		-1px 1px 0 #746f6f,
+		 1px 1px 0 #a39999
+}
+
+@supports ((text-stroke: 2px black) or (-webkit-text-stroke: 2px black)) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px rgb(121, 106, 106);
+        text-stroke: 2px rgb(92, 88, 88);
+        text-shadow: none;
+    }
+}
+.box {
+	background: linear-gradient(to bottom right, lime, lightblue) 50% 50% / 100% 100% no-repeat;
+	display: flex;
+	justify-content: center; /* justify content center on main axis */
+	align-items: center; /* align items center on cross axis */
+	text-align: center; /* center text inside block elements */
+}
+
+* {
+    box-sizing: border-box;
+}

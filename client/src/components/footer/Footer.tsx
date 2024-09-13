@@ -9,8 +9,8 @@ const Footer: React.FC = () => {
     <Box 
       sx={{ 
         width: '100%', 
-        backgroundColor: 'transparent', // Dark background color
-        color: 'black', // White text color
+        backgroundColor: 'transparent', 
+        color: 'black', 
         padding: '20px',
         textAlign: 'center',
         bottom: 0,
@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
         alignItems: 'center',
         flexDirection: 'column',
         gap: '10px',
-        boxShadow: '0 -2px 5px rgba(0, 0, 0, 0.1)' // Optional shadow
+       
       }}
     >
       <Typography variant="body2">

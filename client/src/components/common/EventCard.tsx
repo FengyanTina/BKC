@@ -13,7 +13,7 @@ interface EventCardProps {
   }
 export default function EventCard({  title, image, description }:EventCardProps) {
   return (
-    <Card sx={{ maxWidth: 245,height: 300,display: 'flex', flexDirection: 'column'  }}>
+    <Card sx={{ maxWidth: 245,height: 250,display: 'flex', flexDirection: 'column' , }}>
       <CardMedia
         sx={{ height: 140 }}
         image={image}
