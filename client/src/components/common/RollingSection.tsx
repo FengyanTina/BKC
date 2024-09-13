@@ -8,11 +8,11 @@ import Bible from "../../assets/Bible.jpg";
 
 const RollingSection = () => {
   const topics = [
-    { title: "Topic 1: Prayers", url: "/react-hooks", backgroundImage: Prayer  },
-    { title: "Topic 2: Worship", url: "/js-es6",backgroundImage: Worship },
-    { title: "Topic 3: Bible Study", url: "/css-grid-flexbox",backgroundImage: Bible   },
-    { title: "Topic 4: Baptism", url: "/redux",backgroundImage: Mission },
-    { title: "Topic 5: Conferences", url: "/typescript-react",backgroundImage: Conference },
+    { title: " Prayers", url: "/react-hooks", backgroundImage: Prayer  },
+    { title: " Worship", url: "/js-es6",backgroundImage: Worship },
+    { title: " Bible Study", url: "/css-grid-flexbox",backgroundImage: Bible   },
+    { title: " Baptism", url: "/redux",backgroundImage: Mission },
+    { title: " Conferences", url: "/typescript-react",backgroundImage: Conference },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,8 +57,7 @@ const RollingSection = () => {
         textAlign: "center",
         overflow:'hidden',
       }} 
-    >
-        
+    >    
       <h3 >{topics[currentIndex].title}</h3>
     </div>
   );

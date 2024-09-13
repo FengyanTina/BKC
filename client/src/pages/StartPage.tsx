@@ -1,50 +1,14 @@
 import "../App.css";
-import DrawerAppBar from "../components/appBar/DrawerAppBar";
 import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
-import { Outlet } from "react-router";
-import { Box, Grid, Link, Typography } from "@mui/material";
+import { Box,  Link, Typography } from "@mui/material";
 import RollingSection from "../components/common/RollingSection";
-import TabBar from "../components/appBar/TabBar";
+import EventCard from "../components/common/EventCard";
+import Grid from '@mui/material/Grid2';
+import worshipHands from "../assets/worshipHands.jpg";
+import edward from "../assets/edward.jpg";
+import BethelWorship from "../assets/BethelWorship.jpg";
+import Footer from "../components/common/Footer";
 
-const divStyle: React.CSSProperties = {
-  background: "linear-gradient(135deg, #DCEEFF, #FDE1FE)",
-  height: "100vh", // Or the desired height
-  position: "relative",
-};
-const divStyle1: React.CSSProperties = {
-  backgroundImage: "url('/path-to-nature-image.jpg')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  filter: "blur(2px) brightness(0.9)", // Optional blur and brightness effect
-  height: "100vh", // Full-page height
-  width: "100%",
-};
-const divStyle2: React.CSSProperties = {
-  background: "linear-gradient(#E0F7FA, #B2EBF2)",
-  maskImage: "url('/path-to-church-silhouette.svg')", // Church silhouette
-  maskSize: "cover",
-  maskRepeat: "no-repeat",
-  maskPosition: "center",
-  height: "100vh",
-};
-const divStyle3: React.CSSProperties = {
-  backgroundImage: "url('/path-to-stained-glass-pattern.png')",
-  opacity: 0.6,
-  filter: "contrast(1.2) brightness(1.1)",
-  height: "100vh",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-};
-const divStyle4: React.CSSProperties = {
-  position: "relative",
-  height: "100vh",
-  background: "linear-gradient(135deg, #FFEEA3, #FFE4A5)", // A soft gradient
-};
-const divStyle5: React.CSSProperties = {
-  background:
-    "radial-gradient(circle, rgba(255,255,255,0.2), rgba(255,255,255,0))",
-  height: "100vh",
-};
 export default function StartPage() {
   return (
      <Box display="flex" flexDirection="column">
@@ -106,7 +70,7 @@ export default function StartPage() {
           },
           height: {
             xs: "200px", // Adjust height for small screens
-            sm: "250px", // Tablet height
+            sm: "350px", // Tablet height
             md: "300px", // Desktop height
           },
           border: "1px solid #ddd", // Border for clarity
@@ -121,7 +85,27 @@ export default function StartPage() {
       </Grid>
       <Grid></Grid>
     </Grid>
- 
+
+    <Box sx={{ width: '100%', display:'flex', alignItems:'center',flexDirection:'column' ,gap:'20px', paddingTop:'20px', backgroundColor: '#f0f4f8', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+        <Grid>
+        <Typography>
+            Comming Events
+        </Typography>
+        </Grid>
+      <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 3, md: 4 }}>
+        <Grid size={4}>
+        <EventCard title={"SundayService"} image={worshipHands} description={"Time:"}/>
+        </Grid>
+        <Grid size={4}>
+        <EventCard title={"Youth"} image={BethelWorship} description={"Time"}/>
+        </Grid>
+        <Grid size={4}>
+        <EventCard title={"Prayer Metting"} image={edward} description={"Time"}/>
+        </Grid>
+      </Grid>
+    <Footer />
+    </Box>
+    
       {/* 
       <Box className="card">
         <Box className="contentbef"></Box>
