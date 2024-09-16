@@ -7,24 +7,51 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 interface EventCardProps {
+    time:Date;
     title: string;
     image: string;
     description: string;
   }
-export default function EventCard({  title, image, description }:EventCardProps) {
+
+
+export default function EventCard({  time,title, image, description }:EventCardProps) {
   return (
-    <Card sx={{ maxWidth: 245,height: 250,display: 'flex', flexDirection: 'column' , }}>
+    <Card sx={{ width:'100%',
+       display: 'flex', flexDirection: 'column',justifyContent:'center'}}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ 
+            height: 0,                    // Ensures no height is taken by the card media itself
+            paddingTop: '40%',          // This creates a 16:9 aspect ratio box
+            width: '100%',                 // Ensures the width is 100% of the parent
+            objectFit: 'cover',
+            }}
         image={image}
         title={title}
       />
-      <CardContent  sx={{ flexGrow: 1 }}>
+      <CardContent  sx={{ flexGrow: 1, }}>
         <Typography gutterBottom variant="h6" component="div" sx={{ fontSize: '0.875rem' }}>
         {title}
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary',fontSize: '0.75rem', }}>
+        <Typography variant="body2" sx={{ 
+            color: 'text.secondary',
+            fontSize: '0.75rem',
+            width: "100%",   
+            WebkitLineClamp: 2,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical", 
+            flexShrink: 0
+            }}>
         {description}
+        </Typography>
+        <Typography 
+        sx={{ 
+            color: "text.secondary",
+            fontSize: '0.80rem',
+            marginTop: '10px',   // Pushes the time towards the bottom of the container
+            }}>
+        {time.toLocaleDateString('sv-SE')} {time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
         </Typography>
       </CardContent>
       <CardActions >

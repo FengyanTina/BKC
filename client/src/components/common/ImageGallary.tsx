@@ -76,7 +76,6 @@ export default function ImageGallary() {
       sx={{
         maxWidth: 400,
         height: 450,
-        // Promote the list into its own layer in Chrome. This costs memory, but helps keeping high FPS.
         transform: 'translateZ(0)',
       }}
       rowHeight={200}

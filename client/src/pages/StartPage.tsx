@@ -12,9 +12,35 @@ import Footer from "../components/footer/Footer";
 import ImageGallary from "../components/common/ImageGallary";
 import InforCard from "../components/common/InforCard";
 import { SocialIcon } from "react-social-icons";
-import SwiperSlider from "../components/common/NewsCarousel";
-import NewsCarousel from "../components/common/NewsCarousel";
-
+import SwiperSlider from "../components/common/SwiperCarousel";
+import NewsCarousel from "../components/common/SwiperCarousel";
+const events = [
+ 
+    {
+        time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+        title: 'Art Exhibition',
+        image: PrayerBible,
+        description: 'An exhibition featuring contemporary art pieces from local artists.'
+    },
+    {
+        time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+        title: 'Tech Conference',
+        image: edward,
+        description: 'Join the biggest technology conference of the year with keynote speakers.'
+    },
+    {
+        time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+        title: 'Charity Run',
+        image: Worship,
+        description: 'Participate in the annual charity run to support a good cause.'
+    },
+    {
+        time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+        title: 'Food Festival',
+        image: BethelWorship,
+        description: 'Savor delicious dishes from a variety of food vendors and enjoy live entertainment.'
+    }
+];
 export default function StartPage() {
   return (
     <Box>
@@ -171,6 +197,7 @@ export default function StartPage() {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
+          justifyContent:'center',
           gap: "20px",
           paddingTop: "30px",
           backgroundColor: "#f0f4f8",
@@ -198,7 +225,7 @@ export default function StartPage() {
             Activities
           </Typography>
         </Grid>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="center">
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="Activities"
@@ -242,6 +269,7 @@ export default function StartPage() {
               transform: "translateZ(0)",
               justifyContent: "center", // Center horizontally
               overflow: "hidden", // Hide any overflow
+       
             }}
           >
             <ImageGallary />
@@ -452,40 +480,40 @@ export default function StartPage() {
       </Box>
       <Box
       sx={{
-        width: '100vw',
-        padding: 2,
+        width: '100%',
+        paddingTop: 2, // Padding at the top
+        paddingBottom: 2, // Padding at the bottom
+        paddingLeft:1,
+        paddingRight:1,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#f0f4f8', 
       }}
     >
       <Grid
         container
-        spacing={{ xs: 2, sm: 3, md: 4 }}
+        spacing={2} // Add spacing between items
         justifyContent="center"
-        alignItems="center"
+        
       >
-        <Grid  size={{ xs: 12, sm: 4 }}>
-          <EventCard
-            title={"Sunday Service"}
-            image={worshipHands}
-            description={"Time: 10:00 AM"}
-          />
+        {events.map((event, index) => (
+        <Grid   sx={{
+        maxWidth: 400,
+        display: 'flex',
+              
+      }} 
+      size={{ xs: 12, sm: 3 }}
+      >
+                <EventCard 
+                    key={index} 
+                    time={event.time} 
+                    title={event.title} 
+                    image={event.image} 
+                    description={event.description} 
+                />
         </Grid>
-        <Grid  size={{ xs: 12, sm: 4 }}>
-          <EventCard
-            title={"Youth Event"}
-            image={BethelWorship}
-            description={"Time: 2:00 PM"}
-          />
-        </Grid>
-        <Grid  size={{ xs: 12, sm: 4 }}>
-          <EventCard
-            title={"Prayer Meeting"}
-            image={edward}
-            description={"Time: 6:00 PM"}
-          />
-        </Grid>
+            ))}
       </Grid>
     </Box>
       
