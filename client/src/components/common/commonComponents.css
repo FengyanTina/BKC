@@ -1,2 +1,140 @@
-
- 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .slider-container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+  }
+  
+  .slider {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .slide {
+    width: 40rem;
+    height: 18rem;
+    background-color: gray;
+    display: none;
+    font-size: 1.6rem;
+  }
+  
+  .active {
+    display: grid;
+    place-items: center;
+  }
+  
+  .slider button {
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+  }
+  
+  .lowerSlider {
+    width: 40rem;
+    margin: 1rem auto;
+    overflow-x: auto;
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .lowerSlider p {
+    min-width: 7rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+  
+  .lowerActive {
+    background-color: rgb(216, 216, 216);
+  }
+  
+  .lowerItem {
+    background-color: rgb(162, 162, 162);
+  }
+  
+  /* slick slider  */
+  .slick-container {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    margin-top: 3rem;
+  }
+  
+  @media (max-width: 999px) {
+    .slick-container {
+      width: 90%;
+    }
+  }
+  
+  .slick-container img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+  
+  .slick-slider .slick-list,
+  .slick-slider .slick-track {
+    display: flex;
+    gap: 0.7rem;
+  }
+  
+  .slick-dots {
+    width: fit-content !important;
+    display: flex !important;
+    gap: 0.5rem !important;
+  }
+  
+  .slick-dots li button:before {
+    content: "" !important;
+    color: red !important;
+  }
+  
+  .slick-dots li button {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    border-radius: 50px !important;
+    background-color: black !important;
+  }
+  
+  .slick-dots .slick-active button {
+    background-color: red !important;
+  }
+  
+  .slick-arrows {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .slick-arrows button {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+  
+  /* swwiper slider  */
+  .swiper-slider {
+    width: 70%;
+    margin: 2rem auto;
+  }
+  
+  .swiper-slider .single-slide img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+  
+  @media (max-width: 999px) {
+    .swiper-slider {
+      width: 90%;
+    }
+  }
