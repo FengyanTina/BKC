@@ -1,6 +1,6 @@
-import "../App.css";
+
 import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
-import { Box, Link, Typography } from "@mui/material";
+import { Box,  Typography } from "@mui/material";
 import RollingSection from "../components/common/RollingSection";
 import EventCard from "../components/common/EventCard";
 import Grid from "@mui/material/Grid2";
@@ -14,6 +14,7 @@ import InforCard from "../components/common/InforCard";
 import { SocialIcon } from "react-social-icons";
 import SwiperSlider from "../components/common/SwiperCarousel";
 import NewsCarousel from "../components/common/SwiperCarousel";
+import { Link } from "react-router-dom";
 const events = [
  
     {
@@ -43,7 +44,7 @@ const events = [
 ];
 export default function StartPage() {
   return (
-    <Box>
+    <Box  sx={{marginTop:'-60px'}}>
       <Grid
         spacing={2}
         sx={{
@@ -69,48 +70,106 @@ export default function StartPage() {
             "& a": {
               position: "relative",
               paddingLeft: "20px", // Space for the vertical line
-              marginBottom: "20px", // Space between the links
+              marginBottom: "30px", // Space between the links
               textDecoration: "none", // No underline
               color: "black",
-              fontSize: "18px", // Adjust font size
+              fontSize: {
+                xs: "1rem", // Smaller font size for small screens (mobile devices)
+                sm: "1.5rem", // Default font size for larger screens (tablets and up)
+              }, // Adjust font size
             },
             "& a::before": {
               content: '""',
               position: "absolute",
               left: 0,
               top: "50%",
-              width: "4px", // Vertical line width
+              width: "5px", // Vertical line width
               height: "100%", // Vertical line height
               backgroundColor: "purple", // Line color
               transform: "translateY(-50%)", // Center line vertically
             },
           }}
         >
-          <Box
-            sx={{
-              marginBottom: "30px",
-            }}
-          >
-            <Typography
-              variant="h5"
-              style={{
-                fontWeight: 900,
-                lineHeight: "1em",
-                color: "transparent",
-                WebkitTextStroke: "2px #ffffff",
-                textTransform: "uppercase",
-                paddingTop: "10px",
-                paddingBottom: "10px",
-              }}
-            >
-              A place to worship
-              <br />
-              A place to pray
-              <br />A place to learn the words
-            </Typography>
-          </Box>
-          <Link href="/">New Here</Link>
-          <Link href="/">Contact Us</Link>
+   <Box
+  sx={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center", // Center horizontally
+    textAlign: "center", // Center text content
+    position: "relative", // To move the box up
+    top: { sm: "-30px" },
+  }}
+>
+  {/* First Typography - Borås Kristna Center */}
+  <Typography
+    variant="h5"
+    sx={{
+      fontWeight: {
+        xs: 700, // Lighter font weight for small screens (mobile devices)
+        sm: 900, // Default font weight for larger screens
+      },
+      fontSize: {
+        xs: "2rem", // Smaller font size for small screens (mobile devices)
+        sm: "5rem", // Default font size for larger screens (tablets and up)
+      },
+      lineHeight:
+      {
+        xs: "0.5em", // Smaller font size for small screens (mobile devices)
+        
+        sm: "1em", // Default font size for larger screens (tablets and up)
+      },
+      color: "transparent",
+      WebkitTextStroke: "1px #ffffff",
+      marginBottom:'30px'
+    }}
+  >
+    Borås Kristna Center
+  </Typography>
+
+  {/* Second Typography - Below the first */}
+ 
+
+  <Box
+    sx={{
+        marginTop:'30px',
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start", // Align links to the left
+      textAlign: "left", // Ensure text aligns left
+      width: "100%", // Take full width so alignment works properly
+      maxWidth: "400px", // You can adjust max width for better control
+    }}
+  >
+     <Typography
+    variant="h5"
+    sx={{
+      fontWeight: 800,
+      lineHeight: "1.5em",
+      color: "transparent",
+      WebkitTextStroke: "1px #ffffff",
+      textTransform: "uppercase",
+    
+      marginBottom: "50px",
+      fontSize: {
+        xs: "1rem", // Smaller font size for small screens (mobile devices)
+        sm: "1.5rem", // Default font size for larger screens (tablets and up)
+      },
+    }}
+  >
+    A place to worship
+    <br />
+    A place to pray
+    <br />
+    A place to learn the words
+  </Typography>
+  <Link to="/" >
+    New Here
+  </Link>
+  <Link to="/contact" >
+    Contact Us
+  </Link></Box>
+</Box>
+
         </Grid>
 
         {/* Rolling Section */}
@@ -120,13 +179,13 @@ export default function StartPage() {
           sx={{
             width: {
               xs: "100%", // Full width on small screens
-              sm: "300px", // Adjust width for tablets
-              md: "400px", // Width for larger screens
+              sm: "350px", // Adjust width for tablets
+              md: "450px", // Width for larger screens
             },
             height: {
               xs: "200px", // Adjust height for small screens
-              sm: "350px", // Tablet height
-              md: "300px", // Desktop height
+              sm: "400px", // Tablet height
+              md: "350px", // Desktop height
             },
             border: "1px solid #ddd", // Border for clarity
             borderRadius: "8px", // Rounded corners
@@ -134,6 +193,8 @@ export default function StartPage() {
             overflow: "hidden", // Prevent overflow
             display: "flex", // Flexbox to center content
             justifyContent: "center", // Horizontal centering
+            
+         
           }}
         >
           <RollingSection />
@@ -287,6 +348,7 @@ export default function StartPage() {
           paddingTop: "30px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          
         }}
       >
         <Grid
@@ -483,8 +545,6 @@ export default function StartPage() {
         width: '100%',
         paddingTop: 2, // Padding at the top
         paddingBottom: 2, // Padding at the bottom
-        paddingLeft:1,
-        paddingRight:1,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -499,7 +559,7 @@ export default function StartPage() {
       >
         {events.map((event, index) => (
         <Grid   sx={{
-        maxWidth: 400,
+        maxWidth: 380,
         display: 'flex',
               
       }} 

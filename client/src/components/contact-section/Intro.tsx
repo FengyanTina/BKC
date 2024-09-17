@@ -7,21 +7,11 @@ const Intro: React.FC = () => (
   <Box
     
   
-    sx={{
-      backgroundColor: "#001a3f", // Darker shade of Navi Blue
-      color: "#ffffff", // White color
-      height: "70vh",
-      textAlign: "start",
-      maxWidth: "100%",
-      display: "flex",
-      flexDirection:'column',
-      alignItems: "flex-start",
-      zIndex: -10, position: 'relative'
-    }}
+    className="intro-container"
   >
-    <Grid sx={{ margin: "10", maxWidth: "75vw", padding: "10%" }}>
-      <Typography variant="h3">Our Mission</Typography>
-      <Typography variant="body1">
+    <Grid>
+      <Typography  className="intro-h2" >Our Mission</Typography>
+      <Typography className="intro-p">
         Every single person who understands the impact of the web should be an
         advocate and strive for a better, more inclusive web for all.
       </Typography>

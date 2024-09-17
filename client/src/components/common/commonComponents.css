@@ -1,10 +1,10 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin: 10;
+    padding: 10;
     box-sizing: border-box;
   }
   
-  .slider-container {
+  /* .slider-container {
     display: grid;
     place-items: center;
     height: 100vh;
@@ -63,17 +63,13 @@
   
   /* slick slider  */
   .slick-container {
-    width: 70%;
+    width:60%;
     margin: 0 auto;
     margin-bottom: 4rem;
     margin-top: 3rem;
   }
-  
-  @media (max-width: 999px) {
-    .slick-container {
-      width: 90%;
-    }
-  }
+   
+ 
   
   .slick-container img {
     width: 100%;
@@ -86,7 +82,7 @@
     display: flex;
     gap: 0.7rem;
   }
-  
+   
   .slick-dots {
     width: fit-content !important;
     display: flex !important;
@@ -113,13 +109,13 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-  }
+  } 
   
   .slick-arrows button {
     width: 2rem;
     height: 2rem;
     cursor: pointer;
-  }
+  } 
   
   /* swwiper slider  */
   .swiper-slider {

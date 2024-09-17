@@ -13,6 +13,7 @@ import {
 import HuvudloggaBKC3 from "../../assets/Huvudlogga-BKC3.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, useLocation } from "react-router-dom";
+import './appBar.css'
 
 export default function TabBar() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -34,10 +35,11 @@ export default function TabBar() {
         component="nav"
         sx={{
           backgroundColor: "transparent", // Make the background transparent
-          backdropFilter: "blur(5px)",
+          
           boxShadow: "none",
           position: "fixed", // Ensure it stays at the top
           top: 0,
+          paddingTop:'10px',
           left: 0,
           width: "100%",
           zIndex: 1100,
@@ -55,24 +57,26 @@ export default function TabBar() {
           </IconButton>
 
           <Typography
-            variant="h6"
+            variant="h2"
             component="div"
             sx={{
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               color: "black",
+              fontSize: "4rem",
             }}
           >
             <img
               src={HuvudloggaBKC3}
               alt="Logo"
-              style={{ maxHeight: 40, marginRight: 10 }}
+              style={{ marginRight: 10 }}
             />
           </Typography>
           <Box
             sx={{
               display: { xs: "none", sm: "flex" },
               gap: "50px",
+              fontSize: "4rem",
               justifyContent: "center", // Center the MenuItems
               flexGrow: 1, // Allow the Box to grow to occupy space and center its content
               "&:focus": { outline: "none" },
@@ -85,10 +89,18 @@ export default function TabBar() {
               indicatorColor="secondary"
               aria-label="secondary tabs"
             >
-              <Tab value="/home" label="Home" />
-              <Tab value="/schedules" label="Schedules" />
-              <Tab value="/services" label="Services" />
-              <Tab value="/activities" label="Activities" />
+              <Tab value="/home" label="Home"  sx={{ fontSize: '1.2rem',  color: 'black',fontWeight: 800,
+      WebkitTextStroke: '0.5px white',}}/>
+              <Tab value="/schedules" label="Schedules" sx={{ fontSize: '1.2rem', color: 'black',fontWeight: 800,
+      WebkitTextStroke: '0.5px white', }}/>
+              <Tab value="/services" label="Services" sx={{ fontSize: '1.2rem', color: 'black',fontWeight: 800,
+      WebkitTextStroke: '0.5px white', }}/>
+              <Tab value="/activities" label="Activities" sx={{ fontSize: '1.2rem', color: 'black',fontWeight: 800,
+      WebkitTextStroke: '0.5px white', }}/>
+              <Tab value="/contact" label="Contact" sx={{ fontSize: '1.2rem', color: 'black',fontWeight: 800,
+      WebkitTextStroke: '0.5px white', }}/>
+              <Tab value="/logIn" label="Log In" sx={{ fontSize: '1.2rem', color: 'black',fontWeight: 800,
+      WebkitTextStroke: '0.5px white', }}/>
             </Tabs>
           </Box>
         </Toolbar>

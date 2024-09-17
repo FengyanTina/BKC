@@ -1,6 +1,6 @@
 .contact-section {
     background-color: var(--white);
-    width: 100%;
+    width: 90%;
   }
   
   @media screen and (min-width: 799px) {

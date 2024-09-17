@@ -1,16 +1,12 @@
-import { Box } from "@mui/material";
-import ContactSection from "../../components/contact-section/ContactSection";
-import './schedules.css'
-
-
 import Map from "../../components/map/Map";
 import Intro from "../../components/contact-section/Intro";
+import ContactSection from "../../components/contact-section/ContactSection";
 
 
-export default function SchedulesMainPage() {
+export default function ContactMainPage() {
     return (
         <>
-      
+        
     <div className="contact-container">
       <Intro />
       <ContactSection />

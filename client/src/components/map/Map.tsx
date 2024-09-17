@@ -10,10 +10,11 @@ interface Location {
 }
 
 const location: Location = {
-  address: "1600 Amphitheatre Parkway, Mountain View, California.",
-  lat: 37.42216,
-  lng: -122.08427,
-};
+    address: "Albanoliden 5, vån 3, 50630 Borås, Sweden",
+    lat: 57.72926,
+    lng: 12.94032,
+  };
+  
 
 interface LocationPinProps {
   lat: number;

@@ -1,8 +1,8 @@
 .info {
     text-align: left;
     padding: 20px;
-    background-color: #28a745; /* Green color */
-    color: #ffffff;
+    background-color: var(--main-green);
+    color: var(--white);
   }
   
   .info-h2 {

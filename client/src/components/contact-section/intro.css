@@ -8,6 +8,7 @@
     color: var(--white);
     height: 40vh;
     padding: 20px;
+  
   }
   
   .intro-h2 {
@@ -16,7 +17,7 @@
   
   .intro-p {
     max-width: 85vw;
-    
+    --white: #ffffff;
   }
   
   @media screen and (min-width: 699px) {
@@ -25,7 +26,7 @@
       align-items: flex-start;
       text-align: left;
       padding: 10%;
-      height: 25vh;
+      height: 65vh;
     }
   
     .intro-p {

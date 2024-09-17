@@ -1,6 +1,6 @@
-// import React from 'react';
-// import SendIcon from '@mui/icons-material/Send'; // MUI Send icon
-// import './form.css';
+
+ import SendIcon from '@mui/icons-material/Send'; // MUI Send icon
+ import './form.css';
 
 // interface FormInput {
 //   id: string;
@@ -65,7 +65,7 @@
 // export default Form;
 import React from 'react'
 
-import SendIcon from '@mui/icons-material/Send'
+import sendCircle from "../../assets/mdi--send-circle.png";
 
 import './form.css'
 import { Box } from '@mui/material'
@@ -92,32 +92,61 @@ const formInputs = [
   },
 ]
 
-const Form = () => (
-  <Box className="form" sx={{zIndex: 20, position: 'relative' }}>
-    <h2 className="form-h2">Send us a message</h2>
+// const Form = () => (
+//   <Box className="form" sx={{zIndex: 20, position: 'relative' }}>
+//     <h2 className="form-h2">Send us a message</h2>
 
-    {formInputs.map(input => (
-      <label key={input.label} id={input.id} className="form-label">
-        {input.label}
+//     {formInputs.map(input => (
+//       <label key={input.label} id={input.id} className="form-label">
+//         {input.label}
 
-        {input.type === 'textarea' ? (
-          <textarea className="form-textarea" placeholder={input.placeholder} />
-        ) : (
-          <input
-            className="form-input"
-            type={input.type}
-            placeholder={input.placeholder}
-          />
-        )}
-      </label>
-    ))}
+//         {input.type === 'textarea' ? (
+//           <textarea className="form-textarea" placeholder={input.placeholder} />
+//         ) : (
+//           <input
+//             className="form-input"
+//             type={input.type}
+//             placeholder={input.placeholder}
+//           />
+//         )}
+//       </label>
+//     ))}
 
    
 
-    <button className="form-submit" type="submit">
-      <SendIcon className="form-submit-icon" />
-    </button>
-  </Box>
-)
+//     <button className="form-submit" type="submit">
+//       <SendIcon className="form-submit-icon" />
+//     </button>
+//   </Box>
+// )
+
+const Form = () => (
+    <form className="form">
+      <h2 className="form-h2">Send us a message</h2>
+  
+      {formInputs.map(input => (
+        <label key={input.label} id={input.id} className="form-label">
+          {input.label}
+  
+          {input.type === 'textarea' ? (
+            <textarea className="form-textarea" placeholder={input.placeholder} />
+          ) : (
+            <input
+              className="form-input"
+              type={input.type}
+              placeholder={input.placeholder}
+            />
+          )}
+        </label>
+      ))}
+  
+      <SendIcon className="form-submit"/>
+  
+      {/* <button className="form-submit" type="submit">
+        Send message
+      </button> */}
+    </form>
+  )
+  
 
 export default Form
