@@ -51,7 +51,12 @@ export default function TabBar() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" },color: 'black' }}
+            sx={{ mr: 2, display: { sm: "none" },color: 'black', '& svg': {
+        stroke: 'white',  
+        strokeWidth: 1 ,
+        fill: '#000000',    // Stronger black fill for the icon
+        fontSize: '2rem',
+      } }}
           >
             <MenuIcon />
           </IconButton>

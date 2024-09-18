@@ -114,10 +114,6 @@
 // export default SwiperSlider;
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import worshipHands from "../../assets/worshipHands.jpg";
-import edward from "../../assets/edward.jpg";
-import BethelWorship from "../../assets/BethelWorship.jpg";
-import Worship from "../../assets/Worship.jpeg";
 import './commonComponents.css'; 
 import 'swiper/css';
 
@@ -140,8 +136,8 @@ interface EventProps {
 
 const NewsCarousel = ({  events }:{ events: EventProps[] }) => {
     
-      const displayEvents = events.map((event, i) => (
-        <SwiperSlide className="single-slide" key={i}>
+      const displayEvents = events.map((event) => (
+        <SwiperSlide className="single-slide" key={event.id}>
           {event.image && <img src={event.image} alt={event.title} />}
           <h2>{event.title}</h2>
           <h5> {event.time.toLocaleDateString('sv-SE')} {event.time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</h5>
@@ -155,6 +151,7 @@ const NewsCarousel = ({  events }:{ events: EventProps[] }) => {
           effect={"coverflow"}
           spaceBetween={10}
           slidesPerView={4}
+          loop={true}
           pagination={{
             clickable: true,
           }}
@@ -165,6 +162,7 @@ const NewsCarousel = ({  events }:{ events: EventProps[] }) => {
             depth: 100,
             modifier: 1,
             slideShadows: true,
+            
           }}
           breakpoints={{
             "@0.00": {

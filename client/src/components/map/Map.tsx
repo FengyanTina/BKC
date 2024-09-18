@@ -32,7 +32,7 @@ const LocationPin: React.FC<LocationPinProps> = ({ text }) => (
 const Map: React.FC = () => {
   return (
     <div className="map">
-      <h2 className="map-h2">Come Visit Us At Our Campus</h2>
+      <h2 className="map-h2">Come Visit Us </h2>
 
       <div className="google-map">
         <GoogleMapReact

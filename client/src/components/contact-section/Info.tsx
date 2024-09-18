@@ -3,6 +3,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import { SocialIcon } from 'react-social-icons';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 
 import './info.css';
 
@@ -13,11 +14,12 @@ interface ContactDetail {
 
 const contactDetails: ContactDetail[] = [
   {
-    value: '1600 Amphitheatre Parkway, Mountain View, California.',
+    value: 'Albanoliden 5, vån 3, 50630 Borås',
     icon: <LocationOnIcon />,
   },
-  { value: '+1 234 567 8900', icon: <PhoneIcon /> },
-  { value: 'support@example.com', icon: <EmailIcon /> },
+  { value: '+46 0790189720', icon: <PhoneIcon /> },
+  { value: ' info@bkc.nu', icon: <EmailIcon /> },
+  {value:' PG 53365-3 / Swish 123 6919 278', icon: <CardGiftcardIcon/>}
 ];
 
 const renderContactDetails = (): JSX.Element[] =>
