@@ -126,43 +126,23 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-interface ComingEvent{
-title:string,
-time:Date,
-details?:string,
-imageUrl?:string
-}
-const NewsCarousel = () => {
-    const events: ComingEvent[] = [
-        {
-          title: "Sunday Worship",
-          time: new Date('2024-09-22T10:00:00'),
-          details: "Join us for a special Sunday worship service.",
-          imageUrl: worshipHands, // Use actual image URL
-        },
-        {
-          title: "Community Outreach",
-          time: new Date('2024-09-25T14:00:00'),
-          details: "Participate in our community outreach program.",
-          imageUrl: edward, // Use actual image URL
-        },
-        {
-          title: "Bible Study Group",
-          time: new Date('2024-09-27T19:00:00'),
-          details: "Deep dive into the scriptures with our study group.",
-          imageUrl: BethelWorship, // Use actual image URL
-        },
-        {
-          title: "Prayer Meeting",
-          time: new Date('2024-09-30T08:00:00'),
-          details: "Come together for our weekly prayer meeting.",
-          imageUrl: Worship, // Use actual image URL
-        },
-      ];
+
+
+interface EventProps {
+    id: string;
+    time:Date;
+    title: string;
+    image: string;
+    description: string;
+    details?:string
+  }
+ 
+
+const NewsCarousel = ({  events }:{ events: EventProps[] }) => {
     
       const displayEvents = events.map((event, i) => (
         <SwiperSlide className="single-slide" key={i}>
-          {event.imageUrl && <img src={event.imageUrl} alt={event.title} />}
+          {event.image && <img src={event.image} alt={event.title} />}
           <h2>{event.title}</h2>
           <h5> {event.time.toLocaleDateString('sv-SE')} {event.time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</h5>
           {event.details && <p>{event.details}</p>}
@@ -174,7 +154,7 @@ const NewsCarousel = () => {
         <Swiper
           effect={"coverflow"}
           spaceBetween={10}
-          slidesPerView={3}
+          slidesPerView={4}
           pagination={{
             clickable: true,
           }}

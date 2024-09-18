@@ -100,8 +100,13 @@
   
   }
   .text-overlay h2{
+    width: 100%; /* Ensure the h2 takes full width of its container */
     font-size: 3em;
     margin: 0;
+    white-space: nowrap; /* Prevent the text from breaking into a new line */
+    overflow: hidden; /* Hide any overflowed text */
+    text-overflow: ellipsis;
+    
   }
   .text-overlay p{
     font-size: 1.5em;
@@ -156,8 +161,10 @@
   
   /* swwiper slider  */
   .swiper-slider {
-    width: 70%;
+    width: 100%;
     margin: 2rem auto;
+    z-index: 1;
+    cursor: pointer;
   }
   
   .swiper-slider .single-slide img {

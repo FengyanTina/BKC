@@ -23,6 +23,7 @@ interface EventProps {
     title: string;
     image: string;
     description: string;
+    details?:string
   }
 
  
@@ -34,7 +35,7 @@ function PauseOnHover({  events }:{ events: EventProps[] }) {
     const settings = {
         dots: true,
         infinite: true,
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,

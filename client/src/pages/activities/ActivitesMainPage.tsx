@@ -45,7 +45,7 @@ export default function ActivitiesMainPage() {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
 
         <div style={{ margin:'60px' }}>
-        < NewsCarousel />
+        
         </div>
         <div>
 

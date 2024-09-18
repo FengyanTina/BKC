@@ -45,6 +45,36 @@ const events = [
       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
   },
 ];
+const comingEvents = [
+    {
+        id:"1",
+      title: "Sunday Worship",
+      time: new Date('2024-09-22T10:00:00'),
+      description: "Join us for a special Sunday worship service.",
+      image: worshipHands, // Use actual image URL
+    },
+    {
+        id:"2",
+      title: "Community Outreach",
+      time: new Date('2024-09-25T14:00:00'),
+      description: "Participate in our community outreach program.",
+      image: edward, // Use actual image URL
+    },
+    {
+        id:"3",
+      title: "Bible Study Group",
+      time: new Date('2024-09-27T19:00:00'),
+      description: "Deep dive into the scriptures with our study group.",
+      image: BethelWorship, // Use actual image URL
+    },
+    {
+        id:"4",
+      title: "Prayer Meeting",
+      time: new Date('2024-09-30T08:00:00'),
+      description: "Come together for our weekly prayer meeting.",
+      image: Worship, // Use actual image URL
+    },
+  ];
 const news = [
   {
     id:"1",
@@ -162,8 +192,6 @@ export default function StartPage() {
               Borås Kristna Center
             </Typography>
 
-            {/* Second Typography - Below the first */}
-
             <Box
               sx={{
                 marginTop: "30px",
@@ -268,14 +296,19 @@ export default function StartPage() {
               color: "transparent",
               WebkitTextStroke: "1px #ffffff",
               textTransform: "uppercase",
-              paddingTop: "10px",
-              paddingBottom: "10px",
+              padding: "10px",
+             
             }}
           >
             Comming Events
           </Typography>
         </Box>
-        <NewsCarousel />
+       <Box sx={{width:'80%'}}>
+
+         <NewsCarousel events={comingEvents} />   
+       </Box>
+        
+        
       </Box>
       {/* --------------ACTIVITIES----------- */}
       <Box
@@ -547,6 +580,7 @@ export default function StartPage() {
               alignItems: "center", // Center vertically
               justifyContent: "center", // Center horizontally
               overflow: "hidden", // Hide any overflow
+              marginBottom:'50px'
             }}
           >
             <img
@@ -561,6 +595,32 @@ export default function StartPage() {
             />
           </Grid>
         </Grid>
+
+        <Grid>
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: {
+                xs: 700, // Lighter font weight for small screens (mobile devices)
+                sm: 900, // Default font weight for larger screens
+              },
+              fontSize: {
+                xs: "4rem", // Smaller font size for small screens (mobile devices)
+                sm: "6rem", // Default font size for larger screens (tablets and up)
+              },
+              lineHeight: "1em",
+              color: "transparent",
+              WebkitTextStroke: "1px #d3d3d3",
+              textTransform: "uppercase",
+            }}
+          >
+            News
+          </Typography>
+        </Grid>
+        <Box sx={{backgroundColor: "#f0f4f8", width:'100%',marginTop:'10px', marginBottom:'20px'}}>
+     
+     <PauseOnHover events={news} />
+   </Box>
       </Box>
 
        {/* --------------Events card---------- */}
@@ -601,10 +661,10 @@ export default function StartPage() {
       </Box> */}
 
        {/* --------------NEWS SLIDES----------- */}
-      <div>
-        <PauseOnHover events={news} />
-      </div>
-
+       <Box>
+   
+   
+      </Box>
       <Footer />
       {/* 
       <Box className="card">
