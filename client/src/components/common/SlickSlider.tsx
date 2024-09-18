@@ -15,19 +15,51 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import  React,{ useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+interface EventProps {
+    id: string;
+    time:Date;
+    title: string;
+    image: string;
+    description: string;
+  }
 
-function PauseOnHover() {
+ 
+  
+function PauseOnHover({  events }:{ events: EventProps[] }) {
+    
+//     const displayImages = images.map((img, i) => (
+//     <div key={i}>
+//       <img src={img} alt={`slider-${i}`} />
+//     </div>
+//   ));
+// const displayImages = images.map((img, i) => (
+//     <div key={i} className="slide">
+//       <div
+//         className="image-container"
+//         style={{
+//           backgroundImage: `url(${img})`,
+//         }}
+//       >
+//         <div className="text-overlay">
+//           <h2>Beautiful Destination {i + 1}</h2>
+//           <p>Experience the beauty of nature</p>
+//         </div>
+//       </div>
+//     </div>
+//   ));
+
     const settings = {
         dots: true,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
         pauseOnHover: true,
         
       };
-
+      const navigate = useNavigate();
 
 
   let sliderRef = useRef<Slider>(null);
@@ -44,16 +76,27 @@ function PauseOnHover() {
     }
   };
 
-    const displayImages = images.map((img, i) => (
-    <div key={i}>
-      <img src={img} alt={`slider-${i}`} />
+
+const displayImages = events.map((event,i)=>(
+    <div key={i} className="slide">
+         <Link to={`/news/${i}`}>
+        <div className="image-container" style={{backgroundImage: `url(${event.image})`,}}>
+            <div className="text-overlay">
+                <h2>{event.title}</h2>
+                <p>{event.description}</p>
+                <p>{event.time.toLocaleDateString('sv-SE')} {event.time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</p>
+            </div>
+
+        </div>
+        </Link>
     </div>
-  ));
+))
+
+
+
 
   return (
-    <div className="slider-container">
-      
-     
+    <div className="slider-container">  
        <section className="slick-container">
        <Slider   ref={sliderRef}
         {...settings}
@@ -72,5 +115,45 @@ function PauseOnHover() {
     </div>
   );
 }
+
+// return (
+//     <div className="slider-container">
+//       <section className="slick-container">
+//         <Slider {...settings}>
+//           {events.map((event) => (
+//             <div key={event.id} className="slide">
+//               <Link to={`/news/${event.id}`}>
+//                 <div
+//                   className="image-container"
+//                   style={{ backgroundImage: `url(${event.image})` }}
+//                 >
+//                   <div className="text-overlay">
+//                     <h2>{event.title}</h2>
+//                     <p>{event.description}</p>
+//                     <p>
+//                       {event.time.toLocaleDateString("sv-SE")}{" "}
+//                       {event.time.toLocaleTimeString("sv-SE", {
+//                         hour: "2-digit",
+//                         minute: "2-digit",
+//                       })}
+//                     </p>
+//                   </div>
+//                 </div>
+//               </Link>
+//             </div>
+//           ))}
+//         </Slider>
+//         <div className="slick-arrows">
+//           <button onClick={() => sliderRef.current?.slickPrev()}>
+//             <IoIosArrowBack />
+//           </button>
+//           <button onClick={() => sliderRef.current?.slickNext()}>
+//             <IoIosArrowForward />
+//           </button>
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }
 
 export default PauseOnHover;

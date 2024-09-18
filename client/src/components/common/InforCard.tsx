@@ -11,7 +11,7 @@ interface CardProps {
   title: string;
   subtitle: string;
   content: string;
-  buttonText: string;
+  buttonText?: string;
   time?:Date
 }
 export default function InforCard({

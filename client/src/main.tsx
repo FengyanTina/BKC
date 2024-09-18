@@ -12,6 +12,7 @@ import SchedulesMainPage from "./pages/schedules/SchedulesMainPage.tsx";
 import ActivitiesMainPage from "./pages/activities/ActivitesMainPage.tsx";
 import StartPage from "./pages/StartPage.tsx";
 import ContactMainPage from "./pages/contact/ContactMainPage.tsx";
+import NewsMainPage from "./pages/news/NewsMainPage.tsx";
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "schedules", element: <SchedulesMainPage /> },
       { path: "admin", element: <AdminPage /> },
       { path: "activities", element: <ActivitiesMainPage /> },
+      { path: "news", element: <NewsMainPage /> },
       { path: "contact", element: <ContactMainPage /> },
     ],
   },

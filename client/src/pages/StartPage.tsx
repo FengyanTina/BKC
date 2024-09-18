@@ -1,6 +1,5 @@
-
 import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
-import { Box,  Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import RollingSection from "../components/common/RollingSection";
 import EventCard from "../components/common/EventCard";
 import Grid from "@mui/material/Grid2";
@@ -15,36 +14,74 @@ import { SocialIcon } from "react-social-icons";
 import SwiperSlider from "../components/common/SwiperCarousel";
 import NewsCarousel from "../components/common/SwiperCarousel";
 import { Link } from "react-router-dom";
+import PauseOnHover from "../components/common/SlickSlider";
 const events = [
- 
-    {
-        time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
-        title: 'Art Exhibition',
-        image: PrayerBible,
-        description: 'An exhibition featuring contemporary art pieces from local artists.'
-    },
-    {
-        time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-        title: 'Tech Conference',
-        image: edward,
-        description: 'Join the biggest technology conference of the year with keynote speakers.'
-    },
-    {
-        time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
-        title: 'Charity Run',
-        image: Worship,
-        description: 'Participate in the annual charity run to support a good cause.'
-    },
-    {
-        time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
-        title: 'Food Festival',
-        image: BethelWorship,
-        description: 'Savor delicious dishes from a variety of food vendors and enjoy live entertainment.'
-    }
+  {
+    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+    title: "Art Exhibition",
+    image: PrayerBible,
+    description:
+      "An exhibition featuring contemporary art pieces from local artists.",
+  },
+  {
+    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+    title: "Tech Conference",
+    image: edward,
+    description:
+      "Join the biggest technology conference of the year with keynote speakers.",
+  },
+  {
+    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+    title: "Charity Run",
+    image: Worship,
+    description:
+      "Participate in the annual charity run to support a good cause.",
+  },
+  {
+    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+    title: "Food Festival",
+    image: BethelWorship,
+    description:
+      "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
+  },
+];
+const news = [
+  {
+    id:"1",
+    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+    title: "Reaching out ",
+    image: PrayerBible,
+    description:
+      "An exhibition featuring contemporary art pieces from local artists.",
+  },
+  {
+    id:"2",
+    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+    title: "Tech Conference",
+    image: edward,
+    description:
+      "Join the biggest technology conference of the year with keynote speakers.",
+  },
+  {
+    id:"3",
+    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+    title: "Charity Run",
+    image: Worship,
+    description:
+      "Participate in the annual charity run to support a good cause.",
+  },
+  {
+    id:"4",
+    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+    title: "Food Festival",
+    image: BethelWorship,
+    description:
+      "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
+  },
 ];
 export default function StartPage() {
   return (
-    <Box  sx={{marginTop:'-60px'}}>
+    <Box>
       <Grid
         spacing={2}
         sx={{
@@ -90,86 +127,79 @@ export default function StartPage() {
             },
           }}
         >
-   <Box
-  sx={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center", // Center horizontally
-    textAlign: "center", // Center text content
-    position: "relative", // To move the box up
-    top: { sm: "-30px" },
-  }}
->
-  {/* First Typography - Borås Kristna Center */}
-  <Typography
-    variant="h5"
-    sx={{
-      fontWeight: {
-        xs: 700, // Lighter font weight for small screens (mobile devices)
-        sm: 900, // Default font weight for larger screens
-      },
-      fontSize: {
-        xs: "2rem", // Smaller font size for small screens (mobile devices)
-        sm: "5rem", // Default font size for larger screens (tablets and up)
-      },
-      lineHeight:
-      {
-        xs: "0.5em", // Smaller font size for small screens (mobile devices)
-        
-        sm: "1em", // Default font size for larger screens (tablets and up)
-      },
-      color: "transparent",
-      WebkitTextStroke: "1px #ffffff",
-      marginBottom:'30px'
-    }}
-  >
-    Borås Kristna Center
-  </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center", // Center horizontally
+              textAlign: "center", // Center text content
+              position: "relative", // To move the box up
+              top: { sm: "-30px" },
+            }}
+          >
+            {/* First Typography - Borås Kristna Center */}
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: {
+                  xs: 700, // Lighter font weight for small screens (mobile devices)
+                  sm: 900, // Default font weight for larger screens
+                },
+                fontSize: {
+                  xs: "2rem", // Smaller font size for small screens (mobile devices)
+                  sm: "5rem", // Default font size for larger screens (tablets and up)
+                },
+                lineHeight: {
+                  xs: "0.5em", // Smaller font size for small screens (mobile devices)
 
-  {/* Second Typography - Below the first */}
- 
+                  sm: "1em", // Default font size for larger screens (tablets and up)
+                },
+                color: "transparent",
+                WebkitTextStroke: "1px #ffffff",
+                marginBottom: "30px",
+              }}
+            >
+              Borås Kristna Center
+            </Typography>
 
-  <Box
-    sx={{
-        marginTop:'30px',
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start", // Align links to the left
-      textAlign: "left", // Ensure text aligns left
-      width: "100%", // Take full width so alignment works properly
-      maxWidth: "400px", // You can adjust max width for better control
-    }}
-  >
-     <Typography
-    variant="h5"
-    sx={{
-      fontWeight: 800,
-      lineHeight: "1.5em",
-      color: "transparent",
-      WebkitTextStroke: "1px #ffffff",
-      textTransform: "uppercase",
-    
-      marginBottom: "50px",
-      fontSize: {
-        xs: "1rem", // Smaller font size for small screens (mobile devices)
-        sm: "1.5rem", // Default font size for larger screens (tablets and up)
-      },
-    }}
-  >
-    A place to worship
-    <br />
-    A place to pray
-    <br />
-    A place to learn the words
-  </Typography>
-  <Link to="/" >
-    New Here
-  </Link>
-  <Link to="/contact" >
-    Contact Us
-  </Link></Box>
-</Box>
+            {/* Second Typography - Below the first */}
 
+            <Box
+              sx={{
+                marginTop: "30px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start", // Align links to the left
+                textAlign: "left", // Ensure text aligns left
+                width: "100%", // Take full width so alignment works properly
+                maxWidth: "400px", // You can adjust max width for better control
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 800,
+                  lineHeight: "1.5em",
+                  color: "transparent",
+                  WebkitTextStroke: "1px #ffffff",
+                  textTransform: "uppercase",
+
+                  marginBottom: "50px",
+                  fontSize: {
+                    xs: "1rem", // Smaller font size for small screens (mobile devices)
+                    sm: "1.5rem", // Default font size for larger screens (tablets and up)
+                  },
+                }}
+              >
+                A place to worship
+                <br />
+                A place to pray
+                <br />A place to learn the words
+              </Typography>
+              <Link to="/">New Here</Link>
+              <Link to="/contact">Contact Us</Link>
+            </Box>
+          </Box>
         </Grid>
 
         {/* Rolling Section */}
@@ -193,8 +223,6 @@ export default function StartPage() {
             overflow: "hidden", // Prevent overflow
             display: "flex", // Flexbox to center content
             justifyContent: "center", // Horizontal centering
-            
-         
           }}
         >
           <RollingSection />
@@ -246,10 +274,8 @@ export default function StartPage() {
           >
             Comming Events
           </Typography>
-         
         </Box>
-        < NewsCarousel  /> 
- 
+        <NewsCarousel />
       </Box>
       {/* --------------ACTIVITIES----------- */}
       <Box
@@ -258,7 +284,7 @@ export default function StartPage() {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          justifyContent:'center',
+          justifyContent: "center",
           gap: "20px",
           paddingTop: "30px",
           backgroundColor: "#f0f4f8",
@@ -298,14 +324,14 @@ export default function StartPage() {
             <Box
               sx={{
                 display: "flex",
-                justifyContent:'flex-start',
+                justifyContent: "flex-start",
                 gap: "10px", // Adjust spacing between icons
                 paddingTop: "10px", // Space above the icons
-                paddingLeft:'10px',
+                paddingLeft: "10px",
               }}
             >
               <SocialIcon
-              url="https://instagram.com"
+                url="https://instagram.com"
                 network="pinterest"
                 style={{ height: 25, width: 25 }}
               />
@@ -330,14 +356,13 @@ export default function StartPage() {
               transform: "translateZ(0)",
               justifyContent: "center", // Center horizontally
               overflow: "hidden", // Hide any overflow
-       
             }}
           >
             <ImageGallary />
           </Grid>
         </Grid>
       </Box>
-        {/* --------------ACTIVITIES-Sunday Service----------- */} 
+      {/* --------------ACTIVITIES-Sunday Service----------- */}
       <Box
         sx={{
           width: "100%",
@@ -348,7 +373,6 @@ export default function StartPage() {
           paddingTop: "30px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          
         }}
       >
         <Grid
@@ -361,7 +385,7 @@ export default function StartPage() {
             sx={{
               maxWidth: 400,
               height: 250,
-              transform: "translateZ(0)",      
+              transform: "translateZ(0)",
             }}
           >
             <img
@@ -386,7 +410,7 @@ export default function StartPage() {
         </Grid>
       </Box>
 
-       {/* --------------ACTIVITIES-BKC Kids----------- */} 
+      {/* --------------ACTIVITIES-BKC Kids----------- */}
 
       <Box
         sx={{
@@ -420,7 +444,6 @@ export default function StartPage() {
               maxWidth: 400,
               height: 250,
               transform: "translateZ(0)",
-          
             }}
           >
             <img
@@ -437,7 +460,7 @@ export default function StartPage() {
         </Grid>
       </Box>
 
-       {/* --------------ACTIVITIES-Youth----------- */} 
+      {/* --------------ACTIVITIES-Youth----------- */}
 
       <Box
         sx={{
@@ -486,7 +509,7 @@ export default function StartPage() {
         </Grid>
       </Box>
 
-       {/* --------------ACTIVITIES-Home Group----------- */} 
+      {/* --------------ACTIVITIES-Home Group----------- */}
 
       <Box
         sx={{
@@ -538,45 +561,49 @@ export default function StartPage() {
             />
           </Grid>
         </Grid>
-        
       </Box>
-      <Box
-      sx={{
-        width: '100%',
-        paddingTop: 2, // Padding at the top
-        paddingBottom: 2, // Padding at the bottom
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f0f4f8', 
-      }}
-    >
-      <Grid
-        container
-        spacing={2} // Add spacing between items
-        justifyContent="center"
-        
+
+       {/* --------------Events card---------- */}
+      {/* <Box
+        sx={{
+          width: "100%",
+          paddingTop: 2, // Padding at the top
+          paddingBottom: 2, // Padding at the bottom
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#f0f4f8",
+        }}
       >
-        {events.map((event, index) => (
-        <Grid   sx={{
-        maxWidth: 380,
-        display: 'flex',
-              
-      }} 
-      size={{ xs: 12, sm: 3 }}
-      >
-                <EventCard 
-                    key={index} 
-                    time={event.time} 
-                    title={event.title} 
-                    image={event.image} 
-                    description={event.description} 
-                />
+        <Grid
+          container
+          spacing={2} // Add spacing between items
+          justifyContent="center"
+        >
+          {events.map((event, index) => (
+            <Grid
+              sx={{
+                maxWidth: 380,
+                display: "flex",
+              }}
+              size={{ xs: 12, sm: 3 }}
+            >
+              <EventCard
+                key={index}
+                time={event.time}
+                title={event.title}
+                image={event.image}
+                description={event.description}
+              />
+            </Grid>
+          ))}
         </Grid>
-            ))}
-      </Grid>
-    </Box>
-      
+      </Box> */}
+
+       {/* --------------NEWS SLIDES----------- */}
+      <div>
+        <PauseOnHover events={news} />
+      </div>
 
       <Footer />
       {/* 
@@ -644,6 +671,5 @@ export default function StartPage() {
         </div>
       </div> */}
     </Box>
-    
   );
 }
