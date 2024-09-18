@@ -84,6 +84,7 @@
   .slide{
     position :relative;
     height: 300px;
+    cursor: pointer;
   }
   .text-overlay {
     position: absolute;
@@ -104,13 +105,21 @@
   }
   .text-overlay p{
     font-size: 1.5em;
+    width: "100%";   
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; 
   }
   .slick-slider .slick-list,
   .slick-slider .slick-track {
     display: flex;
     gap: 0.7rem;
   }
-   
+  .slide:hover .text-overlay {
+    opacity: 1; /* Show overlay text on hover if you want */
+  }
   .slick-dots {
     width: fit-content !important;
     display: flex !important;

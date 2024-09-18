@@ -1,6 +1,7 @@
 // NewsDetailsModal.tsx
 import React from 'react';
 import './news.css'
+import { Box } from '@mui/material';
 
 interface EventProps {
     id: string;
@@ -8,6 +9,7 @@ interface EventProps {
     title: string;
     image: string;
     description: string;
+    details?:string;
   }
   
 
@@ -21,15 +23,18 @@ const NewsDetailsModal: React.FC<NewsDetailsModalProps> = ({ isOpen, onClose, ev
   if (!isOpen || !event) return null;
 
   return (
-    <div className="modal-overlay">
+    <Box className="modal-overlay">
       <div className="modal-content">
         <button onClick={onClose} className="close-button">X</button>
         <h1>{event.title}</h1>
-        <img src={event.image} alt={event.title} />
+        <Box className="new-detail-image">
+           <img src={event.image} alt={event.title} />  
+        </Box>
+        
         <p>{event.description}</p>
         <p>{event.time.toLocaleDateString()} {event.time.toLocaleTimeString()}</p>
       </div>
-    </div>
+    </Box>
   );
 };
 

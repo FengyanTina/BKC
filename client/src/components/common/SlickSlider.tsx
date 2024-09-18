@@ -14,8 +14,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import  React,{ useRef } from "react";
+import  React,{ useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import NewsDetailsModal from "../../pages/news/NewsDetails";
 interface EventProps {
     id: string;
     time:Date;
@@ -27,28 +28,9 @@ interface EventProps {
  
   
 function PauseOnHover({  events }:{ events: EventProps[] }) {
-    
-//     const displayImages = images.map((img, i) => (
-//     <div key={i}>
-//       <img src={img} alt={`slider-${i}`} />
-//     </div>
-//   ));
-// const displayImages = images.map((img, i) => (
-//     <div key={i} className="slide">
-//       <div
-//         className="image-container"
-//         style={{
-//           backgroundImage: `url(${img})`,
-//         }}
-//       >
-//         <div className="text-overlay">
-//           <h2>Beautiful Destination {i + 1}</h2>
-//           <p>Experience the beauty of nature</p>
-//         </div>
-//       </div>
-//     </div>
-//   ));
 
+    const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const settings = {
         dots: true,
         infinite: true,
@@ -75,11 +57,19 @@ function PauseOnHover({  events }:{ events: EventProps[] }) {
       (sliderRef.current as any).slickPrev(); // Use 'any' to bypass TypeScript issues
     }
   };
+  const handleSlideClick = (event: EventProps) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null);
+  };
 
 const displayImages = events.map((event,i)=>(
-    <div key={i} className="slide">
-         <Link to={`/news/${i}`}>
+    <div key={i} className="slide" onClick={() => handleSlideClick(event)}>
+      
         <div className="image-container" style={{backgroundImage: `url(${event.image})`,}}>
             <div className="text-overlay">
                 <h2>{event.title}</h2>
@@ -88,11 +78,9 @@ const displayImages = events.map((event,i)=>(
             </div>
 
         </div>
-        </Link>
+       
     </div>
 ))
-
-
 
 
   return (
@@ -112,6 +100,11 @@ const displayImages = events.map((event,i)=>(
          </button>
        </div> 
      </section>
+     <NewsDetailsModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        event={selectedEvent}
+      />
     </div>
   );
 }

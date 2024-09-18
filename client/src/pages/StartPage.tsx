@@ -52,15 +52,15 @@ const news = [
     title: "Reaching out ",
     image: PrayerBible,
     description:
-      "An exhibition featuring contemporary art pieces from local artists.",
+      "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
   },
   {
     id:"2",
     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-    title: "Tech Conference",
+    title: "Easter camp",
     image: edward,
     description:
-      "Join the biggest technology conference of the year with keynote speakers.",
+      "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
   },
   {
     id:"3",
