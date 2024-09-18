@@ -46,38 +46,38 @@ const events = [
   },
 ];
 const comingEvents = [
-    {
-        id:"1",
-      title: "Sunday Worship",
-      time: new Date('2024-09-22T10:00:00'),
-      description: "Join us for a special Sunday worship service.",
-      image: worshipHands, // Use actual image URL
-    },
-    {
-        id:"2",
-      title: "Community Outreach",
-      time: new Date('2024-09-25T14:00:00'),
-      description: "Participate in our community outreach program.",
-      image: edward, // Use actual image URL
-    },
-    {
-        id:"3",
-      title: "Bible Study Group",
-      time: new Date('2024-09-27T19:00:00'),
-      description: "Deep dive into the scriptures with our study group.",
-      image: BethelWorship, // Use actual image URL
-    },
-    {
-        id:"4",
-      title: "Prayer Meeting",
-      time: new Date('2024-09-30T08:00:00'),
-      description: "Come together for our weekly prayer meeting.",
-      image: Worship, // Use actual image URL
-    },
-  ];
+  {
+    id: "1",
+    title: "Sunday Worship",
+    time: new Date("2024-09-22T10:00:00"),
+    description: "Join us for a special Sunday worship service.",
+    image: worshipHands, // Use actual image URL
+  },
+  {
+    id: "2",
+    title: "Community Outreach",
+    time: new Date("2024-09-25T14:00:00"),
+    description: "Participate in our community outreach program.",
+    image: edward, // Use actual image URL
+  },
+  {
+    id: "3",
+    title: "Bible Study Group",
+    time: new Date("2024-09-27T19:00:00"),
+    description: "Deep dive into the scriptures with our study group.",
+    image: BethelWorship, // Use actual image URL
+  },
+  {
+    id: "4",
+    title: "Prayer Meeting",
+    time: new Date("2024-09-30T08:00:00"),
+    description: "Come together for our weekly prayer meeting.",
+    image: Worship, // Use actual image URL
+  },
+];
 const news = [
   {
-    id:"1",
+    id: "1",
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
     title: "Reaching out ",
     image: PrayerBible,
@@ -85,7 +85,7 @@ const news = [
       "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
   },
   {
-    id:"2",
+    id: "2",
     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
     title: "Easter camp",
     image: edward,
@@ -93,7 +93,7 @@ const news = [
       "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
   },
   {
-    id:"3",
+    id: "3",
     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
     title: "Charity Run",
     image: Worship,
@@ -101,7 +101,7 @@ const news = [
       "Participate in the annual charity run to support a good cause.",
   },
   {
-    id:"4",
+    id: "4",
     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
     title: "Food Festival",
     image: BethelWorship,
@@ -297,18 +297,14 @@ export default function StartPage() {
               WebkitTextStroke: "1px #ffffff",
               textTransform: "uppercase",
               padding: "10px",
-             
             }}
           >
             Comming Events
           </Typography>
         </Box>
-       <Box sx={{width:'80%'}}>
-
-         <NewsCarousel events={comingEvents} />   
-       </Box>
-        
-        
+        <Box sx={{ width: "80%" }}>
+          <NewsCarousel events={comingEvents} />
+        </Box>
       </Box>
       {/* --------------ACTIVITIES----------- */}
       <Box
@@ -324,7 +320,7 @@ export default function StartPage() {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Grid>
+        <Grid >
           <Typography
             variant="h1"
             sx={{
@@ -345,7 +341,7 @@ export default function StartPage() {
             Activities
           </Typography>
         </Grid>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={2} justifyContent="center" >
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="Activities"
@@ -580,7 +576,7 @@ export default function StartPage() {
               alignItems: "center", // Center vertically
               justifyContent: "center", // Center horizontally
               overflow: "hidden", // Hide any overflow
-              marginBottom:'50px'
+              marginBottom: "50px",
             }}
           >
             <img
@@ -595,7 +591,8 @@ export default function StartPage() {
             />
           </Grid>
         </Grid>
-
+        
+        {/* --------------NEWS SLIDES----------- */}
         <Grid>
           <Typography
             variant="h1"
@@ -617,13 +614,20 @@ export default function StartPage() {
             News
           </Typography>
         </Grid>
-        <Box sx={{backgroundColor: "#f0f4f8", width:'100%',marginTop:'10px', marginBottom:'20px'}}>
-     
-     <PauseOnHover events={news} />
-   </Box>
+
+        <Box
+          sx={{
+            backgroundColor: "#f0f4f8",
+            width: "100%",
+            marginTop: "10px",
+            marginBottom: "20px",
+          }}
+        >
+          <PauseOnHover events={news} />
+        </Box>
       </Box>
 
-       {/* --------------Events card---------- */}
+      {/* --------------Events card---------- */}
       {/* <Box
         sx={{
           width: "100%",
@@ -660,11 +664,6 @@ export default function StartPage() {
         </Grid>
       </Box> */}
 
-       {/* --------------NEWS SLIDES----------- */}
-       <Box>
-   
-   
-      </Box>
       <Footer />
       {/* 
       <Box className="card">

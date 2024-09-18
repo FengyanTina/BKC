@@ -35,7 +35,7 @@ function PauseOnHover({  events }:{ events: EventProps[] }) {
     const settings = {
         dots: true,
         infinite: true,
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
