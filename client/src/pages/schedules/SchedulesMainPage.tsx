@@ -12,14 +12,11 @@ export default function SchedulesMainPage() {
     return (
         <>
       
-    <div >
-      <Intro content="text"/>
-      <ContactSection />
-      <Map />
-    
-    </div>
-    <div>
+   <Box sx={{marginTop:'300px', padding:'100px', width:'50%'}}>
+
     <BasicDateTimePicker/>
-    </div>
+   </Box>
+    
+   
         </>
     )}
