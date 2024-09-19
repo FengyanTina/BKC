@@ -42,7 +42,7 @@ export default function Intro({ content }: { content: string }) {
   <Box className="intro-container" ref={containerRef}>
     <Grid>
         <Box  sx={{paddingBottom:'40px',overflow:'hidden'}}>
-          <Typography className="intro-h3" variant="h3" >
+          <Typography  variant="h3" >
         Vår vision
       </Typography>   
         </Box>

@@ -12,7 +12,7 @@ interface CardProps {
   subtitle: string;
   content: string;
   buttonText?: string;
-  time?:Date
+  time?: Date;
 }
 export default function InforCard({
   category,
@@ -20,7 +20,7 @@ export default function InforCard({
   subtitle,
   content,
   buttonText,
- time,
+  time,
 }: CardProps) {
   const bull = (
     <Box
@@ -43,24 +43,62 @@ export default function InforCard({
         overflow: "hidden", // Hide overflow if content is too long
         display: "flex",
         flexDirection: "column",
-      
       }}
     >
-      <CardContent>
-      {category && ( // Conditionally render category
-          <Typography gutterBottom sx={{ color: "text.secondary", fontSize: 14 }}>
+      <CardContent
+        sx={{
+          flexGrow: 1, // Ensure the content grows and pushes the button down
+          overflow: "hidden", // Handle overflow for long content
+        }}
+      >
+        {category && ( // Conditionally render category
+          <Typography
+            gutterBottom
+            sx={{
+              color: "text.secondary",
+              fontSize: 14,
+              WebkitLineClamp: 1,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+            }}
+          >
             {category}
           </Typography>
         )}
-        {formattedTime && (
-          <Typography variant="caption" sx={{ mt: 2, color: "text.secondary" }}>
+        {formattedTime && (// Conditionally render time
+          <Typography 
+          variant="caption" 
+          sx={{ mt: 2, color: "text.secondary" }}>
             {formattedTime}
           </Typography>
         )}
-        <Typography variant="h5" component="div" sx={{ mb: 1 }}>
+        <Typography
+          variant="h5"
+          component="div"
+          sx={{
+            mb: 1,
+            WebkitLineClamp: 1,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+          }}
+        >
           {title}
         </Typography>
-        <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
+        <Typography
+          sx={{
+            color: "text.secondary",
+            mb: 1.5,
+            WebkitLineClamp: 1,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+          }}
+        >
           {subtitle}
         </Typography>
         <Typography
@@ -77,11 +115,7 @@ export default function InforCard({
           {content}
         </Typography>
       </CardContent>
-      <CardActions
-        sx={{
-          margin: 0,
-        }}
-      >
+      <CardActions>
         <Button size="small">{buttonText}</Button>
       </CardActions>
     </Card>

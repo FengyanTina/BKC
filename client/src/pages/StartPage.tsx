@@ -1,5 +1,11 @@
 import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  Link as MuiLink,
+  DialogContent,
+  Typography,
+} from "@mui/material";
 import RollingSection from "../components/common/RollingSection";
 import EventCard from "../components/common/EventCard";
 import Grid from "@mui/material/Grid2";
@@ -15,6 +21,10 @@ import SwiperSlider from "../components/common/SwiperCarousel";
 import NewsCarousel from "../components/common/SwiperCarousel";
 import { Link } from "react-router-dom";
 import PauseOnHover from "../components/common/SlickSlider";
+import { useState } from "react";
+import Map from "../components/map/Map";
+import { SlLocationPin } from "react-icons/sl";
+import { FaLocationDot } from "react-icons/fa6";
 const events = [
   {
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
@@ -110,6 +120,15 @@ const news = [
   },
 ];
 export default function StartPage() {
+  const [openMap, setOpenMap] = useState(false);
+
+  const handleOpenMap = () => {
+    setOpenMap(true);
+  };
+
+  const handleCloseMap = () => {
+    setOpenMap(false);
+  };
   return (
     <Box>
       <Grid
@@ -192,6 +211,8 @@ export default function StartPage() {
               Borås Kristna Center
             </Typography>
 
+            {/* Second Typgraph and links - contant, new here */}
+
             <Box
               sx={{
                 marginTop: "30px",
@@ -226,6 +247,20 @@ export default function StartPage() {
               </Typography>
               <Link to="/">New Here</Link>
               <Link to="/contact">Contact Us</Link>
+              {/* Find Us link with onClick */}
+              <FaLocationDot  onClick={handleOpenMap} style={{ fontSize: '2rem', cursor: "pointer", }} />
+            
+              {/* Open Google Map component */}
+              <Dialog
+                open={openMap}
+                onClose={handleCloseMap}
+                maxWidth="md"
+                fullWidth
+              >
+                <DialogContent>
+                  <Map />
+                </DialogContent>
+              </Dialog>
             </Box>
           </Box>
         </Grid>
@@ -320,7 +355,7 @@ export default function StartPage() {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Grid >
+        <Grid>
           <Typography
             variant="h1"
             sx={{
@@ -341,7 +376,7 @@ export default function StartPage() {
             Activities
           </Typography>
         </Grid>
-        <Grid container spacing={2} justifyContent="center" >
+        <Grid container spacing={2} justifyContent="center">
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="Activities"
@@ -383,8 +418,8 @@ export default function StartPage() {
               maxWidth: 400,
               height: 300,
               transform: "translateZ(0)",
-              justifyContent: "center", // Center horizontally
-              overflow: "hidden", // Hide any overflow
+              justifyContent: "center",
+              overflow: "hidden",
             }}
           >
             <ImageGallary />
@@ -418,7 +453,7 @@ export default function StartPage() {
             }}
           >
             <img
-              src={Worship} // Replace with the URL of your image
+              src={Worship}
               alt="Description"
               style={{
                 width: "100%",
@@ -431,8 +466,9 @@ export default function StartPage() {
             <InforCard
               category="Sunday Service"
               title="Word of the Day"
-              subtitle="adjective"
-              content="Borås Kristna Center har haft bibelskola och bibelundervisning i sin kallelse i över 35 år. Nu till hösten och vintern kommer du, under 21 kvällar och 42 lektioner, ges tillfälle att bli undervisad och uppbyggd i Guds Ord. Du kommer få förståelse över din position i Gud och rättfäredigheten i Jesus. Du kommer även få utrustning till att leva ut dina gåvor som Gud lagt på ditt liv."
+              subtitle="välkommen till vår kyrka nu på söndag!"
+              content="Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.
+              Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!"
               buttonText="Learn More"
             />
           </Grid>
@@ -461,9 +497,9 @@ export default function StartPage() {
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="BKC Kids"
-              title="Word of the Day"
-              subtitle="adjective"
-              content="Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn."
+              title="Sunday School"
+              subtitle="BKC-KIDS"
+              content="BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!"
               buttonText="Learn More"
             />
           </Grid>
@@ -476,7 +512,7 @@ export default function StartPage() {
             }}
           >
             <img
-              src={edward} // Replace with the URL of your image
+              src={edward}
               alt="Description"
               style={{
                 width: "100%",
@@ -529,9 +565,9 @@ export default function StartPage() {
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="Youth Group"
-              title="Word of the Day"
-              subtitle="adjective"
-              content="Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn."
+              title="LOGI"
+              subtitle="Bkc Ungdom"
+              content="Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!"
               buttonText="Learn More"
             />
           </Grid>
@@ -591,7 +627,7 @@ export default function StartPage() {
             />
           </Grid>
         </Grid>
-        
+
         {/* --------------NEWS SLIDES----------- */}
         <Grid>
           <Typography

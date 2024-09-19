@@ -1,4 +1,3 @@
-
 // import Slider from "react-slick";
 // import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
@@ -9,41 +8,35 @@ export let images = [
   "https://www.rydges.com/accommodation/cairns-qld/esplanade-cairns-resort/wp-content/uploads/sites/34/2021/08/9081ea8ef3f0c04fd0120c4e86f2bd1c.jpg",
 ];
 
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import  React,{ useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NewsDetailsModal from "../../pages/news/NewsDetails";
+import formatDateTime from "../../utils/FormatDateTime";
 interface EventProps {
-    id: string;
-    time:Date;
-    title: string;
-    image: string;
-    description: string;
-    details?:string
-  }
+  id: string;
+  time: Date;
+  title: string;
+  image: string;
+  description: string;
+  details?: string;
+}
 
- 
-  
-function PauseOnHover({  events }:{ events: EventProps[] }) {
-
-    const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const settings = {
-        dots: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        pauseOnHover: true,
-        
-      };
-      const navigate = useNavigate();
-
+function PauseOnHover({ events }: { events: EventProps[] }) {
+  const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+  };
 
   let sliderRef = useRef<Slider>(null);
 
@@ -68,40 +61,37 @@ function PauseOnHover({  events }:{ events: EventProps[] }) {
     setSelectedEvent(null);
   };
 
-const displayImages = events.map((event,i)=>(
+  const displayImages = events.map((event, i) => (
     <div key={i} className="slide" onClick={() => handleSlideClick(event)}>
-      
-        <div className="image-container" style={{backgroundImage: `url(${event.image})`,}}>
-            <div className="text-overlay">
-                <h2>{event.title}</h2>
-                <p>{event.description}</p>
-                <p>{event.time.toLocaleDateString('sv-SE')} {event.time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</p>
-            </div>
-
+      <div
+        className="image-container"
+        style={{ backgroundImage: `url(${event.image})` }}
+      >
+        <div className="text-overlay">
+          <h2>{event.title}</h2>
+          <p>{event.description}</p>
+          <p>{formatDateTime(event.time)}</p>
         </div>
-       
+      </div>
     </div>
-))
-
+  ));
 
   return (
-    <div className="slider-container">  
-       <section className="slick-container">
-       <Slider   ref={sliderRef}
-        {...settings}
-        >
-         {displayImages}
-       </Slider>
+    <div className="slider-container">
+      <section className="slick-container">
+        <Slider ref={sliderRef} {...settings}>
+          {displayImages}
+        </Slider>
         <div className="slick-arrows">
-         <button onClick={previous}>
-           <IoIosArrowBack />
-         </button>
-         <button  onClick={next}>
-           <IoIosArrowForward />
-         </button>
-       </div> 
-     </section>
-     <NewsDetailsModal
+          <button onClick={previous}>
+            <IoIosArrowBack />
+          </button>
+          <button onClick={next}>
+            <IoIosArrowForward />
+          </button>
+        </div>
+      </section>
+      <NewsDetailsModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         event={selectedEvent}

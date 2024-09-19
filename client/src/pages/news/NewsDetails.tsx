@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "./news.css";
 import { Box, Slider } from "@mui/material";
+import formatDateTime from "../../utils/FormatDateTime";
 
 interface EventProps {
   id: string;
@@ -18,8 +19,12 @@ interface NewsDetailsModalProps {
   event: EventProps | null; // Define your Event type accordingly
 }
 
-export default function NewsDetailsModal({ isOpen, onClose, event }: NewsDetailsModalProps) {
-    if (!isOpen || !event) return null;
+export default function NewsDetailsModal({
+  isOpen,
+  onClose,
+  event,
+}: NewsDetailsModalProps) {
+  if (!isOpen || !event) return null;
 
   const [fontSize, setFontSize] = useState(16);
   const handleFontSizeChange = (newValue: number | number[]) => {
@@ -28,17 +33,15 @@ export default function NewsDetailsModal({ isOpen, onClose, event }: NewsDetails
 
   return (
     <Box className="modal-overlay">
-      <div className="modal-content" style={{ fontSize: `${fontSize}px` }}>
+      <Box className="modal-content" style={{ fontSize: `${fontSize}px` }}>
         <button onClick={onClose} className="close-button">
           X
         </button>
         <h1>{event.title}</h1>
         <img src={event.image} alt={event.title} />
         <p>{event.description}</p>
-        <p>
-          {event.time.toLocaleDateString()} {event.time.toLocaleTimeString()}
-        </p>
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
+        <p>{formatDateTime(event.time)}</p>
+        <Box style={{ marginTop: "20px", textAlign: "center" }}>
           <label htmlFor="font-size-slider">Adjust text size:</label>
           <Slider
             id="font-size-slider"
@@ -48,10 +51,8 @@ export default function NewsDetailsModal({ isOpen, onClose, event }: NewsDetails
             onChange={(_e, newValue) => handleFontSizeChange(newValue)}
             style={{ width: "200px", margin: "10px auto" }}
           />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </Box>
   );
-};
-
-
+}

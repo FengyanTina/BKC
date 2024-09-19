@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import formatDateTime from '../../utils/FormatDateTime';
 
 interface EventCardProps {
     time:Date;
@@ -15,7 +16,7 @@ interface EventCardProps {
   }
 
 
-export default function EventCard({  time,title, image, description }:EventCardProps) {
+export default function EventCard({  time,title, image, description,details }:EventCardProps) {
   return (
     <Card sx={{ width:'100%',
        display: 'flex', flexDirection: 'column',justifyContent:'center'}}>
@@ -52,7 +53,7 @@ export default function EventCard({  time,title, image, description }:EventCardP
             fontSize: '0.80rem',
             marginTop: '10px',   // Pushes the time towards the bottom of the container
             }}>
-        {time.toLocaleDateString('sv-SE')} {time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}
+        {formatDateTime(time)}
         </Typography>
       </CardContent>
       <CardActions >
