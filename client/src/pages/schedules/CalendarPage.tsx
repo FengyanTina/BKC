@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import BasicDateTimePicker from "../../components/common/DateTimePicker";
 
 
 const thumnailImageStyle = {
@@ -44,7 +45,7 @@ export default  function CalendarPage() {
           Calendar
         </Button>
       </Grid>
-    
+    <BasicDateTimePicker/>
 
       <Outlet />
     </>
