@@ -1,11 +1,12 @@
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import BasicDateTimePicker from "../../components/common/DateTimePicker";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Box, Typography } from "@mui/material";
 
 export default function ServicesMainPage() {
     return (
-        <>
-        <p>this is Services</p>
+        <Box sx={{display: 'flex', flexDirection: 'column',backgroundColor: "#f0f4f8",minHeight:'100vh' }}>
+        <Typography variant="h1">
+This is service page
+        </Typography>
+
         
-        </>
+        </Box>
     )}

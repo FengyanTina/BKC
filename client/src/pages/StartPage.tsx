@@ -2,28 +2,23 @@ import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
 import {
   Box,
   Dialog,
-  Link as MuiLink,
   DialogContent,
   Typography,
 } from "@mui/material";
 import RollingSection from "../components/common/RollingSection";
-import EventCard from "../components/common/EventCard";
 import Grid from "@mui/material/Grid2";
 import worshipHands from "../assets/worshipHands.jpg";
 import edward from "../assets/edward.jpg";
 import BethelWorship from "../assets/BethelWorship.jpg";
 import Worship from "../assets/Worship.jpeg";
-import Footer from "../components/footer/Footer";
 import ImageGallary from "../components/common/ImageGallary";
 import InforCard from "../components/common/InforCard";
 import { SocialIcon } from "react-social-icons";
-import SwiperSlider from "../components/common/SwiperCarousel";
 import NewsCarousel from "../components/common/SwiperCarousel";
 import { Link } from "react-router-dom";
 import PauseOnHover from "../components/common/SlickSlider";
 import { useState } from "react";
 import Map from "../components/map/Map";
-import { SlLocationPin } from "react-icons/sl";
 import { FaLocationDot } from "react-icons/fa6";
 const events = [
   {
@@ -700,7 +695,7 @@ export default function StartPage() {
         </Grid>
       </Box> */}
 
-      <Footer />
+      
       {/* 
       <Box className="card">
         <Box className="contentbef"></Box>
