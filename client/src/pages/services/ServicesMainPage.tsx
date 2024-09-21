@@ -6,9 +6,6 @@ export default function ServicesMainPage() {
     return (
         <>
         <p>this is Services</p>
-        <BasicDateTimePicker/>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker />
-    </LocalizationProvider>
+        
         </>
     )}

@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
       }}
     >
       <Typography variant="body2">
-        &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+        &copy; {new Date().getFullYear()} Borås Kristna Center. All rights reserved.
       </Typography>
       <Box>
         <Link href="#" color="inherit" sx={{ mx: 1 }}>

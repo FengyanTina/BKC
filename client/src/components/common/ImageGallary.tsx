@@ -18,44 +18,44 @@ import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
 const itemData = [
     {
       img: Bible,
-      title: 'Breakfast',
+      title: 'Bible Study',
       author: '@bkristastucchio',
       featured: true,
     },
     {
       img: Worship,
-      title: 'Burger',
+      title: 'Juesus Conference',
       author: '@rollelflex_graphy726',
     },
     {
       img: Prayer,
-      title: 'Camera',
+      title: 'Praying for Borås',
       author: '@helloimnik',
     },
     {
       img: Conference,
-      title: 'Coffee',
+      title: 'Comminity Prayer',
       author: '@nolanissac',
     },
     {
       img: Mission,
-      title: 'Hats',
+      title: 'Youth Camp',
       author: '@hjrc33',
     },
     {
       img: BethelWorship,
-      title: 'Honey',
+      title: 'Togather Worship',
       author: '@arwinneil',
       featured: true,
     },
     {
       img:worshipHands,
-      title: 'Basketball',
+      title: 'Worship Conference',
       author: '@tjdragotta',
     },
     {
       img: PrayerBible ,
-      title: 'Fern',
+      title: 'Study the words',
       author: '@katie_wasserman',
     },
     

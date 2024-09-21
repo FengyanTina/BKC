@@ -379,10 +379,10 @@ export default function StartPage() {
         <Grid container spacing={2} justifyContent="center">
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
-              category="Activities"
-              title="Se alla aktivitet här"
-              subtitle="adjective"
-              content="Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre "
+              category="Social Media"
+              title="All activities on Social media"
+              subtitle="Follow our social media"
+              content="Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media"
               buttonText="Learn More"
             />
             <Box
@@ -395,8 +395,8 @@ export default function StartPage() {
               }}
             >
               <SocialIcon
-                url="https://instagram.com"
-                network="pinterest"
+                url="https://youtube.com"
+                network="youtube"
                 style={{ height: 25, width: 25 }}
               />
               <SocialIcon
@@ -565,7 +565,7 @@ export default function StartPage() {
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="Youth Group"
-              title="LOGI"
+              title="Youth"
               subtitle="Bkc Ungdom"
               content="Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!"
               buttonText="Learn More"
@@ -596,8 +596,8 @@ export default function StartPage() {
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="Home Group"
-              title="Word of the Day"
-              subtitle="adjective"
+              title="Find your community"
+              subtitle="subtitle"
               content="Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn."
               buttonText="Learn More"
             />
