@@ -42,10 +42,14 @@ interface Job {
   }: ServiceSchedule): ServiceSchedule {
     return { event, team, memberNeeded, scheduleStatus, category };
   }
-  
+  const loggedInUser = 'David';
   function Row({ row }: { row: ServiceSchedule }) {
     const [open, setOpen] = React.useState(false);
     const categoryColors = ['#f5f5f5', '#e0f7fa', '#fce4ec', '#fff9c4', '#e8f5e9'];
+    const loggedInUser = 'David';
+    const isUserScheduled = row.category.some(category =>
+        category.jobs.some(job => job.members.includes(loggedInUser))
+      );
   
     return (
       <React.Fragment>
@@ -61,6 +65,17 @@ interface Job {
           <TableCell align="right">{row.team}</TableCell>
           <TableCell align="right">{row.memberNeeded}</TableCell>
           <TableCell align="right">{row.scheduleStatus}</TableCell>
+          <TableCell align="right">
+          {isUserScheduled ? (
+            <>
+              {loggedInUser} (Scheduled)
+            </>
+          ) : (
+            <>
+              {loggedInUser} (Not Scheduled)
+            </>
+          )}
+        </TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -94,18 +109,20 @@ interface Job {
                             <TableCell>{job.members.join(', ') || 'No members yet'}</TableCell>
                             <TableCell align="right">{job.totalNumberNeeded}</TableCell>
                             <TableCell align="right">
-                            <Button variant="contained" color="primary" sx={{ marginRight: 1 }}>
-                              Confirm
-                            </Button>
-                            <Button variant="outlined" color="secondary">
-                              Help
-                            </Button>
-                            {/* <Button variant="contained" color="primary" sx={{ marginRight: 1 }}>
-                              Contribute
-                            </Button>
-                            <Button  variant="contained" color="primary" sx={{ marginRight: 1 }}>
-                              Available
-                            </Button> */}
+                            {job.members.includes(loggedInUser) ? (
+                              <>
+                                <Button variant="contained" color="primary" sx={{ marginRight: 1 }}>
+                                  Confirm
+                                </Button>
+                                <Button variant="outlined" color="secondary">
+                                  Help
+                                </Button>
+                              </>
+                            ) : (
+                              <Button variant="outlined" color="primary">
+                                Contribute
+                              </Button>
+                            )}
                           </TableCell>
                           </TableRow>
                         ))}
@@ -201,6 +218,7 @@ interface Job {
               <TableCell align="right">Team</TableCell>
               <TableCell align="right">Members Needed</TableCell>
               <TableCell align="right">Schedule Status</TableCell>
+              <TableCell align="right">{loggedInUser} Status</TableCell> 
             </TableRow>
           </TableHead>
           <TableBody>
