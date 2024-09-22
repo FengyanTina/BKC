@@ -18,9 +18,9 @@ export default function BasicDateTimePicker() {
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="sv">
-      <DemoContainer components={['DateTimePicker']}>
+      {/* <DemoContainer components={['DateTimePicker']}>
         <DateTimePicker label="Basic date time picker" />
-      </DemoContainer>
+      </DemoContainer> */}
       <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
         <DateTimePicker
           label="Select Date and Time"

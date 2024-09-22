@@ -11,10 +11,10 @@ export default function DateCalendarValue() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DateCalendar', 'DateCalendar']}>
-        <DemoItem label="Uncontrolled calendar">
+        {/* <DemoItem label="Uncontrolled calendar">
           <DateCalendar defaultValue={dayjs('2022-04-17')} />
-        </DemoItem>
-        <DemoItem label="Controlled calendar">
+        </DemoItem> */}
+        <DemoItem label="">
           <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
         </DemoItem>
       </DemoContainer>
