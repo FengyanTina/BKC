@@ -5,10 +5,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
 import 'dayjs/locale/sv'; 
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 dayjs.locale('sv');
 
 export default function BasicDateTimePicker() {
+      // State to manage selected date and time
+  const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(dayjs());
+
+  // Function to handle date change
+  const handleDateChange = (newDate: Dayjs | null) => {
+    setSelectedDate(newDate);
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="sv">
       <DemoContainer components={['DateTimePicker']}>
@@ -16,7 +23,10 @@ export default function BasicDateTimePicker() {
       </DemoContainer>
       <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
         <DateTimePicker
-          label="With Time Clock"
+          label="Select Date and Time"
+          value={selectedDate}
+          onChange={handleDateChange} // Updates state with selected date and time
+
           viewRenderers={{
             hours: renderTimeViewClock,
             minutes: renderTimeViewClock,

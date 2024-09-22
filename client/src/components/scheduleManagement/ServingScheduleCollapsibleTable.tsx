@@ -237,14 +237,14 @@ function Row({ row }: { row: ServiceSchedule }) {
                         size="small"
                         sx={{
                             marginLeft: 1,
-                            backgroundColor: "#1976D2", // Soft blue
+                            backgroundColor: "#4CAF50", // Soft green
                             color: "#fff",
                             '&:hover': {
-                              backgroundColor: "#1565C0", // Darker blue on hover
+                              backgroundColor: "#45A049", // Darker green on hover
                             },
                           }}
                       >
-                        Edit Category
+                        Edit Jobs
                       </Button>
                     </Box>
                     <Table size="small" aria-label="jobs">
