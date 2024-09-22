@@ -31,11 +31,16 @@ interface Category {
 interface ServiceSchedule {
   startTime: string;
   endTime: string;
-  event: string;
+  event: Event;
   team: string;
-  memberNeeded: number;
+  memberNeeded?: number;
   scheduleStatus: "open" | "closed"; // Union for specific values
   category: Category[]; // Array of categories, each with its own jobs
+}
+interface Event {
+    eventName: string; 
+    description:string;
+    detail:string;
 }
 
 const getDisplayDateTime = (startTime: string, endTime: string) => {
@@ -157,7 +162,7 @@ function Row({ row }: { row: ServiceSchedule }) {
           scope="row"
           sx={{ fontWeight: "bold", fontSize: "1rem" }}
         >
-          {row.event}
+          {row.event.eventName}
         </TableCell>
         <TableCell align="right" sx={{ fontWeight: "bold", fontSize: "1rem" }}>
           {row.team}
@@ -184,6 +189,7 @@ function Row({ row }: { row: ServiceSchedule }) {
               <Typography variant="h6" gutterBottom component="div">
                 Categories
               </Typography>
+
               {row.category.map((category, index) => {
                 const {
                   displayDate: displayCategoryDate,
@@ -201,14 +207,46 @@ function Row({ row }: { row: ServiceSchedule }) {
                       borderRadius: "8px",
                     }}
                   >
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      component="div"
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      {category.name}
-                    </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "row" }}>
+                      <Typography
+                        variant="subtitle1"
+                        gutterBottom
+                        component="div"
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        {category.name}
+                      </Typography>
+                      <Button
+                        variant="contained"
+                        
+                        size="small"
+                        sx={{
+                            marginLeft: 1,
+                            backgroundColor: "#4CAF50", // Soft green
+                            color: "#fff",
+                            '&:hover': {
+                              backgroundColor: "#45A049", // Darker green on hover
+                            },
+                          }}
+                      >
+                        Create Job
+                      </Button>
+                      <Button
+                        variant="contained"
+                       
+                        size="small"
+                        sx={{
+                            marginLeft: 1,
+                            backgroundColor: "#1976D2", // Soft blue
+                            color: "#fff",
+                            '&:hover': {
+                              backgroundColor: "#1565C0", // Darker blue on hover
+                            },
+                          }}
+                      >
+                        Edit Category
+                      </Button>
+                    </Box>
                     <Table size="small" aria-label="jobs">
                       <TableHead>
                         <TableRow>
@@ -290,17 +328,111 @@ function Row({ row }: { row: ServiceSchedule }) {
 }
 
 export default function CollapsibleTable() {
-  const rows: ServiceSchedule[] = [
-    createData({
+//   const rows: ServiceSchedule[] = [
+//     createData({
+//       startTime: "2023-10-01T10:00:00", // Start time in ISO format
+//       endTime: "2023-10-01T12:00:00",
+//       event: "Sunday Service",
+//       team: "Team A",
+//       memberNeeded: 3,
+//       scheduleStatus: "open",
+//       category: [
+//         {
+//           startTime: "2023-10-01T10:00:00", // Start time in ISO format
+//           endTime: "2023-10-01T12:00:00",
+//           name: "Worship",
+//           jobs: [
+//             {
+//               name: "singing",
+//               members: ["David", "Olivia"],
+//               totalNumberNeeded: 1,
+//             },
+//             { name: "dancing", members: [], totalNumberNeeded: 2 },
+//           ],
+//         },
+//         {
+//           startTime: "2023-10-01T10:00:00", // Start time in ISO format
+//           endTime: "2023-10-02T12:00:00",
+//           name: "Technical",
+//           jobs: [
+//             { name: "sound", members: ["Paul"], totalNumberNeeded: 1 },
+//             { name: "lights", members: [], totalNumberNeeded: 1 },
+//           ],
+//         },
+//       ],
+//     }),
+//     createData({
+//       startTime: "2023-10-01T11:00:00", // Start time in ISO format
+//       endTime: "2023-10-01T13:00:00",
+//       event: "Sunday School",
+//       team: "Team B",
+//       memberNeeded: 5,
+//       scheduleStatus: "open",
+//       category: [
+//         {
+//           startTime: "2023-10-01T11:00:00", // Start time in ISO format
+//           endTime: "2023-10-01T13:00:00",
+//           name: "5 Year group",
+//           jobs: [
+//             { name: "teaching", members: ["John"], totalNumberNeeded: 0 },
+//             { name: "assisstance", members: [], totalNumberNeeded: 2 },
+//           ],
+//         },
+//         {
+//           startTime: "2023-10-01T11:00:00", // Start time in ISO format
+//           endTime: "2023-10-01T13:00:00",
+//           name: "Baby group",
+//           jobs: [
+//             { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
+//             { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
+//           ],
+//         },
+//       ],
+//     }),
+//     createData({
+//       startTime: "2023-10-01T10:00:00", // Start time in ISO format
+//       endTime: "2023-10-01T12:00:00",
+//       event: "Serving",
+//       team: "Team12",
+//       memberNeeded: 2,
+//       scheduleStatus: "open",
+//       category: [
+//         {
+//           startTime: "2023-10-01T12:00:00", // Start time in ISO format
+//           endTime: "2023-10-01T13:00:00",
+//           name: "Fika",
+//           jobs: [
+//             { name: "coffee", members: ["John"], totalNumberNeeded: 0 },
+//             { name: "food", members: [], totalNumberNeeded: 2 },
+//           ],
+//         },
+//         {
+//           startTime: "2023-10-01T11:00:00", // Start time in ISO format
+//           endTime: "2023-10-01T12:00:00",
+//           name: "communion",
+//           jobs: [
+//             { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
+//             { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
+//           ],
+//         },
+//       ],
+//     }),
+//   ];
+const rows: ServiceSchedule[] = [
+    {
       startTime: "2023-10-01T10:00:00", // Start time in ISO format
       endTime: "2023-10-01T12:00:00",
-      event: "Sunday Service",
+      event: {
+        eventName: "Sunday Service",
+        description: "A regular church service held every Sunday.",
+        detail: "The service includes worship, prayers, and sermons."
+      },
       team: "Team A",
       memberNeeded: 3,
       scheduleStatus: "open",
       category: [
         {
-          startTime: "2023-10-01T10:00:00", // Start time in ISO format
+          startTime: "2023-10-01T10:00:00",
           endTime: "2023-10-01T12:00:00",
           name: "Worship",
           jobs: [
@@ -313,7 +445,7 @@ export default function CollapsibleTable() {
           ],
         },
         {
-          startTime: "2023-10-01T10:00:00", // Start time in ISO format
+          startTime: "2023-10-01T10:00:00",
           endTime: "2023-10-02T12:00:00",
           name: "Technical",
           jobs: [
@@ -322,17 +454,21 @@ export default function CollapsibleTable() {
           ],
         },
       ],
-    }),
-    createData({
-      startTime: "2023-10-01T11:00:00", // Start time in ISO format
+    },
+    {
+      startTime: "2023-10-01T11:00:00",
       endTime: "2023-10-01T13:00:00",
-      event: "Sunday School",
+      event: {
+        eventName: "Sunday School",
+        description: "A gathering for children to learn about the Bible.",
+        detail: "Divided into age groups for teaching and activities."
+      },
       team: "Team B",
       memberNeeded: 5,
       scheduleStatus: "open",
       category: [
         {
-          startTime: "2023-10-01T11:00:00", // Start time in ISO format
+          startTime: "2023-10-01T11:00:00",
           endTime: "2023-10-01T13:00:00",
           name: "5 Year group",
           jobs: [
@@ -341,7 +477,7 @@ export default function CollapsibleTable() {
           ],
         },
         {
-          startTime: "2023-10-01T11:00:00", // Start time in ISO format
+          startTime: "2023-10-01T11:00:00",
           endTime: "2023-10-01T13:00:00",
           name: "Baby group",
           jobs: [
@@ -350,17 +486,21 @@ export default function CollapsibleTable() {
           ],
         },
       ],
-    }),
-    createData({
-      startTime: "2023-10-01T10:00:00", // Start time in ISO format
+    },
+    {
+      startTime: "2023-10-01T10:00:00",
       endTime: "2023-10-01T12:00:00",
-      event: "Serving",
+      event: {
+        eventName: "Serving",
+        description: "Volunteers serving during the church service.",
+        detail: "Involves preparing food and assisting with various duties."
+      },
       team: "Team12",
       memberNeeded: 2,
       scheduleStatus: "open",
       category: [
         {
-          startTime: "2023-10-01T12:00:00", // Start time in ISO format
+          startTime: "2023-10-01T12:00:00",
           endTime: "2023-10-01T13:00:00",
           name: "Fika",
           jobs: [
@@ -369,17 +509,18 @@ export default function CollapsibleTable() {
           ],
         },
         {
-          startTime: "2023-10-01T11:00:00", // Start time in ISO format
+          startTime: "2023-10-01T11:00:00",
           endTime: "2023-10-01T12:00:00",
-          name: "communion",
+          name: "Communion",
           jobs: [
             { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
             { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
           ],
         },
       ],
-    }),
+    },
   ];
+  
 
   return (
     <TableContainer component={Paper}>
@@ -424,7 +565,7 @@ export default function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.event} row={row} />
+            <Row key={row.event.eventName} row={row} />
           ))}
         </TableBody>
       </Table>
