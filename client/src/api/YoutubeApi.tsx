@@ -16,6 +16,7 @@ const YouTubePlaylists: React.FC = () => {
     const [videos, setVideos] = useState<Video[]>([]);
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [liveStreams, setLiveStreams] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchChannelVideos = async () => {
@@ -41,6 +42,8 @@ const YouTubePlaylists: React.FC = () => {
 fetchChannelVideos();
 }, []);
 
+
+//*************from playlist********* */
 //   useEffect(() => {
 //     const apiKey = 'AIzaSyDzO2fa8ac6Y6LLjwShHKwkNR87sMQ8WPY'; // Replace with your YouTube API key
 //     const playlistId = 'PLMm1KRJJCKzJxyv3OJsYLXfSpiWRk_4Yv'; // Replace with your playlist ID
@@ -62,6 +65,34 @@ fetchChannelVideos();
 
 //     fetchPlaylistVideos();
 //   }, []);
+
+
+  useEffect(() => {
+    const fetchLiveStreams = async () => {
+        const apiKey = "AIzaSyDzO2fa8ac6Y6LLjwShHKwkNR87sMQ8WPY"; // Replace with your YouTube API key
+        const channelId = "UChwk9uZFucRkHKZCStrwy3w"; // Replace with your YouTube channel ID
+      
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`;
+        
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        // Check if there are live streams available
+        if (data.items.length > 0) {
+          setLiveStreams(data.items);
+        } else {
+          setError('No live streams currently available.');
+        }
+      } catch (error) {
+        setError('Error fetching live streams.');
+        console.error(error);
+      }
+    };
+
+    fetchLiveStreams();
+  }, []); // Empty dependency array means this runs once on mount
 
 const handleVideoClick = (videoId: string) => {
     setSelectedVideoId(videoId);
@@ -108,6 +139,22 @@ const handleVideoClick = (videoId: string) => {
           </div>
         </div>
       )}
+
+<div>
+      <h1>Live Stream Videos</h1>
+      {error && <p>Error: {error}</p>}
+      <ul>
+        {liveStreams.map((stream) => (
+          <li key={stream.id.videoId}>
+            <h2>{stream.snippet.title}</h2>
+            <img src={stream.snippet.thumbnails.default.url} alt={stream.snippet.title} />
+            <a href={`https://www.youtube.com/watch?v=${stream.id.videoId}`} target="_blank" rel="noopener noreferrer">
+              Watch Live
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
   );
 };
