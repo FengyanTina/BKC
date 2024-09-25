@@ -134,7 +134,7 @@ interface EventProps {
   }
  
 
-const NewsCarousel = ({  events }:{ events: EventProps[] }) => {
+const Carousel = ({  events }:{ events: EventProps[] }) => {
     
       const displayEvents = events.map((event) => (
         <SwiperSlide className="single-slide" key={event.id}>
@@ -186,4 +186,4 @@ const NewsCarousel = ({  events }:{ events: EventProps[] }) => {
   };
   
 
-export default  NewsCarousel ;
+export default  Carousel ;

@@ -23,7 +23,7 @@ const navItems = ['Schedule', 'Services', 'Activities'];
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' }, color: 'black' }} // Ensure logo shows on mobile (xs)
+          sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' }, color: 'black' }} 
         >
           <img src={HuvudloggaBKC3} alt="Logo" style={{ maxHeight: 50, marginRight: 10 }} />
         </Typography>

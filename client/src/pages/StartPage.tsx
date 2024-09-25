@@ -14,7 +14,7 @@ import Worship from "../assets/Worship.jpeg";
 import ImageGallary from "../components/common/ImageGallary";
 import InforCard from "../components/common/InforCard";
 import { SocialIcon } from "react-social-icons";
-import NewsCarousel from "../components/common/SwiperCarousel";
+import Carousel from "../components/common/Carousel";
 import { Link } from "react-router-dom";
 import PauseOnHover from "../components/common/SlickSlider";
 import { useState } from "react";
@@ -333,7 +333,7 @@ export default function StartPage() {
           </Typography>
         </Box>
         <Box sx={{ width: "80%" }}>
-          <NewsCarousel events={comingEvents} />
+          <Carousel events={comingEvents} />
         </Box>
       </Box>
       {/* --------------ACTIVITIES----------- */}

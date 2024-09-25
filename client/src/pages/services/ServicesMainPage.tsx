@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import YouTubePlaylists from "../../api/YoutubeApi";
 
 export default function ServicesMainPage() {
     return (
@@ -7,6 +8,6 @@ export default function ServicesMainPage() {
 This is service page
         </Typography>
 
-        
+        <YouTubePlaylists/>
         </Box>
     )}
