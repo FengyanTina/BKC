@@ -58,7 +58,7 @@ const RollingSection = () => {
         overflow:'hidden',
       }} 
     >    
-      <h2 >{topics[currentIndex].title}</h2>
+      {/* <h2 >{topics[currentIndex].title}</h2> */}
     </div>
   );
 };

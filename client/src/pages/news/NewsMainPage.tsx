@@ -4,6 +4,13 @@ import Grid from "@mui/material/Grid";
 import { Link, Outlet } from "react-router-dom";
 import YoutubeApi from "../../api/YoutubeApi";
 import YouTubePlaylists from "../../api/YoutubeApi";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Conference from "../../assets/Conference.jpg";
+import Mission from "../../assets/Mission.png";
+import Prayer from "../../assets/Prayer.jpg";
+import Worship from "../../assets/Worship.jpeg";
+import Bible from "../../assets/Bible.jpg";
 
 
 const thumnailImageStyle = {

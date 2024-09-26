@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import HuvudloggaBKC3 from "../../assets/Huvudlogga-BKC3.png";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./appBar.css";
@@ -30,13 +31,15 @@ export default function TabBar() {
 
   return (
     <Box sx={{ display: "flex" }}>
-        
       <CssBaseline />
       <AppBar
         component="nav"
         sx={{
-          backgroundColor: "transparent", // Make the background transparent
+          //backgroundColor: "transparent", // Make the background transparent
+          //backgroundColor: "rgba(255, 255, 255, 0.1)", // Slight white tint with transparency
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
 
+          backdropFilter: "blur(10px)",
           boxShadow: "none",
           position: "fixed", // Ensure it stays at the top
           top: 0,
@@ -55,11 +58,8 @@ export default function TabBar() {
             sx={{
               mr: 2,
               display: { sm: "none" },
-              color: "black",
+              color: "white",
               "& svg": {
-                stroke: "white",
-                strokeWidth: 1,
-                fill: "#000000", // Stronger black fill for the icon
                 fontSize: "2rem",
               },
             }}
@@ -73,7 +73,6 @@ export default function TabBar() {
             sx={{
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
-              color: "black",
               fontSize: "4rem",
             }}
           >
@@ -101,9 +100,8 @@ export default function TabBar() {
                 label="Home"
                 sx={{
                   fontSize: "1.2rem",
-                  color: "black",
+                  color: "white",
                   fontWeight: 800,
-                  WebkitTextStroke: "0.5px white",
                 }}
               />
               <Tab
@@ -111,9 +109,8 @@ export default function TabBar() {
                 label="Schedules"
                 sx={{
                   fontSize: "1.2rem",
-                  color: "black",
-                  fontWeight: 800,
-                  WebkitTextStroke: "0.5px white",
+                  color: "white",
+                  fontWeight: 900,
                 }}
               />
               <Tab
@@ -121,9 +118,8 @@ export default function TabBar() {
                 label="Services"
                 sx={{
                   fontSize: "1.2rem",
-                  color: "black",
+                  color: "white",
                   fontWeight: 800,
-                  WebkitTextStroke: "0.5px white",
                 }}
               />
               <Tab
@@ -131,9 +127,8 @@ export default function TabBar() {
                 label="Activities"
                 sx={{
                   fontSize: "1.2rem",
-                  color: "black",
+                  color: "white",
                   fontWeight: 800,
-                  WebkitTextStroke: "0.5px white",
                 }}
               />
               <Tab
@@ -141,9 +136,8 @@ export default function TabBar() {
                 label="Contact"
                 sx={{
                   fontSize: "1.2rem",
-                  color: "black",
+                  color: "white",
                   fontWeight: 800,
-                  WebkitTextStroke: "0.5px white",
                 }}
               />
               <Tab
@@ -151,9 +145,8 @@ export default function TabBar() {
                 label="Log In"
                 sx={{
                   fontSize: "1.2rem",
-                  color: "black",
+                  color: "white",
                   fontWeight: 800,
-                  WebkitTextStroke: "0.5px white",
                 }}
               />
             </Tabs>

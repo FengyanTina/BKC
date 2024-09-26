@@ -31,12 +31,20 @@ function PauseOnHover({ events }: { events: EventProps[] }) {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
-  };
+    responsive: [
+        {
+          breakpoint: 768, // Screen width <= 768px
+          settings: {
+            slidesToShow: 1, // Show 1 slide at a time on smaller screens
+          },
+        },
+      ],
+    };
 
   let sliderRef = useRef<Slider>(null);
 

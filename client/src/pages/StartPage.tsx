@@ -1,10 +1,5 @@
 import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
-import {
-  Box,
-  Dialog,
-  DialogContent,
-  Typography,
-} from "@mui/material";
+import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import RollingSection from "../components/common/RollingSection";
 import Grid from "@mui/material/Grid2";
 import worshipHands from "../assets/worshipHands.jpg";
@@ -15,11 +10,18 @@ import ImageGallary from "../components/common/ImageGallary";
 import InforCard from "../components/common/InforCard";
 import { SocialIcon } from "react-social-icons";
 import Carousel from "../components/common/Carousel";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PauseOnHover from "../components/common/SlickSlider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Map from "../components/map/Map";
 import { FaLocationDot } from "react-icons/fa6";
+import Conference from "../assets/Conference.jpg";
+import Mission from "../assets/Mission.png";
+import Prayer from "../assets/Prayer.jpg";
+import Bible from "../assets/Bible.jpg";
+import { LuMapPin } from "react-icons/lu";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import RowAndColumnSpacing from "../components/common/RowAndColumn";
 const events = [
   {
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
@@ -124,12 +126,47 @@ export default function StartPage() {
   const handleCloseMap = () => {
     setOpenMap(false);
   };
+
+  const topics = [
+    { title: " Youtube Video 1", url: "/react-hooks", backgroundImage: Prayer },
+    { title: " Youtube Video 2", url: "/js-es6", backgroundImage: Worship },
+    {
+      title: " Youtube Video 3",
+      url: "/css-grid-flexbox",
+      backgroundImage: Bible,
+    },
+    { title: " Youtube Video 4", url: "/redux", backgroundImage: Mission },
+    {
+      title: " Youtube Video 5",
+      url: "/typescript-react",
+      backgroundImage: Conference,
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate();
+  const changeTopic = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % topics.length);
+  };
+
+  useEffect(() => {
+    if (!isPaused) {
+      const interval = setInterval(() => {
+        changeTopic();
+      }, 3500); // 30 seconds interval
+
+      return () => clearInterval(interval);
+    }
+  }, [isPaused, currentIndex, topics.length]);
+
   return (
     <Box>
       <Grid
+        container
         spacing={2}
         sx={{
-          backgroundImage: `url(${PrayerBible})`,
+          backgroundImage: `url(${Worship})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -144,7 +181,7 @@ export default function StartPage() {
       >
         {/* Link Section */}
         <Grid
-          size={{ xs: 12, sm: 6 }}
+          size={{ xs: 12, sm: 8 }}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -198,8 +235,8 @@ export default function StartPage() {
 
                   sm: "1em", // Default font size for larger screens (tablets and up)
                 },
-                color: "transparent",
-                WebkitTextStroke: "1px #ffffff",
+                color: "white",
+
                 marginBottom: "30px",
               }}
             >
@@ -225,7 +262,7 @@ export default function StartPage() {
                   fontWeight: 800,
                   lineHeight: "1.5em",
                   color: "transparent",
-                  WebkitTextStroke: "1px #ffffff",
+                  WebkitTextStroke: "2px #ffffff",
                   textTransform: "uppercase",
 
                   marginBottom: "50px",
@@ -240,17 +277,28 @@ export default function StartPage() {
                 A place to pray
                 <br />A place to learn the words
               </Typography>
-              <Link to="/">New Here</Link>
-              <Link to="/contact">Contact Us</Link>
+              <Link style={{ color: "white", textDecoration: "none" }} to="/">
+                New Here
+              </Link>
+              <Link
+                style={{ color: "white", textDecoration: "none" }}
+                to="/contact"
+              >
+                Contact Us
+              </Link>
               {/* Find Us link with onClick */}
-              <FaLocationDot  onClick={handleOpenMap} style={{ fontSize: '2rem', cursor: "pointer", }} />
-            
+              <FaMapMarkerAlt
+                onClick={handleOpenMap}
+                style={{ fontSize: "2rem", color: "white", cursor: "pointer" }}
+              />
+
               {/* Open Google Map component */}
               <Dialog
                 open={openMap}
                 onClose={handleCloseMap}
                 maxWidth="md"
                 fullWidth
+                style={{ color: "white", textDecoration: "none" }}
               >
                 <DialogContent>
                   <Map />
@@ -260,8 +308,20 @@ export default function StartPage() {
           </Box>
         </Grid>
 
-        {/* Rolling Section */}
         <Grid
+          sx={{
+            marginTop: {
+              xs: "10px", // Apply 10px margin on small screens (mobile devices)
+              sm: "350px", // Apply 350px margin on larger screens (tablets and up)
+            },
+          }}
+          size={{ xs: 12, sm: 3 }}
+        >
+          <RowAndColumnSpacing />
+        </Grid>
+
+        {/* Rolling Section */}
+        {/* <Grid
           container
           alignItems="center"
           sx={{
@@ -285,7 +345,7 @@ export default function StartPage() {
         >
           <RollingSection />
         </Grid>
-        <Grid></Grid>
+        <Grid></Grid> */}
       </Grid>
       {/* --------------Body----------- */}
       <Box
@@ -695,7 +755,6 @@ export default function StartPage() {
         </Grid>
       </Box> */}
 
-      
       {/* 
       <Box className="card">
         <Box className="contentbef"></Box>
