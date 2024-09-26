@@ -144,13 +144,35 @@ const handleVideoClick = (videoId: string) => {
       <h1>Live Stream Videos</h1>
       {error && <p>Error: {error}</p>}
       <ul>
-        {liveStreams.map((stream) => (
+        {/* {liveStreams.map((stream) => (
           <li key={stream.id.videoId}>
             <h2>{stream.snippet.title}</h2>
             <img src={stream.snippet.thumbnails.default.url} alt={stream.snippet.title} />
             <a href={`https://www.youtube.com/watch?v=${stream.id.videoId}`} target="_blank" rel="noopener noreferrer">
               Watch Live
             </a>
+          </li>
+        ))} */}
+        {liveStreams.map((stream) => (
+          <li key={stream.id.videoId}>
+            <h2>{stream.snippet.title}</h2>
+            <img
+              src={stream.snippet.thumbnails.default.url}
+              alt={stream.snippet.title}
+              style={{ width: '100px', height: 'auto' }}
+            />
+            <div style={{ marginTop: '10px' }}>
+              {/* Embedding the YouTube live video in an iframe */}
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/${stream.id.videoId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={stream.snippet.title}
+              ></iframe>
+            </div>
           </li>
         ))}
       </ul>

@@ -275,7 +275,7 @@ export default function StartPage() {
                 A place to worship
                 <br />
                 A place to pray
-                <br />A place to learn the words
+                <br />A place to learn the word
               </Typography>
               <Link style={{ color: "white", textDecoration: "none" }} to="/">
                 New Here
