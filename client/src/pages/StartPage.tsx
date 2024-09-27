@@ -1,105 +1,33 @@
-import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import worshipHands from "../assets/worshipHands.jpg";
 import edward from "../assets/edward.jpg";
-import BethelWorship from "../assets/BethelWorship.jpg";
 import Worship from "../assets/Worship.jpeg";
 import ImageGallary from "../components/common/ImageGallary";
 import InforCard from "../components/common/InforCard";
 import { SocialIcon } from "react-social-icons";
 import Carousel from "../components/common/Carousel";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PauseOnHover from "../components/common/SlickSlider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Map from "../apis/googleMap/Map.tsx";
-import Conference from "../assets/Conference.jpg";
-import Mission from "../assets/Mission.png";
-import Prayer from "../assets/Prayer.jpg";
-import Bible from "../assets/Bible.jpg";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import CurrentWeekEventCalendar from "../components/common/CurrentWeekEventCalendar";
-import {comingEvents} from "../data.ts";
+import { comingEvents } from "../data.ts";
+import { news } from "../data.ts";
 
 
-const news = [
-  {
-    id: "1",
-    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
-    title: "Reaching out ",
-    image: PrayerBible,
-    description:
-      "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
-  },
-  {
-    id: "2",
-    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-    title: "Easter camp",
-    image: edward,
-    description:
-      "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
-  },
-  {
-    id: "3",
-    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
-    title: "Charity Run",
-    image: Worship,
-    description:
-      "Participate in the annual charity run to support a good cause.",
-  },
-  {
-    id: "4",
-    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
-    title: "Food Festival",
-    image: BethelWorship,
-    description:
-      "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
-  },
-];
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
 
   const handleOpenMap = () => {
     setOpenMap(true);
   };
-
   const handleCloseMap = () => {
     setOpenMap(false);
   };
 
-  const topics = [
-    { title: " Youtube Video 1", url: "/react-hooks", backgroundImage: Prayer },
-    { title: " Youtube Video 2", url: "/js-es6", backgroundImage: Worship },
-    {
-      title: " Youtube Video 3",
-      url: "/css-grid-flexbox",
-      backgroundImage: Bible,
-    },
-    { title: " Youtube Video 4", url: "/redux", backgroundImage: Mission },
-    {
-      title: " Youtube Video 5",
-      url: "/typescript-react",
-      backgroundImage: Conference,
-    },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const navigate = useNavigate();
-  const changeTopic = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % topics.length);
-  };
-
-  useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        changeTopic();
-      }, 3500); // 30 seconds interval
-
-      return () => clearInterval(interval);
-    }
-  }, [isPaused, currentIndex, topics.length]);
-
+  
   return (
     <Box>
       <Grid
@@ -223,7 +151,7 @@ export default function StartPage() {
                 style={{ color: "white", textDecoration: "none" }}
                 to="/contact"
               >
-                Contact Us
+                Find Us
               </Link>
               {/* Find Us link with onClick */}
               <FaMapMarkerAlt
@@ -249,7 +177,7 @@ export default function StartPage() {
 
         <Grid
           sx={{
-            marginRight:'0',
+            marginRight: "0",
             marginTop: {
               xs: "10px", // Apply 10px margin on small screens (mobile devices)
               sm: "340px", // Apply 350px margin on larger screens (tablets and up)
@@ -258,14 +186,14 @@ export default function StartPage() {
               xs: "40vh", // Set height to 40% of the viewport height for small screens
               sm: "50vh", // 50% of viewport height for medium screens
               md: "50vh", // Default height for larger screens
-              lg:'60vh'
+              lg: "60vh",
             },
-            marginBottom:{
-                md:'10px'
+            marginBottom: {
+              md: "10px",
             },
             overflowY: "auto",
           }}
-          size={{ xs: 12, sm: 3, md:2 }}
+          size={{ xs: 12, sm: 3, md: 2 }}
         >
           <CurrentWeekEventCalendar />
         </Grid>

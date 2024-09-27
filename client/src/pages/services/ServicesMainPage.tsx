@@ -1,84 +1,46 @@
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  Paper,
+  styled,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import YouTubePlaylists from "../../apis/youtube/YoutubeApi";
 import { useEffect, useState } from "react";
-interface Video {
-    id: { videoId: string };
-    snippet: {
-      title: string;
-      description: string;
-      thumbnails: { high: { url: string } };
-      publishedAt: string;
-    };
-  }
+import Grid from "@mui/material/Grid2";
+import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
+import worshipHands from "../../assets/worshipHands.jpg";
+import edward from "../../assets/edward.jpg";
+import BethelWorship from "../../assets/BethelWorship.jpg";
+import Worship from "../../assets/Worship.jpeg";
+import Conference from "../../assets/Conference.jpg";
+import Mission from "../../assets/Mission.png";
+import Prayer from "../../assets/Prayer.jpg";
+import Bible from "../../assets/Bible.jpg";
+import Map from "../../apis/googleMap/Map.tsx";
+import { FaMapMarkerAlt } from "react-icons/fa";
+
+const Item = styled("div")(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+
+  ...theme.applyStyles("dark", {}),
+}));
 export default function ServicesMainPage() {
-    const [videos, setVideos] = useState<Video[]>([]);
-  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [liveStreams, setLiveStreams] = useState<any[]>([]);
+  const [openMap, setOpenMap] = useState(false);
 
-  useEffect(() => {
-    const fetchChannelVideos = async () => {
-      const apiKey = "AIzaSyDzO2fa8ac6Y6LLjwShHKwkNR87sMQ8WPY"; // Replace with your YouTube API key
-      const channelId = "UChwk9uZFucRkHKZCStrwy3w"; // Replace with your Channel ID
-      const maxResults = 10; // Number of videos to fetch
-      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&order=date&maxResults=${maxResults}&key=${apiKey}`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (data.items) {
-          setVideos(data.items);
-        } else {
-          setError("No videos found");
-        }
-      } catch (error) {
-        setError("Error fetching videos");
-      }
-    };
-
-    fetchChannelVideos();
-  }, []);
-  useEffect(() => {
-    const fetchLiveStreams = async () => {
-      const apiKey = "AIzaSyDzO2fa8ac6Y6LLjwShHKwkNR87sMQ8WPY"; // Replace with your YouTube API key
-      const channelId = "UChwk9uZFucRkHKZCStrwy3w"; // Replace with your YouTube channel ID
-
-      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        // Check if there are live streams available
-        if (data.items.length > 0) {
-          setLiveStreams(data.items);
-        } else {
-          setError("No live streams currently available.");
-        }
-      } catch (error) {
-        setError("Error fetching live streams.");
-        console.error(error);
-      }
-    };
-
-    fetchLiveStreams();
-  }, []); // Empty dependency array means this runs once on mount
-
-  const handleVideoClick = (videoId: string) => {
-    setSelectedVideoId(videoId);
+  const handleOpenMap = () => {
+    setOpenMap(true);
   };
-
-  const handleCloseVideo = () => {
-    setSelectedVideoId(null);
+  const handleCloseMap = () => {
+    setOpenMap(false);
   };
-  const opts = {
-    height: "390", // Set to appropriate height
-    width: "640", // Set to appropriate width
-    playerVars: {
-      autoplay: 1, // Auto-play the video
-    },
-  };
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box
@@ -87,12 +49,267 @@ export default function ServicesMainPage() {
         flexDirection: "column",
         backgroundColor: "#f0f4f8",
         minHeight: "100vh",
-        marginTop:'100px'
+        flexGrow: 1,
       }}
     >
-      <Typography variant="h1">This is service page</Typography>
+      {/* --------------SundayService First Section----------- */}
+      <Grid
+        container
+        sx={{
+          backgroundImage: `url(${worshipHands})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: { md: "flex-end", sm: "center", xs: "center" },
+          width: "100%", // Full width of the container
+          height: "100vh", // Full viewport height
+          backgroundAttachment: "fixed",
+        }}
+      >
+        <Grid size={{ xs: 6, md: 10 }}>
+          <Typography variant="h3" sx={{ color: "white" }}>
+            Sundays services
+          </Typography>
+          <Typography variant="h6" sx={{ color: "white" }}>
+            Sunday 11:00-13:00
+          </Typography>
+          <Typography variant="h6" sx={{ color: "white" }}>
+            Albanoliden 5, vån 3, 50630 Borås
+          </Typography>
+          <FaMapMarkerAlt
+            onClick={handleOpenMap}
+            style={{ fontSize: "2rem", color: "white", cursor: "pointer" }}
+          />
 
-      <YouTubePlaylists />
+          {/* Open Google Map component */}
+          <Dialog
+            open={openMap}
+            onClose={handleCloseMap}
+            maxWidth="md"
+            fullWidth
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            <DialogContent>
+              <Map />
+            </DialogContent>
+          </Dialog>
+        </Grid>
+      </Grid>
+      {/* --------------SundayService MiddleLine----------- */}
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center", // Center on main axis
+          alignItems: "center", // Center on cross axis
+          textAlign: "center", // Center text
+          width: "100vw", // Full width of the screen
+        }}
+      >
+        <Typography
+          variant="h1"
+          sx={{
+            fontWeight: {
+              xs: 700, // Lighter font weight for small screens (mobile devices)
+              sm: 900, // Default font weight for larger screens
+            },
+            fontSize: {
+              xs: "4rem", // Smaller font size for small screens (mobile devices)
+              sm: "6rem", // Default font size for larger screens (tablets and up)
+            },
+            lineHeight: "1em",
+            color: "transparent",
+            WebkitTextStroke: "1px #ffffff",
+            textTransform: "uppercase",
+            padding: "10px",
+          }}
+        >
+          Sunday Scervices
+        </Typography>
+      </Box>
+      {/* --------------SundayService Intro----------- */}
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid
+          container
+          spacing={{ xs: 0, md: 0 }}
+          columns={{ xs: 1, sm: 12, md: 12 }}
+        >
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            <Item>
+              <img src={Conference} style={{ width: "100%" }} alt="" />
+            </Item>
+          </Grid>
+          <Grid
+            size={{ xs: 12, sm: 6, md: 6 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start", // Ensures that the `h3` stays at the top
+              height: "100%", // Full height grid for vertical centering
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                textAlign: "center", // Align the text to the center
+                mx: "auto", // Horizontal margin to center it within the container
+                px: 3, // Add padding on the sides
+              }}
+            >
+              Welcom to our Sunday Service!
+            </Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                textAlign: "center", // Align the text to the center
+                mx: "auto", // Horizontal margin to center it within the container
+                px: 3, // Add padding on the sides
+                mt: 5,
+              }}
+            >
+              Come as you are !
+            </Typography>
+            <Box
+              sx={{
+                display: "flex", // Make it a flex container
+              
+                alignItems: "center", // Center horizontally
+                justifyContent: "center", // Center vertically
+                alignContent: "center",
+                mt: 5, // Optional margin top if needed
+                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
+                maxHeight: "300px", // Match the max height to prevent too much height difference
+                overflowY: "auto",
+                "@media (max-width: 1430px)": {
+                  maxHeight: "200px", // Cap the height at 1330px width
+                },
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "center", // Align text in the center
+                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+                  overflowY: "auto", // Enable scroll if text is too long
+                  px: 3, // Padding for left and right space
+                }}
+              >
+                Live English simultaneous translation is available for the
+                Sunday services. Thought-provoking and engaging messages based
+                on the Bible from our senior pastor, Tim Dilena. Each service
+                lasts around 90 minutes. Engaging worship music. Come as you
+                are. There is no dress code.
+                {/* Additional text */}
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+      {/* -------------Baptism MiddleLine----------- */}
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center", // Center on main axis
+          alignItems: "center", // Center on cross axis
+          textAlign: "center", // Center text
+          width: "100vw", // Full width of the screen
+        }}
+      >
+        <Typography
+          variant="h1"
+          sx={{
+            fontWeight: {
+              xs: 700, // Lighter font weight for small screens (mobile devices)
+              sm: 900, // Default font weight for larger screens
+            },
+            fontSize: {
+              xs: "4rem", // Smaller font size for small screens (mobile devices)
+              sm: "6rem", // Default font size for larger screens (tablets and up)
+            },
+            lineHeight: "1em",
+            color: "transparent",
+            WebkitTextStroke: "1px #ffffff",
+            textTransform: "uppercase",
+            padding: "10px",
+          }}
+        >
+          Baptism Scervices
+        </Typography>
+      </Box>
+      {/* -------------Baptism Intro----------- */}
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid
+          container
+          spacing={{ xs: 0, md: 0 }}
+          columns={{ xs: 1, sm: 12, md: 12 }}
+        >
+          <Grid
+            size={{ xs: 12, sm: 6, md: 6 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start", // Ensures that the `h3` stays at the top
+              height: "100%", // Full height grid for vertical centering
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                textAlign: "center", // Align the text to the center
+                mx: "auto", // Horizontal margin to center it within the container
+                px: 3, // Add padding on the sides
+              }}
+            >
+             If you would like to be baptized, follow these simple steps.
+            </Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                textAlign: "center", // Align the text to the center
+                mx: "auto", // Horizontal margin to center it within the container
+                px: 3, // Add padding on the sides
+                mt: 5,
+              }}
+            >
+             <a href="http://">Register You</a> 
+            </Typography>
+            <Box
+              sx={{
+                display: "flex", // Make it a flex container
+                flexDirection: "column", // Stack items
+                alignItems: "center", // Center horizontally
+                justifyContent: "center", // Center vertically
+
+                mt: 5, // Optional margin top if needed
+                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
+                maxHeight: "300px", // Match the max height to prevent too much height difference
+                overflowY: "auto",
+                "@media (max-width: 1430px)": {
+                  maxHeight: "200px", // Cap the height at 1330px width
+                },
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "center", // Align text in the center
+                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+                  overflowY: "auto", // Enable scroll if text is too long
+                  px: 3, // Padding for left and right space
+                }}
+              >
+                After you register, you will receive a follow-up email with a video explaining the meaning and significance of water baptism.
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            <Item>
+              <img src={Mission} style={{ width: "100%" }} alt="" />
+            </Item>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 }
