@@ -1,4 +1,4 @@
-import Map from "../../components/map/Map";
+import Map from "../../apis/googleMap/Map";
 import Intro from "../../components/contact-section/Intro";
 import ContactSection from "../../components/contact-section/ContactSection";
 

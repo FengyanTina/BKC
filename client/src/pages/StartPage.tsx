@@ -1,6 +1,5 @@
 import PrayerBible from "../assets/spiritual-prayer-hands-holding-bible.jpg";
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
-import RollingSection from "../components/common/RollingSection";
 import Grid from "@mui/material/Grid2";
 import worshipHands from "../assets/worshipHands.jpg";
 import edward from "../assets/edward.jpg";
@@ -13,75 +12,16 @@ import Carousel from "../components/common/Carousel";
 import { Link, useNavigate } from "react-router-dom";
 import PauseOnHover from "../components/common/SlickSlider";
 import { useEffect, useState } from "react";
-import Map from "../components/map/Map";
-import { FaLocationDot } from "react-icons/fa6";
+import Map from "../apis/googleMap/Map.tsx";
 import Conference from "../assets/Conference.jpg";
 import Mission from "../assets/Mission.png";
 import Prayer from "../assets/Prayer.jpg";
 import Bible from "../assets/Bible.jpg";
-import { LuMapPin } from "react-icons/lu";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import RowAndColumnSpacing from "../components/common/RowAndColumn";
-const events = [
-  {
-    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
-    title: "Art Exhibition",
-    image: PrayerBible,
-    description:
-      "An exhibition featuring contemporary art pieces from local artists.",
-  },
-  {
-    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-    title: "Tech Conference",
-    image: edward,
-    description:
-      "Join the biggest technology conference of the year with keynote speakers.",
-  },
-  {
-    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
-    title: "Charity Run",
-    image: Worship,
-    description:
-      "Participate in the annual charity run to support a good cause.",
-  },
-  {
-    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
-    title: "Food Festival",
-    image: BethelWorship,
-    description:
-      "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
-  },
-];
-const comingEvents = [
-  {
-    id: "1",
-    title: "Sunday Worship",
-    time: new Date("2024-09-22T10:00:00"),
-    description: "Join us for a special Sunday worship service.",
-    image: worshipHands, // Use actual image URL
-  },
-  {
-    id: "2",
-    title: "Community Outreach",
-    time: new Date("2024-09-25T14:00:00"),
-    description: "Participate in our community outreach program.",
-    image: edward, // Use actual image URL
-  },
-  {
-    id: "3",
-    title: "Bible Study Group",
-    time: new Date("2024-09-27T19:00:00"),
-    description: "Deep dive into the scriptures with our study group.",
-    image: BethelWorship, // Use actual image URL
-  },
-  {
-    id: "4",
-    title: "Prayer Meeting",
-    time: new Date("2024-09-30T08:00:00"),
-    description: "Come together for our weekly prayer meeting.",
-    image: Worship, // Use actual image URL
-  },
-];
+import CurrentWeekEventCalendar from "../components/common/CurrentWeekEventCalendar";
+import {comingEvents} from "../data.ts";
+
+
 const news = [
   {
     id: "1",
@@ -176,7 +116,6 @@ export default function StartPage() {
           width: "100%", // Full width of the container
           height: "100vh", // Full viewport height
           backgroundAttachment: "fixed",
-          flexDirection: { xs: "column", sm: "row" },
         }}
       >
         {/* Link Section */}
@@ -310,14 +249,25 @@ export default function StartPage() {
 
         <Grid
           sx={{
+            marginRight:'0',
             marginTop: {
               xs: "10px", // Apply 10px margin on small screens (mobile devices)
-              sm: "350px", // Apply 350px margin on larger screens (tablets and up)
+              sm: "340px", // Apply 350px margin on larger screens (tablets and up)
             },
+            height: {
+              xs: "40vh", // Set height to 40% of the viewport height for small screens
+              sm: "50vh", // 50% of viewport height for medium screens
+              md: "50vh", // Default height for larger screens
+              lg:'60vh'
+            },
+            marginBottom:{
+                md:'10px'
+            },
+            overflowY: "auto",
           }}
-          size={{ xs: 12, sm: 3 }}
+          size={{ xs: 12, sm: 3, md:2 }}
         >
-          <RowAndColumnSpacing />
+          <CurrentWeekEventCalendar />
         </Grid>
 
         {/* Rolling Section */}
