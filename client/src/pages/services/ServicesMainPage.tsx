@@ -22,6 +22,8 @@ import Prayer from "../../assets/Prayer.jpg";
 import Bible from "../../assets/Bible.jpg";
 import Map from "../../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { sundayService } from "../../data.ts";
+import { prayerService } from "../../data.ts";
 
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
@@ -118,9 +120,10 @@ export default function ServicesMainPage() {
               xs: "4rem", // Smaller font size for small screens (mobile devices)
               sm: "6rem", // Default font size for larger screens (tablets and up)
             },
-            lineHeight: "1em",
+            lineHeight: "2em",
             color: "transparent",
-            WebkitTextStroke: "1px #ffffff",
+            //WebkitTextStroke: "1px #ffffff",
+            WebkitTextStroke: "1px #d3d3d3",
             textTransform: "uppercase",
             padding: "10px",
           }}
@@ -137,7 +140,7 @@ export default function ServicesMainPage() {
         >
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <Item>
-              <img src={Conference} style={{ width: "100%" }} alt="" />
+              <img src={sundayService.imageName} style={{ width: "100%" }} alt="" />
             </Item>
           </Grid>
           <Grid
@@ -157,7 +160,7 @@ export default function ServicesMainPage() {
                 px: 3, // Add padding on the sides
               }}
             >
-              Welcom to our Sunday Service!
+             {sundayService.title}
             </Typography>
             <Typography
               variant="h4"
@@ -168,12 +171,12 @@ export default function ServicesMainPage() {
                 mt: 5,
               }}
             >
-              Come as you are !
+              {sundayService.subTitle}
             </Typography>
             <Box
               sx={{
                 display: "flex", // Make it a flex container
-              
+
                 alignItems: "center", // Center horizontally
                 justifyContent: "center", // Center vertically
                 alignContent: "center",
@@ -195,14 +198,115 @@ export default function ServicesMainPage() {
                   px: 3, // Padding for left and right space
                 }}
               >
-                Live English simultaneous translation is available for the
-                Sunday services. Thought-provoking and engaging messages based
-                on the Bible from our senior pastor, Tim Dilena. Each service
-                lasts around 90 minutes. Engaging worship music. Come as you
-                are. There is no dress code.
-                {/* Additional text */}
+                {sundayService.description}
               </Typography>
             </Box>
+          </Grid>
+        </Grid>
+      </Box>
+      {/* --------------PrayerService MiddleLine----------- */}
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center", // Center on main axis
+          alignItems: "center", // Center on cross axis
+          textAlign: "center", // Center text
+          width: "100vw", // Full width of the screen
+        }}
+      >
+        <Typography
+          variant="h1"
+          sx={{
+            fontWeight: {
+              xs: 700, // Lighter font weight for small screens (mobile devices)
+              sm: 900, // Default font weight for larger screens
+            },
+            fontSize: {
+              xs: "4rem", // Smaller font size for small screens (mobile devices)
+              sm: "6rem", // Default font size for larger screens (tablets and up)
+            },
+            lineHeight: "2em",
+            color: "transparent",
+            //WebkitTextStroke: "1px #ffffff",
+            WebkitTextStroke: "1px #d3d3d3",
+            textTransform: "uppercase",
+            padding: "10px",
+          }}
+        >
+          Prayer Scervices
+        </Typography>
+      </Box>
+       {/* --------------PrayerService Intro----------- */}
+       <Box sx={{ flexGrow: 1 }}>
+        <Grid
+          container
+          spacing={{ xs: 0, md: 0 }}
+          columns={{ xs: 1, sm: 12, md: 12 }}
+        >
+          
+          <Grid
+            size={{ xs: 12, sm: 6, md: 6 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start", // Ensures that the `h3` stays at the top
+              height: "100%", // Full height grid for vertical centering
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                textAlign: "center", // Align the text to the center
+                mx: "auto", // Horizontal margin to center it within the container
+                px: 3, // Add padding on the sides
+              }}
+            >
+             {prayerService.title}
+            </Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                textAlign: "center", // Align the text to the center
+                mx: "auto", // Horizontal margin to center it within the container
+                px: 3, // Add padding on the sides
+                mt: 5,
+              }}
+            >
+              <a href="">send in your prayer requiest any time</a>
+            </Typography>
+            <Box
+              sx={{
+                display: "flex", // Make it a flex container
+
+                alignItems: "center", // Center horizontally
+                justifyContent: "center", // Center vertically
+                alignContent: "center",
+                mt: 5, // Optional margin top if needed
+                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
+                maxHeight: "300px", // Match the max height to prevent too much height difference
+                overflowY: "auto",
+                "@media (max-width: 1430px)": {
+                  maxHeight: "200px", // Cap the height at 1330px width
+                },
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "center", // Align text in the center
+                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+                  overflowY: "auto", // Enable scroll if text is too long
+                  px: 3, // Padding for left and right space
+                }}
+              >
+                {prayerService.description}
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            <Item>
+              <img src={sundayService.imageName} style={{ width: "100%" }} alt="" />
+            </Item>
           </Grid>
         </Grid>
       </Box>
@@ -227,9 +331,9 @@ export default function ServicesMainPage() {
               xs: "4rem", // Smaller font size for small screens (mobile devices)
               sm: "6rem", // Default font size for larger screens (tablets and up)
             },
-            lineHeight: "1em",
+            lineHeight: "2em",
             color: "transparent",
-            WebkitTextStroke: "1px #ffffff",
+            WebkitTextStroke: "1px #d3d3d3",
             textTransform: "uppercase",
             padding: "10px",
           }}
@@ -244,6 +348,11 @@ export default function ServicesMainPage() {
           spacing={{ xs: 0, md: 0 }}
           columns={{ xs: 1, sm: 12, md: 12 }}
         >
+              <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            <Item>
+              <img src={Mission} style={{ width: "100%" }} alt="" />
+            </Item>
+          </Grid>
           <Grid
             size={{ xs: 12, sm: 6, md: 6 }}
             sx={{
@@ -261,7 +370,7 @@ export default function ServicesMainPage() {
                 px: 3, // Add padding on the sides
               }}
             >
-             If you would like to be baptized, follow these simple steps.
+              If you would like to be baptized, follow these simple steps.
             </Typography>
             <Typography
               variant="h4"
@@ -271,14 +380,12 @@ export default function ServicesMainPage() {
                 px: 3, // Add padding on the sides
                 mt: 5,
               }}
-            >
-             <a href="http://">Register You</a> 
-            </Typography>
+            ></Typography>
             <Box
               sx={{
                 display: "flex", // Make it a flex container
                 flexDirection: "column", // Stack items
-                alignItems: "center", // Center horizontally
+                alignItems:'start', // Center horizontally
                 justifyContent: "center", // Center vertically
 
                 mt: 5, // Optional margin top if needed
@@ -297,19 +404,43 @@ export default function ServicesMainPage() {
                   maxHeight: { lg: "350px", md: "100px", sm: "100px" },
                   overflowY: "auto", // Enable scroll if text is too long
                   px: 3, // Padding for left and right space
+                  lineHeight: 2,
                 }}
               >
-                After you register, you will receive a follow-up email with a video explaining the meaning and significance of water baptism.
+                <strong>Step1:</strong>:<a href="http://">Register You</a>
+              </Typography>
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign:'left', // Align text in the center
+                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+                  overflowY: "auto", // Enable scroll if text is too long
+                  px: 3, // Padding for left and right space
+                  lineHeight: 2,
+                }}
+              >
+                <strong>Step2:</strong> After you register, you will receive a follow-up email
+                with a video explaining the meaning and significance of water
+                baptism.
+              </Typography>
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "center", // Align text in the center
+                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+                  overflowY: "auto", // Enable scroll if text is too long
+                  px: 3, // Padding for left and right space
+                  lineHeight: 2,
+                }}
+              >
+                <strong>Step3:</strong>: Schedule the baptism.
               </Typography>
             </Box>
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            <Item>
-              <img src={Mission} style={{ width: "100%" }} alt="" />
-            </Item>
-          </Grid>
+        
         </Grid>
       </Box>
+     
     </Box>
   );
 }

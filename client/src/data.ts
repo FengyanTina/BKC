@@ -7,6 +7,22 @@ import Conference from "./assets/Conference.jpg";
 import Mission from "./assets/Mission.png";
 import Prayer from "./assets/Prayer.jpg";
 import Bible from "./assets/Bible.jpg";
+
+interface Section {
+    id: number;
+    text: string;
+    imageUrls: string[];
+  }
+  
+interface Service {
+    id: string;
+    title:string;
+    subTitle?:string;
+    time?:Date;
+    category:string;
+    description: string;
+    imageName: string;
+  }
 export const events = [
     {
       time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
@@ -115,5 +131,62 @@ export const events = [
       title: " Youtube Video 5",
       url: "/typescript-react",
       backgroundImage: Conference,
+    },
+  ];
+ export const sundayService: Service={
+    
+        id: "1",
+        time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+        title: "Welcom to our Sunday Service! ",
+        subTitle:"  Come as you are !",
+        category:"service",
+        imageName: Conference,
+        description:
+          "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
+      
+ }
+ export const prayerService: Service={
+    
+    id: "1",
+    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+    title: "We want to pray for you!",
+    category:"service",
+    imageName: Prayer,
+    description:
+      "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
+  
+}
+  export const services = [
+    {
+      id: "1",
+      time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+      title: "Reaching out ",
+      image: PrayerBible,
+      description:
+        "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
+    },
+    {
+      id: "2",
+      time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+      title: "Easter camp",
+      image: edward,
+      description:
+        "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
+    },
+    {
+      id: "3",
+      time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+      title: "Charity Run",
+      image: Worship,
+      description:
+        "Participate in the annual charity run to support a good cause.",
+    },
+    {
+      id: "4",
+      time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+      title: "Food Festival",
+      image: BethelWorship,
+      description:
+        "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
     },
   ];

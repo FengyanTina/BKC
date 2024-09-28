@@ -48,11 +48,11 @@ const getDisplayDateTime = (startTime: string, endTime: string) => {
   const endDate = new Date(endTime);
   const sameDay = startDate.toDateString() === endDate.toDateString();
 
-  const displayDate = sameDay
-    ? formatDateTime(startDate).split(" ")[0]
-    : `${formatDateTime(startDate).split(" ")[0]} - ${
-        formatDateTime(endDate).split(" ")[0]
-      }`;
+  const displayDayAndMonth = sameDay
+  ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
+  : `${startDate.getDate()}/${startDate.getMonth() + 1} - ${
+      endDate.getDate()}/${endDate.getMonth() + 1
+    }`; 
 
   const displayTime = sameDay
     ? `${formatDateTime(startDate).split(" ")[1]} - ${
@@ -62,7 +62,7 @@ const getDisplayDateTime = (startTime: string, endTime: string) => {
         formatDateTime(endDate).split(" ")[1]
       }`;
 
-  return { displayDate, displayTime };
+  return { displayDayAndMonth, displayTime };
 };
 
 // Updated createData function to handle category and jobs
@@ -107,6 +107,12 @@ function Row({ row }: { row: ServiceSchedule }) {
     : `${formatDateTime(startDate).split(" ")[0]} - ${
         formatDateTime(endDate).split(" ")[0]
       }`; // Start date - End date
+
+      const displayDayAndMonth = sameDay
+      ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
+      : `${startDate.getDate()}/${startDate.getMonth() + 1} - ${
+          endDate.getDate()}/${endDate.getMonth() + 1
+        }`; 
 
   const displayTime = sameDay
     ? `${formatDateTime(startDate).split(" ")[1]} - ${
@@ -192,7 +198,7 @@ function Row({ row }: { row: ServiceSchedule }) {
 
               {row.category.map((category, index) => {
                 const {
-                  displayDate: displayCategoryDate,
+                    displayDayAndMonth: displayCategoryDate,
                   displayTime: displayCategoryTime,
                 } = getDisplayDateTime(category.startTime, category.endTime);
 

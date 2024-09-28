@@ -28,12 +28,13 @@ const YouTubePlaylists: React.FC = () => {
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [liveStreams, setLiveStreams] = useState<any[]>([]);
+  const [player, setPlayer] = useState(null);
 
   useEffect(() => {
     const fetchChannelVideos = async () => {
       //   const apiKey = "AIzaSyDzO2fa8ac6Y6LLjwShHKwkNR87sMQ8WPY"; // Replace with your YouTube API key
       //const apiKey = "AIzaSyDDGV1wYonUjhRI2BxUVYCU774mTNpFKpc";
-      const apiKey = "";
+     const apiKey = "";
       const channelId = "UChwk9uZFucRkHKZCStrwy3w"; // Replace with your Channel ID
       const maxResults = 3; // Number of videos to fetch
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&order=date&maxResults=${maxResults}&key=${apiKey}`;
@@ -118,6 +119,14 @@ const YouTubePlaylists: React.FC = () => {
       autoplay: 1, // Auto-play the video
     },
   };
+ 
+  // Event handler when the YouTube player is ready
+  const onPlayerReady = (event:any) => {
+    setPlayer(event.target); // Store the player instance
+    event.target.playVideo(); // Start playing the video
+  };
+
+  // Handle modal close: stop the video and close modal
 
   return (
     <Box >
@@ -173,11 +182,19 @@ const YouTubePlaylists: React.FC = () => {
                 <span className="close" onClick={handleCloseVideo}>
                   &times;
                 </span>
-                {/* Embedding YouTube Video */}
-                <YouTube videoId={selectedVideoId} opts={opts} />
+                <iframe
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${selectedVideoId}?autoplay=1&controls=1`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="YouTube video player"
+            ></iframe>
               </Box>
             </Box>
-          )}   
+          )}  
+           
               </Grid>
             ))}
           </Grid>
@@ -212,7 +229,64 @@ const YouTubePlaylists: React.FC = () => {
             </ul>
           </Box> 
         </Box>
-     
+        <div>
+          <ul>
+            {videos.map((video) => (
+              <li key={video.id.videoId}>
+                <h2>{video.snippet.title}</h2>
+                <p>{video.snippet.description}</p>
+                <img
+                  src={video.snippet.thumbnails.high.url}
+                  alt={video.snippet.title}
+                  onClick={() => handleVideoClick(video.id.videoId)}
+                  style={{ cursor: "pointer" }}
+                />
+                <p>
+                  Published at:{" "}
+                  {new Date(video.snippet.publishedAt).toLocaleDateString()}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          {selectedVideoId && (
+            <div className="modal">
+              <div className="modal-content">
+                <span className="close" onClick={handleCloseVideo}>
+                  &times;
+                </span>
+                {/* Embedding YouTube Video */}
+                <YouTube videoId={selectedVideoId} opts={opts} onReady={onPlayerReady}/>
+              </div>
+            </div>
+          )}   
+        </div>
+ <h1>Live Stream Videos</h1>
+            {error && <p>Error: {error}</p>}
+            <ul>
+              {liveStreams.map((stream) => (
+                <li key={stream.id.videoId}>
+                  <h2>{stream.snippet.title}</h2>
+                  <img
+                    src={stream.snippet.thumbnails.default.url}
+                    alt={stream.snippet.title}
+                    style={{ width: "100px", height: "auto" }}
+                  />
+                  <div style={{ marginTop: "10px" }}>
+                    {/* Embedding the YouTube live video in an iframe */}
+                    <iframe
+                      width="560"
+                      height="315"
+                      src={`https://www.youtube.com/embed/${stream.id.videoId}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={stream.snippet.title}
+                    ></iframe>
+                  </div>
+                </li>
+              ))}
+            </ul>
     </Box>
   );
 };
