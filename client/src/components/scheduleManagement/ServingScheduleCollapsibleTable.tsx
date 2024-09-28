@@ -15,33 +15,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Button } from "@mui/material";
 import formatDateTime from "../../utils/FormatDateTime";
 import { Category } from "@mui/icons-material";
-interface Job {
-  name: string;
-  members: string[];
-  totalNumberNeeded: number;
-}
+import {ServiceSchedule,Job,} from "../../data.ts"
 
-interface Category {
-  name: string;
-  startTime: string; // ISO format string
-  endTime: string; // ISO format string
-  jobs: Job[];
-}
-
-interface ServiceSchedule {
-  startTime: string;
-  endTime: string;
-  event: Event;
-  team: string;
-  memberNeeded?: number;
-  scheduleStatus: "open" | "closed"; // Union for specific values
-  category: Category[]; // Array of categories, each with its own jobs
-}
-interface Event {
-    eventName: string; 
-    description:string;
-    detail:string;
-}
 
 const getDisplayDateTime = (startTime: string, endTime: string) => {
   const startDate = new Date(startTime);

@@ -23,6 +23,35 @@ interface Service {
     description: string;
     imageName: string;
   }
+  export interface Category {
+    name: string;
+    startTime: string; // ISO format string
+    endTime: string; // ISO format string
+    jobs: Job[];
+  }
+  export interface Job {
+    name: string;
+    members: string[];
+    totalNumberNeeded: number;
+  }
+  
+  
+  
+  interface Event {
+      eventName: string; 
+      description:string;
+      detail:string;
+  }
+  
+  export interface ServiceSchedule {
+    startTime: string;
+    endTime: string;
+    event: Event;
+    team: string;
+    memberNeeded?: number;
+    scheduleStatus: "open" | "closed"; // Union for specific values
+    category: Category[]; // Array of categories, each with its own jobs
+  }
 export const events = [
     {
       time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
