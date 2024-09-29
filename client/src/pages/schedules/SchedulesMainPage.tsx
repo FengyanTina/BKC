@@ -4,6 +4,9 @@ import ServingScheduleCollapsibleTable from "../../components/scheduleManagement
 import EventsCalendar from "./EventsCalendar";
 import Carousel from "../../components/common/Carousel";
 import { comingEvents } from "../../data";
+import CollapsibleTable from "../../components/scheduleManagement/ServingScheduleCollapsibleTable";
+import EventSchedule from "../../components/scheduleManagement/DatePickerEventSchedule";
+import Calendar from "../../components/scheduleManagement/Calendar";
 
 export default function SchedulesMainPage() {
   return (
@@ -30,8 +33,11 @@ export default function SchedulesMainPage() {
 
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "90%" }}>
         <Typography sx={{  marginBottom: "50px", textAlign:'center'}} variant="h4">Comming Week Schedule</Typography>
-          <ServingScheduleCollapsibleTable />
+          {/* <ServingScheduleCollapsibleTable /> */}
+          <CollapsibleTable/>
         </Box>
+        <EventSchedule/>
+        <Calendar/>
       </Box>
     </>
   );

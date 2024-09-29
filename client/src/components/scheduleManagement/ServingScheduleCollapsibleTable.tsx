@@ -41,25 +41,25 @@ const getDisplayDateTime = (startTime: string, endTime: string) => {
 };
 
 // Updated createData function to handle category and jobs
-function createData({
-  startTime,
-  endTime,
-  event,
-  team,
-  memberNeeded,
-  scheduleStatus,
-  category,
-}: ServiceSchedule): ServiceSchedule {
-  return {
-    startTime,
-    endTime,
-    event,
-    team,
-    memberNeeded,
-    scheduleStatus,
-    category,
-  };
-}
+// function createData({
+//   startTime,
+//   endTime,
+//   event,
+//   team,
+//   memberNeeded,
+//   scheduleStatus,
+//   category,
+// }: ServiceSchedule): ServiceSchedule {
+//   return {
+//     startTime,
+//     endTime,
+//     event,
+//     team,
+//     memberNeeded,
+//     scheduleStatus,
+//     category,
+//   };
+// }
 const loggedInUser = "David";
 function Row({ row }: { row: ServiceSchedule }) {
   const [open, setOpen] = React.useState(false);
@@ -309,96 +309,7 @@ function Row({ row }: { row: ServiceSchedule }) {
 }
 
 export default function CollapsibleTable() {
-//   const rows: ServiceSchedule[] = [
-//     createData({
-//       startTime: "2023-10-01T10:00:00", // Start time in ISO format
-//       endTime: "2023-10-01T12:00:00",
-//       event: "Sunday Service",
-//       team: "Team A",
-//       memberNeeded: 3,
-//       scheduleStatus: "open",
-//       category: [
-//         {
-//           startTime: "2023-10-01T10:00:00", // Start time in ISO format
-//           endTime: "2023-10-01T12:00:00",
-//           name: "Worship",
-//           jobs: [
-//             {
-//               name: "singing",
-//               members: ["David", "Olivia"],
-//               totalNumberNeeded: 1,
-//             },
-//             { name: "dancing", members: [], totalNumberNeeded: 2 },
-//           ],
-//         },
-//         {
-//           startTime: "2023-10-01T10:00:00", // Start time in ISO format
-//           endTime: "2023-10-02T12:00:00",
-//           name: "Technical",
-//           jobs: [
-//             { name: "sound", members: ["Paul"], totalNumberNeeded: 1 },
-//             { name: "lights", members: [], totalNumberNeeded: 1 },
-//           ],
-//         },
-//       ],
-//     }),
-//     createData({
-//       startTime: "2023-10-01T11:00:00", // Start time in ISO format
-//       endTime: "2023-10-01T13:00:00",
-//       event: "Sunday School",
-//       team: "Team B",
-//       memberNeeded: 5,
-//       scheduleStatus: "open",
-//       category: [
-//         {
-//           startTime: "2023-10-01T11:00:00", // Start time in ISO format
-//           endTime: "2023-10-01T13:00:00",
-//           name: "5 Year group",
-//           jobs: [
-//             { name: "teaching", members: ["John"], totalNumberNeeded: 0 },
-//             { name: "assisstance", members: [], totalNumberNeeded: 2 },
-//           ],
-//         },
-//         {
-//           startTime: "2023-10-01T11:00:00", // Start time in ISO format
-//           endTime: "2023-10-01T13:00:00",
-//           name: "Baby group",
-//           jobs: [
-//             { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
-//             { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
-//           ],
-//         },
-//       ],
-//     }),
-//     createData({
-//       startTime: "2023-10-01T10:00:00", // Start time in ISO format
-//       endTime: "2023-10-01T12:00:00",
-//       event: "Serving",
-//       team: "Team12",
-//       memberNeeded: 2,
-//       scheduleStatus: "open",
-//       category: [
-//         {
-//           startTime: "2023-10-01T12:00:00", // Start time in ISO format
-//           endTime: "2023-10-01T13:00:00",
-//           name: "Fika",
-//           jobs: [
-//             { name: "coffee", members: ["John"], totalNumberNeeded: 0 },
-//             { name: "food", members: [], totalNumberNeeded: 2 },
-//           ],
-//         },
-//         {
-//           startTime: "2023-10-01T11:00:00", // Start time in ISO format
-//           endTime: "2023-10-01T12:00:00",
-//           name: "communion",
-//           jobs: [
-//             { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
-//             { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
-//           ],
-//         },
-//       ],
-//     }),
-//   ];
+
 const rows: ServiceSchedule[] = [
     {
       startTime: "2023-10-01T10:00:00", // Start time in ISO format

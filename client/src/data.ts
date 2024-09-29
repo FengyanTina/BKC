@@ -8,13 +8,22 @@ import Mission from "./assets/Mission.png";
 import Prayer from "./assets/Prayer.jpg";
 import Bible from "./assets/Bible.jpg";
 
+export interface Video {
+    id: { videoId: string };
+    snippet: {
+      title: string;
+      description: string;
+      thumbnails: { high: { url: string } };
+      publishedAt: string;
+    };
+  }
 interface Section {
     id: number;
     text: string;
     imageUrls: string[];
   }
   
-interface Service {
+export interface Service {
     id: string;
     title:string;
     subTitle?:string;
