@@ -1,5 +1,8 @@
 .map{
     align-content: center;
+    padding: 50px;
+    padding-left: 80px;
+    padding-right: 80px;
 }
 .map-h2 {
     text-transform: uppercase;

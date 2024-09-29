@@ -99,12 +99,13 @@ export default function ServicesMainPage() {
               <Map />
             </DialogContent>
           </Dialog>
+
           <Typography variant="h6" sx={{ color: "white",marginTop:'10px' }}>
             Live: Sunday 11:00 on Youtube
           </Typography>
           <LiveService/>
           <Typography variant="h6" sx={{ color: "white" }}>
-            Check All Teachings  <SocialIcon
+           <a href="https://www.youtube.com/c/Bor%C3%A5sKristnaCenter" style={{ color: "white" }}> Check All Services </a><SocialIcon
                 url="https://www.youtube.com/c/Bor%C3%A5sKristnaCenter"
                 network="youtube"
                 style={{ height: 25, width: 25 }}
@@ -206,7 +207,7 @@ export default function ServicesMainPage() {
               <Typography
                 variant="h5"
                 sx={{
-                  textAlign: "center", // Align text in the center
+                  textAlign: "left", // Align text in the center
                   maxHeight: { lg: "350px", md: "100px", sm: "100px" },
                   overflowY: "auto", // Enable scroll if text is too long
                   px: 3, // Padding for left and right space
@@ -307,7 +308,7 @@ export default function ServicesMainPage() {
               <Typography
                 variant="h5"
                 sx={{
-                  textAlign: "center", // Align text in the center
+                  textAlign: "left", // Align text in the center
                   maxHeight: { lg: "350px", md: "100px", sm: "100px" },
                   overflowY: "auto", // Enable scroll if text is too long
                   px: 3, // Padding for left and right space
@@ -483,8 +484,17 @@ export default function ServicesMainPage() {
         >
          Latest Service Videos
         </Typography>
-      </Box>     
-     <YouTubePlaylists/>    
+      </Box>
+     {/* <YouTubePlaylists/>     */}
+     <Box sx={{ marginBottom:'40px',marginTop:'20px' }}>
+      <Typography variant="h5" sx={{ color: "black",textAlign:'center', marginTop:'10px',marginBottom:'40px' }}>
+           <a href="https://www.youtube.com/c/Bor%C3%A5sKristnaCenter"> Check Our Preachings on Youtube </a> <SocialIcon
+                url="https://www.youtube.com/c/Bor%C3%A5sKristnaCenter"
+                network="youtube"
+                style={{ height: 30, width: 30 }}
+              />
+          </Typography>    
+          </Box> 
     </Box>
   );
 }

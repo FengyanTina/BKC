@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 export default function LiveService() {
-const apiKey = "AIzaSyDzO2fa8ac6Y6LLjwShHKwkNR87sMQ8WPY"; // tinaalwarzon 
+//const apiKey = "AIzaSyDzO2fa8ac6Y6LLjwShHKwkNR87sMQ8WPY"; // tinaalwarzon 
 //const apiKey = "AIzaSyDDGV1wYonUjhRI2BxUVYCU774mTNpFKpc";//alwarzontina
 const channelId = "UChwk9uZFucRkHKZCStrwy3w"; // Replace with your YouTube channel ID
-//const apiKey = "";
+const apiKey = "";
 
 const [liveError, setLiveError] = useState<string | null>(null);
 const [liveStreams, setLiveStreams] = useState<any[]>([]);
