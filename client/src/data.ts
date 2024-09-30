@@ -20,6 +20,7 @@ export interface Video {
 interface Section {
   title: string;
   subTitle?: string;
+  category?:string;
   description: string;
   image: string | string[]; // Accept either a single string or an array of strings for images
   date?: Date;
@@ -81,6 +82,62 @@ interface InforCardProps {
     description:"Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn.",
     image:Varhistoria ,
   }
+  
+export const imageGallarytemData = [
+    {
+      img: Bible,
+      title: "Bible Study",
+      author: "@bkristastucchio",
+      featured: true,
+    },
+    {
+      img: Worship,
+      title: "Juesus Conference",
+      author: "@rollelflex_graphy726",
+    },
+    {
+      img: Prayer,
+      title: "Praying for Borås",
+      author: "@helloimnik",
+    },
+    {
+      img: Conference,
+      title: "Comminity Prayer",
+      author: "@nolanissac",
+    },
+    {
+      img: Mission,
+      title: "Youth Camp",
+      author: "@hjrc33",
+    },
+    {
+      img: BethelWorship,
+      title: "Togather Worship",
+      author: "@arwinneil",
+      featured: true,
+    },
+    {
+      img: worshipHands,
+      title: "Worship Conference",
+      author: "@tjdragotta",
+    },
+    {
+      img: PrayerBible,
+      title: "Study the words",
+      author: "@katie_wasserman",
+    },
+  ];
+  
+  
+  export const socialMediaActivityCardInfor={
+    id: "1",
+    title: "All activities on Social media",
+    subTitle:"Together,Stronger!",
+    time:new Date(2024, 9, 22, 14, 30),
+    category: "Social Media",
+    description:"Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media",
+    image:imageGallarytemData ,
+  }
 
 
 export interface Service {
@@ -90,7 +147,7 @@ export interface Service {
   time?: Date;
   category: string;
   description: string;
-  image: string ;
+  image: string | string[];
 }
 export interface Category {
   name: string;
@@ -303,51 +360,6 @@ export const services = [
     image: BethelWorship,
     description:
       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
-  },
-];
-
-export const imageGallarytemData = [
-  {
-    img: Bible,
-    title: "Bible Study",
-    author: "@bkristastucchio",
-    featured: true,
-  },
-  {
-    img: Worship,
-    title: "Juesus Conference",
-    author: "@rollelflex_graphy726",
-  },
-  {
-    img: Prayer,
-    title: "Praying for Borås",
-    author: "@helloimnik",
-  },
-  {
-    img: Conference,
-    title: "Comminity Prayer",
-    author: "@nolanissac",
-  },
-  {
-    img: Mission,
-    title: "Youth Camp",
-    author: "@hjrc33",
-  },
-  {
-    img: BethelWorship,
-    title: "Togather Worship",
-    author: "@arwinneil",
-    featured: true,
-  },
-  {
-    img: worshipHands,
-    title: "Worship Conference",
-    author: "@tjdragotta",
-  },
-  {
-    img: PrayerBible,
-    title: "Study the words",
-    author: "@katie_wasserman",
   },
 ];
 

@@ -27,15 +27,15 @@ export default function InforCard({
       component="span"
       sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
     >
-      •
+      
     </Box>
   );
   const formattedTime = time ? time.toLocaleString() : null;
   return (
     <Card
       sx={{
-        maxWidth: 350,
-        height: 250,
+        maxWidth: 500,
+        height: 350,
         
         border: "none", // Remove the card border
         backgroundColor: "transparent", // Remove the card background color
@@ -49,6 +49,7 @@ export default function InforCard({
         sx={{
           flexGrow: 1, // Ensure the content grows and pushes the button down
           overflow: "hidden", // Handle overflow for long content
+          paddingLeft:'0'
         }}
       >
         {category && ( // Conditionally render category
@@ -56,7 +57,7 @@ export default function InforCard({
             gutterBottom
             sx={{
               color: "text.secondary",
-              fontSize: 14,
+              fontSize: 18,
               WebkitLineClamp: 1,
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -92,6 +93,7 @@ export default function InforCard({
           sx={{
             color: "text.secondary",
             mb: 1.5,
+            fontSize: 18,
             WebkitLineClamp: 1,
             overflow: "hidden",
             textOverflow: "ellipsis",
@@ -105,11 +107,12 @@ export default function InforCard({
           variant="body2"
           sx={{
             width: "100%",
-            WebkitLineClamp: 3,
+            WebkitLineClamp: 5,
             overflow: "hidden",
             textOverflow: "ellipsis",
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
+            fontSize: 18,
           }}
         >
           {content}

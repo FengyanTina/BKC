@@ -15,6 +15,8 @@ const SectionLine = ({text,  useWhiteStroke}: Props) => {
       alignItems: "center", // Center on cross axis
       textAlign: "center", // Center text
       width: "100vw", // Full width of the screen
+      marginTop: "30px",
+      marginBottom:'30px'
     }}
   >
     <Typography
@@ -33,7 +35,7 @@ const SectionLine = ({text,  useWhiteStroke}: Props) => {
         //WebkitTextStroke: "1px #ffffff",
         WebkitTextStroke: `1px ${useWhiteStroke ? "#ffffff" : "#d3d3d3"}`,
         textTransform: "uppercase",
-        padding: "20px",
+        padding: "30px",
       }}
     >    
       {text}

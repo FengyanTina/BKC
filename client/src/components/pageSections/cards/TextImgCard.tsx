@@ -23,7 +23,7 @@ const Item = styled("div")(({ theme }) => ({
 
 const TextImgCard = ({title,subTitle,description,image,date,location,linkSubtitle}: Props) => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,width:'80%', }}>
     <Grid
       container
       spacing={{ xs: 0, md: 0 }}
@@ -45,6 +45,9 @@ const TextImgCard = ({title,subTitle,description,image,date,location,linkSubtitl
             textAlign: "center", // Align the text to the center
             mx: "auto", // Horizontal margin to center it within the container
             px: 3, // Add padding on the sides
+            fontSize:{
+                lg: 30, md: 20, sm: 16
+             },
           }}
         >
          {title}
@@ -59,7 +62,10 @@ const TextImgCard = ({title,subTitle,description,image,date,location,linkSubtitl
             mt: 5,
           }}
         >
-          <a href="">{linkSubtitle}</a>
+          <a href=""   
+          style={{
+            fontSize: window.innerWidth >= 1200 ? "25px" : window.innerWidth >= 960 ? "18px" : "14px",
+          }}>{linkSubtitle}</a>
         </Typography>   
         )}
         
@@ -71,6 +77,9 @@ const TextImgCard = ({title,subTitle,description,image,date,location,linkSubtitl
                   mx: "auto", // Horizontal margin to center it within the container
                   px: 3, // Add padding on the sides
                   mt: 5,
+                  fontSize:{
+                    lg: 20, md: 14, sm: 12
+                 },
                 }}
               >
                 {subTitle}
@@ -96,9 +105,12 @@ const TextImgCard = ({title,subTitle,description,image,date,location,linkSubtitl
             variant="h5"
             sx={{
               textAlign: "left", // Align text in the center
-              maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+              maxHeight: { lg: "350px", md: "80px", sm: "80px" },
               overflowY: "auto", // Enable scroll if text is too long
               px: 3, // Padding for left and right space
+              fontSize:{
+                lg: 20, md: 14, sm: 12
+             },
             }}
           >
             {description}

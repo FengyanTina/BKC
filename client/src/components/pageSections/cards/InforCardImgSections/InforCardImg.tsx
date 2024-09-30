@@ -16,20 +16,20 @@ const InforCardImg = ({title,category,subTitle,content,buttonText,time,image}: P
   return (
     <Box
     sx={{
-      width: "100%",
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      gap: "20px",
-      paddingTop: "30px",
-      backgroundColor: "#f0f4f8",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    }}
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+       
+        paddingTop: "30px",
+        backgroundColor: "#f0f4f8",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
   >
     <Grid
       container
-      spacing={2}
-      sx={{ flexDirection: { xs: "column", sm: "row" } }}
+     
+      sx={{ flexDirection: { xs: "column", sm: "row" } ,  }}
     >
       <Grid size={{ xs: 12, sm: 6 }}>
         <InforCard
@@ -43,8 +43,8 @@ const InforCardImg = ({title,category,subTitle,content,buttonText,time,image}: P
       <Grid
         size={{ xs: 12, sm: 6 }}
         sx={{
-          maxWidth: 400,
-          height: 250,
+            maxWidth: 500,
+            height: 350,
           transform: "translateZ(0)",
         }}
       >

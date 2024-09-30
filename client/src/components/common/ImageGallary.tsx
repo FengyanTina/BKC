@@ -36,11 +36,12 @@ export default function ImageGallary({itemData}:ImageGalleryComponentProps) {
   return (
     <ImageList
       sx={{
-        maxWidth: 400,
-        height: 450,
+        width: '100%',
+        height: 350,
+        overflowY: 'auto',  
         transform: 'translateZ(0)',
       }}
-      rowHeight={200}
+      rowHeight={250}
       gap={1}
     >
       {itemData.map((item) => {

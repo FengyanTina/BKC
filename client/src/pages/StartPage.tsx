@@ -1,11 +1,6 @@
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import worshipHands from "../assets/worshipHands.jpg";
-import edward from "../assets/edward.jpg";
 import Worship from "../assets/Worship.jpeg";
-import ImageGallary from "../components/common/ImageGallary";
-import InforCard from "../components/common/InforCard";
-import { SocialIcon } from "react-social-icons";
 import Carousel from "../components/common/Carousel";
 import { Link } from "react-router-dom";
 import PauseOnHover from "../components/common/SlickSlider";
@@ -14,10 +9,18 @@ import Map from "../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import CurrentWeekEventCalendar from "../components/common/CurrentWeekEventCalendar";
 import { comingEvents } from "../data.ts";
-import { news, imageGallarytemData, sundayServiceCardInfor,sundaySchoolActivityCardInfor,youthActivityCardInfor, homeGroupActivityCardInfor } from "../data.ts";
+import {
+  news,
+  sundayServiceCardInfor,
+  sundaySchoolActivityCardInfor,
+  youthActivityCardInfor,
+  homeGroupActivityCardInfor,
+  socialMediaActivityCardInfor,
+} from "../data.ts";
 import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
 import InforCardImg from "../components/pageSections/cards/InforCardImgSections/InforCardImg.tsx";
+import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -237,7 +240,8 @@ export default function StartPage() {
           paddingTop: "30px",
           backgroundColor: "#dbe1e8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          paddingBottom: "20px",
+          paddingBottom: "30px",
+          marginBottom: "30px",
         }}
       >
         {/* --------------comming events----------- */}
@@ -250,72 +254,14 @@ export default function StartPage() {
       {/* --------------ACTIVITIES----------- */}
 
       <SectionLine text=" Activities" />
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: "20px",
-          paddingTop: "30px",
-          backgroundColor: "#f0f4f8",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Grid
-          container
-          spacing={2}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
-        >
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
-              category="Social Media"
-              title="All activities on Social media"
-              subTitle="Follow our social media"
-              content="Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media"
-              buttonText="Learn More"
-            />
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-start",
-                gap: "10px", // Adjust spacing between icons
-                paddingTop: "10px", // Space above the icons
-                paddingLeft: "10px",
-              }}
-            >
-              <SocialIcon
-                url="https://youtube.com"
-                network="youtube"
-                style={{ height: 25, width: 25 }}
-              />
-              <SocialIcon
-                url="https://instagram.com"
-                network="instagram"
-                style={{ height: 25, width: 25 }}
-              />
+      <ActivitySocialMediaScetionCard
+        title={socialMediaActivityCardInfor.title}
+        subTitle={socialMediaActivityCardInfor.subTitle}
+        content={socialMediaActivityCardInfor.description}
+        image={socialMediaActivityCardInfor.image}
+        category={socialMediaActivityCardInfor.category}
+      />
 
-              <SocialIcon
-                url="https://facebook.com"
-                network="facebook"
-                style={{ height: 25, width: 25 }}
-              />
-            </Box>
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6 }}
-            sx={{
-              maxWidth: 400,
-              height: 300,
-              transform: "translateZ(0)",
-              justifyContent: "center",
-              overflow: "hidden",
-            }}
-          >
-            <ImageGallary itemData={imageGallarytemData} />
-          </Grid>
-        </Grid>
-      </Box>
       {/* --------------ACTIVITIES-Sunday Service----------- */}
       <ImgInforCard
         title={sundayServiceCardInfor.title}
@@ -344,38 +290,36 @@ export default function StartPage() {
 
       {/* --------------ACTIVITIES-Home Group----------- */}
       <InforCardImg
-        title={ homeGroupActivityCardInfor.title}
-        subTitle={ homeGroupActivityCardInfor.subTitle}
-        content={ homeGroupActivityCardInfor.description}
-        image={ homeGroupActivityCardInfor.image}
-        category={ homeGroupActivityCardInfor.category}
+        title={homeGroupActivityCardInfor.title}
+        subTitle={homeGroupActivityCardInfor.subTitle}
+        content={homeGroupActivityCardInfor.description}
+        image={homeGroupActivityCardInfor.image}
+        category={homeGroupActivityCardInfor.category}
       />
-     {/* --------------NEWS SLIDES----------- */}
-      <Box  sx={{ 
+      {/* --------------NEWS SLIDES----------- */}
+      <Box
+        sx={{
           width: "100%",
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          gap: "20px",
-          paddingTop: "30px",
+          justifyContent: "center",
+          paddingTop: "50px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}>
-        
+        }}
+      >
         <SectionLine text=" News" />
         <Box
           sx={{
             backgroundColor: "#f0f4f8",
             width: "100%",
-            marginTop: "10px",
-            marginBottom: "20px",
+            marginBottom: "10px",
           }}
         >
           <PauseOnHover events={news} />
         </Box>
       </Box>
-
-
     </Box>
   );
 }

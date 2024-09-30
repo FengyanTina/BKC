@@ -36,14 +36,13 @@ export default function ServicesMainPage() {
   const handleCloseMap = () => {
     setOpenMap(false);
   };
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
         backgroundColor: "#f0f4f8",
         minHeight: "100vh",
         flexGrow: 1,
@@ -114,7 +113,7 @@ export default function ServicesMainPage() {
         </Grid>
       </Grid>
       {/* --------------SundayService ----------- */}
-      <SectionLine text="Sunday Scervice"  />
+      <SectionLine text="Sunday Scervice" />
 
       <ImgTextCard
         title={sundayService.title}

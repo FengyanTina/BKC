@@ -49,7 +49,7 @@ const BaptismSectionCard = ({
     steps 
   }: Props) => {
     return (
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1,width:'80%', }}>
         <Grid container spacing={{ xs: 0, md: 0 }} columns={{ xs: 1, sm: 12, md: 12 }}>
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <Item>
@@ -85,6 +85,9 @@ const BaptismSectionCard = ({
                 textAlign: "center",
                 mx: "auto",
                 px: 3,
+                fontSize:{
+                    lg: 30, md: 20, sm: 18
+                 },
               }}
             >
               {title}
@@ -111,8 +114,10 @@ const BaptismSectionCard = ({
               minHeight: '100px',
               maxHeight: '300px',
               overflowY: 'auto',
+            
               '@media (max-width: 1430px)': {
                 maxHeight: '200px',
+                overflowY: 'auto',
               },
             }}
           >
@@ -122,8 +127,11 @@ const BaptismSectionCard = ({
                 variant="h5"
                 sx={{
                   textAlign: index === 1 ? 'left' : 'center', // Center for step 1 and 3, left for step 2
-                  maxHeight: { lg: '350px', md: '100px', sm: '100px' },
-                  overflowY: 'auto',
+                  maxHeight: { lg: "350px", md: "80px", sm: "80px" },
+                  fontSize:{
+                     lg: 20, md: 14, sm: 12
+                  },
+                 
                   px: 3,
                   lineHeight: 2,
                 }}

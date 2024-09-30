@@ -21,7 +21,7 @@ const Item = styled("div")(({ theme }) => ({
   }));
 const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtitle}: Props) => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,width:'80%', }}>
         <Grid
           container
           spacing={{ xs: 0, md: 0 }}
@@ -62,6 +62,9 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
                 textAlign: "center", // Align the text to the center
                 mx: "auto", // Horizontal margin to center it within the container
                 px: 3, // Add padding on the sides
+                fontSize:{
+                    lg: 20, md: 16, sm: 18
+                 },
               }}
             >
              {title}
@@ -87,6 +90,9 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
                   mx: "auto", // Horizontal margin to center it within the container
                   px: 3, // Add padding on the sides
                   mt: 5,
+                  fontSize:{
+                    lg: 30, md: 20, sm: 16
+                 },
                 }}
               >
                 {subTitle}
@@ -101,8 +107,7 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
                 justifyContent: "center", // Center vertically
                 alignContent: "center",
                 mt: 5, // Optional margin top if needed
-                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
-                maxHeight: "300px", // Match the max height to prevent too much height difference
+              // Match the max height to prevent too much height difference
                 overflowY: "auto",
                 "@media (max-width: 1430px)": {
                   maxHeight: "200px", // Cap the height at 1330px width
@@ -113,7 +118,10 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
                 variant="h5"
                 sx={{
                   textAlign: "left", // Align text in the center
-                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+                  maxHeight: { lg: "350px", md: "80px", sm: "80px" },
+                  fontSize:{
+                     lg: 20, md: 14, sm: 12
+                  },
                   overflowY: "auto", // Enable scroll if text is too long
                   px: 3, // Padding for left and right space
                 }}
