@@ -9,6 +9,7 @@ import { Box, Typography } from "@mui/material";
 import InforCard from "../../components/common/InforCard";
 import { SocialIcon } from "react-social-icons";
 import ImageGallary from "../../components/common/ImageGallary";
+import {imageGallarytemData} from "../../data.ts"
 const events = [
   {
     id: "1",
@@ -100,7 +101,7 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Social Media"
               title="All activities on Social media"
-              subtitle="Follow our social media"
+              subTitle="Follow our social media"
               content="Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media"
               buttonText="Learn More"
             />
@@ -141,7 +142,7 @@ export default function ActivitiesMainPage() {
               overflow: "hidden",
             }}
           >
-            <ImageGallary />
+            <ImageGallary itemData={imageGallarytemData}/>
           </Grid>
         </Grid>
       </Box>
@@ -185,7 +186,7 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Sunday Service"
               title="Word of the Day"
-              subtitle="välkommen till vår kyrka nu på söndag!"
+              subTitle="välkommen till vår kyrka nu på söndag!"
               content="Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.
               Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!"
               buttonText="Learn More"
@@ -217,7 +218,7 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="BKC Kids"
               title="Sunday School"
-              subtitle="BKC-KIDS"
+              subTitle="BKC-KIDS"
               content="BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!"
               buttonText="Learn More"
             />
@@ -285,7 +286,7 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Youth Group"
               title="Youth"
-              subtitle="Bkc Ungdom"
+              subTitle="Bkc Ungdom"
               content="Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!"
               buttonText="Learn More"
             />
@@ -316,7 +317,7 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Home Group"
               title="Find your community"
-              subtitle="subtitle"
+              subTitle="subtitle"
               content="Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn."
               buttonText="Learn More"
             />

@@ -14,8 +14,10 @@ import Map from "../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import CurrentWeekEventCalendar from "../components/common/CurrentWeekEventCalendar";
 import { comingEvents } from "../data.ts";
-import { news } from "../data.ts";
-
+import { news, imageGallarytemData, sundayServiceCardInfor,sundaySchoolActivityCardInfor,youthActivityCardInfor, homeGroupActivityCardInfor } from "../data.ts";
+import SectionLine from "../components/pageSections/SectionLine.tsx";
+import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
+import InforCardImg from "../components/pageSections/cards/InforCardImgSections/InforCardImg.tsx";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -27,7 +29,6 @@ export default function StartPage() {
     setOpenMap(false);
   };
 
-  
   return (
     <Box>
       <Grid
@@ -240,81 +241,37 @@ export default function StartPage() {
         }}
       >
         {/* --------------comming events----------- */}
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "center", // Center on main axis
-            alignItems: "center", // Center on cross axis
-            textAlign: "center", // Center text
-            width: "100vw", // Full width of the screen
-          }}
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: {
-                xs: 700, // Lighter font weight for small screens (mobile devices)
-                sm: 900, // Default font weight for larger screens
-              },
-              fontSize: {
-                xs: "4rem", // Smaller font size for small screens (mobile devices)
-                sm: "6rem", // Default font size for larger screens (tablets and up)
-              },
-              lineHeight: "1em",
-              color: "transparent",
-              WebkitTextStroke: "1px #ffffff",
-              textTransform: "uppercase",
-              padding: "10px",
-            }}
-          >
-            Comming Events
-          </Typography>
-        </Box>
+
+        <SectionLine text="Comming Events" useWhiteStroke={true} />
         <Box sx={{ width: "80%" }}>
           <Carousel events={comingEvents} />
         </Box>
       </Box>
       {/* --------------ACTIVITIES----------- */}
+
+      <SectionLine text=" Activities" />
       <Box
         sx={{
           width: "100%",
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          justifyContent: "center",
           gap: "20px",
           paddingTop: "30px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Grid>
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: {
-                xs: 700, // Lighter font weight for small screens (mobile devices)
-                sm: 900, // Default font weight for larger screens
-              },
-              fontSize: {
-                xs: "4rem", // Smaller font size for small screens (mobile devices)
-                sm: "6rem", // Default font size for larger screens (tablets and up)
-              },
-              lineHeight: "1em",
-              color: "transparent",
-              WebkitTextStroke: "1px #d3d3d3",
-              textTransform: "uppercase",
-            }}
-          >
-            Activities
-          </Typography>
-        </Grid>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid
+          container
+          spacing={2}
+          sx={{ flexDirection: { xs: "column", sm: "row" } }}
+        >
           <Grid size={{ xs: 12, sm: 6 }}>
             <InforCard
               category="Social Media"
               title="All activities on Social media"
-              subtitle="Follow our social media"
+              subTitle="Follow our social media"
               content="Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media"
               buttonText="Learn More"
             />
@@ -355,162 +312,46 @@ export default function StartPage() {
               overflow: "hidden",
             }}
           >
-            <ImageGallary />
+            <ImageGallary itemData={imageGallarytemData} />
           </Grid>
         </Grid>
       </Box>
       {/* --------------ACTIVITIES-Sunday Service----------- */}
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: "20px",
-          paddingTop: "30px",
-          backgroundColor: "#f0f4f8",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Grid
-          container
-          spacing={2}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
-        >
-          <Grid
-            size={{ xs: 12, sm: 6 }}
-            sx={{
-              maxWidth: 400,
-              height: 250,
-              transform: "translateZ(0)",
-            }}
-          >
-            <img
-              src={Worship}
-              alt="Description"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover", // Ensure the image covers the container
-              }}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
-              category="Sunday Service"
-              title="Word of the Day"
-              subtitle="välkommen till vår kyrka nu på söndag!"
-              content="Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.
-              Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!"
-              buttonText="Learn More"
-            />
-          </Grid>
-        </Grid>
-      </Box>
+      <ImgInforCard
+        title={sundayServiceCardInfor.title}
+        subTitle={sundayServiceCardInfor.subTitle}
+        content={sundayServiceCardInfor.description}
+        image={sundayServiceCardInfor.image}
+        category={sundayServiceCardInfor.category}
+      />
 
       {/* --------------ACTIVITIES-BKC Kids----------- */}
-
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: "20px",
-          paddingTop: "30px",
-          backgroundColor: "#f0f4f8",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Grid
-          container
-          spacing={2}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
-        >
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
-              category="BKC Kids"
-              title="Sunday School"
-              subtitle="BKC-KIDS"
-              content="BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!"
-              buttonText="Learn More"
-            />
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6 }}
-            sx={{
-              maxWidth: 400,
-              height: 250,
-              transform: "translateZ(0)",
-            }}
-          >
-            <img
-              src={edward}
-              alt="Description"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover", // Ensure the image covers the container
-                display: "block",
-              }}
-            />
-          </Grid>
-        </Grid>
-      </Box>
-
+      <InforCardImg
+        title={sundaySchoolActivityCardInfor.title}
+        subTitle={sundaySchoolActivityCardInfor.subTitle}
+        content={sundaySchoolActivityCardInfor.description}
+        image={sundaySchoolActivityCardInfor.image}
+        category={sundaySchoolActivityCardInfor.category}
+      />
       {/* --------------ACTIVITIES-Youth----------- */}
-
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: "20px",
-          paddingTop: "30px",
-          backgroundColor: "#f0f4f8",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Grid
-          container
-          spacing={2}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
-        >
-          <Grid
-            size={{ xs: 12, sm: 6 }}
-            sx={{
-              maxWidth: 400,
-              height: 250,
-              transform: "translateZ(0)",
-            }}
-          >
-            <img
-              src={worshipHands} // Replace with the URL of your image
-              alt="Description"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover", // Ensure the image covers the container
-              }}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
-              category="Youth Group"
-              title="Youth"
-              subtitle="Bkc Ungdom"
-              content="Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!"
-              buttonText="Learn More"
-            />
-          </Grid>
-        </Grid>
-      </Box>
+      <ImgInforCard
+        title={youthActivityCardInfor.title}
+        subTitle={youthActivityCardInfor.subTitle}
+        content={youthActivityCardInfor.description}
+        image={youthActivityCardInfor.image}
+        category={youthActivityCardInfor.category}
+      />
 
       {/* --------------ACTIVITIES-Home Group----------- */}
-
-      <Box
-        sx={{
+      <InforCardImg
+        title={ homeGroupActivityCardInfor.title}
+        subTitle={ homeGroupActivityCardInfor.subTitle}
+        content={ homeGroupActivityCardInfor.description}
+        image={ homeGroupActivityCardInfor.image}
+        category={ homeGroupActivityCardInfor.category}
+      />
+     {/* --------------NEWS SLIDES----------- */}
+      <Box  sx={{ 
           width: "100%",
           display: "flex",
           alignItems: "center",
@@ -519,71 +360,9 @@ export default function StartPage() {
           paddingTop: "30px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Grid
-          container
-          spacing={2}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
-        >
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
-              category="Home Group"
-              title="Find your community"
-              subtitle="subtitle"
-              content="Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn."
-              buttonText="Learn More"
-            />
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6 }}
-            sx={{
-              maxWidth: 400,
-              height: 250,
-              transform: "translateZ(0)",
-              display: "flex", // Flexbox to center the image
-              alignItems: "center", // Center vertically
-              justifyContent: "center", // Center horizontally
-              overflow: "hidden", // Hide any overflow
-              marginBottom: "50px",
-            }}
-          >
-            <img
-              src={edward} // Replace with the URL of your image
-              alt="Description"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover", // Ensure the image covers the container
-                display: "block",
-              }}
-            />
-          </Grid>
-        </Grid>
-
-        {/* --------------NEWS SLIDES----------- */}
-        <Grid>
-          <Typography
-            variant="h1"
-            sx={{
-              fontWeight: {
-                xs: 700, // Lighter font weight for small screens (mobile devices)
-                sm: 900, // Default font weight for larger screens
-              },
-              fontSize: {
-                xs: "4rem", // Smaller font size for small screens (mobile devices)
-                sm: "6rem", // Default font size for larger screens (tablets and up)
-              },
-              lineHeight: "1em",
-              color: "transparent",
-              WebkitTextStroke: "1px #d3d3d3",
-              textTransform: "uppercase",
-            }}
-          >
-            News
-          </Typography>
-        </Grid>
-
+        }}>
+        
+        <SectionLine text=" News" />
         <Box
           sx={{
             backgroundColor: "#f0f4f8",
@@ -596,107 +375,7 @@ export default function StartPage() {
         </Box>
       </Box>
 
-      {/* --------------Events card---------- */}
-      {/* <Box
-        sx={{
-          width: "100%",
-          paddingTop: 2, // Padding at the top
-          paddingBottom: 2, // Padding at the bottom
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#f0f4f8",
-        }}
-      >
-        <Grid
-          container
-          spacing={2} // Add spacing between items
-          justifyContent="center"
-        >
-          {events.map((event, index) => (
-            <Grid
-              sx={{
-                maxWidth: 380,
-                display: "flex",
-              }}
-              size={{ xs: 12, sm: 3 }}
-            >
-              <EventCard
-                key={index}
-                time={event.time}
-                title={event.title}
-                image={event.image}
-                description={event.description}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Box> */}
 
-      {/* 
-      <Box className="card">
-        <Box className="contentbef"></Box>
-        <Box className="content">
-          <Typography variant="h2">01</Typography>
-          <Typography variant="h3">Card One</Typography>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-          </Typography>
-          <Link href="/">Read More</Link>
-        </Box>
-      </Box>
-      <Box className="card">
-        <Box className="content">
-          <Typography variant="h2">02</Typography>
-          <Typography variant="h3">Card Two</Typography>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-          </Typography>
-          <Link href="/">Read More</Link>
-        </Box>
-      </Box>
-      <Box className="card">
-        <Box className="content">
-          <Typography variant="h2">03</Typography>
-          <Typography variant="h3">Card Three</Typography>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-          </Typography>
-          <Link href="/">Read More</Link>
-        </Box>
-      </Box>
-
-      <div
-        className="container"
-        style={{
-          backgroundImage: `url(${PrayerBible})`,
-          backgroundSize: "cover",
-        }}
-      >
-        <div className="card">
-          <div className="contentbef"></div>
-          <div className="content1">
-            <h3>Card One</h3>
-            <a href="/">Read More</a>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="content">
-            <h3>Card Two</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit... </p>
-            <a href="/">Read More</a>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="content">
-            <h3>Card Three</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit... </p>
-            <a href="/">Read More</a>
-          </div>
-        </div>
-      </div> */}
     </Box>
   );
 }

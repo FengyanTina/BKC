@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 interface CardProps {
   category?: string;
   title: string;
-  subtitle: string;
+  subTitle?: string;
   content: string;
   buttonText?: string;
   time?: Date;
@@ -17,7 +17,7 @@ interface CardProps {
 export default function InforCard({
   category,
   title,
-  subtitle,
+  subTitle: subtitle,
   content,
   buttonText,
   time,
@@ -34,9 +34,9 @@ export default function InforCard({
   return (
     <Card
       sx={{
-        minWidth: 350,
+        maxWidth: 350,
         height: 250,
-        maxWidth: 50,
+        
         border: "none", // Remove the card border
         backgroundColor: "transparent", // Remove the card background color
         boxShadow: "none", // Remove the card shadow

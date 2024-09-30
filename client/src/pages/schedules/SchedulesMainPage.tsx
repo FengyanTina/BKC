@@ -1,12 +1,12 @@
 import { Box,  Typography } from "@mui/material";
-import "./schedules.css";
-import ServingScheduleCollapsibleTable from "../../components/scheduleManagement/ServingScheduleCollapsibleTable";
+
+import ServingScheduleCollapsibleTable from "../../components/pageSections/scheduleManagement/ServingScheduleCollapsibleTable";
 import EventsCalendar from "./EventsCalendar";
 import Carousel from "../../components/common/Carousel";
 import { comingEvents } from "../../data";
-import CollapsibleTable from "../../components/scheduleManagement/ServingScheduleCollapsibleTable";
-import EventSchedule from "../../components/scheduleManagement/DatePickerEventSchedule";
-import Calendar from "../../components/scheduleManagement/Calendar";
+import CollapsibleTable from "../../components/pageSections/scheduleManagement/ServingScheduleCollapsibleTable";
+import EventSchedule from "../../components/pageSections/scheduleManagement/DatePickerEventSchedule";
+import Calendar from "../../components/pageSections/scheduleManagement/Calendar";
 
 export default function SchedulesMainPage() {
   return (

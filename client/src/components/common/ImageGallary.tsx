@@ -14,53 +14,15 @@ import BethelWorship from "../../assets/BethelWorship.jpg";
 import worshipHands from "../../assets/worshipHands.jpg";
 
 import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
-
-const itemData = [
-    {
-      img: Bible,
-      title: 'Bible Study',
-      author: '@bkristastucchio',
-      featured: true,
-    },
-    {
-      img: Worship,
-      title: 'Juesus Conference',
-      author: '@rollelflex_graphy726',
-    },
-    {
-      img: Prayer,
-      title: 'Praying for Borås',
-      author: '@helloimnik',
-    },
-    {
-      img: Conference,
-      title: 'Comminity Prayer',
-      author: '@nolanissac',
-    },
-    {
-      img: Mission,
-      title: 'Youth Camp',
-      author: '@hjrc33',
-    },
-    {
-      img: BethelWorship,
-      title: 'Togather Worship',
-      author: '@arwinneil',
-      featured: true,
-    },
-    {
-      img:worshipHands,
-      title: 'Worship Conference',
-      author: '@tjdragotta',
-    },
-    {
-      img: PrayerBible ,
-      title: 'Study the words',
-      author: '@katie_wasserman',
-    },
-    
-   
-  ];
+interface ImageGalleryProps{
+    img:string;
+    title?:string;
+    featured?:boolean;
+    author?:string;
+}
+interface ImageGalleryComponentProps {
+    itemData: ImageGalleryProps[]; // Array of imageGalleryProps
+  }
 function srcset(image: string, width: number, height: number, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format`,
@@ -70,7 +32,7 @@ function srcset(image: string, width: number, height: number, rows = 1, cols = 1
   };
 }
 
-export default function ImageGallary() {
+export default function ImageGallary({itemData}:ImageGalleryComponentProps) {
   return (
     <ImageList
       sx={{

@@ -4,7 +4,6 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import { SocialIcon } from 'react-social-icons';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
-
 import './info.css';
 
 interface ContactDetail {
