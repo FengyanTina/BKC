@@ -114,7 +114,7 @@
 // export default SwiperSlider;
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import './commonComponents.css'; 
+import '../commonComponents.css'; 
 import 'swiper/css';
 
 import "swiper/css/effect-coverflow";

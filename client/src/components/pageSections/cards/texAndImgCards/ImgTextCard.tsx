@@ -1,7 +1,7 @@
 import { Box, styled, Typography } from '@mui/material';
 import  Grid  from '@mui/material/Grid2';
-import React from 'react'
-import ImageGallary from '../../common/ImageGallary';
+import ImageGallary from '../../../common/ImageGallary';
+import  "./textImageText.css"
 
 type Props = {
     title:string;
@@ -28,27 +28,19 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
           columns={{ xs: 1, sm: 12, md: 12 }}
         >
             
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+          <Grid size={{ xs: 12, sm: 12, md: 6 }}>
             <Item>
             {Array.isArray(image) ? (
-              // If it's an array, map through it to render multiple images
-            //   image.map((imgSrc, index) => (
-            //     <img
-            //       key={index}
-            //       src={imgSrc}
-            //       alt={`Image ${index + 1}`}
-            //       style={{ width: "100%", marginBottom: "10px" }} // Add margin if you want some space between images
-            //     />
-            //   ))
+  
             <ImageGallary itemData={image.map(img => ({ img: img }))}/>
             ) : (
               // Otherwise, render a single image
-              <img src={image} style={{ width: "100%" }} alt="" />
+              <img src={image} style={{ width: '100%', objectFit: 'cover',maxHeight: '380px', }} alt="" />
             )}
             </Item>
           </Grid>
           <Grid
-            size={{ xs: 12, sm: 6, md: 6 }}
+            size={{ xs: 12, sm: 12, md: 6 }}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -63,7 +55,7 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
                 mx: "auto", // Horizontal margin to center it within the container
                 px: 3, // Add padding on the sides
                 fontSize:{
-                    lg: 20, md: 16, sm: 18
+                    lg: 30, md: 28, sm: 25
                  },
               }}
             >
@@ -76,38 +68,42 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
             textAlign: "center", // Align the text to the center
             mx: "auto", // Horizontal margin to center it within the container
             px: 3, // Add padding on the sides
-            mt: 5,
+            mt: 2,
           }}
         >
-          <a href="">{linkSubtitle}</a>
+          <a href=""   
+          style={{
+            fontSize: window.innerWidth >= 1200 ? "25px" : window.innerWidth >= 960 ? "25px" : "20px",
+          }}>{linkSubtitle}</a>
         </Typography>   
         )}
             {subTitle && (
                 <Typography
                 variant="h4"
                 sx={{
-                  textAlign: "center", // Align the text to the center
-                  mx: "auto", // Horizontal margin to center it within the container
-                  px: 3, // Add padding on the sides
-                  mt: 5,
-                  fontSize:{
-                    lg: 30, md: 20, sm: 16
-                 },
-                }}
+                    textAlign: "center", // Align the text to the center
+                    mx: "auto", // Horizontal margin to center it within the container
+                    px: 3, // Add padding on the sides
+                    mt: 3,
+                    fontSize:{
+                        lg: 25, md: 20, sm: 20
+                     },
+                  }}
               >
                 {subTitle}
               </Typography> 
             )}
           
             <Box
-              sx={{
+               sx={{
                 display: "flex", // Make it a flex container
-
+                mt: 3,
                 alignItems: "center", // Center horizontally
                 justifyContent: "center", // Center vertically
                 alignContent: "center",
-                mt: 5, // Optional margin top if needed
-              // Match the max height to prevent too much height difference
+               
+                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
+                maxHeight: "300px", // Match the max height to prevent too much height difference
                 overflowY: "auto",
                 "@media (max-width: 1430px)": {
                   maxHeight: "200px", // Cap the height at 1330px width
@@ -117,14 +113,14 @@ const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtit
               <Typography
                 variant="h5"
                 sx={{
-                  textAlign: "left", // Align text in the center
-                  maxHeight: { lg: "350px", md: "80px", sm: "80px" },
-                  fontSize:{
-                     lg: 20, md: 14, sm: 12
-                  },
-                  overflowY: "auto", // Enable scroll if text is too long
-                  px: 3, // Padding for left and right space
-                }}
+                    textAlign: "left", // Align text in the center
+                    maxHeight: { lg: "350px", md: "100px", sm: "100px" },
+                    overflowY: "auto", // Enable scroll if text is too long
+                    px: 3, // Padding for left and right space
+                    fontSize:{
+                        lg: 20, md: 20, sm: 18
+                     },
+                  }}
               >
                 {description}
               </Typography>

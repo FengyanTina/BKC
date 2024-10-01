@@ -15,8 +15,8 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { prayerService, baptismService, sundayService } from "../../data.ts";
 import LiveService from "../../apis/youtube/LiveService.tsx";
 import { SocialIcon } from "react-social-icons";
-import ImgTextCard from "../../components/pageSections/cards/ImgTextCard.tsx";
-import TextImgCard from "../../components/pageSections/cards/TextImgCard.tsx";
+import ImgTextCard from "../../components/pageSections/cards/texAndImgCards/ImgTextCard.tsx";
+import TextImgCard from "../../components/pageSections/cards/texAndImgCards/TextImgCard.tsx";
 import SectionLine from "../../components/pageSections/SectionLine.tsx";
 import BaptismSectionCard from "../../components/pageSections/cards/customizedCards/BaptismSectionCard.tsx";
 

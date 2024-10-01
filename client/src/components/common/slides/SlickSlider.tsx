@@ -14,8 +14,8 @@ import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import NewsDetailsModal from "../../pages/news/NewsDetails";
-import formatDateTime from "../../utils/FormatDateTime";
+import NewsDetailsModal from "../../../pages/news/NewsDetails";
+import formatDateTime from "../../../utils/FormatDateTime";
 interface EventProps {
   id: string;
   time: Date;

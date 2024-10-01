@@ -5,14 +5,37 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
+interface Step {
+    title: string;
+    description: string;
+    link?: string; // Optional link if needed
+  }
+type Props = {
+    category?: string;
+    title: string;
+    subTitle?: string;
+    linkSubtitle?: string;
+    content: string;
+    buttonText?: string;
+    time?: Date;
+    image:string | string[];
+    date?: Date;
+    linkBody?: string;
+    location?: string;
+    steps?: Step[];
+}
 interface CardProps {
   category?: string;
   title: string;
   subTitle?: string;
+   linkSubtitle?: string;
   content: string;
   buttonText?: string;
+  date?: Date;
   time?: Date;
+  linkBody?: string;
+  location?: string;
+  steps?: Step[];
 }
 export default function InforCard({
   category,

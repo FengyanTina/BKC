@@ -1,4 +1,4 @@
-import PauseOnHover from "../../components/common/SlickSlider";
+import PauseOnHover from "../../components/common/slides/SlickSlider.tsx";
 import worshipHands from "../../assets/worshipHands.jpg";
 import edward from "../../assets/edward.jpg";
 import BethelWorship from "../../assets/BethelWorship.jpg";
@@ -6,7 +6,7 @@ import Worship from "../../assets/Worship.jpeg";
 import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
 import Grid from "@mui/material/Grid2";
 import { Box, Typography } from "@mui/material";
-import InforCard from "../../components/common/InforCard";
+import InforCard from "../../components/common/cards/InforCard.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImageGallary from "../../components/common/ImageGallary";
 import {imageGallarytemData} from "../../data.ts"

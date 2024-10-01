@@ -1,9 +1,9 @@
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Worship from "../assets/Worship.jpeg";
-import Carousel from "../components/common/Carousel";
+import Carousel from "../components/common/slides/Carousel.tsx";
 import { Link } from "react-router-dom";
-import PauseOnHover from "../components/common/SlickSlider";
+import PauseOnHover from "../components/common/slides/SlickSlider";
 import { useState } from "react";
 import Map from "../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -16,11 +16,13 @@ import {
   youthActivityCardInfor,
   homeGroupActivityCardInfor,
   socialMediaActivityCardInfor,
+  newHere
 } from "../data.ts";
 import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
 import InforCardImg from "../components/pageSections/cards/InforCardImgSections/InforCardImg.tsx";
 import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
+import NewHereSectionGrid from "../components/pageSections/Grid/NewHereSectionGrid.tsx";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -114,7 +116,7 @@ export default function StartPage() {
               Borås Kristna Center
             </Typography>
 
-            {/* Second Typgraph and links - contant, new here */}
+          
 
             <Box
               sx={{
@@ -149,7 +151,7 @@ export default function StartPage() {
                 <br />A place to learn the word
               </Typography>
               <Link style={{ color: "white", textDecoration: "none" }} to="/">
-                New Here
+                About Us
               </Link>
               <Link
                 style={{ color: "white", textDecoration: "none" }}
@@ -201,33 +203,6 @@ export default function StartPage() {
         >
           <CurrentWeekEventCalendar />
         </Grid>
-
-        {/* Rolling Section */}
-        {/* <Grid
-          container
-          alignItems="center"
-          sx={{
-            width: {
-              xs: "100%", // Full width on small screens
-              sm: "350px", // Adjust width for tablets
-              md: "450px", // Width for larger screens
-            },
-            height: {
-              xs: "200px", // Adjust height for small screens
-              sm: "400px", // Tablet height
-              md: "350px", // Desktop height
-            },
-            border: "1px solid #ddd", // Border for clarity
-            borderRadius: "8px", // Rounded corners
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Soft shadow
-            overflow: "hidden", // Prevent overflow
-            display: "flex", // Flexbox to center content
-            justifyContent: "center", // Horizontal centering
-          }}
-        >
-          <RollingSection />
-        </Grid>
-        <Grid></Grid> */}
       </Grid>
       {/* --------------Body----------- */}
       <Box
@@ -239,17 +214,20 @@ export default function StartPage() {
           gap: "20px",
           paddingTop: "30px",
           backgroundColor: "#dbe1e8",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          paddingBottom: "30px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",      
           marginBottom: "30px",
         }}
       >
-        {/* --------------comming events----------- */}
+        {/* --------------COMMING EVENTS----------- */}
 
         <SectionLine text="Comming Events" useWhiteStroke={true} />
         <Box sx={{ width: "80%" }}>
           <Carousel events={comingEvents} />
         </Box>
+
+         {/* --------------NEW HERE----------- */}
+        <SectionLine text="New Here" useWhiteStroke={true} />
+        <NewHereSectionGrid title= {newHere.title} content= {newHere.content} image={newHere.image} links={newHere.links} subTitle={newHere.subTitle} />
       </Box>
       {/* --------------ACTIVITIES----------- */}
 

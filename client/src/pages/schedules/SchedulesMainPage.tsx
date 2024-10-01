@@ -2,7 +2,7 @@ import { Box,  Typography } from "@mui/material";
 
 import ServingScheduleCollapsibleTable from "../../components/pageSections/scheduleManagement/ServingScheduleCollapsibleTable";
 import EventsCalendar from "./EventsCalendar";
-import Carousel from "../../components/common/Carousel";
+import Carousel from "../../components/common/slides/Carousel";
 import { comingEvents } from "../../data";
 import CollapsibleTable from "../../components/pageSections/scheduleManagement/ServingScheduleCollapsibleTable";
 import EventSchedule from "../../components/pageSections/scheduleManagement/DatePickerEventSchedule";

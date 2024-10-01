@@ -8,6 +8,7 @@ import Mission from "./assets/Mission.png";
 import Prayer from "./assets/Prayer.jpg";
 import Bible from "./assets/Bible.jpg";
 import Varhistoria from "./assets/Varhistoria.jpg"
+import Welcome from "./assets/Welcome.jpg"
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -176,6 +177,21 @@ export interface ServiceSchedule {
   scheduleStatus: "open" | "closed"; // Union for specific values
   category: Category[]; // Array of categories, each with its own jobs
 }
+interface NewHereSectionGridProps {
+    title: string;
+    subTitle?:string;
+    content: string;
+    image: string;
+    links?: string[];
+  }
+
+  export const newHere:NewHereSectionGridProps ={
+    title:"New Here? ",
+    subTitle:"can't wait to meet you!",
+    content:"If you are new here, and want to know more about us, or if you want to know about Jesus, you find information in below links or feel free to contact us if you need any help. ",
+    image:Welcome,
+    links:["Get Connected","For your Family","Find Your Community","Connet to Your Purpose "]
+  }
 export const events = [
   {
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM

@@ -1,7 +1,7 @@
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
-import InforCard from "../../../common/InforCard";
+import InforCard from "../../../common/cards/InforCard";
 
 type Props = {
     category?: string;
@@ -21,8 +21,8 @@ const ImgInforCard = ({title,category,subTitle,content,buttonText,time,image}: P
           display: "flex",
           alignItems: "center",
          justifyContent:'center',
-         
-          paddingTop: "30px",
+        
+          padding: "20px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
