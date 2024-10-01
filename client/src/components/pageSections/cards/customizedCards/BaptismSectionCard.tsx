@@ -1,12 +1,7 @@
 import {
   Box,
-  Dialog,
-  DialogContent,
-  Paper,
   styled,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import "./customizedCards.css";
 
@@ -40,12 +35,7 @@ type Props = {
 const BaptismSectionCard = ({
   title,
   subTitle,
-  linkSubtitle,
-  description,
   image,
-  date,
-  linkBody,
-  location,
   steps,
 }: Props) => {
   return (

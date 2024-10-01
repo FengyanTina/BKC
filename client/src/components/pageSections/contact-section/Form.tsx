@@ -63,12 +63,9 @@
 // );
 
 // export default Form;
-import React from 'react'
 
-import sendCircle from "../../assets/mdi--send-circle.png";
 
 import './form.css'
-import { Box } from '@mui/material'
 
 const formInputs = [
   { id: 'name', type: 'text', label: 'Your name', placeholder: 'John Doe' },

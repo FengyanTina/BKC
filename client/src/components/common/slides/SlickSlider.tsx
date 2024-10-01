@@ -1,5 +1,4 @@
-// import Slider from "react-slick";
-// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 
 export let images = [
   "https://travelteam.com/wp-content/uploads/2020/02/Hamilton-island-air-Great-barrier-reef-discovery.jpg",
@@ -12,8 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
 import NewsDetailsModal from "../../../pages/news/NewsDetails";
 import formatDateTime from "../../../utils/FormatDateTime";
 interface EventProps {
@@ -107,45 +105,5 @@ function PauseOnHover({ events }: { events: EventProps[] }) {
     </div>
   );
 }
-
-// return (
-//     <div className="slider-container">
-//       <section className="slick-container">
-//         <Slider {...settings}>
-//           {events.map((event) => (
-//             <div key={event.id} className="slide">
-//               <Link to={`/news/${event.id}`}>
-//                 <div
-//                   className="image-container"
-//                   style={{ backgroundImage: `url(${event.image})` }}
-//                 >
-//                   <div className="text-overlay">
-//                     <h2>{event.title}</h2>
-//                     <p>{event.description}</p>
-//                     <p>
-//                       {event.time.toLocaleDateString("sv-SE")}{" "}
-//                       {event.time.toLocaleTimeString("sv-SE", {
-//                         hour: "2-digit",
-//                         minute: "2-digit",
-//                       })}
-//                     </p>
-//                   </div>
-//                 </div>
-//               </Link>
-//             </div>
-//           ))}
-//         </Slider>
-//         <div className="slick-arrows">
-//           <button onClick={() => sliderRef.current?.slickPrev()}>
-//             <IoIosArrowBack />
-//           </button>
-//           <button onClick={() => sliderRef.current?.slickNext()}>
-//             <IoIosArrowForward />
-//           </button>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// }
 
 export default PauseOnHover;

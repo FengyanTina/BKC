@@ -1,4 +1,4 @@
-import { Box, Dialog, DialogContent, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
 import InforCard from "../../../common/cards/InforCard";
@@ -25,8 +25,6 @@ const ActivitySocialMediaScetionCard = ({
   category,
   subTitle,
   content,
-  buttonText,
-  time,
   image,
 }: Props) => {
   return (

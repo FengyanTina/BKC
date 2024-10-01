@@ -9,7 +9,7 @@ import { Box, Typography } from "@mui/material";
 import InforCard from "../../components/common/cards/InforCard.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImageGallary from "../../components/common/ImageGallary";
-import {imageGallarytemData} from "../../data.ts"
+import { imageGallarytemData } from "../../data.ts";
 const events = [
   {
     id: "1",
@@ -46,19 +46,18 @@ const events = [
 ];
 export default function ActivitiesMainPage() {
   return (
-    <Box style={{ marginTop: "80px" , }}>
+    <Box style={{ marginTop: "80px" }}>
       <Box
         style={{
           display: "flex",
           flexDirection: "column",
           backgroundColor: "#f0f4f8",
-          marginTop: "20px"
+          marginTop: "20px",
         }}
       >
         <Box style={{ paddingTop: "20px" }}>
           <PauseOnHover events={events} />
         </Box>
-        
       </Box>
       <Box
         sx={{
@@ -69,12 +68,12 @@ export default function ActivitiesMainPage() {
           justifyContent: "center",
           gap: "20px",
           paddingTop: "30px",
-          paddingBottom:'30px',
+          paddingBottom: "30px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Grid sx={{marginBottom:'50px'}} >
+        <Grid sx={{ marginBottom: "50px" }}>
           <Typography
             variant="h1"
             sx={{
@@ -90,7 +89,6 @@ export default function ActivitiesMainPage() {
               color: "transparent",
               WebkitTextStroke: "1px #d3d3d3",
               textTransform: "uppercase",
-         
             }}
           >
             Activities
@@ -142,7 +140,7 @@ export default function ActivitiesMainPage() {
               overflow: "hidden",
             }}
           >
-            <ImageGallary itemData={imageGallarytemData}/>
+            <ImageGallary itemData={imageGallarytemData} />
           </Grid>
         </Grid>
       </Box>

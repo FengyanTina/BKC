@@ -16,7 +16,7 @@ import {
   youthActivityCardInfor,
   homeGroupActivityCardInfor,
   socialMediaActivityCardInfor,
-  newHere
+  newHere,
 } from "../data.ts";
 import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
@@ -116,8 +116,6 @@ export default function StartPage() {
               Borås Kristna Center
             </Typography>
 
-          
-
             <Box
               sx={{
                 marginTop: "30px",
@@ -214,7 +212,7 @@ export default function StartPage() {
           gap: "20px",
           paddingTop: "30px",
           backgroundColor: "#dbe1e8",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",      
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
           marginBottom: "30px",
         }}
       >
@@ -225,9 +223,15 @@ export default function StartPage() {
           <Carousel events={comingEvents} />
         </Box>
 
-         {/* --------------NEW HERE----------- */}
+        {/* --------------NEW HERE----------- */}
         <SectionLine text="New Here" useWhiteStroke={true} />
-        <NewHereSectionGrid title= {newHere.title} content= {newHere.content} image={newHere.image} links={newHere.links} subTitle={newHere.subTitle} />
+        <NewHereSectionGrid
+          title={newHere.title}
+          content={newHere.content}
+          image={newHere.image}
+          links={newHere.links}
+          subTitle={newHere.subTitle}
+        />
       </Box>
       {/* --------------ACTIVITIES----------- */}
 

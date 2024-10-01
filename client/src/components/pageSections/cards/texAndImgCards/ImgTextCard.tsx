@@ -19,7 +19,7 @@ const Item = styled("div")(({ theme }) => ({
   
     ...theme.applyStyles("dark", {}),
   }));
-const ImgTextCard = ({title,subTitle,description,image,date,location, linkSubtitle}: Props) => {
+const ImgTextCard = ({title,subTitle,description,image, linkSubtitle}: Props) => {
   return (
     <Box sx={{ flexGrow: 1,width:'80%', }}>
         <Grid

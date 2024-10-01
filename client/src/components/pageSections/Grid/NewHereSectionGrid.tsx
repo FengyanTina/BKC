@@ -1,22 +1,9 @@
-import * as React from "react";
-import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid2";
 import { Typography } from "@mui/material";
 
-const Item = styled("div")(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(0),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles("dark", {
-    backgroundColor: "#1A2027",
-  }),
-}));
 interface NewsSectionGridProps {
   title: string;
-  subTitle?:string;
+  subTitle?: string;
   content: string;
   image: string;
   links?: string[];
@@ -57,7 +44,7 @@ export default function NewHereSectionGrid({
           variant="h2"
           sx={{
             marginTop: "20px",
-            fontWeight:'700',
+            fontWeight: "700",
             color: "#5eead4", // Light teal for the title
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
@@ -68,7 +55,7 @@ export default function NewHereSectionGrid({
           variant="h3"
           sx={{
             marginTop: "20px",
-            fontWeight:'500',
+            fontWeight: "500",
             color: "#5eead4", // Light teal for the title
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
@@ -79,7 +66,7 @@ export default function NewHereSectionGrid({
           variant="h5"
           sx={{
             marginTop: "20px",
-            fontWeight:'500',
+            fontWeight: "500",
             color: "#5eead4", // Light teal for the title
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
@@ -98,7 +85,7 @@ export default function NewHereSectionGrid({
                   fontSize: "20px",
                   marginBottom: "10px",
                   color: "white",
-                  fontWeight:"500"
+                  fontWeight: "500",
                 }}
               >
                 {" "}

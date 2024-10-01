@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import dayjs from 'dayjs';
-import { Typography, Paper, Box } from '@mui/material';
+import * as React from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import dayjs from "dayjs";
+import { Typography, Paper, Box } from "@mui/material";
 
 interface Event {
   eventName: string;
@@ -30,11 +30,15 @@ const scheduledEvents: Event[] = [
 ];
 
 export default function BasicDateCalendar() {
-  const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs | null>(dayjs());
+  const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs | null>(
+    dayjs()
+  );
 
   const getEventsForDate = (date: dayjs.Dayjs) => {
-    const formattedDate = date.format('YYYY-MM-DD'); // Format date to compare
-    return scheduledEvents.filter(event => event.date.startsWith(formattedDate));
+    const formattedDate = date.format("YYYY-MM-DD"); // Format date to compare
+    return scheduledEvents.filter((event) =>
+      event.date.startsWith(formattedDate)
+    );
   };
 
   return (
@@ -48,7 +52,7 @@ export default function BasicDateCalendar() {
         <Typography variant="h6">Scheduled Events</Typography>
         {getEventsForDate(selectedDate!).length > 0 ? (
           getEventsForDate(selectedDate!).map((event, index) => (
-            <Paper key={index} sx={{ padding: 2, margin: '8px 0' }}>
+            <Paper key={index} sx={{ padding: 2, margin: "8px 0" }}>
               <Typography variant="h6">{event.eventName}</Typography>
               <Typography>{event.description}</Typography>
             </Paper>

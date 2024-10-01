@@ -1,29 +1,25 @@
-import * as React from 'react';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import DetailsIcon from '@mui/icons-material/Details';
-import Conference from "../../assets/Conference.jpg";
-import Mission from "../../assets/Mission.png";
-import Prayer from "../../assets/Prayer.jpg";
-import Worship from "../../assets/Worship.jpeg";
-import Bible from "../../assets/Bible.jpg";
-import BethelWorship from "../../assets/BethelWorship.jpg";
-import worshipHands from "../../assets/worshipHands.jpg";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import IconButton from "@mui/material/IconButton";
+import DetailsIcon from "@mui/icons-material/Details";
 
-import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
-interface ImageGalleryProps{
-    img:string;
-    title?:string;
-    featured?:boolean;
-    author?:string;
+interface ImageGalleryProps {
+  img: string;
+  title?: string;
+  featured?: boolean;
+  author?: string;
 }
 interface ImageGalleryComponentProps {
-    itemData: ImageGalleryProps[]; // Array of imageGalleryProps
-  }
-function srcset(image: string, width: number, height: number, rows = 1, cols = 1) {
+  itemData: ImageGalleryProps[]; // Array of imageGalleryProps
+}
+function srcset(
+  image: string,
+  width: number,
+  height: number,
+  rows = 1,
+  cols = 1
+) {
   return {
     src: `${image}?w=${width * cols}&h=${height * rows}&fit=crop&auto=format`,
     srcSet: `${image}?w=${width * cols}&h=${
@@ -32,14 +28,14 @@ function srcset(image: string, width: number, height: number, rows = 1, cols = 1
   };
 }
 
-export default function ImageGallary({itemData}:ImageGalleryComponentProps) {
+export default function ImageGallary({ itemData }: ImageGalleryComponentProps) {
   return (
     <ImageList
       sx={{
-        width: '100%',
+        width: "100%",
         height: 350,
-        overflowY: 'auto',  
-        transform: 'translateZ(0)',
+        overflowY: "auto",
+        transform: "translateZ(0)",
       }}
       rowHeight={250}
       gap={1}
@@ -58,14 +54,14 @@ export default function ImageGallary({itemData}:ImageGalleryComponentProps) {
             <ImageListItemBar
               sx={{
                 background:
-                  'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-                  'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+                  "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+                  "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
               }}
               title={item.title}
               position="top"
               actionIcon={
                 <IconButton
-                  sx={{ color: 'white' }}
+                  sx={{ color: "white" }}
                   aria-label={`star ${item.title}`}
                 >
                   <DetailsIcon />
@@ -79,4 +75,3 @@ export default function ImageGallary({itemData}:ImageGalleryComponentProps) {
     </ImageList>
   );
 }
-

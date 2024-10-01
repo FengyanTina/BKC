@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import { Box, Button, TextField, Modal, Typography, Paper } from '@mui/material';
-import Grid from '@mui/material/Grid2';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from 'dayjs';
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  TextField,
+  Modal,
+  Typography,
+  Paper,
+} from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 interface Job {
   name: string;
@@ -30,7 +37,7 @@ interface ServiceSchedule {
   endTime: string;
   event: Event;
   team: string;
-  scheduleStatus: 'open' | 'closed';
+  scheduleStatus: "open" | "closed";
   category: Category[];
 }
 
@@ -40,10 +47,10 @@ const EventSchedule = () => {
   const [open, setOpen] = useState(false);
   const [newSchedule, setNewSchedule] = useState<ServiceSchedule>({
     startTime: dayjs().toISOString(),
-    endTime: dayjs().add(2, 'hour').toISOString(),
-    event: { eventName: '', description: '', detail: '' },
-    team: '',
-    scheduleStatus: 'open',
+    endTime: dayjs().add(2, "hour").toISOString(),
+    event: { eventName: "", description: "", detail: "" },
+    team: "",
+    scheduleStatus: "open",
     category: [],
   });
 
@@ -60,7 +67,9 @@ const EventSchedule = () => {
   // Filter schedules by the selected date
   const getEventsForDate = (date: Dayjs) => {
     return schedules.filter(
-      (schedule) => dayjs(schedule.startTime).format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
+      (schedule) =>
+        dayjs(schedule.startTime).format("YYYY-MM-DD") ===
+        date.format("YYYY-MM-DD")
     );
   };
 
@@ -88,12 +97,12 @@ const EventSchedule = () => {
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             width: 400,
-            bgcolor: 'background.paper',
+            bgcolor: "background.paper",
             p: 4,
             boxShadow: 24,
           }}
@@ -105,21 +114,33 @@ const EventSchedule = () => {
             label="Event Name"
             fullWidth
             value={newSchedule.event.eventName}
-            onChange={(e) => setNewSchedule({ ...newSchedule, event: { ...newSchedule.event, eventName: e.target.value } })}
+            onChange={(e) =>
+              setNewSchedule({
+                ...newSchedule,
+                event: { ...newSchedule.event, eventName: e.target.value },
+              })
+            }
             sx={{ mb: 2 }}
           />
           <TextField
             label="Description"
             fullWidth
             value={newSchedule.event.description}
-            onChange={(e) => setNewSchedule({ ...newSchedule, event: { ...newSchedule.event, description: e.target.value } })}
+            onChange={(e) =>
+              setNewSchedule({
+                ...newSchedule,
+                event: { ...newSchedule.event, description: e.target.value },
+              })
+            }
             sx={{ mb: 2 }}
           />
           <TextField
             label="Team"
             fullWidth
             value={newSchedule.team}
-            onChange={(e) => setNewSchedule({ ...newSchedule, team: e.target.value })}
+            onChange={(e) =>
+              setNewSchedule({ ...newSchedule, team: e.target.value })
+            }
             sx={{ mb: 2 }}
           />
           <Button variant="contained" onClick={handleAddSchedule}>
@@ -130,18 +151,22 @@ const EventSchedule = () => {
 
       {/* Displaying Events for Selected Date */}
       <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
-        Events for {selectedDate?.format('YYYY-MM-DD')}
+        Events for {selectedDate?.format("YYYY-MM-DD")}
       </Typography>
 
       <Grid container spacing={2}>
         {getEventsForDate(selectedDate || dayjs()).map((schedule, index) => (
-          <Grid size={{ xs: 12}} key={index}>
+          <Grid size={{ xs: 12 }} key={index}>
             <Paper elevation={3} sx={{ padding: 2 }}>
               <Typography variant="h6">{schedule.event.eventName}</Typography>
               <Typography>{schedule.event.description}</Typography>
               <Typography>Team: {schedule.team}</Typography>
-              <Typography>Start: {dayjs(schedule.startTime).format('HH:mm')}</Typography>
-              <Typography>End: {dayjs(schedule.endTime).format('HH:mm')}</Typography>
+              <Typography>
+                Start: {dayjs(schedule.startTime).format("HH:mm")}
+              </Typography>
+              <Typography>
+                End: {dayjs(schedule.endTime).format("HH:mm")}
+              </Typography>
             </Paper>
           </Grid>
         ))}

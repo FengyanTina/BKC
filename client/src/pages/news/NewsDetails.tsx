@@ -1,5 +1,5 @@
 // NewsDetailsModal.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import "./news.css";
 import { Box, Slider } from "@mui/material";
 import formatDateTime from "../../utils/FormatDateTime";

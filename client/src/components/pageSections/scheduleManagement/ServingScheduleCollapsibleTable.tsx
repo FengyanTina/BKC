@@ -14,9 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Button } from "@mui/material";
 import formatDateTime from "../../../utils/FormatDateTime.tsx";
-import { Category } from "@mui/icons-material";
-import {ServiceSchedule,Job,} from "../../../data.ts"
-
+import { ServiceSchedule } from "../../../data.ts";
 
 const getDisplayDateTime = (startTime: string, endTime: string) => {
   const startDate = new Date(startTime);
@@ -24,10 +22,10 @@ const getDisplayDateTime = (startTime: string, endTime: string) => {
   const sameDay = startDate.toDateString() === endDate.toDateString();
 
   const displayDayAndMonth = sameDay
-  ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
-  : `${startDate.getDate()}/${startDate.getMonth() + 1} - ${
-      endDate.getDate()}/${endDate.getMonth() + 1
-    }`; 
+    ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
+    : `${startDate.getDate()}/${
+        startDate.getMonth() + 1
+      } - ${endDate.getDate()}/${endDate.getMonth() + 1}`;
 
   const displayTime = sameDay
     ? `${formatDateTime(startDate).split(" ")[1]} - ${
@@ -83,11 +81,11 @@ function Row({ row }: { row: ServiceSchedule }) {
         formatDateTime(endDate).split(" ")[0]
       }`; // Start date - End date
 
-      const displayDayAndMonth = sameDay
-      ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
-      : `${startDate.getDate()}/${startDate.getMonth() + 1} - ${
-          endDate.getDate()}/${endDate.getMonth() + 1
-        }`; 
+  const displayDayAndMonth = sameDay
+    ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
+    : `${startDate.getDate()}/${
+        startDate.getMonth() + 1
+      } - ${endDate.getDate()}/${endDate.getMonth() + 1}`;
 
   const displayTime = sameDay
     ? `${formatDateTime(startDate).split(" ")[1]} - ${
@@ -173,7 +171,7 @@ function Row({ row }: { row: ServiceSchedule }) {
 
               {row.category.map((category, index) => {
                 const {
-                    displayDayAndMonth: displayCategoryDate,
+                  displayDayAndMonth: displayCategoryDate,
                   displayTime: displayCategoryTime,
                 } = getDisplayDateTime(category.startTime, category.endTime);
 
@@ -199,31 +197,29 @@ function Row({ row }: { row: ServiceSchedule }) {
                       </Typography>
                       <Button
                         variant="contained"
-                        
                         size="small"
                         sx={{
-                            marginLeft: 1,
-                            backgroundColor: "#4CAF50", // Soft green
-                            color: "#fff",
-                            '&:hover': {
-                              backgroundColor: "#45A049", // Darker green on hover
-                            },
-                          }}
+                          marginLeft: 1,
+                          backgroundColor: "#4CAF50", // Soft green
+                          color: "#fff",
+                          "&:hover": {
+                            backgroundColor: "#45A049", // Darker green on hover
+                          },
+                        }}
                       >
                         Create Job
                       </Button>
                       <Button
                         variant="contained"
-                       
                         size="small"
                         sx={{
-                            marginLeft: 1,
-                            backgroundColor: "#4CAF50", // Soft green
-                            color: "#fff",
-                            '&:hover': {
-                              backgroundColor: "#45A049", // Darker green on hover
-                            },
-                          }}
+                          marginLeft: 1,
+                          backgroundColor: "#4CAF50", // Soft green
+                          color: "#fff",
+                          "&:hover": {
+                            backgroundColor: "#45A049", // Darker green on hover
+                          },
+                        }}
                       >
                         Edit Jobs
                       </Button>
@@ -309,15 +305,14 @@ function Row({ row }: { row: ServiceSchedule }) {
 }
 
 export default function CollapsibleTable() {
-
-const rows: ServiceSchedule[] = [
+  const rows: ServiceSchedule[] = [
     {
       startTime: "2023-10-01T10:00:00", // Start time in ISO format
       endTime: "2023-10-01T12:00:00",
       event: {
         eventName: "Sunday Service",
         description: "A regular church service held every Sunday.",
-        detail: "The service includes worship, prayers, and sermons."
+        detail: "The service includes worship, prayers, and sermons.",
       },
       team: "Team A",
       memberNeeded: 3,
@@ -353,7 +348,7 @@ const rows: ServiceSchedule[] = [
       event: {
         eventName: "Sunday School",
         description: "A gathering for children to learn about the Bible.",
-        detail: "Divided into age groups for teaching and activities."
+        detail: "Divided into age groups for teaching and activities.",
       },
       team: "Team B",
       memberNeeded: 5,
@@ -385,7 +380,7 @@ const rows: ServiceSchedule[] = [
       event: {
         eventName: "Serving",
         description: "Volunteers serving during the church service.",
-        detail: "Involves preparing food and assisting with various duties."
+        detail: "Involves preparing food and assisting with various duties.",
       },
       team: "Team12",
       memberNeeded: 2,
@@ -412,7 +407,6 @@ const rows: ServiceSchedule[] = [
       ],
     },
   ];
-  
 
   return (
     <TableContainer component={Paper}>

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Dialog,
-  DialogContent,
-  styled,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import { useState } from "react";
 import Grid from "@mui/material/Grid2";
 import worshipHands from "../../assets/worshipHands.jpg";
@@ -20,13 +12,6 @@ import TextImgCard from "../../components/pageSections/cards/texAndImgCards/Text
 import SectionLine from "../../components/pageSections/SectionLine.tsx";
 import BaptismSectionCard from "../../components/pageSections/cards/customizedCards/BaptismSectionCard.tsx";
 
-const Item = styled("div")(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-
-  ...theme.applyStyles("dark", {}),
-}));
 export default function ServicesMainPage() {
   const [openMap, setOpenMap] = useState(false);
 

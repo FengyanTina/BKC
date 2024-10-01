@@ -1,6 +1,4 @@
-import { Box,  Typography } from "@mui/material";
-
-import ServingScheduleCollapsibleTable from "../../components/pageSections/scheduleManagement/ServingScheduleCollapsibleTable";
+import { Box, Typography } from "@mui/material";
 import EventsCalendar from "./EventsCalendar";
 import Carousel from "../../components/common/slides/Carousel";
 import { comingEvents } from "../../data";
@@ -27,17 +25,21 @@ export default function SchedulesMainPage() {
         </Box>
 
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "50%" }}>
-         
           <EventsCalendar />
         </Box>
 
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "90%" }}>
-        <Typography sx={{  marginBottom: "50px", textAlign:'center'}} variant="h4">Comming Week Schedule</Typography>
+          <Typography
+            sx={{ marginBottom: "50px", textAlign: "center" }}
+            variant="h4"
+          >
+            Comming Week Schedule
+          </Typography>
           {/* <ServingScheduleCollapsibleTable /> */}
-          <CollapsibleTable/>
+          <CollapsibleTable />
         </Box>
-        <EventSchedule/>
-        <Calendar/>
+        <EventSchedule />
+        <Calendar />
       </Box>
     </>
   );

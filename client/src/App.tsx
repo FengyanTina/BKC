@@ -12,30 +12,24 @@ export default function App() {
 
   return (
     <>
-   
       <Box
-       component="main"
-       sx={{
-        
-         display: "flex",
-         flexDirection: "column",
-         minHeight: "100vh", // Ensure the container takes up the full height of the viewport
-         backgroundColor: "#f0f4f8", // Background color that covers the whole screen
-       }}
+        component="main"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh", // Ensure the container takes up the full height of the viewport
+          backgroundColor: "#f0f4f8", // Background color that covers the whole screen
+        }}
       >
         {/* <DrawerAppBar /> */}
         <TabBar />
+        <Box component="main" sx={{ flexGrow: 1 }}>
+          <Outlet />
+        </Box>
         <Box
-      component="main"
-      sx={{ flexGrow: 1,}}
-    >
-      <Outlet />
-    </Box>
-        <Box
-        component='footer'
+          component="footer"
           sx={{
-           
-            backgroundColor: '#f0f4f8',
+            backgroundColor: "#f0f4f8",
             mt: "auto",
           }}
         >

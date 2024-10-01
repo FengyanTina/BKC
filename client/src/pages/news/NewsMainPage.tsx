@@ -1,36 +1,23 @@
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 import { Link, Outlet } from "react-router-dom";
-import YoutubeApi from "../../apis/youtube/PlayList";
-import YouTubePlaylists from "../../apis/youtube/PlayList";
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Conference from "../../assets/Conference.jpg";
-import Mission from "../../assets/Mission.png";
-import Prayer from "../../assets/Prayer.jpg";
-import Worship from "../../assets/Worship.jpeg";
-import Bible from "../../assets/Bible.jpg";
 
+// const thumnailImageStyle = {
+//   cursor: "pointer",
+//   borderRadius: "5px",
+//   maxWidth: "100%",
+// };
 
-const thumnailImageStyle = {
-  cursor: "pointer",
-  borderRadius: "5px",
-  maxWidth: "100%",
-};
+// const listItemStyle = {
+//   py: 1,
+//   flexDirection: "column",
+//   alignItems: "stretch",
+//   "@media (min-width: 600px)": {
+//     flexDirection: "row",
+//   },
+// };
 
-const listItemStyle = {
-  py: 1,
-  flexDirection: "column",
-  alignItems: "stretch",
-  "@media (min-width: 600px)": {
-    flexDirection: "row",
-  },
-};
-
-export default  function NewsMainPage() {
- 
-
+export default function NewsMainPage() {
   return (
     <>
       <Box my={"40px"}>
@@ -43,11 +30,8 @@ export default  function NewsMainPage() {
           data-cy="admin-add-product"
         >
           Admin
-
-          
         </Button>
       </Box>
-    
 
       <Outlet />
     </>

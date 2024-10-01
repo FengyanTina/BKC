@@ -1,16 +1,14 @@
 import { useParams } from "react-router-dom";
 interface EventProps {
-  
-    time:Date;
-    title: string;
-    image: string;
-    description: string;
-    details?:string;
-  }
+  time: Date;
+  title: string;
+  image: string;
+  description: string;
+  details?: string;
+}
 // Event details component
 function EventDetails({ events }: { events: EventProps[] }) {
   const { id } = useParams<{ id: string }>(); // Get dynamic route parameter
-
 
   const eventId = id ?? "0"; // Provide a fallback value if `id` is undefined
 

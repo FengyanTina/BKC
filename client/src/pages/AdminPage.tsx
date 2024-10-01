@@ -2,25 +2,22 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { Link, Outlet } from "react-router-dom";
 
+// const thumnailImageStyle = {
+//   cursor: "pointer",
+//   borderRadius: "5px",
+//   maxWidth: "100%",
+// };
 
-const thumnailImageStyle = {
-  cursor: "pointer",
-  borderRadius: "5px",
-  maxWidth: "100%",
-};
+// const listItemStyle = {
+//   py: 1,
+//   flexDirection: "column",
+//   alignItems: "stretch",
+//   "@media (min-width: 600px)": {
+//     flexDirection: "row",
+//   },
+// };
 
-const listItemStyle = {
-  py: 1,
-  flexDirection: "column",
-  alignItems: "stretch",
-  "@media (min-width: 600px)": {
-    flexDirection: "row",
-  },
-};
-
-export default  function AdminPage() {
- 
-
+export default function AdminPage() {
   return (
     <>
       <Grid my={"40px"}>
@@ -35,7 +32,6 @@ export default  function AdminPage() {
           Admin
         </Button>
       </Grid>
-    
 
       <Outlet />
     </>
