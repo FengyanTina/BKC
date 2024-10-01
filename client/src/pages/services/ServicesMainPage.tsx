@@ -5,7 +5,7 @@ import worshipHands from "../../assets/worshipHands.jpg";
 import Map from "../../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { prayerService, baptismService, sundayService } from "../../data.ts";
-import LiveService from "../../apis/youtube/LiveService.tsx";
+// import LiveService from "../../apis/youtube/LiveService.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImgTextCard from "../../components/pageSections/cards/texAndImgCards/ImgTextCard.tsx";
 import TextImgCard from "../../components/pageSections/cards/texAndImgCards/TextImgCard.tsx";
@@ -80,7 +80,7 @@ export default function ServicesMainPage() {
           <Typography variant="h6" sx={{ color: "white", marginTop: "10px" }}>
             Live: Sunday 11:00 on Youtube
           </Typography>
-          <LiveService />
+          {/* <LiveService /> */}
           <Typography variant="h6" sx={{ color: "white" }}>
             <a
               href="https://www.youtube.com/c/Bor%C3%A5sKristnaCenter"

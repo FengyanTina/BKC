@@ -28,23 +28,23 @@ interface Section {
   linkSubtitle?: string;
   location?: string;
 }
-interface InforCardProps {
-    category?: string;
-    title: string;
-    subtitle: string;
-    content: string;
-    buttonText?: string;
-    time?: Date;
-  }
-  interface InforCardImgSectionProps {
-    category?: string;
-    title: string;
-    subtitle: string;
-    content: string;
-    buttonText?: string;
-    time?: Date;
-    image:string | string[];
-  }
+// interface InforCardProps {
+//     category?: string;
+//     title: string;
+//     subtitle: string;
+//     content: string;
+//     buttonText?: string;
+//     time?: Date;
+//   }
+//   interface InforCardImgSectionProps {
+//     category?: string;
+//     title: string;
+//     subtitle: string;
+//     content: string;
+//     buttonText?: string;
+//     time?: Date;
+//     image:string | string[];
+//   }
 
   export const sundayServiceCardInfor:Service={
     id: "1",
@@ -303,11 +303,11 @@ export const topics = [
   },
 ];
 
-interface Step {
-    title: string;
-    description: string;
-    link?: string; // Optional link if needed
-  }
+// interface Step {
+//     title: string;
+//     description: string;
+//     link?: string; // Optional link if needed
+//   }
   
   export const steps = [
     {

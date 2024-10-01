@@ -25,7 +25,7 @@ export default function TabBar() {
   const location = useLocation(); // Get the current location
   const currentTab = location.pathname;
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     navigate(newValue); // Navigate to the new route
   };
 

@@ -1,5 +1,4 @@
 
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -10,20 +9,20 @@ interface Step {
     description: string;
     link?: string; // Optional link if needed
   }
-type Props = {
-    category?: string;
-    title: string;
-    subTitle?: string;
-    linkSubtitle?: string;
-    content: string;
-    buttonText?: string;
-    time?: Date;
-    image:string | string[];
-    date?: Date;
-    linkBody?: string;
-    location?: string;
-    steps?: Step[];
-}
+// type Props = {
+//     category?: string;
+//     title: string;
+//     subTitle?: string;
+//     linkSubtitle?: string;
+//     content: string;
+//     buttonText?: string;
+//     time?: Date;
+//     image:string | string[];
+//     date?: Date;
+//     linkBody?: string;
+//     location?: string;
+//     steps?: Step[];
+// }
 interface CardProps {
   category?: string;
   title: string;
@@ -45,14 +44,14 @@ export default function InforCard({
   buttonText,
   time,
 }: CardProps) {
-  const bull = (
-    <Box
-      component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-    >
+//   const bull = (
+//     <Box
+//       component="span"
+//       sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+//     >
       
-    </Box>
-  );
+//     </Box>
+//   );
   const formattedTime = time ? time.toLocaleString() : null;
   return (
     <Card

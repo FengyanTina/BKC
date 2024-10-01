@@ -81,11 +81,11 @@ function Row({ row }: { row: ServiceSchedule }) {
         formatDateTime(endDate).split(" ")[0]
       }`; // Start date - End date
 
-  const displayDayAndMonth = sameDay
-    ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
-    : `${startDate.getDate()}/${
-        startDate.getMonth() + 1
-      } - ${endDate.getDate()}/${endDate.getMonth() + 1}`;
+//   const displayDayAndMonth = sameDay
+//     ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
+//     : `${startDate.getDate()}/${
+//         startDate.getMonth() + 1
+//       } - ${endDate.getDate()}/${endDate.getMonth() + 1}`;
 
   const displayTime = sameDay
     ? `${formatDateTime(startDate).split(" ")[1]} - ${
