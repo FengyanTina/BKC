@@ -22,7 +22,7 @@ import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
 import InforCardImg from "../components/pageSections/cards/InforCardImgSections/InforCardImg.tsx";
 import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
-import NewHereSectionGrid from "../components/pageSections/Grid/NewHereSectionGrid.tsx";
+import NewHereSectionGrid from "../components/pageSections/grid/NewHereSectionGrid.tsx";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -223,8 +223,8 @@ export default function StartPage() {
           <Carousel events={comingEvents} />
         </Box>
 
-        {/* --------------NEW HERE----------- */}
-        <SectionLine text="New Here" useWhiteStroke={true} />
+        {/* --------------WELCOME NEW----------- */}
+        <SectionLine text="Welcome" useWhiteStroke={true} />
         <NewHereSectionGrid
           title={newHere.title}
           content={newHere.content}
@@ -235,7 +235,7 @@ export default function StartPage() {
       </Box>
       {/* --------------ACTIVITIES----------- */}
 
-      <SectionLine text=" Activities" />
+      <SectionLine text=" Activities And Services" />
       <ActivitySocialMediaScetionCard
         title={socialMediaActivityCardInfor.title}
         subTitle={socialMediaActivityCardInfor.subTitle}

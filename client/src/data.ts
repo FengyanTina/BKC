@@ -48,7 +48,7 @@ interface Section {
 
   export const sundayServiceCardInfor:Service={
     id: "1",
-    title: "Word of the Day",
+    title: "For Congregation",
     subTitle:"välkommen till vår kyrka nu på söndag!",
     time:new Date(2024, 9, 22, 14, 30),
     category: "Sunday Service",
@@ -57,17 +57,17 @@ interface Section {
   }
   export const sundaySchoolActivityCardInfor:Service={
     id: "1",
-    title: "Sunday School",
+    title: "For Small Kids",
     subTitle:"BKC-KIDS",
     time:new Date(2024, 9, 22, 14, 30),
-    category: "BKC Kids",
+    category: "Sunday School",
     description:"BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!",
     image: edward ,
   }
  
   export const youthActivityCardInfor:Service={
     id: "1",
-    title: "Youth",
+    title: "For Young Adult",
     subTitle:"Bkc Ungdom",
     time:new Date(2024, 9, 22, 14, 30),
     category: "Youth Group",
@@ -76,7 +76,7 @@ interface Section {
   }
   export const homeGroupActivityCardInfor:Service={
     id: "1",
-    title: "Find your community",
+    title: "Your Small Community",
     subTitle:"Together,Stronger!",
     time:new Date(2024, 9, 22, 14, 30),
     category: "Home Group",
@@ -188,9 +188,9 @@ interface NewHereSectionGridProps {
   export const newHere:NewHereSectionGridProps ={
     title:"New Here? ",
     subTitle:"can't wait to meet you!",
-    content:"If you are new here, and want to know more about us, or if you want to know about Jesus, you find information in below links or feel free to contact us if you need any help. ",
+    content:"You may find information you need in below links or feel free to contact us. ",
     image:Welcome,
-    links:["Get Connected","For your Family","Find Your Community","Connet to Your Purpose "]
+    links:["What Expected In Church","For your Family","Find Your Small Community","Connet to Your Purpose "]
   }
 export const events = [
   {

@@ -50,13 +50,13 @@ export default function ServicesMainPage() {
         }}
       >
         <Grid size={{ xs: 6, md: 10 }}>
-          <Typography variant="h3" sx={{ color: "white" }}>
+          <Typography variant="h3" sx={{ color: "white", }}>
             Sunday services
           </Typography>
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography variant="h6" sx={{ color: "white",marginTop: "10px" }}>
             Sunday 11:00-13:00
           </Typography>
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography variant="h6" sx={{ color: "white",marginTop: "10px" }}>
             Albanoliden 5, vån 3, 50630 Borås{" "}
             <FaMapMarkerAlt
               onClick={handleOpenMap}
@@ -81,7 +81,7 @@ export default function ServicesMainPage() {
             Live: Sunday 11:00 on Youtube
           </Typography>
           {/* <LiveService /> */}
-          <Typography variant="h6" sx={{ color: "white" }}>
+          <Typography variant="h6" sx={{ color: "white",marginTop: "20px" }}>
             <a
               href="https://www.youtube.com/c/Bor%C3%A5sKristnaCenter"
               style={{ color: "white" }}

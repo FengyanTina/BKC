@@ -45,8 +45,9 @@ export default function NewHereSectionGrid({
           sx={{
             marginTop: "20px",
             fontWeight: "700",
-            color: "#5eead4", // Light teal for the title
+            color: "#883b9b", // Muted reddish-purple that stands out on both black and white backgrounds
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
+            
           }}
         >
           {title}
@@ -56,19 +57,23 @@ export default function NewHereSectionGrid({
           sx={{
             marginTop: "20px",
             fontWeight: "500",
-            color: "#5eead4", // Light teal for the title
-            textShadow: "2px 2px 4px rgba(0,0,0,1)",
+            // color: "#883b9b", // Muted reddish-purple that stands out on both black and white backgrounds
+            // textShadow: "2px 2px 4px rgba(0,0,0,1)",
+            color: "#9b4eaf", // Slightly brighter muted reddish-purple that stands out on both black and white backgrounds
+textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
         >
           {subTitle}
         </Typography>
         <Typography
-          variant="h5"
+          variant="h4"
           sx={{
             marginTop: "20px",
-            fontWeight: "500",
-            color: "#5eead4", // Light teal for the title
-            textShadow: "2px 2px 4px rgba(0,0,0,1)",
+            fontWeight: "600",
+            // color: "#9b5de5", // Vivid purple that stands out on both black and white backgrounds
+            // textShadow: "2px 2px 4px rgba(0,0,0,1.5)",
+            color: "#9b4eaf", // Slightly brighter muted reddish-purple that stands out on both black and white backgrounds
+textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
         >
           {content}
