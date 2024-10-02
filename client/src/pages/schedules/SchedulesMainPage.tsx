@@ -1,10 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import EventsCalendar from "./EventsCalendar";
+import EventsCalendar from "./EventsCalendarOriginal";
 import Carousel from "../../components/common/slides/Carousel";
 import { comingEvents } from "../../data";
 import CollapsibleTable from "../../components/pageSections/scheduleManagement/ServingScheduleCollapsibleTable";
 import EventSchedule from "../../components/pageSections/scheduleManagement/DatePickerEventSchedule";
 import Calendar from "../../components/pageSections/scheduleManagement/Calendar";
+import MyCalendar from "./MyCalendar";
+import LocalCalendar from "./EventCalendar";
 
 export default function SchedulesMainPage() {
   return (
@@ -25,7 +27,8 @@ export default function SchedulesMainPage() {
         </Box>
 
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "50%" }}>
-          <EventsCalendar />
+          {/* <EventsCalendar /> */}
+          <LocalCalendar/>
         </Box>
 
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "90%" }}>
@@ -40,6 +43,7 @@ export default function SchedulesMainPage() {
         </Box>
         <EventSchedule />
         <Calendar />
+        
       </Box>
     </>
   );
