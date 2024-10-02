@@ -18,7 +18,22 @@ export interface Video {
     publishedAt: string;
   };
 }
-interface Section {
+export interface Schedule{
+    id:string;
+    event:Event | Event[];
+    startDate:Date;
+    endDate:Date;
+}
+interface Event {
+    id:string;
+    title:string;
+    subtitle?:string;
+    category?:string;
+    description?: string;
+    extraDetail?: string;//only member can see
+   // scheduleList:Schedule | Schedule[]    // Many to many relationship with schedule
+  }
+interface PageSection {
   title: string;
   subTitle?: string;
   category?:string;
@@ -162,11 +177,7 @@ export interface Job {
   totalNumberNeeded: number;
 }
 
-interface Event {
-  eventName: string;
-  description: string;
-  detail: string;
-}
+
 
 export interface ServiceSchedule {
   startTime: string;
@@ -337,7 +348,7 @@ export const sundayService: Service = {
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
 };
-export const prayerService: Section = {
+export const prayerService: PageSection = {
   title: "We want to pray for you!",
   linkSubtitle: "send in your prayer requiest any time",
   image: Prayer,
