@@ -6,7 +6,7 @@ import CollapsibleTable from "../../components/pageSections/scheduleManagement/S
 import EventSchedule from "../../components/pageSections/scheduleManagement/DatePickerEventSchedule";
 import Calendar from "../../components/pageSections/scheduleManagement/Calendar";
 import MyCalendar from "./MyCalendar";
-import LocalCalendar from "./EventCalendar";
+import EventCalendar from "./EventCalendar";
 
 export default function SchedulesMainPage() {
   return (
@@ -26,9 +26,20 @@ export default function SchedulesMainPage() {
           <Carousel events={comingEvents} />
         </Box>
 
-        <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "50%" }}>
+        <Box
+          sx={{
+            marginTop: "50px",
+            marginBottom: "50px",
+       
+            width: {
+              lg: "60%",
+              sm: "100%",
+              xm:"70%"
+            },
+          }}
+        >
           {/* <EventsCalendar /> */}
-          <LocalCalendar/>
+          <EventCalendar />
         </Box>
 
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "90%" }}>
@@ -43,7 +54,6 @@ export default function SchedulesMainPage() {
         </Box>
         <EventSchedule />
         <Calendar />
-        
       </Box>
     </>
   );

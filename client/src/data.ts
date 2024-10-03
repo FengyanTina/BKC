@@ -9,6 +9,7 @@ import Prayer from "./assets/Prayer.jpg";
 import Bible from "./assets/Bible.jpg";
 import Varhistoria from "./assets/Varhistoria.jpg"
 import Welcome from "./assets/Welcome.jpg"
+import welcome2 from "./assets/welcome2.jpg"
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -200,7 +201,7 @@ interface NewHereSectionGridProps {
     title:"New Here? ",
     subTitle:"can't wait to meet you!",
     content:"You may find information you need in below links or feel free to contact us. ",
-    image:Welcome,
+    image:welcome2,
     links:["What Expected In Church","For your Family","Find Your Small Community","Connet to Your Purpose "]
   }
 export const events = [

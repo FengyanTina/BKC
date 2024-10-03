@@ -35,19 +35,21 @@ export default function NewHereSectionGrid({
     >
       <Box
         sx={{
-          maxWidth: "800px", // Set a maximum width for the content
+          maxWidth: "1100px", // Set a maximum width for the content
           width: "100%", // Make sure it scales for smaller screens
           textAlign: "center",
+          justifyContent: "center", // Center horizontally
+          alignItems: "center", // Center vertically
         }}
       >
         <Typography
           variant="h2"
           sx={{
-            marginTop: "20px",
+            marginTop: "0px",
+            paddingTop:'0px',
             fontWeight: "700",
             color: "#883b9b", // Muted reddish-purple that stands out on both black and white backgrounds
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
-            
           }}
         >
           {title}
@@ -55,12 +57,12 @@ export default function NewHereSectionGrid({
         <Typography
           variant="h3"
           sx={{
-            marginTop: "20px",
+            marginTop: "10px",
             fontWeight: "500",
             // color: "#883b9b", // Muted reddish-purple that stands out on both black and white backgrounds
             // textShadow: "2px 2px 4px rgba(0,0,0,1)",
             color: "#9b4eaf", // Slightly brighter muted reddish-purple that stands out on both black and white backgrounds
-textShadow: "2px 2px 4px rgba(0,0,0,1)",
+            textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
         >
           {subTitle}
@@ -68,17 +70,31 @@ textShadow: "2px 2px 4px rgba(0,0,0,1)",
         <Typography
           variant="h4"
           sx={{
-            marginTop: "20px",
+            marginTop: "10px",
+            marginBottom: "10px",
             fontWeight: "600",
             // color: "#9b5de5", // Vivid purple that stands out on both black and white backgrounds
             // textShadow: "2px 2px 4px rgba(0,0,0,1.5)",
             color: "#9b4eaf", // Slightly brighter muted reddish-purple that stands out on both black and white backgrounds
-textShadow: "2px 2px 4px rgba(0,0,0,1)",
+            textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
         >
           {content}
         </Typography>
-        <Box sx={{ marginTop: "20px" }}>
+        <Box
+          sx={{
+            marginTop: "0px",
+            backdropFilter: "blur(5px)", // Apply a blur effect to the background
+            backgroundColor: "rgba(255, 255, 255, 0.4)",
+            paddingTop: "30px",
+            paddingBottom: "30px",
+            alignItems: "center",
+            justifyContent:'center',
+            maxWidth: "1100px",
+            marginLeft: "auto", // Automatically adjust left margin
+            marginRight: "auto",
+          }}
+        >
           {links &&
             links.length > 0 &&
             links.map((link, index) => (
@@ -87,9 +103,9 @@ textShadow: "2px 2px 4px rgba(0,0,0,1)",
                 href={link}
                 style={{
                   display: "block",
-                  fontSize: "20px",
+                  fontSize: "25px",
                   marginBottom: "10px",
-                  color: "white",
+                  color: "black",
                   fontWeight: "500",
                 }}
               >

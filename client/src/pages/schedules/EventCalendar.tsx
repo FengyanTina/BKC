@@ -16,6 +16,8 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS, createEventId } from "./Events";
 import svLocale from "@fullcalendar/core/locales/sv"; // Swedish locale
+import Grid  from "@mui/material/Grid2";
+import { Button, Paper } from "@mui/material";
 
 // Custom event interface
 interface CustomEvent {
@@ -103,17 +105,53 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
         </div>
         <div className="demo-app-sidebar-section">
           <h2>All Events ({this.state.currentEvents.length})</h2>
-          <ul>
+          <Paper elevation={1}>
+            <Grid container spacing={0} style={{ padding: "10px" }}>
+              {/* Header Row */}
+              <Grid size={2}>
+                <strong>Date</strong>
+              </Grid>
+              <Grid  size={2}>
+                <strong>Time</strong>
+              </Grid>
+              <Grid  size={5}>
+                <strong>Event</strong>
+              </Grid>
+              <Grid size={3}>
+                <strong>Action</strong>
+              </Grid>
+            </Grid>
+            {/* Event Rows */}
             {this.state.currentEvents.map((event) =>
               renderSidebarEvent(event, this.handleEdit, this.handleDelete)
             )}
-          </ul>
+          </Paper>
+          {/* <ul>
+            <li
+              style={{
+                display: "flex",
+                justifyContent: "flex-start", // Align items to the start
+                alignItems: "center", // Center items vertically
+                padding: "10px",
+                fontWeight: "bold",
+                borderBottom: "1px solid #ddd",
+                width: "100%", // Ensure it takes full width
+              }}
+            >
+              <div style={{ flex: "0 0 80px", textAlign: "left" }}>Date</div>
+              <div style={{ flex: "0 0 100px", textAlign: "left" }}>Time</div>
+              <div style={{ flex: "1 1 auto", textAlign: "left" }}>Event</div>
+              <div style={{ flex: "0 0 auto", textAlign: "left" }}>Action</div>
+            </li>
+            {this.state.currentEvents.map((event) =>
+              renderSidebarEvent(event, this.handleEdit, this.handleDelete)
+            )}
+          </ul> */}
         </div>
       </div>
     );
   }
 
-  // Convert CustomEvent[] to EventInput[] for FullCalendar
   convertCustomEventsToEventInput(): EventInput[] {
     return this.state.currentEvents.map((event) => ({
       id: event.id,
@@ -164,24 +202,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
       );
     }
   };
-//   handleEventAdd = (addInfo: EventAddArg) => {
-//     const newEvent: CustomEvent = {
-//       id: addInfo.event.id,
-//       title: addInfo.event.title,
-//       start: addInfo.event.startStr,
-//       end: addInfo.event.endStr,
-//       allDay: addInfo.event.allDay,
-//     };
 
-//     this.setState(
-//       (prevState) => ({
-//         currentEvents: [...prevState.currentEvents, newEvent],
-//       }),
-//       () => saveEventsToLocalStorage(this.state.currentEvents)
-//     );
-//   };
-
-  // Event Change Handler
   handleEventChange = (changeInfo: EventChangeArg) => {
     const updatedEvent: CustomEvent = {
       id: changeInfo.event.id,
@@ -293,78 +314,92 @@ function renderSidebarEvent(
   onDelete: (event: CustomEvent) => void
 ) {
   return (
-    <li
-      key={event.id}
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "10px",
-        borderBottom: "1px solid #ddd",
-      }}
-    >
-      <div style={{ flexGrow: 1 }}>
-        <div>
-          <b>
-            {formatDate(event.start, {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              locale: "sv-SE",
-            })}{" "}
-            -{" "}
-            {formatDate(event.end, {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-              locale: "sv-SE",
-            })}
-          </b>
-        </div>
-        <div>{event.title}</div>
-      </div>
-      <div>
-        <button onClick={() => onEdit(event)} style={{ marginRight: "5px" }}>
-          Edit
-        </button>
-        <button
-          onClick={() => onDelete(event)}
-          style={{ backgroundColor: "red", color: "white" }}
-        >
-          Delete
-        </button>
-      </div>
-    </li>
-    // <li key={event.id}>
-    //   <b></b>
-    //   <li key={event.id}>
-    //     <b>{event.title}</b>
-    //     <br />
-    //     Start:{" "}
+    // <li
+    //   key={event.id}
+    //   style={{
+    //     display: "flex",
+    //     justifyContent: "flex-start", // Align items to the start
+    //     alignItems: "center", // Center items vertically
+    //     padding: "10px",
+    //     borderBottom: "1px solid #ddd",
+    //     width: "100%", // Ensure it takes full width
+    //   }}
+    // >
+    //   <div style={{ flex: "0 0 80px", textAlign: "left" }}>
     //     {formatDate(event.start, {
-    //       year: "numeric",
-    //       month: "short",
-    //       day: "numeric",
+    //       day: "2-digit",
+    //       month: "2-digit",
+    //       locale: "sv-SE",
+    //     })}
+    //   </div>
+
+    //   {/* Time Column */}
+    //   <div style={{ flex: "0 0 auto", textAlign: "left" }}>
+    //     {formatDate(event.start, {
     //       hour: "2-digit",
     //       minute: "2-digit",
     //       locale: "sv-SE",
-    //     })}
-    //     <br />
-    //     End:{" "}
+    //     })}{" "}
+    //     -{" "}
     //     {formatDate(event.end, {
-    //       year: "numeric",
-    //       month: "short",
-    //       day: "numeric",
     //       hour: "2-digit",
     //       minute: "2-digit",
     //       locale: "sv-SE",
     //     })}
-    //     ;
-    //   </li>
+    //   </div>
+
+    //   {/* Event Title Column */}
+    //   <div style={{ flex: "1 1 auto", textAlign: "left" }}>{event.title}</div>
+
+    //   {/* Action Buttons */}
+    //   <div style={{ flex: "0 0 100px", textAlign: "left" }}>
+    //     <button onClick={() => onEdit(event)} style={{ marginRight: "5px" }}>
+    //       Edit
+    //     </button>
+    //     <button
+    //       onClick={() => onDelete(event)}
+    //       style={{ backgroundColor: "red", color: "white" }}
+    //     >
+    //       Delete
+    //     </button>
+    //   </div>
     // </li>
+    <Grid
+    container
+    key={event.id}
+    style={{ padding: "10px", borderBottom: "1px solid #ddd" }}
+  >
+    <Grid size={2} style={{ textAlign: "left" }}>
+      {formatDate(event.start, {
+        day: "2-digit",
+        month: "2-digit",
+        locale: "sv-SE",
+      })}
+    </Grid>
+    <Grid size={2} style={{ textAlign: "left" }}>
+      {formatDate(event.start, {
+        hour: "2-digit",
+        minute: "2-digit",
+        locale: "sv-SE",
+      })}{" "}
+      -{" "}
+      {formatDate(event.end, {
+        hour: "2-digit",
+        minute: "2-digit",
+        locale: "sv-SE",
+      })}
+    </Grid>
+    <Grid  size={5} style={{ textAlign: "left" }}>
+      {event.title}
+    </Grid>
+    <Grid size={3} style={{ textAlign: "left" }}>
+      <Button onClick={() => onEdit(event)} variant="outlined" style={{ marginRight: "5px" }}>
+        Edit
+      </Button>
+      <Button onClick={() => onDelete(event)} variant="contained" color="error">
+        Delete
+      </Button>
+    </Grid>
+  </Grid>
   );
 }
