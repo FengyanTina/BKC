@@ -2,10 +2,8 @@ import { EventInput } from "@fullcalendar/core";
 import React from "react";
 import {
   EventApi,
-  DateSelectArg,
   EventClickArg,
   EventContentArg,
-  EventAddArg,
   EventChangeArg,
   EventRemoveArg,
   formatDate,
@@ -14,7 +12,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "./Events";
 import svLocale from "@fullcalendar/core/locales/sv"; // Swedish locale
 import Grid from "@mui/material/Grid2";
 import {
@@ -24,11 +21,10 @@ import {
   DialogContent,
   DialogTitle,
   Paper,
-  TextField,
   Typography,
 } from "@mui/material";
 import EventAddAndEditForm from "./EventAddAndEditForm";
-import EventFormWithTimeSelection from "./EventFormWithTimeSelection";
+import "./schedule.css"
 
 // Custom event interface
 interface CustomEvent {
@@ -246,6 +242,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
           isEditing={isEditing}
           handleFieldChange={this.handleFieldChange}
           handleSaveEvent ={this.handleSaveEvent}
+         
           />
           {/* <EventFormWithTimeSelection
             open={isModalOpen}

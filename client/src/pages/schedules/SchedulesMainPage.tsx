@@ -23,27 +23,40 @@ export default function SchedulesMainPage() {
           alignItems: "center",
         }}
       >
-        <Box sx={{ width: "80%",marginBottom:"30px" }}>
+        <Box sx={{ width: "80%", marginBottom: "30px" }}>
           <Carousel events={comingEvents} />
         </Box>
-        <SectionLine text="Event calandar" />
+        <Box  sx={{
+          
+          backgroundColor: "#d0d8e0",
+          width:"100%"
+         
+        }}>
+        <SectionLine text="Event calandar" useWhiteStroke={true} />
+        </Box>
         <Box
           sx={{
             marginTop: "50px",
             marginBottom: "50px",
-       
+
             width: {
               lg: "60%",
               sm: "100%",
-              xm:"70%"
+              xm: "70%",
             },
           }}
         >
           {/* <EventsCalendar /> */}
           <EventCalendar />
         </Box>
-        <SectionLine text="Comming Week serving Schedule" />
-
+        <Box  sx={{
+          
+          backgroundColor: "#d0d8e0",
+          width:"100%"
+         
+        }}>
+          <SectionLine text="Comming Week serving Schedule" useWhiteStroke={true} />
+        </Box>
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "90%" }}>
           <Typography
             sx={{ marginBottom: "50px", textAlign: "center" }}
@@ -54,8 +67,8 @@ export default function SchedulesMainPage() {
           {/* <ServingScheduleCollapsibleTable /> */}
           <CollapsibleTable />
         </Box>
-        <EventSchedule />
-        <Calendar />
+        {/* <EventSchedule />
+        <Calendar /> */}
       </Box>
     </>
   );
