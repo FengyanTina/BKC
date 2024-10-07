@@ -90,7 +90,7 @@ import { createEventId } from './Events';
 
 interface EventFormProps {
   open: boolean;
-  event?: CustomEvent; // Optional because it can be undefined when adding a new event
+  event?: CustomEvent|null; // Optional because it can be undefined when adding a new event
   onClose: () => void;
   onSave: (event: CustomEvent) => void; // Callback for saving the event
   isEditing:boolean;

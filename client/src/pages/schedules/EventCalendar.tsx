@@ -28,6 +28,7 @@ import {
   Typography,
 } from "@mui/material";
 import EventAddAndEditForm from "./EventAddAndEditForm";
+import EventFormWithTimeSelection from "./EventFormWithTimeSelection";
 
 // Custom event interface
 interface CustomEvent {
@@ -215,12 +216,8 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   };
 
   render() {
-    const {
-      selectedEvent,
-      isModalOpen,
-      isDetailModalOpen,
-      isEditing,
-    } = this.state;
+    const { selectedEvent, isModalOpen, isDetailModalOpen, isEditing } =
+      this.state;
     return (
       <div className="demo-app">
         {this.renderSidebar()}
@@ -309,15 +306,21 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
               )}
             </DialogContent>
           </Dialog> */}
-          <EventAddAndEditForm
+          {/* <EventAddAndEditForm
           isModalOpen={isModalOpen} 
           handleCloseModal={this.handleCloseModal} 
           selectedEvent={selectedEvent}
           isEditing={isEditing}
           handleFieldChange={this.handleFieldChange}
           handleSaveEvent ={this.handleSaveEvent}
+          /> */}
+          <EventFormWithTimeSelection
+            open={isModalOpen}
+            onClose={this.handleCloseModal}
+            event={selectedEvent}
+            isEditing={isEditing}
+            onSave={this.handleSaveEvent}
           />
-
           <Dialog open={isDetailModalOpen} onClose={this.handleCloseModal}>
             <DialogTitle>Event Details</DialogTitle>
             <DialogContent>
