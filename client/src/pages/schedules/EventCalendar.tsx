@@ -16,8 +16,18 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS, createEventId } from "./Events";
 import svLocale from "@fullcalendar/core/locales/sv"; // Swedish locale
-import Grid  from "@mui/material/Grid2";
-import { Button, Paper } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import EventAddAndEditForm from "./EventAddAndEditForm";
 
 // Custom event interface
 interface CustomEvent {
@@ -32,6 +42,12 @@ interface CustomEvent {
 interface DemoAppState {
   weekendsVisible: boolean;
   currentEvents: CustomEvent[];
+  selectedEvent: CustomEvent | null;
+  isModalOpen: boolean;
+  isDetailModalOpen: boolean;
+  isEditing: boolean;
+  newEventInfo: { start: string; end: string; allDay: boolean };
+  isConfirmDeleteOpen: boolean;
 }
 const getStoredEvents = (): CustomEvent[] => {
   const storedEvents = localStorage.getItem("calendarEvents");
@@ -46,9 +62,165 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   state: DemoAppState = {
     weekendsVisible: true,
     currentEvents: getStoredEvents(), // Load from localStorage
+    selectedEvent: null, // Track the clicked event
+    isModalOpen: false, // Modal state
+    isDetailModalOpen: false,
+    isEditing: false,
+    newEventInfo: { start: "", end: "", allDay: false },
+    isConfirmDeleteOpen: false,
+  };
+  handleEventClick = (clickInfo: EventClickArg) => {
+    const selectedEvent = this.state.currentEvents.find(
+      (event) => event.id === clickInfo.event.id
+    );
+
+    if (selectedEvent) {
+      this.setState({
+        selectedEvent, // Set the clicked event
+        isDetailModalOpen: true, // Open the modal
+      });
+    }
+  };
+  handleCloseModal = () => {
+    this.setState({
+      isModalOpen: false,
+      isDetailModalOpen: false,
+      selectedEvent: null, // Clear the selected event when closing modal
+    });
+  };
+  handleDateSelect = (selectInfo: any) => {
+    // Store selected date information for the new event
+    this.setState((prevState) => ({
+      newEventInfo: {
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay,
+      },
+      isModalOpen: true, // Open modal
+      isEditing: true, // Edit mode (adding a new event)
+      // Prepare the empty event object for the form and ensure the 'id' is a string (empty initially)
+      selectedEvent: {
+        id: "", // Ensure id is always a string
+        title: "",
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        description: "",
+        allDay: selectInfo.allDay,
+      },
+    }));
+
+    selectInfo.view.calendar.unselect(); // Unselect the date after opening the form
+  };
+  //   handleSaveEvent = () => {
+  //     const { selectedEvent, currentEvents, isEditing } = this.state;
+  //     if (selectedEvent && selectedEvent.title) {
+  //       // Create or update the event object
+  //       const updatedEvent: CustomEvent = {
+  //         id:
+  //           isEditing && selectedEvent.id
+  //             ? selectedEvent.id
+  //             : String(new Date().getTime()), // Use existing ID if editing
+  //         title: selectedEvent.title,
+  //         start: selectedEvent.start, // Use start from selectedEvent for both cases
+  //         end: selectedEvent.end, // Use end from selectedEvent for both cases
+  //         description: selectedEvent.description || "", // Include description
+  //         allDay: selectedEvent.allDay ?? false, // Include allDay status
+  //       };
+
+  //        this.setState(
+  //             (prevState) => {
+  //                 let updatedEvents;
+  //                 if (isEditing) {
+  //                     // Edit the existing event
+  //                     updatedEvents = prevState.currentEvents.map((event) =>
+  //                         event.id === updatedEvent.id ? updatedEvent : event
+  //                     );
+  //                 } else {
+  //                     // Add a new event
+  //                     updatedEvents = [...prevState.currentEvents, updatedEvent];
+  //                 }
+  //                 return {
+  //                     currentEvents: updatedEvents,
+  //                     isModalOpen: false, // Close the modal after saving
+  //                 };
+  //             },
+  //         () => saveEventsToLocalStorage(this.state.currentEvents) // Save to localStorage
+  //       );
+  //     }
+  //   };
+
+  //   // Function to save the newly added event
+  handleSaveEvent = () => {
+    const { selectedEvent, currentEvents, newEventInfo } = this.state;
+
+    if (selectedEvent && selectedEvent.title) {
+      let updatedEvents;
+
+      // If editing (selectedEvent has an id), update the existing event
+      if (selectedEvent.id) {
+        updatedEvents = currentEvents.map((event) =>
+          event.id === selectedEvent.id
+            ? {
+                ...event,
+                title: selectedEvent.title,
+                start: selectedEvent.start || newEventInfo.start, // Use selectedEvent's start if available
+                end: selectedEvent.end || newEventInfo.end, // Use selectedEvent's end if available
+                description: selectedEvent.description || "",
+                allDay: selectedEvent.allDay,
+              }
+            : event
+        );
+      } else {
+        // If no id, it's a new event, so add it
+        const newEvent: CustomEvent = {
+          id: String(new Date().getTime()), // Generate a unique ID
+          title: selectedEvent.title,
+          start: newEventInfo.start,
+          end: newEventInfo.end,
+          description: selectedEvent.description || "",
+          allDay: newEventInfo.allDay,
+        };
+        updatedEvents = [...currentEvents, newEvent]; // Add new event
+      }
+
+      // Update the state with the updated events array
+      this.setState(
+        {
+          currentEvents: updatedEvents,
+          isModalOpen: false, // Close the modal after saving
+          selectedEvent: null, // Clear the selected event
+        },
+        () => saveEventsToLocalStorage(this.state.currentEvents) // Save to localStorage
+      );
+    }
+  };
+
+  // Handle form field changes (title/description)
+  handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    // Ensure the id always has a valid string value
+    this.setState((prevState) => ({
+      selectedEvent: {
+        ...prevState.selectedEvent,
+        id: prevState.selectedEvent?.id || "", // Ensure id is always a string
+        title: prevState.selectedEvent?.title || "", // Ensure title is always a string
+        description: prevState.selectedEvent?.description || "", // Ensure description is always a string
+        start: prevState.selectedEvent?.start || "", // Ensure start is always a string
+        end: prevState.selectedEvent?.end || "", // Ensure end is always a string
+        allDay: prevState.selectedEvent?.allDay ?? false, // Ensure allDay is always a boolean
+        [name]: value, // Dynamically update field (title or description)
+      },
+    }));
   };
 
   render() {
+    const {
+      selectedEvent,
+      isModalOpen,
+      isDetailModalOpen,
+      isEditing,
+    } = this.state;
     return (
       <div className="demo-app">
         {this.renderSidebar()}
@@ -87,6 +259,117 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
               hour12: false, // 24-hour format
             }}
           />
+          {/* Modal for adding/viewing events */}
+          {/* <Dialog open={isModalOpen} onClose={this.handleCloseModal}>
+            <DialogTitle>
+              {isEditing ? "Add New Event" : "Event Details"}
+            </DialogTitle>
+            <DialogContent>
+              {selectedEvent && (
+                <div>
+                  <TextField
+                    label="Title"
+                    name="title"
+                    value={selectedEvent.title}
+                    onChange={this.handleFieldChange}
+                    fullWidth
+                    margin="normal"
+                    disabled={!isEditing} // Disable in view mode
+                  />
+                  <TextField
+                    label="Description"
+                    name="description"
+                    value={selectedEvent.description || ""}
+                    onChange={this.handleFieldChange}
+                    fullWidth
+                    margin="normal"
+                    multiline
+                    rows={4}
+                    disabled={!isEditing} // Disable in view mode
+                  />
+
+                  <Button
+                    onClick={this.handleSaveEvent}
+                    color="primary"
+                    variant="contained"
+                    style={{ marginTop: "16px",marginRight:"10px" }}
+                  >
+                    Save Event
+                  </Button>
+
+                  <Button
+                    onClick={this.handleCloseModal}
+                    color="primary"
+                    variant="contained"
+                    style={{ marginTop: "16px" }}
+                  >
+                    Close
+                  </Button>
+                </div>
+              )}
+            </DialogContent>
+          </Dialog> */}
+          <EventAddAndEditForm
+          isModalOpen={isModalOpen} 
+          handleCloseModal={this.handleCloseModal} 
+          selectedEvent={selectedEvent}
+          isEditing={isEditing}
+          handleFieldChange={this.handleFieldChange}
+          handleSaveEvent ={this.handleSaveEvent}
+          />
+
+          <Dialog open={isDetailModalOpen} onClose={this.handleCloseModal}>
+            <DialogTitle>Event Details</DialogTitle>
+            <DialogContent>
+              {selectedEvent ? (
+                <div>
+                  <Typography variant="body1">
+                    <strong>Title:</strong> {selectedEvent.title}
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Start:</strong>{" "}
+                    {new Date(selectedEvent.start).toLocaleString()}
+                  </Typography>
+                  {selectedEvent.end && (
+                    <Typography variant="body1">
+                      <strong>End:</strong>{" "}
+                      {new Date(selectedEvent.end).toLocaleString()}
+                    </Typography>
+                  )}
+                  <Typography variant="body1">
+                    <strong>Description:</strong>{" "}
+                    {selectedEvent.description || "No description"}
+                  </Typography>
+                </div>
+              ) : (
+                <Typography variant="body1">No event selected.</Typography>
+              )}
+              <Button onClick={this.handleCloseModal} color="primary">
+                Close
+              </Button>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog
+            open={this.state.isConfirmDeleteOpen}
+            onClose={this.handleCloseConfirmDelete}
+          >
+            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogContent>
+              <p>
+                Are you sure you want to delete the event '
+                {this.state.selectedEvent?.title}'?
+              </p>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleCloseConfirmDelete} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={this.handleConfirmDelete} color="secondary">
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
     );
@@ -111,13 +394,13 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
               <Grid size={2}>
                 <strong>Date</strong>
               </Grid>
-              <Grid  size={2}>
+              <Grid size={2}>
                 <strong>Time</strong>
               </Grid>
-              <Grid  size={5}>
+              <Grid size={6}>
                 <strong>Event</strong>
               </Grid>
-              <Grid size={3}>
+              <Grid size={2}>
                 <strong>Action</strong>
               </Grid>
             </Grid>
@@ -126,27 +409,6 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
               renderSidebarEvent(event, this.handleEdit, this.handleDelete)
             )}
           </Paper>
-          {/* <ul>
-            <li
-              style={{
-                display: "flex",
-                justifyContent: "flex-start", // Align items to the start
-                alignItems: "center", // Center items vertically
-                padding: "10px",
-                fontWeight: "bold",
-                borderBottom: "1px solid #ddd",
-                width: "100%", // Ensure it takes full width
-              }}
-            >
-              <div style={{ flex: "0 0 80px", textAlign: "left" }}>Date</div>
-              <div style={{ flex: "0 0 100px", textAlign: "left" }}>Time</div>
-              <div style={{ flex: "1 1 auto", textAlign: "left" }}>Event</div>
-              <div style={{ flex: "0 0 auto", textAlign: "left" }}>Action</div>
-            </li>
-            {this.state.currentEvents.map((event) =>
-              renderSidebarEvent(event, this.handleEdit, this.handleDelete)
-            )}
-          </ul> */}
         </div>
       </div>
     );
@@ -163,42 +425,82 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
     }));
   }
 
-  handleEdit = (event: CustomEvent) => {
-    const newTitle = prompt(
-      "Please enter a new title for your event",
-      event.title
-    );
-    if (newTitle) {
-      const updatedEvent: CustomEvent = {
-        ...event,
-        title: newTitle,
-      };
+  //   handleEdit = (event: CustomEvent) => {
+  //     const newTitle = prompt(
+  //       "Please enter a new title for your event",
+  //       event.title
+  //     );
+  //     if (newTitle) {
+  //       const updatedEvent: CustomEvent = {
+  //         ...event,
+  //         title: newTitle,
+  //       };
 
-      this.setState(
-        (prevState) => {
-          const updatedEvents = prevState.currentEvents.map((e) =>
-            e.id === updatedEvent.id ? updatedEvent : e
-          );
-          return { currentEvents: updatedEvents };
-        },
-        () => saveEventsToLocalStorage(this.state.currentEvents)
-      );
-    }
+  //       this.setState(
+  //         (prevState) => {
+  //           const updatedEvents = prevState.currentEvents.map((e) =>
+  //             e.id === updatedEvent.id ? updatedEvent : e
+  //           );
+  //           return { currentEvents: updatedEvents };
+  //         },
+  //         () => saveEventsToLocalStorage(this.state.currentEvents)
+  //       );
+  //     }
+  //   };
+  handleEdit = (event: CustomEvent) => {
+    this.setState({
+      selectedEvent: {
+        ...event, // Spread the existing event data
+      },
+      isModalOpen: true, // Open the modal
+      isEditing: true, // Set editing mode
+    });
+  };
+  //   handleDelete = (event: CustomEvent) => {
+  //     const confirmDelete = confirm(
+  //       `Are you sure you want to delete the event '${event.title}'?`
+  //     );
+  //     if (confirmDelete) {
+  //       this.setState(
+  //         (prevState) => {
+  //           const updatedEvents = prevState.currentEvents.filter(
+  //             (e) => e.id !== event.id
+  //           );
+  //           return { currentEvents: updatedEvents };
+  //         },
+  //         () => saveEventsToLocalStorage(this.state.currentEvents)
+  //       );
+  //     }
+  //   };
+  handleDelete = (event: CustomEvent) => {
+    this.setState({
+      selectedEvent: event, // Store the event to be deleted
+      isConfirmDeleteOpen: true, // Open the confirmation modal
+    });
   };
 
-  handleDelete = (event: CustomEvent) => {
-    const confirmDelete = confirm(
-      `Are you sure you want to delete the event '${event.title}'?`
-    );
-    if (confirmDelete) {
+  // Function to close the confirmation modal
+  handleCloseConfirmDelete = () => {
+    this.setState({ isConfirmDeleteOpen: false, selectedEvent: null });
+  };
+
+  // Function to confirm deletion
+  handleConfirmDelete = () => {
+    const { selectedEvent } = this.state;
+
+    if (selectedEvent) {
       this.setState(
         (prevState) => {
           const updatedEvents = prevState.currentEvents.filter(
-            (e) => e.id !== event.id
+            (e) => e.id !== selectedEvent.id
           );
-          return { currentEvents: updatedEvents };
+          return {
+            currentEvents: updatedEvents,
+            isConfirmDeleteOpen: false,
+            selectedEvent: null,
+          };
         },
-        () => saveEventsToLocalStorage(this.state.currentEvents)
+        () => saveEventsToLocalStorage(this.state.currentEvents) // Save to localStorage
       );
     }
   };
@@ -246,53 +548,53 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
     );
   };
 
-  handleDateSelect = (selectInfo: DateSelectArg) => {
-    let title = prompt("Please enter a new title for your event");
-    let calendarApi = selectInfo.view.calendar;
+  //   handleDateSelect = (selectInfo: DateSelectArg) => {
+  //     let title = prompt("Please enter a new title for your event");
+  //     let calendarApi = selectInfo.view.calendar;
 
-    calendarApi.unselect(); // clear date selection
+  //     calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      const newEvent: CustomEvent = {
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      };
+  //     if (title) {
+  //       const newEvent: CustomEvent = {
+  //         id: createEventId(),
+  //         title,
+  //         start: selectInfo.startStr,
+  //         end: selectInfo.endStr,
+  //         allDay: selectInfo.allDay,
+  //       };
 
-      // Add event to the calendar
-      calendarApi.addEvent(newEvent);
+  //       // Add event to the calendar
+  //       calendarApi.addEvent(newEvent);
 
-      // Update local state and localStorage
-      this.setState(
-        (prevState) => ({
-          currentEvents: [...prevState.currentEvents, newEvent],
-        }),
-        () => saveEventsToLocalStorage(this.state.currentEvents)
-      );
-    }
-  };
+  //       // Update local state and localStorage
+  //       this.setState(
+  //         (prevState) => ({
+  //           currentEvents: [...prevState.currentEvents, newEvent],
+  //         }),
+  //         () => saveEventsToLocalStorage(this.state.currentEvents)
+  //       );
+  //     }
+  //   };
 
-  handleEventClick = (clickInfo: EventClickArg) => {
-    if (
-      confirm(
-        `Are you sure you want to delete the event '${clickInfo.event.title}'`
-      )
-    ) {
-      clickInfo.event.remove();
+  //   handleEventClick = (clickInfo: EventClickArg) => {
+  //     if (
+  //       confirm(
+  //         `Are you sure you want to delete the event '${clickInfo.event.title}'`
+  //       )
+  //     ) {
+  //       clickInfo.event.remove();
 
-      // Remove event from state and localStorage
-      this.setState(
-        (prevState) => ({
-          currentEvents: prevState.currentEvents.filter(
-            (event) => event.id !== clickInfo.event.id
-          ),
-        }),
-        () => saveEventsToLocalStorage(this.state.currentEvents)
-      );
-    }
-  };
+  //       // Remove event from state and localStorage
+  //       this.setState(
+  //         (prevState) => ({
+  //           currentEvents: prevState.currentEvents.filter(
+  //             (event) => event.id !== clickInfo.event.id
+  //           ),
+  //         }),
+  //         () => saveEventsToLocalStorage(this.state.currentEvents)
+  //       );
+  //     }
+  //   };
 
   handleEvents = () => {
     // This function could be used to sync changes to external sources if needed
@@ -314,92 +616,50 @@ function renderSidebarEvent(
   onDelete: (event: CustomEvent) => void
 ) {
   return (
-    // <li
-    //   key={event.id}
-    //   style={{
-    //     display: "flex",
-    //     justifyContent: "flex-start", // Align items to the start
-    //     alignItems: "center", // Center items vertically
-    //     padding: "10px",
-    //     borderBottom: "1px solid #ddd",
-    //     width: "100%", // Ensure it takes full width
-    //   }}
-    // >
-    //   <div style={{ flex: "0 0 80px", textAlign: "left" }}>
-    //     {formatDate(event.start, {
-    //       day: "2-digit",
-    //       month: "2-digit",
-    //       locale: "sv-SE",
-    //     })}
-    //   </div>
-
-    //   {/* Time Column */}
-    //   <div style={{ flex: "0 0 auto", textAlign: "left" }}>
-    //     {formatDate(event.start, {
-    //       hour: "2-digit",
-    //       minute: "2-digit",
-    //       locale: "sv-SE",
-    //     })}{" "}
-    //     -{" "}
-    //     {formatDate(event.end, {
-    //       hour: "2-digit",
-    //       minute: "2-digit",
-    //       locale: "sv-SE",
-    //     })}
-    //   </div>
-
-    //   {/* Event Title Column */}
-    //   <div style={{ flex: "1 1 auto", textAlign: "left" }}>{event.title}</div>
-
-    //   {/* Action Buttons */}
-    //   <div style={{ flex: "0 0 100px", textAlign: "left" }}>
-    //     <button onClick={() => onEdit(event)} style={{ marginRight: "5px" }}>
-    //       Edit
-    //     </button>
-    //     <button
-    //       onClick={() => onDelete(event)}
-    //       style={{ backgroundColor: "red", color: "white" }}
-    //     >
-    //       Delete
-    //     </button>
-    //   </div>
-    // </li>
     <Grid
-    container
-    key={event.id}
-    style={{ padding: "10px", borderBottom: "1px solid #ddd" }}
-  >
-    <Grid size={2} style={{ textAlign: "left" }}>
-      {formatDate(event.start, {
-        day: "2-digit",
-        month: "2-digit",
-        locale: "sv-SE",
-      })}
+      container
+      key={event.id}
+      style={{ padding: "10px", borderBottom: "1px solid #ddd" }}
+    >
+      <Grid size={2} style={{ textAlign: "left" }}>
+        {formatDate(event.start, {
+          day: "2-digit",
+          month: "2-digit",
+          locale: "sv-SE",
+        })}
+      </Grid>
+      <Grid size={2} style={{ textAlign: "left" }}>
+        {formatDate(event.start, {
+          hour: "2-digit",
+          minute: "2-digit",
+          locale: "sv-SE",
+        })}{" "}
+        -{" "}
+        {formatDate(event.end, {
+          hour: "2-digit",
+          minute: "2-digit",
+          locale: "sv-SE",
+        })}
+      </Grid>
+      <Grid size={6} style={{ textAlign: "left" }}>
+        {event.title}
+      </Grid>
+      <Grid size={2} style={{ textAlign: "left" }}>
+        <Button
+          onClick={() => onEdit(event)}
+          variant="outlined"
+          style={{ marginRight: "5px" }}
+        >
+          Edit
+        </Button>
+        <Button
+          onClick={() => onDelete(event)}
+          variant="contained"
+          color="error"
+        >
+          Delete
+        </Button>
+      </Grid>
     </Grid>
-    <Grid size={2} style={{ textAlign: "left" }}>
-      {formatDate(event.start, {
-        hour: "2-digit",
-        minute: "2-digit",
-        locale: "sv-SE",
-      })}{" "}
-      -{" "}
-      {formatDate(event.end, {
-        hour: "2-digit",
-        minute: "2-digit",
-        locale: "sv-SE",
-      })}
-    </Grid>
-    <Grid  size={5} style={{ textAlign: "left" }}>
-      {event.title}
-    </Grid>
-    <Grid size={3} style={{ textAlign: "left" }}>
-      <Button onClick={() => onEdit(event)} variant="outlined" style={{ marginRight: "5px" }}>
-        Edit
-      </Button>
-      <Button onClick={() => onDelete(event)} variant="contained" color="error">
-        Delete
-      </Button>
-    </Grid>
-  </Grid>
   );
 }

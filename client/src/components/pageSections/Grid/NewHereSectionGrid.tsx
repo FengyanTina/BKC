@@ -86,8 +86,9 @@ export default function NewHereSectionGrid({
             marginTop: "0px",
             backdropFilter: "blur(5px)", // Apply a blur effect to the background
             backgroundColor: "rgba(255, 255, 255, 0.4)",
-            paddingTop: "30px",
-            paddingBottom: "30px",
+            paddingTop: "40px",
+            paddingBottom: "40px",
+            marginBottom:'60px',
             alignItems: "center",
             justifyContent:'center',
             maxWidth: "1100px",
@@ -104,7 +105,7 @@ export default function NewHereSectionGrid({
                 style={{
                   display: "block",
                   fontSize: "25px",
-                  marginBottom: "10px",
+               
                   color: "black",
                   fontWeight: "500",
                 }}
