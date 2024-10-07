@@ -112,43 +112,6 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
 
     selectInfo.view.calendar.unselect(); // Unselect the date after opening the form
   };
-  //   handleSaveEvent = () => {
-  //     const { selectedEvent, currentEvents, isEditing } = this.state;
-  //     if (selectedEvent && selectedEvent.title) {
-  //       // Create or update the event object
-  //       const updatedEvent: CustomEvent = {
-  //         id:
-  //           isEditing && selectedEvent.id
-  //             ? selectedEvent.id
-  //             : String(new Date().getTime()), // Use existing ID if editing
-  //         title: selectedEvent.title,
-  //         start: selectedEvent.start, // Use start from selectedEvent for both cases
-  //         end: selectedEvent.end, // Use end from selectedEvent for both cases
-  //         description: selectedEvent.description || "", // Include description
-  //         allDay: selectedEvent.allDay ?? false, // Include allDay status
-  //       };
-
-  //        this.setState(
-  //             (prevState) => {
-  //                 let updatedEvents;
-  //                 if (isEditing) {
-  //                     // Edit the existing event
-  //                     updatedEvents = prevState.currentEvents.map((event) =>
-  //                         event.id === updatedEvent.id ? updatedEvent : event
-  //                     );
-  //                 } else {
-  //                     // Add a new event
-  //                     updatedEvents = [...prevState.currentEvents, updatedEvent];
-  //                 }
-  //                 return {
-  //                     currentEvents: updatedEvents,
-  //                     isModalOpen: false, // Close the modal after saving
-  //                 };
-  //             },
-  //         () => saveEventsToLocalStorage(this.state.currentEvents) // Save to localStorage
-  //       );
-  //     }
-  //   };
 
   //   // Function to save the newly added event
   handleSaveEvent = () => {
@@ -214,13 +177,32 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
       },
     }));
   };
+  handleEdit = (event: CustomEvent) => {
+    this.setState({
+      selectedEvent: {
+        ...event, // Spread the existing event data
+      },
+      isModalOpen: true, // Open the modal
+      isEditing: true, // Set editing mode
+    });
+  };
+  convertCustomEventsToEventInput(): EventInput[] {
+    return this.state.currentEvents.map((event) => ({
+      id: event.id,
+      title: event.title,
+      start: event.start,
+      end: event.end,
+      allDay: event.allDay,
+      description: event.description,
+    }));
+  }
 
   render() {
     const { selectedEvent, isModalOpen, isDetailModalOpen, isEditing } =
       this.state;
     return (
       <div className="demo-app">
-        {this.renderSidebar()}
+       
         <div className="demo-app-main">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -257,70 +239,22 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
             }}
           />
           {/* Modal for adding/viewing events */}
-          {/* <Dialog open={isModalOpen} onClose={this.handleCloseModal}>
-            <DialogTitle>
-              {isEditing ? "Add New Event" : "Event Details"}
-            </DialogTitle>
-            <DialogContent>
-              {selectedEvent && (
-                <div>
-                  <TextField
-                    label="Title"
-                    name="title"
-                    value={selectedEvent.title}
-                    onChange={this.handleFieldChange}
-                    fullWidth
-                    margin="normal"
-                    disabled={!isEditing} // Disable in view mode
-                  />
-                  <TextField
-                    label="Description"
-                    name="description"
-                    value={selectedEvent.description || ""}
-                    onChange={this.handleFieldChange}
-                    fullWidth
-                    margin="normal"
-                    multiline
-                    rows={4}
-                    disabled={!isEditing} // Disable in view mode
-                  />
-
-                  <Button
-                    onClick={this.handleSaveEvent}
-                    color="primary"
-                    variant="contained"
-                    style={{ marginTop: "16px",marginRight:"10px" }}
-                  >
-                    Save Event
-                  </Button>
-
-                  <Button
-                    onClick={this.handleCloseModal}
-                    color="primary"
-                    variant="contained"
-                    style={{ marginTop: "16px" }}
-                  >
-                    Close
-                  </Button>
-                </div>
-              )}
-            </DialogContent>
-          </Dialog> */}
-          {/* <EventAddAndEditForm
+          <EventAddAndEditForm
           isModalOpen={isModalOpen} 
           handleCloseModal={this.handleCloseModal} 
           selectedEvent={selectedEvent}
           isEditing={isEditing}
           handleFieldChange={this.handleFieldChange}
           handleSaveEvent ={this.handleSaveEvent}
-          /> */}
-          <EventFormWithTimeSelection
+          />
+          {/* <EventFormWithTimeSelection
             open={isModalOpen}
             onClose={this.handleCloseModal}
             event={selectedEvent}
             isEditing={isEditing}
             onSave={this.handleSaveEvent}
-          />
+          /> */}
+          {/* Modal for event details */}
           <Dialog open={isDetailModalOpen} onClose={this.handleCloseModal}>
             <DialogTitle>Event Details</DialogTitle>
             <DialogContent>
@@ -352,7 +286,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
               </Button>
             </DialogContent>
           </Dialog>
-
+          {/* Modal for confirm delte */}
           <Dialog
             open={this.state.isConfirmDeleteOpen}
             onClose={this.handleCloseConfirmDelete}
@@ -374,6 +308,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
             </DialogActions>
           </Dialog>
         </div>
+        {this.renderSidebar()}
       </div>
     );
   }
@@ -391,8 +326,8 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
         </div>
         <div className="demo-app-sidebar-section">
           <h2>All Events ({this.state.currentEvents.length})</h2>
-          <Paper elevation={1}>
-            <Grid container spacing={0} style={{ padding: "10px" }}>
+          <Paper elevation={1} style={{ marginBottom: "30px" }}>
+            <Grid container spacing={0} style={{ padding: "10px" , }}>
               {/* Header Row */}
               <Grid size={2}>
                 <strong>Date</strong>
@@ -417,16 +352,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
     );
   }
 
-  convertCustomEventsToEventInput(): EventInput[] {
-    return this.state.currentEvents.map((event) => ({
-      id: event.id,
-      title: event.title,
-      start: event.start,
-      end: event.end,
-      allDay: event.allDay,
-      description: event.description,
-    }));
-  }
+ 
 
   //   handleEdit = (event: CustomEvent) => {
   //     const newTitle = prompt(
@@ -450,15 +376,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   //       );
   //     }
   //   };
-  handleEdit = (event: CustomEvent) => {
-    this.setState({
-      selectedEvent: {
-        ...event, // Spread the existing event data
-      },
-      isModalOpen: true, // Open the modal
-      isEditing: true, // Set editing mode
-    });
-  };
+ 
   //   handleDelete = (event: CustomEvent) => {
   //     const confirmDelete = confirm(
   //       `Are you sure you want to delete the event '${event.title}'?`
@@ -622,7 +540,7 @@ function renderSidebarEvent(
     <Grid
       container
       key={event.id}
-      style={{ padding: "10px", borderBottom: "1px solid #ddd" }}
+      style={{ padding: "10px", borderBottom: "1px solid #ddd",  }}
     >
       <Grid size={2} style={{ textAlign: "left" }}>
         {formatDate(event.start, {

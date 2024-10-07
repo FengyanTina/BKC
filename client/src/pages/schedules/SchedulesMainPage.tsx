@@ -7,6 +7,7 @@ import EventSchedule from "../../components/pageSections/scheduleManagement/Date
 import Calendar from "../../components/pageSections/scheduleManagement/Calendar";
 import MyCalendar from "./MyCalendar";
 import EventCalendar from "./EventCalendar";
+import SectionLine from "../../components/pageSections/SectionLine";
 
 export default function SchedulesMainPage() {
   return (
@@ -22,10 +23,10 @@ export default function SchedulesMainPage() {
           alignItems: "center",
         }}
       >
-        <Box sx={{ width: "80%" }}>
+        <Box sx={{ width: "80%",marginBottom:"30px" }}>
           <Carousel events={comingEvents} />
         </Box>
-
+        <SectionLine text="Event calandar" />
         <Box
           sx={{
             marginTop: "50px",
@@ -41,6 +42,7 @@ export default function SchedulesMainPage() {
           {/* <EventsCalendar /> */}
           <EventCalendar />
         </Box>
+        <SectionLine text="Comming Week serving Schedule" />
 
         <Box sx={{ marginTop: "50px", marginBottom: "50px", width: "90%" }}>
           <Typography
