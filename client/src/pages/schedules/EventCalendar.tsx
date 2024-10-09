@@ -25,6 +25,8 @@ import {
 } from "@mui/material";
 import EventAddAndEditForm from "./EventAddAndEditForm";
 import "./schedule.css"
+import { AuthContext, AuthContextType } from "../../context/AuthContext";
+import { User, UserCategory } from "../../modals/User";
 
 // Custom event interface
 interface CustomEvent {
@@ -56,6 +58,7 @@ const saveEventsToLocalStorage = (events: CustomEvent[]) => {
 };
 
 export default class EventsCalendar extends React.Component<{}, DemoAppState> {
+    static contextType = AuthContext;
   state: DemoAppState = {
     weekendsVisible: true,
     currentEvents: getStoredEvents(), // Load from localStorage
@@ -311,6 +314,17 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   }
 
   renderSidebar() {
+    const { user } = this.context as AuthContextType;
+  // Check if action buttons exist
+    const isAdmin = user?.role === UserCategory.Admin;
+
+    // Set sizes based on whether the user is an admin
+    const dateColumnSize = isAdmin ? 2 : 3;
+    const timeColumnSize = isAdmin ? 2 : 3;
+    const titleColumnSize = isAdmin ? 6 : 4;
+    const actionColumnSize = isAdmin ? 2: 0;
+    // Set sizes based on whether action buttons are available
+ 
     return (
       <div className="demo-app-sidebar">
         <div className="demo-app-sidebar-section">
@@ -326,23 +340,35 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
           <Paper elevation={1} style={{ marginBottom: "30px" }}>
             <Grid container spacing={0} style={{ padding: "10px" , }}>
               {/* Header Row */}
-              <Grid size={2}>
+              <Grid size={dateColumnSize}>
                 <strong>Date</strong>
               </Grid>
-              <Grid size={2}>
+              <Grid size={timeColumnSize}>
                 <strong>Time</strong>
               </Grid>
-              <Grid size={6}>
+              <Grid size={ titleColumnSize}>
                 <strong>Event</strong>
               </Grid>
-              <Grid size={2}>
+              {user?.role === UserCategory.Admin && (
+              <Grid size={actionColumnSize}>
                 <strong>Action</strong>
-              </Grid>
-            </Grid>
-            {/* Event Rows */}
-            {this.state.currentEvents.map((event) =>
-              renderSidebarEvent(event, this.handleEdit, this.handleDelete)
+              </Grid> 
             )}
+            </Grid>
+            {/* Action Rows */}
+            {/* {this.state.currentEvents.map((event) =>
+              renderSidebarEvent(event, this.handleEdit, this.handleDelete)
+            )} */}
+             {this.state.currentEvents.map((event) =>
+            renderSidebarEvent(
+              event,
+            //   user?.role === UserCategory.Admin ? this.handleEdit : null,
+            //   user?.role === UserCategory.Admin ? this.handleDelete : null
+              isAdmin ? this.handleEdit : null,
+                isAdmin ? this.handleDelete : null,
+               
+            )
+          )}
           </Paper>
         </div>
       </div>
@@ -529,24 +555,35 @@ function renderEventContent(eventContent: EventContentArg) {
 }
 
 function renderSidebarEvent(
-  event: CustomEvent,
-  onEdit: (event: CustomEvent) => void,
-  onDelete: (event: CustomEvent) => void
+    event: CustomEvent,
+    onEdit: ((event: CustomEvent) => void) | null, // Accept null
+    onDelete: ((event: CustomEvent) => void) | null ,
+    
 ) {
+    
+
+    const hasActionColumn = !!(onEdit || onDelete); // Check if action buttons exist
+
+    // Set sizes based on whether action buttons are available
+    const dateColumnSize = hasActionColumn ? 2 : 3;
+    const timeColumnSize = hasActionColumn ? 2 : 3;
+    const titleColumnSize = hasActionColumn ? 6 : 4;
+    const actionColumnSize = hasActionColumn ? 2 : 0;
+    
   return (
     <Grid
       container
       key={event.id}
       style={{ padding: "10px", borderBottom: "1px solid #ddd",  }}
     >
-      <Grid size={2} style={{ textAlign: "left" }}>
+      <Grid size={dateColumnSize} style={{ textAlign: "left" }}>
         {formatDate(event.start, {
           day: "2-digit",
           month: "2-digit",
           locale: "sv-SE",
         })}
       </Grid>
-      <Grid size={2} style={{ textAlign: "left" }}>
+      <Grid size={timeColumnSize} style={{ textAlign: "left" }}>
         {formatDate(event.start, {
           hour: "2-digit",
           minute: "2-digit",
@@ -559,10 +596,12 @@ function renderSidebarEvent(
           locale: "sv-SE",
         })}
       </Grid>
-      <Grid size={6} style={{ textAlign: "left" }}>
+      <Grid size={titleColumnSize} style={{ textAlign: "left" }}>
         {event.title}
       </Grid>
-      <Grid size={2} style={{ textAlign: "left" }}>
+      
+      <Grid size={actionColumnSize} style={{ textAlign: "left" }}>
+      {/* <Grid size={2} style={{ textAlign: "left" }}>
         <Button
           onClick={() => onEdit(event)}
           variant="outlined"
@@ -577,7 +616,27 @@ function renderSidebarEvent(
         >
           Delete
         </Button>
-      </Grid>
+      </Grid> */}
+      {onEdit && (
+          <Button
+            onClick={() => onEdit(event)}
+            variant="outlined"
+            style={{ marginRight: "5px" }}
+          >
+            Edit
+          </Button>
+        )}
+        {onDelete && (
+          <Button
+            onClick={() => onDelete(event)}
+            variant="contained"
+            color="error"
+          >
+            Delete
+          </Button>
+        )}
+        </Grid>
+    
     </Grid>
   );
 }

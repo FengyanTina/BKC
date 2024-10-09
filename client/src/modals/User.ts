@@ -20,8 +20,9 @@ export interface User {
   email: string;
   phoneNumber: string;
   address: string | undefined;
-  category: UserCategory;
+  role: UserCategory;
   permissions: Permission;
+ 
 }
 // export const mockTeamLeader: User = {
 //   name: "David",

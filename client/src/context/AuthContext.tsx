@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { UserCategory } from "../modals/User";
 
-interface User {
+interface LogInUser {
   id: string;
   username: string; // Adding username
   name: string;
@@ -10,16 +10,16 @@ interface User {
   token: string;
 }
 
-interface AuthContextType {
-  user: User | null;
+export interface AuthContextType {
+  user: LogInUser | null;
   login: (id: string, username: string, name: string, role: UserCategory, token: string) => void;
   logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<LogInUser | null>(null);
 
   // Load user from localStorage on initial mount
   useEffect(() => {
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = (id: string, username: string, name: string, role: UserCategory, token: string) => {
-    const userData: User = { id, username, name, role, token };
+    const userData: LogInUser = { id, username, name, role, token };
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
   };

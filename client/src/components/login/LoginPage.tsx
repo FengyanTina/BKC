@@ -47,7 +47,7 @@ import RegisterModal from "../register/RegisterModal";
 
         if (user) {
             // Use the login function from AuthContext
-            login(user.id, user.userName, user.name, user.category, "fake_jwt_token"); // You can replace the token with a real one if needed
+            login(user.id, user.userName, user.name, user.role, "fake_jwt_token"); // You can replace the token with a real one if needed
             setError(""); // Clear any previous error message
             onClose();
         } else {

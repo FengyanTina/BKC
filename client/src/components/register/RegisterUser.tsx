@@ -30,7 +30,7 @@ const RegisterPage: React.FC = () => {
           email,
           phoneNumber,
           address: address || undefined,
-          category: UserCategory.Admin, // Automatically assign admin role
+          role: UserCategory.Admin, // Automatically assign admin role
           permissions: {
             canEditPages: true,
             canViewPages: true,
@@ -60,8 +60,9 @@ const RegisterPage: React.FC = () => {
           userName,
           email,
           phoneNumber,
+          
           address: address || undefined,
-          category: role as UserCategory,
+          role: role as UserCategory,
           permissions: {
             canEditPages: role === UserCategory.Admin,
             canViewPages: true,
