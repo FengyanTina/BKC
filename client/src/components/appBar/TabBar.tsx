@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import TabDrawer from "./TabDrawer";
 import {
   AppBar,
+  Button,
   CssBaseline,
   IconButton,
   Toolbar,
@@ -15,9 +16,24 @@ import HuvudloggaBKC3 from "../../assets/Huvudlogga-BKC3.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./appBar.css";
+import { useState } from "react";
+import LoginModal from "../login/LoginModal";
+import { useAuth } from "../../context/AuthContext";
 
 export default function TabBar() {
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const { user, logout } = useAuth();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const handleLoginOpen = () => {
+    setIsLoginOpen(true);
+  };
+
+  const handleLoginClose = () => {
+    setIsLoginOpen(false);
+  };
+
   const handleDrawerToggle = () => {
     setDrawerOpen((prevOpen) => !prevOpen);
   };
@@ -28,6 +44,12 @@ export default function TabBar() {
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     navigate(newValue); // Navigate to the new route
   };
+
+  const handleLogout = () => {
+    logout(); // Call the logout function from AuthContext to clear the user state
+    alert("You have logged out successfully."); // Show a success message
+    // Optionally, you can redirect or perform other actions here
+};
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -140,20 +162,31 @@ export default function TabBar() {
                   fontWeight: 800,
                 }}
               />
-              <Tab
-                value="/logIn"
-                label="Log In"
-                sx={{
-                  fontSize: "1.2rem",
-                  color: "white",
-                  fontWeight: 800,
-                }}
-              />
+              {user ? (
+                <>
+                  <Typography variant="body1" sx={{ marginRight: 2 }}>
+                    Hello, {user.name} {/* Safe access to user.name */}
+                  </Typography>
+                  <Button color="inherit" onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Tab
+                  label="Log In"
+                  onClick={handleLoginOpen}
+                  sx={{
+                    fontSize: "1.2rem",
+                    color: "white",
+                    fontWeight: 800,
+                  }}
+                />
+              )}
             </Tabs>
           </Box>
         </Toolbar>
       </AppBar>
-
+      <LoginModal open={isLoginOpen} handleClose={handleLoginClose} />
       <nav>
         <TabDrawer open={drawerOpen} onClose={handleDrawerToggle} />
       </nav>
