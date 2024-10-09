@@ -7,6 +7,11 @@ import {
   AppBar,
   Button,
   CssBaseline,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   IconButton,
   Toolbar,
   Typography,
@@ -23,6 +28,7 @@ import { useAuth } from "../../context/AuthContext";
 export default function TabBar() {
   const { user, logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [logOutFormOpen, setlogOutFormOpen] = useState(false);
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
@@ -47,9 +53,12 @@ export default function TabBar() {
 
   const handleLogout = () => {
     logout(); // Call the logout function from AuthContext to clear the user state
-    alert("You have logged out successfully."); // Show a success message
-    // Optionally, you can redirect or perform other actions here
-};
+    setlogOutFormOpen(true);
+    
+  };
+  const handleClose = () => {
+    setlogOutFormOpen(false); // Close the dialog
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -60,7 +69,6 @@ export default function TabBar() {
           //backgroundColor: "transparent", // Make the background transparent
           //backgroundColor: "rgba(255, 255, 255, 0.1)", // Slight white tint with transparency
           backgroundColor: "rgba(0, 0, 0, 0.3)",
-
           backdropFilter: "blur(10px)",
           boxShadow: "none",
           position: "fixed", // Ensure it stays at the top
@@ -162,15 +170,46 @@ export default function TabBar() {
                   fontWeight: 800,
                 }}
               />
+
               {user ? (
-                <>
-                  <Typography variant="body1" sx={{ marginRight: 2 }}>
-                    Hello, {user.name} {/* Safe access to user.name */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    marginLeft: "auto",
+                    fontWeight: 800,
+                    ml: 3,
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "#9c27b0",
+                      fontWeight: 800,
+                      fontSize: "1.5rem",
+                    }}
+                  >
+                    {user.name} {/* Safe access to user.name */}
                   </Typography>
-                  <Button color="inherit" onClick={handleLogout}>
+                  <Typography
+                    variant="h5"
+                    sx={{ color: "#9c27b0", fontWeight: 800,marginLeft:'5px' }}
+                  >
+                    /
+                  </Typography>
+                  <Button
+                    color="inherit"
+                    onClick={handleLogout}
+                    sx={{
+                      color: "#9c27b0",
+                      fontWeight: 800,
+                      fontSize: "1.2rem",
+                    }}
+                  >
                     Logout
                   </Button>
-                </>
+                </Box>
               ) : (
                 <Tab
                   label="Log In"
@@ -190,6 +229,21 @@ export default function TabBar() {
       <nav>
         <TabDrawer open={drawerOpen} onClose={handleDrawerToggle} />
       </nav>
+      {/* Modal for confirm delte */}
+      <Dialog open={logOutFormOpen} onClose={handleClose}>
+        <DialogTitle>Logout Successful</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            You have logged out successfully.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+     
     </Box>
   );
 }
