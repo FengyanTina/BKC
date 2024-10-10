@@ -32,30 +32,57 @@ import RegisterModal from "../register/RegisterModal";
     const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false); // State to control modal visibility
     const { login } = useAuth();
     // Handle form submission
+    const handleLogin = (userName: string, enteredPassword: string) => {
+        const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+      
+        // Find the user by username
+        const user = storedUsers.find((user: User) => user.userName === userName);
+      
+        if (!user) {
+          alert("User not found");
+          return;
+        }
+      
+        // Compare the entered password with the stored password
+        const passwordMatch = user.password === enteredPassword;
+      
+        if (passwordMatch) {
+          const fakeToken = "fake_jwt_token"; // Simulate a token (replace with real token in a real app)
+          login(user, fakeToken); // Call the login function from AuthContext with user and token
+          alert("Login successful");
+        } else {
+          alert("Incorrect password");
+        }
+      };
+
+    
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+    
         if (!username || !password) {
-            setError("All fields are required");
-            return;
+          setError("All fields are required");
+          return;
         }
-
-        const storedUsers: User[] = JSON.parse(localStorage.getItem("users") || "[]");
+         
+        const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
         const user = storedUsers.find(
-            (user) => user.userName === username && user.password === password
+          (user: any) => user.userName === username && user.password === password
         );
-
+    
         if (user) {
-            // Use the login function from AuthContext
-            login(user.id, user.userName, user.name, user.role, "fake_jwt_token"); // You can replace the token with a real one if needed
-            setError(""); // Clear any previous error message
-            onClose();
+          const token = "fake_jwt_token"; // Generate or mock a token here
+          login(user, token); // Use the login function from AuthContext
+          setError(""); // Clear any previous error message
+          onClose();
         } else {
-            setError("Login failed. Please check your credentials.");
+          setError("Login failed. Please check your credentials.");
+          return;
         }
 
+      };
+    
+    
 
-    };
     const handleRegisterOpen = () => {
       setIsRegisterOpen(true);
     };
@@ -132,35 +159,4 @@ import RegisterModal from "../register/RegisterModal";
   };
   
   export default LoginPage;
-  async function fakeLoginApi(username: string, password: string): Promise<LoginResponse> {
-    console.log("Logging in user:", { username, password });
-  
-    // Simulating a successful login with mock user data
-    if (username === "John" && password === "12345") {
-      return {
-        success: true,
-        data: {
-          id: "1", // Mock ID
-          name: "John Doe", // Mock name
-          username: "John", // Mock username
-          role: UserCategory.Admin, // Mock user role
-          token: "fake_jwt_token", // Mock token
-        },
-      };
-    } else {
-      return { success: false };
-    }
-  }
-  
  
-  
-  interface LoginResponse {
-    success: boolean;
-    data?: {
-        id:string;
-      name: string;
-      username: string;
-      token: string; // This will be returned on successful login
-      role:  UserCategory;
-    };
-  }

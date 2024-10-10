@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Container, Paper, TextField, Button, Typography, Avatar, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { User, UserCategory } from '../../modals/User';
-let idGuid = 0; // Initialize ID counter
-const createId = () => String(idGuid++); 
+const createId = () => {
+    return Math.random().toString(36).substr(2, 9); // Generates a random alphanumeric string
+  };
+  
 interface RegisterPageProps {
     handleClose: () => void; // Add handleClose prop
   }
@@ -20,37 +22,37 @@ const RegisterPage: React.FC = () => {
     const handleRegister = async () => {
       const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
   
-      // Create the first admin user
-      if (storedUsers.length === 0) {
-        const adminUser: User = {
-          id: createId(), // Generate a unique ID for the admin user
-          name,
-          password,
-          userName,
-          email,
-          phoneNumber,
-          address: address || undefined,
-          role: UserCategory.Admin, // Automatically assign admin role
-          permissions: {
-            canEditPages: true,
-            canViewPages: true,
-            canEditSchedules: true,
-            canViewSchedules: true,
-          },
-        };
+    //   // Create the first admin user
+    //   if (storedUsers.length === 0) {
+    //     const adminUser: User = {
+    //       id: createId(), // Generate a unique ID for the admin user
+    //       name,
+    //       password,
+    //       userName,
+    //       email,
+    //       phoneNumber,
+    //       address: address || undefined,
+    //       role: UserCategory.Admin, // Automatically assign admin role
+    //       permissions: {
+    //         canEditPages: true,
+    //         canViewPages: true,
+    //         canEditSchedules: true,
+    //         canViewSchedules: true,
+    //       },
+    //     };
   
-        storedUsers.push(adminUser);
-        localStorage.setItem("users", JSON.stringify(storedUsers));
+    //     storedUsers.push(adminUser);
+    //     localStorage.setItem("users", JSON.stringify(storedUsers));
   
-        alert("Admin user registered successfully.");
-      } else {
-        // Only allow admin to register other users
-        // Check if currentUser is available; otherwise, remove this check or pass currentUser as prop
-        const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
-        if (currentUser?.category !== UserCategory.Admin) {
-          alert("Only admins can register new users.");
-          return;
-        }
+    //     alert("Admin user registered successfully.");
+    //   } else {
+    //     // Only allow admin to register other users
+    //     // Check if currentUser is available; otherwise, remove this check or pass currentUser as prop
+    //     const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+    //     if (currentUser?.category !== UserCategory.Admin) {
+    //       alert("Only admins can register new users.");
+    //       return;
+    //     }
   
         // Create new user data
         const newUser: User = {
@@ -62,7 +64,7 @@ const RegisterPage: React.FC = () => {
           phoneNumber,
           
           address: address || undefined,
-          role: role as UserCategory,
+          category: role as UserCategory,
           permissions: {
             canEditPages: role === UserCategory.Admin,
             canViewPages: true,
@@ -75,7 +77,7 @@ const RegisterPage: React.FC = () => {
         localStorage.setItem("users", JSON.stringify(storedUsers));
   
         alert("User registered successfully.");
-      }
+    //   }
   
      // Close modal on successful registration
     };

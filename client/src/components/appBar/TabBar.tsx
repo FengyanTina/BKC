@@ -24,13 +24,22 @@ import "./appBar.css";
 import { useState } from "react";
 import LoginModal from "../login/LoginModal";
 import { useAuth } from "../../context/AuthContext";
+import RegisterModal from "../register/RegisterModal";
 
 export default function TabBar() {
   const { user, logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [logOutFormOpen, setlogOutFormOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false); 
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const handleRegisterOpen = () => {
+    setIsRegisterOpen(true);
+  };
+
+  const handleRegisterClose = () => {
+    setIsRegisterOpen(false);
+  };
 
   const handleLoginOpen = () => {
     setIsLoginOpen(true);
@@ -221,10 +230,13 @@ export default function TabBar() {
                   }}
                 />
               )}
+             
             </Tabs>
+            
           </Box>
         </Toolbar>
       </AppBar>
+      <RegisterModal open={isRegisterOpen} handleClose={handleRegisterClose} />
       <LoginModal open={isLoginOpen} handleClose={handleLoginClose} />
       <nav>
         <TabDrawer open={drawerOpen} onClose={handleDrawerToggle} />

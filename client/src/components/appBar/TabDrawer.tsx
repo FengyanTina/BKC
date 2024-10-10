@@ -16,7 +16,7 @@ interface TabDrawerProps {
   }
 export default function TabDrawer({ open, onClose }: TabDrawerProps) {
 
-const navItems = ['Schedule', 'Services', 'Activities'];
+const navItems = ['Schedule', 'Services', 'Activities','Login','Register'];
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={onClose}>
            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2 }}>

@@ -26,7 +26,7 @@ import {
 import EventAddAndEditForm from "./EventAddAndEditForm";
 import "./schedule.css"
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
-import { User, UserCategory } from "../../modals/User";
+import {  UserCategory } from "../../modals/User";
 
 // Custom event interface
 interface CustomEvent {
@@ -58,7 +58,8 @@ const saveEventsToLocalStorage = (events: CustomEvent[]) => {
 };
 
 export default class EventsCalendar extends React.Component<{}, DemoAppState> {
-    static contextType = AuthContext;
+    static contextType = AuthContext; // Set context type
+    declare context: AuthContextType;
   state: DemoAppState = {
     weekendsVisible: true,
     currentEvents: getStoredEvents(), // Load from localStorage
@@ -314,10 +315,10 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   }
 
   renderSidebar() {
-    const { user } = this.context as AuthContextType;
+    const { user } = this.context; 
   // Check if action buttons exist
-    const isAdmin = user?.role === UserCategory.Admin;
-
+    const isAdmin = user?.category === UserCategory.Admin;
+console.log("logedin user",user)
     // Set sizes based on whether the user is an admin
     const dateColumnSize = isAdmin ? 2 : 3;
     const timeColumnSize = isAdmin ? 2 : 3;
@@ -349,7 +350,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
               <Grid size={ titleColumnSize}>
                 <strong>Event</strong>
               </Grid>
-              {user?.role === UserCategory.Admin && (
+              {user?.category === UserCategory.Admin && (
               <Grid size={actionColumnSize}>
                 <strong>Action</strong>
               </Grid> 
@@ -362,10 +363,10 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
              {this.state.currentEvents.map((event) =>
             renderSidebarEvent(
               event,
-            //   user?.role === UserCategory.Admin ? this.handleEdit : null,
-            //   user?.role === UserCategory.Admin ? this.handleDelete : null
-              isAdmin ? this.handleEdit : null,
-                isAdmin ? this.handleDelete : null,
+               user?.category === UserCategory.Admin ? this.handleEdit : null,
+               user?.category === UserCategory.Admin ? this.handleDelete : null
+            //   isAdmin ? this.handleEdit : null,
+            //     isAdmin ? this.handleDelete : null,
                
             )
           )}
