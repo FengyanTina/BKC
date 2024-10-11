@@ -13,6 +13,7 @@ type Props = {
   image: string | string[];
 };
 
+
 const ImgInforCard = ({ title, category, subTitle, content, image }: Props) => {
   return (
     <Box
@@ -21,7 +22,6 @@ const ImgInforCard = ({ title, category, subTitle, content, image }: Props) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-
         padding: "20px",
         backgroundColor: "#f0f4f8",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",

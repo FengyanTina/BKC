@@ -11,7 +11,7 @@ import ContactMainPage from "./pages/contact/ContactMainPage.tsx";
 import NewsMainPage from "./pages/news/NewsMainPage.tsx";
 import LogInPage from "./pages/LogIn/LogInPage.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
-import UserMangementPage from "./pages/members/UserMangementPage.tsx";
+import AboutUsPage from "./pages/aboutUs/AboutUsPage.tsx";
 
 
 const router = createBrowserRouter(
@@ -27,7 +27,7 @@ const router = createBrowserRouter(
       { path: "activities", element: <ActivitiesMainPage /> },
       { path: "news", element: <NewsMainPage /> },
       { path: "contact", element: <ContactMainPage /> },
-      { path: "members", element: <UserMangementPage /> },
+      { path: "aboutUs", element: <AboutUsPage /> },
     ],
   },
 ]);

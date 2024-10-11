@@ -144,6 +144,15 @@ export default function TabBar() {
                 }}
               />
               <Tab
+                value="/aboutUs"
+                label="About us"
+                sx={{
+                  fontSize: "1.2rem",
+                  color: "white",
+                  fontWeight: 800,
+                }}
+              />
+              <Tab
                 value="/schedules"
                 label="Schedules"
                 sx={{
