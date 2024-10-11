@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { User } from "../../modals/User";
-import { Box, Link, Paper, styled, Typography } from "@mui/material";
+import { Box, Button, Link, Modal, Paper, styled, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import IntroCard from "../../components/common/cards/IntroCard";
 import ImgInforCard from "../../components/pageSections/cards/InforCardImgSections/ImgInforCard";
@@ -9,16 +9,16 @@ import SectionLine from "../../components/pageSections/SectionLine";
 
 type Props = {};
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles("dark", {
-    backgroundColor: "#1A2027",
-  }),
-}));
+const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+};
 const AboutUsPage = (props: Props) => {
   const deleteUser = (userName: string) => {
     let storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
@@ -100,17 +100,20 @@ const AboutUsPage = (props: Props) => {
               marginTop: "20px",
               flexGrow: 1, // This makes the content expand to fill the available space
               display: '-webkit-box',
-              overflow: 'auto',
+              overflow: 'hidden',
               WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 7, // Limit to 7 lines
-              mb: 1,
+              WebkitLineClamp: 12, // Limit to 7 lines
+              position: 'relative',
             }}
           >
-             {Pastor.content.split('\n').map((paragraph, index) => (
-            <Box sx={{ display: 'block', mb: 2 }} key={index} mb={2}> {/* Adding margin bottom for spacing between paragraphs */}
-                {paragraph}
-            </Box>
-        ))}
+                {/* Directly using Box to prevent wrapping issues with Typography */}
+                {Pastor.content.split('\n').map((paragraph, index) => (
+                    <Box key={index} sx={{ display: 'block', mb: 2 }}>
+                        <Typography variant="body1">{paragraph}</Typography>
+                    </Box>
+                ))}
+               
+                
           </Box>
           <Box sx={{ marginTop: "20px" }}>
             <Typography variant="body1">
@@ -136,7 +139,8 @@ const AboutUsPage = (props: Props) => {
           </Box>
           <Box sx={{ marginTop: "20px" }}>
             <Link
-              href="https://your-blog-link.com"
+              onClick={handleOpen} 
+              sx={{ cursor: 'pointer', marginTop: 1 }}
               target="_blank"
               rel="noopener"
               underline="hover"
@@ -145,7 +149,33 @@ const AboutUsPage = (props: Props) => {
             </Link>
           </Box>
         </Grid>
+        <Modal
+                open={modalOpen}
+                onClose={handleClose}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+            >
+                <Box sx={modalStyle}>
+                    <Typography id="modal-title" variant="h4" >
+                        {Pastor.title}
+                    </Typography>
+                    <Typography variant="h5">
+                        {Pastor.subTitle}
+                        </Typography>
 
+                    <Box sx={{ mt: 2 }}>
+                        {/* Displaying full content in modal */}
+                        {Pastor.content.split('\n').map((paragraph, index) => (
+                            <Box key={index} sx={{ display: 'block', mb: 2 }}>
+                                {paragraph}
+                            </Box>
+                        ))}
+                    </Box>
+                    <Button onClick={handleClose} sx={{ mt: 2 }} variant="contained">
+                        Close
+                    </Button>
+                </Box>
+            </Modal>
         {/* <ImgInforCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image}/> */}
       </Grid>
       <SectionLine text="Leadership" />
@@ -160,10 +190,11 @@ const AboutUsPage = (props: Props) => {
           gap: "50px",
         }}
       >
-        <IntroCard />
-        <IntroCard />
-        <IntroCard />
+        <IntroCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image} onOpen={handleOpen}/>
+        <IntroCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image} onOpen={handleOpen}/>
+        <IntroCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image} onOpen={handleOpen}/>
       </Box>
+      <SectionLine text="Our History"/>
       <Box
         sx={{
           marginTop: "50px",
@@ -173,7 +204,8 @@ const AboutUsPage = (props: Props) => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h5">MemberMangement</Typography>
+        <SectionLine text="Membership Mangement"/>
+        
       </Box>
     </Box>
   );

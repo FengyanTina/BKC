@@ -8,24 +8,36 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import DavidB from "../../../assets/DavidB.jpg";
 import Leader from "../../../assets/leader.jpg";
-
-export default function IntroCard() {
+interface IntroCardProps{
+title:string;
+subTitle:string;
+content:string;
+image:string;
+onOpen: () => void;
+}
+export default function IntroCard({title,subTitle,content,image,onOpen}:IntroCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia component="img" height="240" image={Leader} alt="" />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-          Carter & Teresa Conlon
+          <Typography gutterBottom variant="h4" component="div">
+          {title}
           </Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Carter Conlon is General Overseer of Times Square Church, Inc. He
-            joined the pastoral staff as associate pastor in 1994 and 
+          <Typography gutterBottom variant="h5" component="div">
+          {subTitle}
+          </Typography>
+          <Typography variant="h6" sx={{ color: "text.secondary", display: '-webkit-box',
+              overflow: 'hidden',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 3, // Limit to 7 lines
+              position: 'relative', }}>
+           {content}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={onOpen}>
           Read More
         </Button>
       </CardActions>
