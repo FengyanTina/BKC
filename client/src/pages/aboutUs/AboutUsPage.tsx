@@ -102,7 +102,7 @@ const AboutUsPage = (props: Props) => {
               display: '-webkit-box',
               overflow: 'hidden',
               WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 12, // Limit to 7 lines
+              WebkitLineClamp: 11, // Limit to 7 lines
               position: 'relative',
             }}
           >
