@@ -6,6 +6,7 @@ import IntroCard from "../../components/common/cards/IntroCard";
 import ImgInforCard from "../../components/pageSections/cards/InforCardImgSections/ImgInforCard";
 import { Pastor } from "../../data";
 import SectionLine from "../../components/pageSections/SectionLine";
+import UserTable from "../../components/common/Tables/userTable";
 
 type Props = {};
 
@@ -205,7 +206,10 @@ const AboutUsPage = (props: Props) => {
         }}
       >
         <SectionLine text="Membership Mangement"/>
-        
+        <Box sx={{with:'60%'}}>
+
+        </Box>
+        <UserTable/>
       </Box>
     </Box>
   );
