@@ -9,7 +9,6 @@ interface ImageGalleryProps {
   title?: string;
   featured?: boolean;
   author?: string;
-  imgStyle?: React.CSSProperties; 
 }
 interface ImageGalleryComponentProps {
   itemData: ImageGalleryProps[]; // Array of imageGalleryProps
@@ -51,7 +50,6 @@ export default function ImageGallary({ itemData }: ImageGalleryComponentProps) {
               {...srcset(item.img, 250, 200, rows, cols)}
               alt={item.title}
               loading="lazy"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }} 
             />
             <ImageListItemBar
               sx={{
