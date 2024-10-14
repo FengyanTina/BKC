@@ -10,6 +10,8 @@ import Bible from "./assets/Bible.jpg";
 import Varhistoria from "./assets/Varhistoria.jpg"
 import DavidB from "./assets/DavidB.jpg"
 import welcome2 from "./assets/welcome2.jpg"
+import { ActivityCategory } from "./modals/Activity";
+import { PageSection } from "./modals/PageSection";
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -19,50 +21,9 @@ export interface Video {
     publishedAt: string;
   };
 }
-export interface Schedule{
-    id:string;
-    event:Event | Event[];
-    startDate:Date;
-    endDate:Date;
-}
-interface Event {
-    id:string;
-    title:string;
-    subtitle?:string;
-    category?:string;
-    description?: string;
-    extraDetail?: string;//only member can see
-   // scheduleList:Schedule | Schedule[]    // Many to many relationship with schedule
-  }
-interface PageSection {
-  title: string;
-  subTitle?: string;
-  category?:string;
-  description: string;
-  image: string | string[]; // Accept either a single string or an array of strings for images
-  date?: Date;
-  linkSubtitle?: string;
-  location?: string;
-}
-// interface InforCardProps {
-//     category?: string;
-//     title: string;
-//     subtitle: string;
-//     content: string;
-//     buttonText?: string;
-//     time?: Date;
-//   }
-//   interface InforCardImgSectionProps {
-//     category?: string;
-//     title: string;
-//     subtitle: string;
-//     content: string;
-//     buttonText?: string;
-//     time?: Date;
-//     image:string | string[];
-//   }
 
-  export const sundayServiceCardInfor:Service={
+
+  export const sundayServiceCardInfor:PageSection={
     id: "1",
     title: "For Congregation",
     subTitle:"välkommen till vår kyrka nu på söndag!",
@@ -71,7 +32,7 @@ interface PageSection {
     description:"Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!",
     image: Worship ,
   }
-  export const sundaySchoolActivityCardInfor:Service={
+  export const sundaySchoolActivityCardInfor:PageSection={
     id: "1",
     title: "For Small Kids",
     subTitle:"BKC-KIDS",
@@ -81,21 +42,21 @@ interface PageSection {
     image: edward ,
   }
  
-  export const youthActivityCardInfor:Service={
+  export const youthActivityCardInfor:PageSection={
     id: "1",
     title: "For Young Adult",
     subTitle:"Bkc Ungdom",
     time:new Date(2024, 9, 22, 14, 30),
-    category: "Youth Group",
+    category: ActivityCategory.YouthService,
     description:"Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!",
     image: worshipHands ,
   }
-  export const homeGroupActivityCardInfor:Service={
+  export const homeGroupActivityCardInfor:PageSection={
     id: "1",
     title: "Your Small Community",
     subTitle:"Together,Stronger!",
     time:new Date(2024, 9, 22, 14, 30),
-    category: "Home Group",
+    category: ActivityCategory.HomeGroup,
     description:"Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn.",
     image:Varhistoria ,
   }
@@ -146,7 +107,7 @@ export const imageGallarytemData = [
   ];
   
   
-  export const socialMediaActivityCardInfor={
+  export const socialMediaActivityCardInfor:PageSection={
     id: "1",
     title: "All activities on Social media",
     subTitle:"Together,Stronger!",
@@ -163,20 +124,12 @@ export const imageGallarytemData = [
     image: DavidB   
     }
 
-export interface Service {
-  id: string;
-  title: string;
-  subTitle?: string;
-  time?: Date;
-  category: string;
-  description: string;
-  image: string | string[];
-}
-export interface Category {
+
+export interface Position {
   name: string;
   startTime: string; // ISO format string
   endTime: string; // ISO format string
-  jobs: Job[];
+  jobs: Job[]|Job;
 }
 export interface Job {
   name: string;
@@ -184,63 +137,56 @@ export interface Job {
   totalNumberNeeded: number;
 }
 
-
-
-export interface ServiceSchedule {
+export interface ServingPosition {
   startTime: string;
   endTime: string;
-  event: Event;
+  activityCategory: ActivityCategory;
   team: string;
   memberNeeded?: number;
   scheduleStatus: "open" | "closed"; // Union for specific values
-  category: Category[]; // Array of categories, each with its own jobs
+  position: Position[]; // Array of categories, each with its own jobs
 }
-interface NewHereSectionGridProps {
-    title: string;
-    subTitle?:string;
-    content: string;
-    image: string;
-    links?: string[];
-  }
 
-  export const newHere:NewHereSectionGridProps ={
+
+  export const newHere:PageSection ={
+    id:'23',
     title:"New Here? ",
     subTitle:"can't wait to meet you!",
-    content:"You may find information you need in below links or feel free to contact us. ",
+    description:"You may find information you need in below links or feel free to contact us. ",
     image:welcome2,
     links:["What Expected In Church","For your Family","Find Your Small Community","Connet to Your Purpose "]
   }
-export const events = [
-  {
-    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
-    title: "Art Exhibition",
-    image: PrayerBible,
-    description:
-      "An exhibition featuring contemporary art pieces from local artists.",
-  },
-  {
-    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-    title: "Tech Conference",
-    image: edward,
-    description:
-      "Join the biggest technology conference of the year with keynote speakers.",
-  },
-  {
-    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
-    title: "Charity Run",
-    image: Worship,
-    description:
-      "Participate in the annual charity run to support a good cause.",
-  },
-  {
-    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
-    title: "Food Festival",
-    image: BethelWorship,
-    description:
-      "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
-  },
-];
-export const comingEvents = [
+// export const events = [
+//   {
+//     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+//     title: "Art Exhibition",
+//     image: PrayerBible,
+//     description:
+//       "An exhibition featuring contemporary art pieces from local artists.",
+//   },
+//   {
+//     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+//     title: "Tech Conference",
+//     image: edward,
+//     description:
+//       "Join the biggest technology conference of the year with keynote speakers.",
+//   },
+//   {
+//     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+//     title: "Charity Run",
+//     image: Worship,
+//     description:
+//       "Participate in the annual charity run to support a good cause.",
+//   },
+//   {
+//     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+//     title: "Food Festival",
+//     image: BethelWorship,
+//     description:
+//       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
+//   },
+// ];
+export const comingEvents:PageSection[] = [
   {
     id: "1",
     title: "Sunday Worship",
@@ -271,7 +217,7 @@ export const comingEvents = [
   },
 ];
 
-export const news = [
+export const news:PageSection[] = [
   {
     id: "1",
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
@@ -305,21 +251,21 @@ export const news = [
       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
   },
 ];
-export const topics = [
-  { title: " Youtube Video 1", url: "/react-hooks", backgroundImage: Prayer },
-  { title: " Youtube Video 2", url: "/js-es6", backgroundImage: Worship },
-  {
-    title: " Youtube Video 3",
-    url: "/css-grid-flexbox",
-    backgroundImage: Bible,
-  },
-  { title: " Youtube Video 4", url: "/redux", backgroundImage: Mission },
-  {
-    title: " Youtube Video 5",
-    url: "/typescript-react",
-    backgroundImage: Conference,
-  },
-];
+// export const topics = [
+//   { title: " Youtube Video 1", url: "/react-hooks", backgroundImage: Prayer },
+//   { title: " Youtube Video 2", url: "/js-es6", backgroundImage: Worship },
+//   {
+//     title: " Youtube Video 3",
+//     url: "/css-grid-flexbox",
+//     backgroundImage: Bible,
+//   },
+//   { title: " Youtube Video 4", url: "/redux", backgroundImage: Mission },
+//   {
+//     title: " Youtube Video 5",
+//     url: "/typescript-react",
+//     backgroundImage: Conference,
+//   },
+// ];
 
 // interface Step {
 //     title: string;
@@ -345,55 +291,56 @@ export const topics = [
     steps: steps,
     image: Mission,
   };
-export const sundayService: Service = {
+export const sundayServiceSection: PageSection = {
   id: "1",
   time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
   title: "Welcom to our Sunday Service! ",
   subTitle: "  Come as you are !",
-  category: "service",
+  category: ActivityCategory.SundayService,
   image: Conference,
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
 };
-export const prayerService: PageSection = {
+export const prayerService:PageSection = {
+    id:'12',
   title: "We want to pray for you!",
   linkSubtitle: "send in your prayer requiest any time",
   image: Prayer,
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
 };
-export const services = [
-  {
-    id: "1",
-    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
-    title: "Reaching out ",
-    image: PrayerBible,
-    description:
-      "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
-  },
-  {
-    id: "2",
-    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-    title: "Easter camp",
-    image: edward,
-    description:
-      "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
-  },
-  {
-    id: "3",
-    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
-    title: "Charity Run",
-    image: Worship,
-    description:
-      "Participate in the annual charity run to support a good cause.",
-  },
-  {
-    id: "4",
-    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
-    title: "Food Festival",
-    image: BethelWorship,
-    description:
-      "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
-  },
-];
+// export const services = [
+//   {
+//     id: "1",
+//     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+//     title: "Reaching out ",
+//     image: PrayerBible,
+//     description:
+//       "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
+//   },
+//   {
+//     id: "2",
+//     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+//     title: "Easter camp",
+//     image: edward,
+//     description:
+//       "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
+//   },
+//   {
+//     id: "3",
+//     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+//     title: "Charity Run",
+//     image: Worship,
+//     description:
+//       "Participate in the annual charity run to support a good cause.",
+//   },
+//   {
+//     id: "4",
+//     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+//     title: "Food Festival",
+//     image: BethelWorship,
+//     description:
+//       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
+//   },
+// ];
 

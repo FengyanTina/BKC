@@ -12,7 +12,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Button } from "@mui/material";
 import formatDateTime from "../../../utils/FormatDateTime.tsx";
-import { ServiceSchedule } from "../../../data.ts";
+import { ServingPosition } from "../../../data.ts";
 const getDisplayDateTime = (startTime: string, endTime: string) => {
   const startDate = new Date(startTime);
   const endDate = new Date(endTime);
@@ -35,7 +35,7 @@ const getDisplayDateTime = (startTime: string, endTime: string) => {
   return { displayDayAndMonth, displayTime };
 };
 
-export function Row({ row }: { row: ServiceSchedule }) {
+export function Row({ row }: { row: ServingPosition }) {
   const [open, setOpen] = React.useState(false);
   const categoryColors = [
     "#f5f5f5",

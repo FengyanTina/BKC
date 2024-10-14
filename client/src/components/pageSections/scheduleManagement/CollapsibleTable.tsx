@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { ServiceSchedule } from "../../../data.ts";
+import { ServingPosition } from "../../../data.ts";
 import { Row } from "./TableRow.tsx";
 
 export default function CollapsibleTable() {
@@ -33,7 +33,7 @@ export default function CollapsibleTable() {
 //     return { displayDayAndMonth, displayTime };
 //   };
 
-  const rows: ServiceSchedule[] = [
+  const rows: ServingPosition[] = [
     {
       startTime: "2023-10-01T10:00:00", // Start time in ISO format
       endTime: "2023-10-01T12:00:00",

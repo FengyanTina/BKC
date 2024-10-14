@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid2";
 import worshipHands from "../../assets/worshipHands.jpg";
 import Map from "../../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { prayerService, baptismService, sundayService } from "../../data.ts";
+import { prayerService, baptismService, sundayServiceSection } from "../../data.ts";
 // import LiveService from "../../apis/youtube/LiveService.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImgTextCard from "../../components/pageSections/cards/texAndImgCards/ImgTextCard.tsx";
@@ -101,10 +101,10 @@ export default function ServicesMainPage() {
       <SectionLine text="Sunday Scervice" />
 
       <ImgTextCard
-        title={sundayService.title}
-        subTitle={sundayService.subTitle}
-        description={sundayService.description}
-        image={sundayService.image}
+        title={sundayServiceSection.title}
+        subTitle={sundayServiceSection.subTitle}
+        description={sundayServiceSection.description}
+        image={sundayServiceSection.image}
       />
 
       {/* --------------PrayerService ----------- */}

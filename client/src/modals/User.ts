@@ -1,4 +1,5 @@
 export enum UserCategory {
+  Pastor = "pastor",
   Admin = "admin",
   Member = "member",
   TeamLeader = "teamLeader",
@@ -14,13 +15,13 @@ export interface Permission {
 
 export interface User {
   id: string;
-  name: string;
-  password: string;
+  firstName: string;
+  lastName:string;
+  userId: string;
   userName: string;
   email: string;
   phoneNumber: string;
-  address: string | undefined;
+  address?: string | undefined;
   category: UserCategory;
   permissions: Permission;
- 
 }

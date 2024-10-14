@@ -14,7 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Button } from "@mui/material";
 import formatDateTime from "../../../utils/FormatDateTime.tsx";
-import { ServiceSchedule } from "../../../data.ts";
+import { ServingPosition } from "../../../data.ts";
 
 const getDisplayDateTime = (startTime: string, endTime: string) => {
   const startDate = new Date(startTime);
@@ -59,7 +59,7 @@ const getDisplayDateTime = (startTime: string, endTime: string) => {
 //   };
 // }
 const loggedInUser = "David";
-function Row({ row }: { row: ServiceSchedule }) {
+function Row({ row }: { row: ServingPosition }) {
   const [open, setOpen] = React.useState(false);
   const categoryColors = [
     "#f5f5f5",
@@ -305,7 +305,7 @@ function Row({ row }: { row: ServiceSchedule }) {
 }
 
 export default function CollapsibleTable() {
-  const rows: ServiceSchedule[] = [
+  const rows: ServingPosition[] = [
     {
       startTime: "2023-10-01T10:00:00", // Start time in ISO format
       endTime: "2023-10-01T12:00:00",
