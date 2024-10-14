@@ -10,7 +10,7 @@ import Bible from "./assets/Bible.jpg";
 import Varhistoria from "./assets/Varhistoria.jpg"
 import DavidB from "./assets/DavidB.jpg"
 import welcome2 from "./assets/welcome2.jpg"
-import { ActivityCategory } from "./modals/Activity";
+import { Activity, ActivityCategory } from "./modals/Activity";
 import { PageSection } from "./modals/PageSection";
 export interface Video {
   id: { videoId: string };
@@ -156,40 +156,12 @@ export interface ServingPosition {
     image:welcome2,
     links:["What Expected In Church","For your Family","Find Your Small Community","Connet to Your Purpose "]
   }
-// export const events = [
-//   {
-//     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
-//     title: "Art Exhibition",
-//     image: PrayerBible,
-//     description:
-//       "An exhibition featuring contemporary art pieces from local artists.",
-//   },
-//   {
-//     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-//     title: "Tech Conference",
-//     image: edward,
-//     description:
-//       "Join the biggest technology conference of the year with keynote speakers.",
-//   },
-//   {
-//     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
-//     title: "Charity Run",
-//     image: Worship,
-//     description:
-//       "Participate in the annual charity run to support a good cause.",
-//   },
-//   {
-//     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
-//     title: "Food Festival",
-//     image: BethelWorship,
-//     description:
-//       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
-//   },
-// ];
-export const comingEvents:PageSection[] = [
+
+export const comingEvents:Activity[] = [
   {
     id: "1",
     title: "Sunday Worship",
+    category:ActivityCategory.Event,
     time: new Date("2024-09-22T10:00:00"),
     description: "Join us for a special Sunday worship service.",
     image: worshipHands, // Use actual image URL
@@ -197,6 +169,7 @@ export const comingEvents:PageSection[] = [
   {
     id: "2",
     title: "Community Outreach",
+    category:ActivityCategory.Event,
     time: new Date("2024-09-25T14:00:00"),
     description: "Participate in our community outreach program.",
     image: edward, // Use actual image URL
@@ -204,6 +177,7 @@ export const comingEvents:PageSection[] = [
   {
     id: "3",
     title: "Bible Study Group",
+    category:ActivityCategory.Event,
     time: new Date("2024-09-27T19:00:00"),
     description: "Deep dive into the scriptures with our study group.",
     image: BethelWorship, // Use actual image URL
@@ -211,18 +185,20 @@ export const comingEvents:PageSection[] = [
   {
     id: "4",
     title: "Prayer Meeting",
+    category:ActivityCategory.Event,
     time: new Date("2024-09-30T08:00:00"),
     description: "Come together for our weekly prayer meeting.",
     image: Worship, // Use actual image URL
   },
 ];
 
-export const news:PageSection[] = [
+export const news:Activity[] = [
   {
     id: "1",
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
     title: "Reaching out ",
     image: PrayerBible,
+    category:ActivityCategory.News,
     description:
       "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
   },
@@ -230,6 +206,7 @@ export const news:PageSection[] = [
     id: "2",
     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
     title: "Easter camp",
+    category:ActivityCategory.News,
     image: edward,
     description:
       "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
@@ -238,6 +215,7 @@ export const news:PageSection[] = [
     id: "3",
     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
     title: "Charity Run",
+    category:ActivityCategory.News,
     image: Worship,
     description:
       "Participate in the annual charity run to support a good cause.",
@@ -247,32 +225,12 @@ export const news:PageSection[] = [
     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
     title: "Food Festival",
     image: BethelWorship,
+    category:ActivityCategory.News,
     description:
       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
   },
 ];
-// export const topics = [
-//   { title: " Youtube Video 1", url: "/react-hooks", backgroundImage: Prayer },
-//   { title: " Youtube Video 2", url: "/js-es6", backgroundImage: Worship },
-//   {
-//     title: " Youtube Video 3",
-//     url: "/css-grid-flexbox",
-//     backgroundImage: Bible,
-//   },
-//   { title: " Youtube Video 4", url: "/redux", backgroundImage: Mission },
-//   {
-//     title: " Youtube Video 5",
-//     url: "/typescript-react",
-//     backgroundImage: Conference,
-//   },
-// ];
 
-// interface Step {
-//     title: string;
-//     description: string;
-//     link?: string; // Optional link if needed
-//   }
-  
   export const steps = [
     {
       title: "Step 1",
@@ -309,38 +267,5 @@ export const prayerService:PageSection = {
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
 };
-// export const services = [
-//   {
-//     id: "1",
-//     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
-//     title: "Reaching out ",
-//     image: PrayerBible,
-//     description:
-//       "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
-//   },
-//   {
-//     id: "2",
-//     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
-//     title: "Easter camp",
-//     image: edward,
-//     description:
-//       "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
-//   },
-//   {
-//     id: "3",
-//     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
-//     title: "Charity Run",
-//     image: Worship,
-//     description:
-//       "Participate in the annual charity run to support a good cause.",
-//   },
-//   {
-//     id: "4",
-//     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
-//     title: "Food Festival",
-//     image: BethelWorship,
-//     description:
-//       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
-//   },
-// ];
+
 

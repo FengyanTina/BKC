@@ -14,6 +14,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useRef, useState } from "react";
 import NewsDetailsModal from "../../../pages/news/NewsDetails";
 import formatDateTime from "../../../utils/FormatDateTime";
+import { Activity } from "../../../modals/Activity";
 interface EventProps {
   id: string;
   time: Date;
@@ -23,8 +24,8 @@ interface EventProps {
   details?: string;
 }
 
-function PauseOnHover({ events }: { events: EventProps[] }) {
-  const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(null);
+function PauseOnHover({ events }: { events: Activity[] }) {
+  const [selectedEvent, setSelectedEvent] = useState<Activity | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const settings = {
     dots: true,
@@ -57,7 +58,7 @@ function PauseOnHover({ events }: { events: EventProps[] }) {
       (sliderRef.current as any).slickPrev(); // Use 'any' to bypass TypeScript issues
     }
   };
-  const handleSlideClick = (event: EventProps) => {
+  const handleSlideClick = (event: Activity) => {
     setSelectedEvent(event);
     setIsModalOpen(true);
   };
@@ -76,7 +77,10 @@ function PauseOnHover({ events }: { events: EventProps[] }) {
         <div className="text-overlay">
           <h2>{event.title}</h2>
           <p>{event.description}</p>
+          {event.time && (
+
           <p>{formatDateTime(event.time)}</p>
+          )}
         </div>
       </div>
     </div>

@@ -226,8 +226,9 @@ export default function StartPage() {
         {/* --------------WELCOME NEW----------- */}
         <SectionLine text="Welcome" useWhiteStroke={true} />
         <NewHereSectionGrid
+        id={newHere.id}
           title={newHere.title}
-          content={newHere.content}
+         description={newHere.description}
           image={newHere.image}
           links={newHere.links}
           subTitle={newHere.subTitle}
@@ -237,44 +238,49 @@ export default function StartPage() {
 
       <SectionLine text=" Activities And Services" />
       <ActivitySocialMediaScetionCard
+      id={socialMediaActivityCardInfor.id}
         title={socialMediaActivityCardInfor.title}
         subTitle={socialMediaActivityCardInfor.subTitle}
-        content={socialMediaActivityCardInfor.description}
+        description={socialMediaActivityCardInfor.description}
         image={socialMediaActivityCardInfor.image}
         category={socialMediaActivityCardInfor.category}
       />
 
       {/* --------------ACTIVITIES-Sunday Service----------- */}
       <ImgInforCard
+      id={sundaySchoolActivityCardInfor.id}
         title={sundayServiceCardInfor.title}
         subTitle={sundayServiceCardInfor.subTitle}
-        content={sundayServiceCardInfor.description}
+        description={sundayServiceCardInfor.description}
         image={sundayServiceCardInfor.image}
         category={sundayServiceCardInfor.category}
       />
 
       {/* --------------ACTIVITIES-BKC Kids----------- */}
       <InforCardImg
+      id={sundaySchoolActivityCardInfor.id}
         title={sundaySchoolActivityCardInfor.title}
         subTitle={sundaySchoolActivityCardInfor.subTitle}
-        content={sundaySchoolActivityCardInfor.description}
+        description={sundaySchoolActivityCardInfor.description}
         image={sundaySchoolActivityCardInfor.image}
         category={sundaySchoolActivityCardInfor.category}
       />
       {/* --------------ACTIVITIES-Youth----------- */}
       <ImgInforCard
+      id={youthActivityCardInfor.id}
         title={youthActivityCardInfor.title}
         subTitle={youthActivityCardInfor.subTitle}
-        content={youthActivityCardInfor.description}
+        description={youthActivityCardInfor.description}
         image={youthActivityCardInfor.image}
         category={youthActivityCardInfor.category}
       />
 
       {/* --------------ACTIVITIES-Home Group----------- */}
       <InforCardImg
+      id={homeGroupActivityCardInfor.id}
         title={homeGroupActivityCardInfor.title}
         subTitle={homeGroupActivityCardInfor.subTitle}
-        content={homeGroupActivityCardInfor.description}
+        description={homeGroupActivityCardInfor.description}
         image={homeGroupActivityCardInfor.image}
         category={homeGroupActivityCardInfor.category}
       />

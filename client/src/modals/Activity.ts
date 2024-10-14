@@ -22,5 +22,6 @@ export interface Activity {
     HomeGroup='HomeGroup',
     PrayerMeeting ='PrayerMeeting',
     Event ='Event',
+    News='News',
     MemeberMeeting ='MemberMeeting'
   }

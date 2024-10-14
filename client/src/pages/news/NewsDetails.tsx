@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./news.css";
 import { Box, Slider } from "@mui/material";
 import formatDateTime from "../../utils/FormatDateTime";
+import { Activity } from "../../modals/Activity";
 
 interface EventProps {
   id: string;
@@ -16,7 +17,7 @@ interface EventProps {
 interface NewsDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  event: EventProps | null; // Define your Event type accordingly
+  event: Activity | null; // Define your Event type accordingly
 }
 
 export default function NewsDetailsModal({
@@ -38,9 +39,22 @@ export default function NewsDetailsModal({
           X
         </button>
         <h1>{event.title}</h1>
-        <img src={event.image} alt={event.title} />
+        {event.image && (
+        <>
+          {Array.isArray(event.image) ? (
+            // Render the first image if it's an array
+            <img src={event.image[0]} alt={event.title} />
+          ) : (
+            // Render the image if it's a single string
+            <img src={event.image} alt={event.title} />
+          )}
+        </>
+      )}
         <p>{event.description}</p>
+        {event.time&&(
+
         <p>{formatDateTime(event.time)}</p>
+        )}
         <Box style={{ marginTop: "20px", textAlign: "center" }}>
           <label htmlFor="font-size-slider">Adjust text size:</label>
           <Slider

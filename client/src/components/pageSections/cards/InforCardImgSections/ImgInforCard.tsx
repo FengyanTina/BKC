@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
 import InforCard from "../../../common/cards/InforCard";
+import { PageSection } from "../../../../modals/PageSection";
 
 type Props = {
   category?: string;
@@ -14,7 +15,7 @@ type Props = {
 };
 
 
-const ImgInforCard = ({ title, category, subTitle, content, image }: Props) => {
+const ImgInforCard = ({ title, category, subTitle, description, image }: PageSection) => {
   return (
     <Box
       sx={{
@@ -40,8 +41,20 @@ const ImgInforCard = ({ title, category, subTitle, content, image }: Props) => {
             transform: "translateZ(0)",
           }}
         >
+           
+         
           {Array.isArray(image) ? (
-            <ImageGallary itemData={image.map((img) => ({ img: img }))} />
+            <ImageGallary
+            itemData={
+                Array.isArray(image)
+                  ? image
+                      .filter((img): img is string => typeof img === "string") // Ensure img is a string
+                      .map((img) => ({ img })) // Map to the required format
+                  : typeof image === "string"
+                  ? [{ img: image }] // If image is a single string, wrap it in an array
+                  : [] // In case image is neither a string nor an array of strings
+              }
+          />
           ) : (
             // Otherwise, render a single image
             <img
@@ -56,7 +69,7 @@ const ImgInforCard = ({ title, category, subTitle, content, image }: Props) => {
             category={category}
             title={title}
             subTitle={subTitle}
-            content={content}
+            content={description}
             buttonText="Learn More"
           />
         </Grid>

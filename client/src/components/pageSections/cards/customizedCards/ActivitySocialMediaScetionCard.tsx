@@ -4,6 +4,7 @@ import ImageGallary from "../../../common/ImageGallary";
 import InforCard from "../../../common/cards/InforCard";
 import { SocialIcon } from "react-social-icons";
 import { imageGallarytemData } from "../../../../data";
+import { PageSection } from "../../../../modals/PageSection";
 interface ImageGalleryProps {
   img: string;
   title?: string;
@@ -24,9 +25,9 @@ const ActivitySocialMediaScetionCard = ({
   title,
   category,
   subTitle,
-  content,
+  description,
   image,
-}: Props) => {
+}: PageSection) => {
   return (
     <Box
       sx={{
@@ -50,7 +51,7 @@ const ActivitySocialMediaScetionCard = ({
             category={category}
             title={title}
             subTitle={subTitle}
-            content={content}
+            content={description}
             buttonText="Learn More"
           />
           <Box

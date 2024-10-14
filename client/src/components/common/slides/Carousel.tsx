@@ -6,28 +6,38 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import { Activity } from "../../../modals/Activity";
 
 
-interface EventProps {
-    id: string;
-    time:Date;
-    title: string;
-    image: string;
-    description: string;
-    details?:string
-  }
- 
 
-const Carousel = ({  events }:{ events: EventProps[] }) => {
+
+const Carousel = ({  events }:{ events: Activity[] }) => {
     
-      const displayEvents = events.map((event) => (
-        <SwiperSlide className="single-slide" key={event.id}>
-          {event.image && <img src={event.image} alt={event.title} />}
-          <h2>{event.title}</h2>
-          <h5> {event.time.toLocaleDateString('sv-SE')} {event.time.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}</h5>
-          {event.details && <p>{event.details}</p>}
-        </SwiperSlide>
-      ));
+    const displayEvents = events.map((event) => {
+        let imageUrl: string | undefined;
+    
+        // Handle different cases for `event.image`
+        if (typeof event.image === "string") {
+          imageUrl = event.image; // Single image string
+        } else if (Array.isArray(event.image)) {
+          // Handle an array of images (string or ImageGallary)
+          imageUrl = typeof event.image[0] === "string" ? event.image[0] : undefined; // Use the first image if available
+        }
+    
+        return (
+          <SwiperSlide className="single-slide" key={event.id}>
+            {imageUrl && <img src={imageUrl} alt={event.title} />} {/* Display image */}
+            <h2>{event.title}</h2>
+            {event.time && (
+              <h5>
+                {event.time.toLocaleDateString("sv-SE")}{" "}
+                {event.time.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })}
+              </h5>
+            )}
+            {event.description && <p>{event.description}</p>} {/* Render description if available */}
+          </SwiperSlide>
+        );
+      });
     
     return (
         <section className="swiper-slider">

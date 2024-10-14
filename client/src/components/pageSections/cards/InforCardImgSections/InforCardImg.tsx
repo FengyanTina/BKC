@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
 import InforCard from "../../../common/cards/InforCard";
+import { PageSection } from "../../../../modals/PageSection";
 
 type Props = {
   category?: string;
@@ -16,9 +17,9 @@ const InforCardImg = ({
   title,
   category,
   subTitle,
-  content,
+  description,
   image,
-}: Props) => {
+}:PageSection) => {
   return (
     <Box
       sx={{
@@ -38,7 +39,7 @@ const InforCardImg = ({
             category={category}
             title={title}
             subTitle={subTitle}
-            content={content}
+            content={description}
             buttonText="Learn More"
           />
         </Grid>
@@ -50,17 +51,19 @@ const InforCardImg = ({
             transform: "translateZ(0)",
           }}
         >
-          {Array.isArray(image) ? (
-            // If it's an array, map through it to render multiple images
-            //   image.map((imgSrc, index) => (
-            //     <img
-            //       key={index}
-            //       src={imgSrc}
-            //       alt={`Image ${index + 1}`}
-            //       style={{ width: "100%", marginBottom: "10px" }} // Add margin if you want some space between images
-            //     />
-            //   ))
-            <ImageGallary itemData={image.map((img) => ({ img: img }))} />
+         
+         {Array.isArray(image) ? (
+            <ImageGallary
+            itemData={
+                Array.isArray(image)
+                  ? image
+                      .filter((img): img is string => typeof img === "string") // Ensure img is a string
+                      .map((img) => ({ img })) // Map to the required format
+                  : typeof image === "string"
+                  ? [{ img: image }] // If image is a single string, wrap it in an array
+                  : [] // In case image is neither a string nor an array of strings
+              }
+          />
           ) : (
             // Otherwise, render a single image
             <img
@@ -68,16 +71,6 @@ const InforCardImg = ({
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               alt=""
             />
-            //     <img
-            //     src={}
-            //     alt="Description"
-            //     style={{
-            //       width: "100%",
-            //       height: "100%",
-            //       objectFit: "cover", // Ensure the image covers the container
-            //       display: "block",
-            //     }}
-            //   />
           )}
         </Grid>
       </Grid>

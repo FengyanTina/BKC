@@ -1,20 +1,16 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import { ImageGallary } from "../../../modals/ImgGallary";
+import { PageSection } from "../../../modals/PageSection";
 
-interface NewsSectionGridProps {
-  title: string;
-  subTitle?: string;
-  content: string;
-  image: string;
-  links?: string[];
-}
+
 export default function NewHereSectionGrid({
   title,
-  content,
+  description,
   image,
   links,
   subTitle,
-}: NewsSectionGridProps) {
+}: PageSection) {
   return (
     <Box
       sx={{
@@ -79,7 +75,7 @@ export default function NewHereSectionGrid({
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
         >
-          {content}
+          {description}
         </Typography>
         <Box
           sx={{
@@ -96,25 +92,36 @@ export default function NewHereSectionGrid({
             marginRight: "auto",
           }}
         >
-          {links &&
-            links.length > 0 &&
-            links.map((link, index) => (
+          {links && (
+            Array.isArray(links) ? (
+              links.map((link, index) => (
+                <a
+                  key={index}
+                  href={link}
+                  style={{
+                    display: "block",
+                    fontSize: "25px",
+                    color: "black",
+                    fontWeight: "500",
+                  }}
+                >
+                  {link}
+                </a>
+              ))
+            ) : (
               <a
-                key={index}
-                href={link}
+                href={links}
                 style={{
                   display: "block",
                   fontSize: "25px",
-               
                   color: "black",
                   fontWeight: "500",
                 }}
               >
-                {" "}
-                {/* Added key and link */}
-                {link}
+                {links}
               </a>
-            ))}
+            )
+          )}
         </Box>
       </Box>
     </Box>
