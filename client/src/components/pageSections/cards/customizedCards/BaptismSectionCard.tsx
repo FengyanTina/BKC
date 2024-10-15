@@ -45,18 +45,20 @@ const BaptismSectionCard = ({
         spacing={{ xs: 0, md: 0 }}
         columns={{ xs: 1, sm: 12, md: 12 }}
       >
-        <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 6 }}>
           <Item>
             {Array.isArray(image) ? (
               <ImageGallary itemData={image.map((img) => ({ img: img }))} />
             ) : (
               // Otherwise, render a single image
-              <img src={image} style={{ width: '100%',}} alt="" />
+              <img src={image} style={{ width: '100%', 
+                objectFit: 'cover',
+                maxHeight: '380px',}} alt="" />
             )}
           </Item>
         </Grid>
         <Grid
-          size={{ xs: 12, sm: 6, md: 6 }}
+          size={{ xs: 12, sm: 12, md: 6 }}
           sx={{
             display: "flex",
             flexDirection: "column",

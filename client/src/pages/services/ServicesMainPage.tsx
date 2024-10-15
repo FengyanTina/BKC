@@ -8,7 +8,6 @@ import { prayerService, baptismService, sundayServiceSection } from "../../data.
 // import LiveService from "../../apis/youtube/LiveService.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImgTextCard from "../../components/pageSections/cards/texAndImgCards/ImgTextCard.tsx";
-import TextImgCard from "../../components/pageSections/cards/texAndImgCards/TextImgCard.tsx";
 import SectionLine from "../../components/pageSections/SectionLine.tsx";
 import BaptismSectionCard from "../../components/pageSections/cards/customizedCards/BaptismSectionCard.tsx";
 
@@ -111,12 +110,13 @@ export default function ServicesMainPage() {
       {/* --------------PrayerService ----------- */}
       <SectionLine text="Prayer Services" />
 
-      <TextImgCard
+      <ImgTextCard
       id={prayerService.id}
         title={prayerService.title}
         linkSubtitle={prayerService.linkSubtitle}
         description={prayerService.description}
         images={prayerService.images}
+        imageLeft={false}
       />
 
       {/* -------------BaptismService----------- */}
