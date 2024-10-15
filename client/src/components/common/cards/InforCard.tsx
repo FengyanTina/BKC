@@ -26,23 +26,23 @@ interface Step {
 interface CardProps {
   category?: string;
   title: string;
-  subTitle?: string;
-   linkSubtitle?: string;
-  content: string;
+  subtitle?: string;
+  
+   description: string;
   buttonText?: string;
   date?: Date;
   time?: Date;
-  linkBody?: string;
   location?: string;
-  steps?: Step[];
+ 
 }
 export default function InforCard({
   category,
   title,
-  subTitle: subtitle,
-  content,
+ subtitle,
+ description,
   buttonText,
   time,
+  location,
 }: CardProps) {
 //   const bull = (
 //     <Box
@@ -97,6 +97,13 @@ export default function InforCard({
             {formattedTime}
           </Typography>
         )}
+         {location && (// Conditionally render time
+          <Typography 
+          variant="caption" 
+          sx={{ mt: 2, color: "text.secondary" }}>
+            {location}
+          </Typography>
+        )}
         <Typography
           variant="h5"
           component="div"
@@ -137,7 +144,7 @@ export default function InforCard({
             fontSize: 18,
           }}
         >
-          {content}
+          {description}
         </Typography>
       </CardContent>
       <CardActions>

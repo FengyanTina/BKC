@@ -101,20 +101,22 @@ export default function ServicesMainPage() {
       <SectionLine text="Sunday Scervice" />
 
       <ImgTextCard
+      id={sundayServiceSection.id}
         title={sundayServiceSection.title}
-        subTitle={sundayServiceSection.subTitle}
+        subtitle={sundayServiceSection.subTitle}
         description={sundayServiceSection.description}
-        image={sundayServiceSection.image}
+        images={sundayServiceSection.images}
       />
 
       {/* --------------PrayerService ----------- */}
       <SectionLine text="Prayer Services" />
 
       <TextImgCard
+      id={prayerService.id}
         title={prayerService.title}
         linkSubtitle={prayerService.linkSubtitle}
         description={prayerService.description}
-        image={prayerService.image}
+        images={prayerService.images}
       />
 
       {/* -------------BaptismService----------- */}

@@ -10,11 +10,14 @@ import InforCard from "../../components/common/cards/InforCard.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImageGallary from "../../components/common/ImageGallary";
 import { imageGallarytemData } from "../../data.ts";
+import { ActivityCategory } from "../../modals/ActivityCategory.ts";
+
 const events = [
   {
     id: "1",
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
     title: "Reaching out ",
+    category:ActivityCategory.Event,
     image: PrayerBible,
     description:
       "An exhibition featuring contemporary art pieces from local artists.",
@@ -23,6 +26,7 @@ const events = [
     id: "2",
     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
     title: "Tech Conference",
+    category:ActivityCategory.Event,
     image: edward,
     description:
       "Join the biggest technology conference of the year with keynote speakers.",
@@ -31,6 +35,7 @@ const events = [
     id: "3",
     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
     title: "Charity Run",
+    category:ActivityCategory.Event,
     image: Worship,
     description:
       "Participate in the annual charity run to support a good cause.",
@@ -39,6 +44,7 @@ const events = [
     id: "4",
     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
     title: "Food Festival",
+    category:ActivityCategory.Event,
     image: BethelWorship,
     description:
       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
@@ -99,8 +105,8 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Social Media"
               title="All activities on Social media"
-              subTitle="Follow our social media"
-              content="Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media"
+              subtitle="Follow our social media"
+              description="Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media"
               buttonText="Learn More"
             />
             <Box
@@ -184,8 +190,8 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Sunday Service"
               title="Word of the Day"
-              subTitle="välkommen till vår kyrka nu på söndag!"
-              content="Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.
+              subtitle="välkommen till vår kyrka nu på söndag!"
+              description="Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.
               Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!"
               buttonText="Learn More"
             />
@@ -216,8 +222,8 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="BKC Kids"
               title="Sunday School"
-              subTitle="BKC-KIDS"
-              content="BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!"
+              subtitle="BKC-KIDS"
+              description="BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!"
               buttonText="Learn More"
             />
           </Grid>
@@ -284,8 +290,8 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Youth Group"
               title="Youth"
-              subTitle="Bkc Ungdom"
-              content="Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!"
+              subtitle="Bkc Ungdom"
+              description="Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!"
               buttonText="Learn More"
             />
           </Grid>
@@ -315,8 +321,8 @@ export default function ActivitiesMainPage() {
             <InforCard
               category="Home Group"
               title="Find your community"
-              subTitle="subtitle"
-              content="Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn."
+              subtitle="subtitle"
+              description="Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn."
               buttonText="Learn More"
             />
           </Grid>

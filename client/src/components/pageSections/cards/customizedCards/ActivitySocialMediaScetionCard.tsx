@@ -5,28 +5,13 @@ import InforCard from "../../../common/cards/InforCard";
 import { SocialIcon } from "react-social-icons";
 import { imageGallarytemData } from "../../../../data";
 import { PageSection } from "../../../../modals/PageSection";
-interface ImageGalleryProps {
-  img: string;
-  title?: string;
-  featured?: boolean;
-  author?: string;
-}
-type Props = {
-  category?: string;
-  title: string;
-  subTitle?: string;
-  content: string;
-  buttonText?: string;
-  time?: Date;
-  image: string | ImageGalleryProps[];
-};
 
 const ActivitySocialMediaScetionCard = ({
   title,
   category,
-  subTitle,
+  subtitle,
   description,
-  image,
+  images,
 }: PageSection) => {
   return (
     <Box
@@ -50,8 +35,8 @@ const ActivitySocialMediaScetionCard = ({
           <InforCard
             category={category}
             title={title}
-            subTitle={subTitle}
-            content={description}
+            subtitle={subtitle}
+            description={description}
             buttonText="Learn More"
           />
           <Box
@@ -79,6 +64,11 @@ const ActivitySocialMediaScetionCard = ({
               network="facebook"
               style={{ height: 25, width: 25 }}
             />
+            {/* <SocialIcon
+              url="https://www.twitter.com"
+              network="twitter"
+              style={{ height: 25, width: 25 }}
+            /> */}
           </Box>
         </Grid>
         <Grid
@@ -91,12 +81,12 @@ const ActivitySocialMediaScetionCard = ({
             overflow: "hidden",
           }}
         >
-          {Array.isArray(image) ? (
+          {Array.isArray(images) ? (
             <ImageGallary itemData={imageGallarytemData} />
           ) : (
             // Otherwise, render a single image
             <img
-              src={image}
+              src={images}
               style={{
                 width: "100%",
                 height: "100%",

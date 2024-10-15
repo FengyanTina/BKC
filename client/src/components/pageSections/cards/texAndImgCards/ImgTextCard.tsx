@@ -2,16 +2,8 @@ import { Box, styled, Typography } from '@mui/material';
 import  Grid  from '@mui/material/Grid2';
 import ImageGallary from '../../../common/ImageGallary';
 import  "./textImageText.css"
+import { ImageTextCardModal } from '../../../../modals/ImageTex';
 
-type Props = {
-    title:string;
-    subTitle?:string;
-    description:string;
-    image: string | string[]; // Accept either a single string or an array of strings for images
-    date?: Date;
-    linkSubtitle?:string;
-    location?:string;
-}
 const Item = styled("div")(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(2),
@@ -19,7 +11,7 @@ const Item = styled("div")(({ theme }) => ({
   
     ...theme.applyStyles("dark", {}),
   }));
-const ImgTextCard = ({title,subTitle,description,image, linkSubtitle}: Props) => {
+const ImgTextCard = ({title,subtitle,description,images, linkSubtitle,imageLeft = true}: ImageTextCardModal ) => {
   return (
     <Box sx={{ flexGrow: 1,width:'80%', }}>
         <Grid
@@ -30,12 +22,12 @@ const ImgTextCard = ({title,subTitle,description,image, linkSubtitle}: Props) =>
             
           <Grid size={{ xs: 12, sm: 12, md: 6 }}>
             <Item>
-            {Array.isArray(image) ? (
+            {Array.isArray(images) ? (
   
-            <ImageGallary itemData={image.map(img => ({ img: img }))}/>
+            <ImageGallary itemData={images.map(img => ({ img: img }))}/>
             ) : (
               // Otherwise, render a single image
-              <img src={image} style={{ width: '100%', objectFit: 'cover',maxHeight: '380px', }} alt="" />
+              <img src={images} style={{ width: '100%', objectFit: 'cover',maxHeight: '380px', }} alt="" />
             )}
             </Item>
           </Grid>
@@ -77,7 +69,7 @@ const ImgTextCard = ({title,subTitle,description,image, linkSubtitle}: Props) =>
           }}>{linkSubtitle}</a>
         </Typography>   
         )}
-            {subTitle && (
+            {subtitle && (
                 <Typography
                 variant="h4"
                 sx={{
@@ -90,7 +82,7 @@ const ImgTextCard = ({title,subTitle,description,image, linkSubtitle}: Props) =>
                      },
                   }}
               >
-                {subTitle}
+                {subtitle}
               </Typography> 
             )}
           

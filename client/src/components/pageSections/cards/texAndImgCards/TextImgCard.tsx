@@ -2,16 +2,8 @@ import { Box, styled, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
 import "./textImageText.css";
+import { ImageTextCardModal } from "../../../../modals/ImageTex";
 
-type Props = {
-  title: string;
-  subTitle?: string;
-  description: string;
-  image: string | string[]; // Accept either a single string or an array of strings for images
-  date?: Date;
-  linkSubtitle?: string;
-  location?: string;
-};
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(2),
@@ -21,11 +13,11 @@ const Item = styled("div")(({ theme }) => ({
 
 const TextImgCard = ({
   title,
-  subTitle,
+  subtitle,
   description,
-  image,
+  images,
   linkSubtitle,
-}: Props) => {
+}: ImageTextCardModal ) => {
   return (
     <Box sx={{ flexGrow: 1, width: "80%" }}>
       <Grid
@@ -83,7 +75,7 @@ const TextImgCard = ({
             </Typography>
           )}
 
-          {subTitle && (
+          {subtitle && (
             <Typography
               variant="h4"
               sx={{
@@ -98,7 +90,7 @@ const TextImgCard = ({
                 },
               }}
             >
-              {subTitle}
+              {subtitle}
             </Typography>
           )}
           <Box
@@ -137,12 +129,12 @@ const TextImgCard = ({
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 6 }}>
           <Item>
-            {Array.isArray(image) ? (
-              <ImageGallary itemData={image.map((img) => ({ img: img }))} />
+            {Array.isArray(images) ? (
+              <ImageGallary itemData={images.map((img) => ({ img: img }))} />
             ) : (
               // Otherwise, render a single image
               <img
-                src={image}
+                src={images}
                 style={{
                   width: "100%",
                   objectFit: "cover",

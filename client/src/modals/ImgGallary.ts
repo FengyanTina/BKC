@@ -1,4 +1,4 @@
-export interface ImageGallary 
+export interface ImageGallaryItemData 
     {
       img: string,
       title?: string,

@@ -1,13 +1,13 @@
-import { ImageGallary } from "./ImgGallary";
+import { ImageGallaryItemData } from "./ImgGallary";
 
 export interface PageSection {
     id:string;
     title: string;
-    subTitle?: string;
+    subtitle?: string;
    
     category?:string;
     description: string;
-    image?: string | string[]|ImageGallary[]; // Accept either a single string or an array of strings for images
+    images?: string | string[]|ImageGallaryItemData[]; // Accept either a single string or an array of strings for images
     time?: Date;
     linkSubtitle?: string;
     links?: string|string[];

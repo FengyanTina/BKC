@@ -12,6 +12,7 @@ import DavidB from "./assets/DavidB.jpg"
 import welcome2 from "./assets/welcome2.jpg"
 import { Activity, ActivityCategory } from "./modals/Activity";
 import { PageSection } from "./modals/PageSection";
+import { ImageInforCardModal } from "./modals/ImageInforCard";
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -23,98 +24,98 @@ export interface Video {
 }
 
 
-  export const sundayServiceCardInfor:PageSection={
+  export const sundayServiceCardInfor:ImageInforCardModal={
     id: "1",
     title: "For Congregation",
-    subTitle:"välkommen till vår kyrka nu på söndag!",
+    subtitle:"välkommen till vår kyrka nu på söndag!",
     time:new Date(2024, 9, 22, 14, 30),
-    category: "Sunday Service",
+    category:ActivityCategory.SundayService,
     description:"Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!",
-    image: Worship ,
+    images: Worship 
   }
-  export const sundaySchoolActivityCardInfor:PageSection={
+  export const sundaySchoolActivityCardInfor:ImageInforCardModal={
     id: "1",
     title: "For Small Kids",
-    subTitle:"BKC-KIDS",
+    subtitle:"BKC-KIDS",
     time:new Date(2024, 9, 22, 14, 30),
-    category: "Sunday School",
+    category:ActivityCategory.SundaySchoole,
     description:"BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!",
-    image: edward ,
+    images: edward ,
   }
  
-  export const youthActivityCardInfor:PageSection={
+  export const youthActivityCardInfor:ImageInforCardModal={
     id: "1",
     title: "For Young Adult",
-    subTitle:"Bkc Ungdom",
+    subtitle:"Bkc Ungdom",
     time:new Date(2024, 9, 22, 14, 30),
     category: ActivityCategory.YouthService,
     description:"Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!",
-    image: worshipHands ,
+    images: worshipHands ,
   }
-  export const homeGroupActivityCardInfor:PageSection={
+  export const homeGroupActivityCardInfor:ImageInforCardModal={
     id: "1",
     title: "Your Small Community",
-    subTitle:"Together,Stronger!",
+    subtitle:"Together,Stronger!",
     time:new Date(2024, 9, 22, 14, 30),
     category: ActivityCategory.HomeGroup,
     description:"Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn.",
-    image:Varhistoria ,
+    images:Varhistoria 
   }
   
 export const imageGallarytemData = [
     {
       img: Bible,
       title: "Bible Study",
-      author: "@bkristastucchio",
+     
       featured: true,
     },
     {
       img: Worship,
       title: "Juesus Conference",
-      author: "@rollelflex_graphy726",
+     
     },
     {
       img: Prayer,
       title: "Praying for Borås",
-      author: "@helloimnik",
+     
     },
     {
       img: Conference,
       title: "Comminity Prayer",
-      author: "@nolanissac",
+ 
     },
     {
       img: Mission,
       title: "Youth Camp",
-      author: "@hjrc33",
+      
     },
     {
       img: BethelWorship,
       title: "Togather Worship",
-      author: "@arwinneil",
+     
       featured: true,
     },
     {
       img: worshipHands,
       title: "Worship Conference",
-      author: "@tjdragotta",
+    
     },
     {
       img: PrayerBible,
       title: "Study the words",
-      author: "@katie_wasserman",
+    
     },
   ];
   
   
-  export const socialMediaActivityCardInfor:PageSection={
+  export const socialMediaActivityCardInfor={
     id: "1",
     title: "All activities on Social media",
     subTitle:"Together,Stronger!",
     time:new Date(2024, 9, 22, 14, 30),
     category: "Social Media",
     description:"Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media",
-    image:imageGallarytemData ,
+    images:imageGallarytemData ,
   }
 
   export const Pastor= {
@@ -148,12 +149,12 @@ export interface ServingPosition {
 }
 
 
-  export const newHere:PageSection ={
+  export const newHere:ImageInforCardModal ={
     id:'23',
     title:"New Here? ",
-    subTitle:"can't wait to meet you!",
+    subtitle:"can't wait to meet you!",
     description:"You may find information you need in below links or feel free to contact us. ",
-    image:welcome2,
+    images:welcome2,
     links:["What Expected In Church","For your Family","Find Your Small Community","Connet to Your Purpose "]
   }
 
@@ -249,21 +250,21 @@ export const news:Activity[] = [
     steps: steps,
     image: Mission,
   };
-export const sundayServiceSection: PageSection = {
+export const sundayServiceSection  = {
   id: "1",
   time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
   title: "Welcom to our Sunday Service! ",
   subTitle: "  Come as you are !",
   category: ActivityCategory.SundayService,
-  image: Conference,
+  images: Conference,
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
 };
-export const prayerService:PageSection = {
+export const prayerService = {
     id:'12',
   title: "We want to pray for you!",
   linkSubtitle: "send in your prayer requiest any time",
-  image: Prayer,
+  images: Prayer,
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
 };

@@ -20,7 +20,6 @@ import {
 } from "../data.ts";
 import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
-import InforCardImg from "../components/pageSections/cards/InforCardImgSections/InforCardImg.tsx";
 import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
 import NewHereSectionGrid from "../components/pageSections/grid/NewHereSectionGrid.tsx";
 
@@ -229,9 +228,9 @@ export default function StartPage() {
         id={newHere.id}
           title={newHere.title}
          description={newHere.description}
-          image={newHere.image}
+          images={newHere.images}
           links={newHere.links}
-          subTitle={newHere.subTitle}
+          subtitle={newHere.subtitle}
         />
       </Box>
       {/* --------------ACTIVITIES----------- */}
@@ -240,49 +239,51 @@ export default function StartPage() {
       <ActivitySocialMediaScetionCard
       id={socialMediaActivityCardInfor.id}
         title={socialMediaActivityCardInfor.title}
-        subTitle={socialMediaActivityCardInfor.subTitle}
+        subtitle={socialMediaActivityCardInfor.subTitle}
         description={socialMediaActivityCardInfor.description}
-        image={socialMediaActivityCardInfor.image}
+        images={socialMediaActivityCardInfor.images}
         category={socialMediaActivityCardInfor.category}
       />
 
       {/* --------------ACTIVITIES-Sunday Service----------- */}
       <ImgInforCard
-      id={sundaySchoolActivityCardInfor.id}
+      id={sundayServiceCardInfor.id}
         title={sundayServiceCardInfor.title}
-        subTitle={sundayServiceCardInfor.subTitle}
+        subtitle={sundayServiceCardInfor.subtitle}
         description={sundayServiceCardInfor.description}
-        image={sundayServiceCardInfor.image}
+        images={sundayServiceCardInfor.images}
         category={sundayServiceCardInfor.category}
       />
 
       {/* --------------ACTIVITIES-BKC Kids----------- */}
-      <InforCardImg
+      <ImgInforCard
       id={sundaySchoolActivityCardInfor.id}
         title={sundaySchoolActivityCardInfor.title}
-        subTitle={sundaySchoolActivityCardInfor.subTitle}
+        subtitle={sundaySchoolActivityCardInfor.subtitle}
         description={sundaySchoolActivityCardInfor.description}
-        image={sundaySchoolActivityCardInfor.image}
+        images={sundaySchoolActivityCardInfor.images}
         category={sundaySchoolActivityCardInfor.category}
+        imageLeft={false}
       />
       {/* --------------ACTIVITIES-Youth----------- */}
       <ImgInforCard
       id={youthActivityCardInfor.id}
         title={youthActivityCardInfor.title}
-        subTitle={youthActivityCardInfor.subTitle}
+        subtitle={youthActivityCardInfor.subtitle}
         description={youthActivityCardInfor.description}
-        image={youthActivityCardInfor.image}
+        images={youthActivityCardInfor.images}
         category={youthActivityCardInfor.category}
       />
 
       {/* --------------ACTIVITIES-Home Group----------- */}
-      <InforCardImg
+      <ImgInforCard
       id={homeGroupActivityCardInfor.id}
         title={homeGroupActivityCardInfor.title}
-        subTitle={homeGroupActivityCardInfor.subTitle}
+        subtitle={homeGroupActivityCardInfor.subtitle}
         description={homeGroupActivityCardInfor.description}
-        image={homeGroupActivityCardInfor.image}
+        images={homeGroupActivityCardInfor.images}
         category={homeGroupActivityCardInfor.category}
+        imageLeft={false}
       />
       {/* --------------NEWS SLIDES----------- */}
       <Box

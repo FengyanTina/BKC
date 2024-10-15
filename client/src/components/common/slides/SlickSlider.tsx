@@ -15,15 +15,6 @@ import { useRef, useState } from "react";
 import NewsDetailsModal from "../../../pages/news/NewsDetails";
 import formatDateTime from "../../../utils/FormatDateTime";
 import { Activity } from "../../../modals/Activity";
-interface EventProps {
-  id: string;
-  time: Date;
-  title: string;
-  image: string;
-  description: string;
-  details?: string;
-}
-
 function PauseOnHover({ events }: { events: Activity[] }) {
   const [selectedEvent, setSelectedEvent] = useState<Activity | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

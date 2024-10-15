@@ -1,21 +1,22 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import { ImageGallary } from "../../../modals/ImgGallary";
+import { ImageGallaryItemData } from "../../../modals/ImgGallary";
 import { PageSection } from "../../../modals/PageSection";
+import { ImageInforCardModal } from "../../../modals/ImageInforCard";
 
 
 export default function NewHereSectionGrid({
   title,
   description,
-  image,
+  images,
   links,
-  subTitle,
-}: PageSection) {
+  subtitle,
+}: ImageInforCardModal) {
   return (
     <Box
       sx={{
         flexGrow: 1,
-        backgroundImage: `url(${image})`, // Set the image as background
+        backgroundImage: `url(${images})`, // Set the image as background
         backgroundSize: "cover", // Cover the entire area
         backgroundPosition: "center", // Center the image
         backgroundRepeat: "no-repeat", // Avoid repeating the image
@@ -61,7 +62,7 @@ export default function NewHereSectionGrid({
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
           }}
         >
-          {subTitle}
+          {subtitle}
         </Typography>
         <Typography
           variant="h4"

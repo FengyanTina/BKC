@@ -12,6 +12,7 @@ interface ImageGalleryProps {
 }
 interface ImageGalleryComponentProps {
   itemData: ImageGalleryProps[]; // Array of imageGalleryProps
+  showAllAsFeatured?: boolean;
 }
 function srcset(
   image: string,
@@ -28,7 +29,7 @@ function srcset(
   };
 }
 
-export default function ImageGallary({ itemData }: ImageGalleryComponentProps) {
+export default function ImageGallary({ itemData ,showAllAsFeatured = false,}: ImageGalleryComponentProps) {
   return (
     <ImageList
       sx={{
@@ -40,7 +41,44 @@ export default function ImageGallary({ itemData }: ImageGalleryComponentProps) {
       rowHeight={250}
       gap={1}
     >
+        {itemData.map((item) => {
+    // Conditionally render all images as featured if `showAllAsFeatured` is true
+    const isFeatured = showAllAsFeatured ? true : item.featured; // Here is where it's used
+    const cols = isFeatured ? 2 : 1; // If the image is featured, take up more columns
+    const rows = isFeatured ? 2 : 1; // If the image is featured, take up more rows
+
+    return (
+      <ImageListItem key={item.img} cols={cols} rows={rows}> {/* Used here */}
+        <img
+          {...srcset(item.img, 250, 200, rows, cols)} 
+          alt={item.title}
+          loading="lazy"
+        />
+        <ImageListItemBar
+          sx={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+              "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+          }}
+          title={item.title}
+          position="top"
+          actionIcon={
+            <IconButton
+              sx={{ color: "white" }}
+              aria-label={`details ${item.title}`}
+            >
+              <DetailsIcon />
+            </IconButton>
+          }
+          actionPosition="left"
+        />
+      </ImageListItem>
+    );
+})}
+{/* 
       {itemData.map((item) => {
+         const isFeatured = showAllAsFeatured ? true : item.featured;
+    
         const cols = item.featured ? 2 : 1;
         const rows = item.featured ? 2 : 1;
 
@@ -71,7 +109,7 @@ export default function ImageGallary({ itemData }: ImageGalleryComponentProps) {
             />
           </ImageListItem>
         );
-      })}
+      })} */}
     </ImageList>
   );
 }

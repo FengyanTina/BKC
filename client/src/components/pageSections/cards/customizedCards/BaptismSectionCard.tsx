@@ -20,24 +20,24 @@ interface Step {
   link?: string; // Optional link if needed
 }
 
-type Props = {
+type BaptismSectionModal = {
   title: string;
-  subTitle?: string;
-  linkSubtitle?: string;
-  description?: string;
+  subTitle?: string; 
   image: string | string[]; // Accept either a single string or an array of strings for images
-  date?: Date;
-  linkBody?: string;
-  location?: string;
   steps?: Step[]; // New field for steps
 };
-
+type ImageLinksInforCardModal = {
+    subTitle?: string;
+    linkSubtitle?: string;
+    image: string | string[]; // Accept either a single string or an array of strings for images
+    linkBody?: string;
+  };
 const BaptismSectionCard = ({
   title,
   subTitle,
   image,
   steps,
-}: Props) => {
+}: BaptismSectionModal) => {
   return (
     <Box sx={{ flexGrow: 1, width: "80%" }}>
       <Grid
