@@ -13,6 +13,7 @@ import welcome2 from "./assets/welcome2.jpg"
 import { Activity, ActivityCategory } from "./modals/Activity";
 import { PageSection } from "./modals/PageSection";
 import { ImageInforCardModal } from "./modals/ImageInforCard";
+import { ActivitySocialMediaScetionCardModal } from "./modals/ActivitySocialMediaScetionCard";
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -108,12 +109,11 @@ export const imageGallarytemData = [
   ];
   
   
-  export const socialMediaActivityCardInfor={
+  export const socialMediaActivityCardInfor:ActivitySocialMediaScetionCardModal={
     id: "1",
     title: "All activities on Social media",
-    subTitle:"Together,Stronger!",
-    time:new Date(2024, 9, 22, 14, 30),
-    category: "Social Media",
+    subtitle:"Together,Stronger!",
+    category: ActivityCategory.SocialMedia,
     description:"Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media",
     images:imageGallarytemData ,
   }

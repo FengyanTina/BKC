@@ -10,5 +10,6 @@ export enum ActivityCategory {
     PrayerMeeting ='PrayerMeeting',
     Event ='Event',
     News='News',
-    MemeberMeeting ='MemberMeeting'
+    MemeberMeeting ='MemberMeeting',
+    SocialMedia ='SocialMedia'
   }

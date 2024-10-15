@@ -239,7 +239,7 @@ export default function StartPage() {
       <ActivitySocialMediaScetionCard
       id={socialMediaActivityCardInfor.id}
         title={socialMediaActivityCardInfor.title}
-        subtitle={socialMediaActivityCardInfor.subTitle}
+        subtitle={socialMediaActivityCardInfor.subtitle}
         description={socialMediaActivityCardInfor.description}
         images={socialMediaActivityCardInfor.images}
         category={socialMediaActivityCardInfor.category}

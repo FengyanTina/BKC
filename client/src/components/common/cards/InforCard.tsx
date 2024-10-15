@@ -27,7 +27,6 @@ interface CardProps {
   category?: string;
   title: string;
   subtitle?: string;
-  
    description: string;
   buttonText?: string;
   date?: Date;
