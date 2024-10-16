@@ -22,137 +22,56 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import { UserContext } from "../../../context/UserContext";
+import { User } from "../../../models/User";
+import { Link } from "react-router-dom";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { useContext, useState } from "react";
 
-interface Data {
-  id: string;
-  fullName: string;
-  phoneNumber: string;
-  email: string;
-  userCategory: string;
-  userName: string;
-  userId: string;
-}
 
-function createData(
-  id: string,
-  fullName: string,
-  phoneNumber: string,
-  email: string,
-  userCategory: string,
-  userName: string,
-  userId: string
-): Data {
-  return {
-    id,
-    fullName,
-    phoneNumber,
-    email,
-    userCategory,
-    userName,
-    userId,
-  };
-}
 
-const rows = [
-  createData(
-    "1",
-    "David Svensen",
-    "0762555305",
-    "david@bkc.se",
-    "member",
-    "BKC1",
-    "BKCId"
-  ),
-  createData(
-    "2",
-    "Johan Backer",
-    "0762555452",
-    "johan@bkc.se",
-    "member",
-    "BKC1",
-    "BKCId"
-  ),
-  createData(
-    "3",
-    "Ellen Blue",
-    "0762555262",
-    "ellen@bkc.se",
-    "member",
-    "BKC1",
-    "BKCId"
-  ),
-  createData(
-    "4",
-    "Johana Beman",
-    "0762555159",
-    "johanan@bkc.se",
-    "member",
-    "BKC1",
-    "BKCId"
-  ),
-  createData(
-    "5",
-    "Daniel Alwarzon",
-    "0762555356",
-    "daniel@bkc.se",
-    "member",
-    "BKC1",
-    "BKCId"
-  ),
-  createData(
-    "6",
-    "Victoria Tailer",
-    "0762555408",
-    "victoria@bkc.se",
-    "member",
-    "BKC1",
-    "BKCId"
-  ),
-  createData(
-    "7",
-    "Ice cream sandwich",
-    "0762555237",
-    "ice@bkc.se",
-    "member",
-    "BKC1",
-    "BKCId"
-  ),
-];
+
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
+    const aValue = a[orderBy] ?? ""; // Default to empty string if undefined
+    const bValue = b[orderBy] ?? ""; // Default to empty string if undefined
+  
+    if (bValue < aValue) {
+      return -1;
+    }
+    if (bValue > aValue) {
+      return 1;
+    }
+    return 0;
   }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
+
 
 type Order = "asc" | "desc";
 
-function getComparator<Key extends keyof any>(
+function getComparator<Key extends keyof User>(
   order: Order,
   orderBy: Key
 ): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string }
+    a: User,
+    b: User
 ) => number {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
+  
+
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof Data;
+  id: keyof User;
   label: string;
   numeric: boolean;
 }
 
 const headCells: readonly HeadCell[] = [
   {
-    id: "fullName",
+    id: "firstName",
     numeric: false,
     disablePadding: true,
     label: "Name ",
@@ -170,7 +89,7 @@ const headCells: readonly HeadCell[] = [
     label: "Email",
   },
   {
-    id: "userCategory",
+    id: "category",
     numeric: false,
     disablePadding: false,
     label: "UserCategory",
@@ -193,7 +112,7 @@ interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof Data
+    property: keyof User
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
@@ -211,7 +130,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     onRequestSort,
   } = props;
   const createSortHandler =
-    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof User) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
@@ -255,10 +174,33 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 interface EnhancedTableToolbarProps {
-  numSelected: number;
-}
+    numSelected: number;
+    selectedIds: readonly string[]; // Add selected IDs prop
+  }
+  
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-  const { numSelected } = props;
+    const { removeUsers, users } = React.useContext(UserContext);  // Get removeUsers function from context
+  const [open, setOpen] = useState(false);  // State to handle dialog open/close
+  const [idsToDelete, setIdsToDelete] = useState<string[]>([]);  // To store selected IDs for deletion
+  
+    // Open the confirmation dialog
+    const handleOpenDialog = () => {
+      setIdsToDelete([...selectedIds]);  // Store the selected IDs
+      setOpen(true);
+    };
+  
+    // Close the confirmation dialog
+    const handleCloseDialog = () => {
+      setOpen(false);
+    };
+  
+    // Confirm deletion
+    const handleConfirmDelete = () => {
+      removeUsers(idsToDelete);  // Call the delete function in the context
+      setOpen(false);  // Close dialog after deletion
+    };
+
+  const { numSelected,selectedIds } = props;
   return (
     <Toolbar
       sx={[
@@ -295,7 +237,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
             Members
           </Typography>
           <Tooltip title="Add">
-            <IconButton>
+          <IconButton component={Link} to="/user/new"> 
               <AddIcon />
             </IconButton>
           </Tooltip>
@@ -305,15 +247,36 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       {numSelected > 0 ? (
         <>
           <Tooltip title="Edit">
-            <IconButton>
-              <EditIcon />
+          <IconButton component={Link}  to={`/user/${selectedIds[0]}`} >
+              <EditIcon/>
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton>
+           <IconButton onClick={handleOpenDialog}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
+          <Dialog
+        open={open}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Delete"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete the selected user(s)?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmDelete} color="secondary" autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
         </>
       ) : (
         <Tooltip title="Filter list">
@@ -327,15 +290,16 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 export default function UserTable() {
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("fullName");
+  const [orderBy, setOrderBy] = React.useState<keyof User>("firstName");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const { users} = useContext(UserContext);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof Data
+    property: keyof User
   ) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -344,7 +308,7 @@ export default function UserTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
+      const newSelected = users.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -387,20 +351,21 @@ export default function UserTable() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
 
   const visibleRows = React.useMemo(
     () =>
-      [...rows]
+      [...users]
         .sort(getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [order, orderBy, page, rowsPerPage]
   );
+  
 
   return (
     <Box sx={{ width: "80%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length}selectedIds={selected} />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -413,7 +378,7 @@ export default function UserTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={users.length}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
@@ -447,11 +412,11 @@ export default function UserTable() {
                       padding="none"
                       align="left"
                     >
-                      {row.fullName}
+                      {row.firstName}{row.lastName}
                     </TableCell>
                     <TableCell align="left">{row.phoneNumber}</TableCell>
                     <TableCell align="left">{row.email}</TableCell>
-                    <TableCell align="left">{row.userCategory}</TableCell>
+                    <TableCell align="left">{row.category}</TableCell>
                     <TableCell align="left">{row.userName}</TableCell>
                     <TableCell align="left">{row.userId}</TableCell>
                   </TableRow>
@@ -472,7 +437,7 @@ export default function UserTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={users.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

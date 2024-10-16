@@ -20,7 +20,7 @@ import {
   import { Link as RouterLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { User, UserCategory } from "../../modals/User";
+import { User, UserCategory } from "../../models/User";
 import RegisterModal from "../register/RegisterModal";
   interface LoginPageProp{
     onClose: () => void;

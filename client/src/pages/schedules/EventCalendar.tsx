@@ -26,7 +26,7 @@ import {
 import EventAddAndEditForm from "./EventAddAndEditForm";
 import "./schedule.css"
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
-import {  UserCategory } from "../../modals/User";
+import {  UserCategory } from "../../models/User";
 
 // Custom event interface
 interface CustomEvent {

@@ -1,4 +1,9 @@
 export enum ActivityCategory {
+    Service ='Service',
+    Activity = 'Activity',
+    Event ='Event',
+    News='News',
+    Meeting ='Meeting',
     SundayService = 'SundayService',
     PrayerService = 'PrayerService',
     SundaySchoole = 'SundaySchoole',
@@ -8,8 +13,6 @@ export enum ActivityCategory {
     WorshipService = 'WorshipService',
     HomeGroup='HomeGroup',
     PrayerMeeting ='PrayerMeeting',
-    Event ='Event',
-    News='News',
     MemeberMeeting ='MemberMeeting',
     SocialMedia ='SocialMedia'
   }

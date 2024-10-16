@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import { ImageGallaryItemData } from "../../../modals/ImgGallary";
-import { PageSection } from "../../../modals/PageSection";
-import { ImageInforCardModal } from "../../../modals/ImageInforCard";
+import { ImageGallaryItemData } from "../../../models/ImgGallary";
+import { PageSection } from "../../../models/PageSection";
+import { ImageInforCardModel } from "../../../models/ImageInforCard";
 
 
 export default function NewHereSectionGrid({
@@ -11,7 +11,7 @@ export default function NewHereSectionGrid({
   images,
   links,
   subtitle,
-}: ImageInforCardModal) {
+}: ImageInforCardModel) {
   return (
     <Box
       sx={{

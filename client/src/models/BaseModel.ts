@@ -1,6 +1,6 @@
 import { ImageGallaryItemData } from "./ImgGallary";
 
-export interface BaseModal {
+export interface BaseModel {
     id: string;
     title: string;
     description: string;

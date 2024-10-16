@@ -2,7 +2,7 @@ import { Box, styled, Typography } from '@mui/material';
 import  Grid  from '@mui/material/Grid2';
 import ImageGallary from '../../../common/ImageGallary';
 import  "./textImageText.css"
-import { ImageTextCardModal } from '../../../../modals/ImageTex';
+import { ImageTextCardModal } from '../../../../models/ImageTex';
 
 const Item = styled("div")(({ theme }) => ({
     ...theme.typography.body2,

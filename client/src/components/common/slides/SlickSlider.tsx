@@ -14,7 +14,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useRef, useState } from "react";
 import NewsDetailsModal from "../../../pages/news/NewsDetails";
 import formatDateTime from "../../../utils/FormatDateTime";
-import { Activity } from "../../../modals/Activity";
+import { Activity } from "../../../models/Activity";
 function PauseOnHover({ events }: { events: Activity[] }) {
   const [selectedEvent, setSelectedEvent] = useState<Activity | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

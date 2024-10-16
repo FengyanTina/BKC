@@ -1,8 +1,8 @@
 import { ActivityCategory } from "./ActivityCategory";
-import { BaseModal } from "./BaseModal";
+import { BaseModel } from "./BaseModel";
 import { ImageGallaryItemData } from "./ImgGallary";
 
-export interface ImageInforCardModal extends BaseModal {
+export interface ImageInforCardModel extends BaseModel {
    
     subtitle?: string;
     category?:ActivityCategory;

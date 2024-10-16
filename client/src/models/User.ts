@@ -20,8 +20,28 @@ export interface User {
   userId: string;
   userName: string;
   email: string;
+  image?:string;
   phoneNumber: string;
-  address?: string | undefined;
+  address?: string ;
+  zipcode?: string ;
   category: UserCategory;
-  permissions: Permission;
+ 
 }
+
+export enum UserDialogMode {
+    Add = "add",
+    Edit = "edit",
+  }
+  export function defaultUser(): User {
+    return {
+        id:'',
+        firstName:'',
+        lastName:'',
+        userId:'',
+        userName: '',
+        email: '',
+        phoneNumber: '',
+        address:'',
+        category:UserCategory.Member,
+       
+  }}

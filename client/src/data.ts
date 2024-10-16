@@ -10,10 +10,10 @@ import Bible from "./assets/Bible.jpg";
 import Varhistoria from "./assets/Varhistoria.jpg"
 import DavidB from "./assets/DavidB.jpg"
 import welcome2 from "./assets/welcome2.jpg"
-import { Activity, ActivityCategory } from "./modals/Activity";
-import { PageSection } from "./modals/PageSection";
-import { ImageInforCardModal } from "./modals/ImageInforCard";
-import { ActivitySocialMediaScetionCardModal } from "./modals/ActivitySocialMediaScetionCard";
+import { Activity, ActivityCategory } from "./models/Activity";
+import { PageSection } from "./models/PageSection";
+import { ImageInforCardModel } from "./models/ImageInforCard";
+import { ActivitySocialMediaScetionCardModel } from "./models/ActivitySocialMediaScetionCard";
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -25,7 +25,7 @@ export interface Video {
 }
 
 
-  export const sundayServiceCardInfor:ImageInforCardModal={
+  export const sundayServiceCardInfor:ImageInforCardModel={
     id: "1",
     title: "For Congregation",
     subtitle:"välkommen till vår kyrka nu på söndag!",
@@ -34,7 +34,7 @@ export interface Video {
     description:"Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!",
     images: Worship 
   }
-  export const sundaySchoolActivityCardInfor:ImageInforCardModal={
+  export const sundaySchoolActivityCardInfor:ImageInforCardModel={
     id: "1",
     title: "For Small Kids",
     subtitle:"BKC-KIDS",
@@ -44,7 +44,7 @@ export interface Video {
     images: edward ,
   }
  
-  export const youthActivityCardInfor:ImageInforCardModal={
+  export const youthActivityCardInfor:ImageInforCardModel={
     id: "1",
     title: "For Young Adult",
     subtitle:"Bkc Ungdom",
@@ -53,7 +53,7 @@ export interface Video {
     description:"Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!",
     images: worshipHands ,
   }
-  export const homeGroupActivityCardInfor:ImageInforCardModal={
+  export const homeGroupActivityCardInfor:ImageInforCardModel={
     id: "1",
     title: "Your Small Community",
     subtitle:"Together,Stronger!",
@@ -109,7 +109,7 @@ export const imageGallarytemData = [
   ];
   
   
-  export const socialMediaActivityCardInfor:ActivitySocialMediaScetionCardModal={
+  export const socialMediaActivityCardInfor:ActivitySocialMediaScetionCardModel={
     id: "1",
     title: "All activities on Social media",
     subtitle:"Together,Stronger!",
@@ -149,7 +149,7 @@ export interface ServingPosition {
 }
 
 
-  export const newHere:ImageInforCardModal ={
+  export const newHere:ImageInforCardModel ={
     id:'23',
     title:"New Here? ",
     subtitle:"can't wait to meet you!",

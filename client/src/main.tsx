@@ -12,6 +12,9 @@ import NewsMainPage from "./pages/news/NewsMainPage.tsx";
 import LogInPage from "./pages/LogIn/LogInPage.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import AboutUsPage from "./pages/aboutUs/AboutUsPage.tsx";
+import { UserProvider } from "./context/UserContext.tsx";
+import { UserDialogMode } from "./models/User.ts";
+import UserDialog from "./components/common/Forms/UserDialog.tsx";
 
 
 const router = createBrowserRouter(
@@ -28,6 +31,17 @@ const router = createBrowserRouter(
       { path: "news", element: <NewsMainPage /> },
       { path: "contact", element: <ContactMainPage /> },
       { path: "aboutUs", element: <AboutUsPage /> },
+      { path: "user/new", element:<UserDialog mode={UserDialogMode.Add} /> },
+      { path: "user/:id", element:<UserDialog mode={UserDialogMode.Edit} /> },
+    //   <Route
+    //       path="user/new"
+    //       element={<UserDialog mode={UserDialogMode.Add} />}
+    //     />
+    //     <Route
+    //       path="user/:id"
+    //       element={<UserDialog mode={UserDialogMode.Edit} />}
+    //     />
+    //   </Route>
     ],
   },
 ]);
@@ -35,7 +49,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthProvider>
+        <UserProvider>
     <RouterProvider router={router} />
+    </UserProvider>
     </AuthProvider>
   </React.StrictMode>
 );

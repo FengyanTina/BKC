@@ -2,9 +2,9 @@ import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
 import InforCard from "../../../common/cards/InforCard";
-import { PageSection } from "../../../../modals/PageSection";
+import { PageSection } from "../../../../models/PageSection";
 import { imageGallarytemData } from "../../../../data";
-import { ImageInforCardModal } from "../../../../modals/ImageInforCard";
+import { ImageInforCardModel } from "../../../../models/ImageInforCard";
 
 type Props = {
   category?: string;
@@ -16,7 +16,7 @@ type Props = {
 };
 
 
-const ImgInforCard = ({ title, category, subtitle, description, images,imageLeft = true }: ImageInforCardModal) => {
+const ImgInforCard = ({ title, category, subtitle, description, images,imageLeft = true }: ImageInforCardModel) => {
     const renderImageGallery = () => {
         if (Array.isArray(images)) {
           return (

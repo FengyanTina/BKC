@@ -1,4 +1,4 @@
-import { BaseModal } from "./BaseModal";
+import { BaseModal } from "./BaseModel";
 
 export interface ImageTextCardModal extends BaseModal {
     category?: string;

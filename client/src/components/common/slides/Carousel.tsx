@@ -6,7 +6,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import { Activity } from "../../../modals/Activity";
+import { Activity } from "../../../models/Activity";
 
 
 

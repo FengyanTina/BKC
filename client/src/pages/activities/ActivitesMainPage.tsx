@@ -10,7 +10,7 @@ import InforCard from "../../components/common/cards/InforCard.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImageGallary from "../../components/common/ImageGallary";
 import { imageGallarytemData } from "../../data.ts";
-import { ActivityCategory } from "../../modals/ActivityCategory.ts";
+import { ActivityCategory } from "../../models/ActivityCategory.ts";
 
 const events = [
   {

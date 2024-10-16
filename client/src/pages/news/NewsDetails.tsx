@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./news.css";
 import { Box, Slider } from "@mui/material";
 import formatDateTime from "../../utils/FormatDateTime";
-import { Activity } from "../../modals/Activity";
+import { Activity } from "../../models/Activity";
 
 interface EventProps {
   id: string;

@@ -1,9 +1,9 @@
 import { ActivityCategory } from "./ActivityCategory";
-import { BaseModal } from "./BaseModal";
+import { BaseModel } from "./BaseModel";
 import { Schedule } from "./Schedule";
 
 
-export interface Activity extends BaseModal{
+export interface Activity extends BaseModel{
    
     subTitle?: string;
     time?: Date;

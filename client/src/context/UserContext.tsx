@@ -1,12 +1,13 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { User } from '../modals/User';
+import { User } from '../models/User';
 import { useLocalStorage } from '../hooks/UseLocalStorage';
 
 export const UserContext = createContext({
     users: [] as User[],
     setUsers: (users: User[]) => {},
-    registerUser: (newUser: User) => {},
+    addUser: (newUser: User) => {},
     removeUser: (id: string) => {},
+    removeUsers: (id: string[]) => {},
   });
   
 export function UserProvider({ children }: { children: React.ReactNode }) {
@@ -24,7 +25,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         
     //     loadUsers();
     //   }, []);
-    const registerUser = (newUser: User) => {
+    
+    const addUser = (newUser: User) => {
         const updatedData = [...users, newUser];
         setUsers(updatedData);
       };
@@ -33,10 +35,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         const updatedUsersData = users.filter((user) => user.id !== id);
         setUsers(updatedUsersData);
       };
-  
+    const removeUsers = (ids: string[]) => {
+        const updatedUsersData = users.filter((user) => !ids.includes(user.id));
+        setUsers(updatedUsersData);
+      };
     return (
       <UserContext.Provider
-        value={{ users, setUsers, registerUser: registerUser, removeUser }}
+        value={{ users, setUsers, addUser, removeUsers,removeUser }}
       >
         {children}
       </UserContext.Provider>

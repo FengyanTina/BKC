@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { User } from "../../modals/User";
-import { Box, Button, Link, Modal, Paper, styled, Typography } from "@mui/material";
+import { useState } from "react";
+import { User } from "../../models/User";
+import { Box, Button, Link, Modal, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import IntroCard from "../../components/common/cards/IntroCard";
-import ImgInforCard from "../../components/pageSections/cards/InforCardImgSections/ImgInforCard";
 import { Pastor } from "../../data";
 import SectionLine from "../../components/pageSections/SectionLine";
 import UserTable from "../../components/common/Tables/userTable";
@@ -21,17 +20,12 @@ const modalStyle = {
     p: 4,
 };
 const AboutUsPage = (props: Props) => {
-  const deleteUser = (userName: string) => {
-    let storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+ 
 
-    // Remove the user from the array
-    storedUsers = storedUsers.filter(
-      (user: User) => user.userName !== userName
-    );
+  
 
-    // Save the updated array back to localStorage
-    localStorage.setItem("users", JSON.stringify(storedUsers));
-  };
+  
+
 
   const [modalOpen, setModalOpen] = useState(false); // State for modal visibility
 
@@ -211,6 +205,8 @@ const AboutUsPage = (props: Props) => {
         </Box>
         <UserTable/>
       </Box>
+
+
     </Box>
   );
 };

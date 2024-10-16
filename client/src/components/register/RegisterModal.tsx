@@ -1,7 +1,7 @@
 // src/components/LoginModal.tsx
 import React from "react";
 import { Dialog, DialogContent, DialogActions, Button } from "@mui/material";
-import RegisterPage from "./RegisterUser";
+
 
 
 
@@ -14,7 +14,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ open, handleClose }) => {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
       <DialogContent>
-        <RegisterPage />
+        {/* <RegisterPage /> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">

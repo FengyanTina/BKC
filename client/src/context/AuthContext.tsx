@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { User } from "../modals/User";
+import { User } from "../models/User";
 import { useLocalStorage } from "../hooks/UseLocalStorage";
 
 

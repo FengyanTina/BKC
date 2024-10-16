@@ -66,9 +66,9 @@ import {
               </Link>
             </Grid>
             <Grid >
-              <Link component={RouterLink} to="/register">
+              {/* <Link component={RouterLink} to="/register">
                 Sign Up
-              </Link>
+              </Link> */}
             </Grid>
           </Grid>
         </Paper>
