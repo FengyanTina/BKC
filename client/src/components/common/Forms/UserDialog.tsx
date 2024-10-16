@@ -4,13 +4,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Grid from "@mui/material/Grid2";
 import { FormControl, FormHelperText, FormHelperTextProps, InputLabel, MenuItem, Select } from "@mui/material";
-
+import { HashLink } from 'react-router-hash-link';
 import { defaultUser, User, UserCategory, UserDialogMode } from "../../../models/User";
 import { UserContext } from "../../../context/UserContext";
 import { generateUniqueId } from "../../../utils/generateUniqueId";
@@ -20,6 +20,7 @@ type UserDialogProps = {
 };
 
 function UserDialog({ mode }: UserDialogProps) {
+   
   const navigate = useNavigate();
   const { users, setUsers, addUser } = useContext(UserContext);
   const { id } = useParams();
@@ -30,7 +31,6 @@ function UserDialog({ mode }: UserDialogProps) {
 
   const {
     register,
-    setValue,
     handleSubmit,
     formState: { errors },
     reset,
@@ -39,6 +39,8 @@ function UserDialog({ mode }: UserDialogProps) {
     values: initialUser,
   });
 
+
+ 
   // Should be used with data from the product dialog
   const createOrEditUser = (userFromDialog: User) => {
     console.log("mode", mode);
@@ -58,25 +60,13 @@ function UserDialog({ mode }: UserDialogProps) {
     }
     createOrEditUser(user);
     reset();
-    navigate("/aboutUs");
+    // navigate("/aboutUs");
+    navigate("/aboutUs#userTable");
   };
 
-  //   const [imagePreview, setImagePreview] = useState<string | null>(null);
-
-  //   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     const file = event.target.files?.[0]; // Get the first file if available
-  //     if (file) {
-  //       const url = URL.createObjectURL(file);
-  //       setImagePreview(url); // Set the preview URL
-  //       setValue("image", url); // Set the file directly in the form state
-  //     } else {
-  //       setImagePreview(null); // Reset the preview if no file is selected
-  //       setValue("image", undefined); // Reset the image field
-  //     }
-  //   };
 
   return (
-    <Dialog open={true} onClose={() => navigate("/aboutUs")}>
+    <Dialog open={true} onClose={() => navigate("/aboutUs#userTable")}>
       {mode === UserDialogMode.Edit ? (
         <DialogTitle >Edit User: {id} </DialogTitle>
       ) : (
@@ -122,7 +112,7 @@ function UserDialog({ mode }: UserDialogProps) {
               required: "UserId is required.",
             })}
           />
-        
+        <HashLink to=''></HashLink>
           <TextField
             error={!!errors.phoneNumber}
             helperText={errors.phoneNumber?.message}
@@ -171,25 +161,6 @@ function UserDialog({ mode }: UserDialogProps) {
               },
             })}
           />
-
-          {/*   
-         <Box marginTop={2}>
-        <input
-          type="file"
-          accept="image/*"
-          {...register("image")} // Register the file input with react-hook-form
-          onChange={handleFileChange} // Call handleFileChange on file selection
-        />
-        {errors.image && (
-          <span style={{ color: 'red' }}>{errors.image.message}</span>
-        )}
-      </Box>
-
-      {imagePreview && (
-        <Box marginTop={2}>
-          <img src={imagePreview} alt="Uploaded preview" style={{ maxWidth: '100%', maxHeight: '200px' }} />
-        </Box>
-      )} */}
      <FormControl fullWidth margin="normal" error={!!errors.category}>
           <InputLabel id="category-label">Category</InputLabel>
           <Select
@@ -267,7 +238,7 @@ function UserDialog({ mode }: UserDialogProps) {
             <Button
               variant="contained"
               color="secondary"
-              onClick={() => navigate("/aboutUs")}
+              onClick={() => navigate("/aboutUs#userTable")}
             >
               Cancel
             </Button>

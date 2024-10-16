@@ -66,7 +66,7 @@ import RegisterModal from "../register/RegisterModal";
          
         const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
         const user = storedUsers.find(
-          (user: any) => user.userName === username && user.password === password
+          (user:User) => user.userName === username && user.userId === password
         );
     
         if (user) {

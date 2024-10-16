@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { User } from "../../models/User";
 import { Box, Button, Link, Modal, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
@@ -7,7 +7,7 @@ import { Pastor } from "../../data";
 import SectionLine from "../../components/pageSections/SectionLine";
 import UserTable from "../../components/common/Tables/userTable";
 
-type Props = {};
+
 
 const modalStyle = {
     position: 'absolute',
@@ -19,11 +19,29 @@ const modalStyle = {
     boxShadow: 24,
     p: 4,
 };
-const AboutUsPage = (props: Props) => {
+const AboutUsPage = () => {
  
-
+    
   
-
+    useEffect(() => {
+        // Scroll to the user table when the component mounts
+        // const hash = window.location.hash;
+        // if (hash) {
+        //   const element = document.getElementById(hash.substring(1));
+        //   if (element) {
+        //     element.scrollIntoView({ behavior: "smooth" });
+        //   }
+        // }
+        const hash = window.location.hash;
+        if (hash) {
+          const element = document.getElementById(hash.substring(1));
+          if (element) {
+            // Jump directly to the target element's offset position
+            const yOffset = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: yOffset, behavior: 'auto' }); // Use 'auto' for no smooth scrolling
+          }
+        }
+      }, []);
   
 
 
@@ -198,12 +216,15 @@ const AboutUsPage = (props: Props) => {
           flexDirection: "column",
           alignItems: "center",
         }}
+        id="userTable"
+        
       >
         <SectionLine text="Membership Mangement"/>
-        <Box sx={{with:'60%'}}>
+        <Box sx={{with:'60%'}} >
 
         </Box>
-        <UserTable/>
+        
+        <UserTable />
       </Box>
 
 

@@ -33,13 +33,9 @@ export default function TabBar() {
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false); 
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const handleRegisterOpen = () => {
-    setIsRegisterOpen(true);
-  };
 
-  const handleRegisterClose = () => {
-    setIsRegisterOpen(false);
-  };
+
+
 
   const handleLoginOpen = () => {
     setIsLoginOpen(true);
@@ -208,7 +204,7 @@ export default function TabBar() {
                       fontSize: "1.5rem",
                     }}
                   >
-                    {user.name} {/* Safe access to user.name */}
+                    {user.firstName} {/* Safe access to user.name */}
                   </Typography>
                   <Typography
                     variant="h5"
@@ -245,7 +241,7 @@ export default function TabBar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <RegisterModal open={isRegisterOpen} handleClose={handleRegisterClose} />
+     
       <LoginModal open={isLoginOpen} handleClose={handleLoginClose} />
       <nav>
         <TabDrawer open={drawerOpen} onClose={handleDrawerToggle} />
