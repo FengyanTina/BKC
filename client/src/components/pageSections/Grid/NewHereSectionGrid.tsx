@@ -3,13 +3,13 @@ import { Typography } from "@mui/material";
 import { ImageGallaryItemData } from "../../../models/ImgGallary";
 import { PageSection } from "../../../models/PageSection";
 import { ImageInforCardModel } from "../../../models/ImageInforCard";
-
+import { HashLink } from "react-router-hash-link";
+import { useNavigate } from "react-router-dom";
 
 export default function NewHereSectionGrid({
   title,
   description,
   images,
-  links,
   subtitle,
 }: ImageInforCardModel) {
   return (
@@ -43,7 +43,7 @@ export default function NewHereSectionGrid({
           variant="h2"
           sx={{
             marginTop: "0px",
-            paddingTop:'0px',
+            paddingTop: "0px",
             fontWeight: "700",
             color: "#883b9b", // Muted reddish-purple that stands out on both black and white backgrounds
             textShadow: "2px 2px 4px rgba(0,0,0,1)",
@@ -85,33 +85,16 @@ export default function NewHereSectionGrid({
             backgroundColor: "rgba(255, 255, 255, 0.4)",
             paddingTop: "40px",
             paddingBottom: "40px",
-            marginBottom:'60px',
+            marginBottom: "60px",
             alignItems: "center",
-            justifyContent:'center',
+            justifyContent: "center",
             maxWidth: "1100px",
             marginLeft: "auto", // Automatically adjust left margin
             marginRight: "auto",
           }}
         >
-          {links && (
-            Array.isArray(links) ? (
-              links.map((link, index) => (
-                <a
-                  key={index}
-                  href={link}
-                  style={{
-                    display: "block",
-                    fontSize: "25px",
-                    color: "black",
-                    fontWeight: "500",
-                  }}
-                >
-                  {link}
-                </a>
-              ))
-            ) : (
-              <a
-                href={links}
+              <HashLink
+                to="/services#in-church"
                 style={{
                   display: "block",
                   fontSize: "25px",
@@ -119,10 +102,30 @@ export default function NewHereSectionGrid({
                   fontWeight: "500",
                 }}
               >
-                {links}
-              </a>
-            )
-          )}
+                In Church
+              </HashLink>
+              <HashLink
+                to="/services#serve"
+                style={{
+                  display: "block",
+                  fontSize: "25px",
+                  color: "black",
+                  fontWeight: "500",
+                }}
+              >
+                Connect To Your Purpose
+              </HashLink>
+              <HashLink
+                to="/activities"
+                style={{
+                  display: "block",
+                  fontSize: "25px",
+                  color: "black",
+                  fontWeight: "500",
+                }}
+              >
+                For Your Family
+              </HashLink>
         </Box>
       </Box>
     </Box>

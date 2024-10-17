@@ -17,7 +17,6 @@ const WantServeSectionCard = ({
   subtitle,
   images,
   steps,
-  showAllAsFeatured = false,
 }: ImageTextWithStepsModel) => {
   const imageCount = Array.isArray(images) ? images.length : 1; // Determine the number of images
   const hasLargeImage = imageCount > 2;

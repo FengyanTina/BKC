@@ -156,7 +156,6 @@ export interface ServingPosition {
     subtitle:"can't wait to meet you!",
     description:"You may find information you need in below links or feel free to contact us. ",
     images:welcome2,
-    links:["What Expected In Church","For your Family","Find Your Small Community","Connet to Your Purpose "]
   }
 
 export const comingEvents:Activity[] = [

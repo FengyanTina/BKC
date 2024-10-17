@@ -2,18 +2,7 @@ import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
 import InforCard from "../../../common/cards/InforCard";
-import { PageSection } from "../../../../models/PageSection";
-import { imageGallarytemData } from "../../../../data";
 import { ImageInforCardModel } from "../../../../models/ImageInforCard";
-
-type Props = {
-  category?: string;
-  title: string;
-  subtitle?: string;
-  buttonText?: string;
-  time?: Date;
-  image: string | string[];
-};
 
 
 const ImgInforCard = ({ title, category, subtitle, description, images,imageLeft = true }: ImageInforCardModel) => {

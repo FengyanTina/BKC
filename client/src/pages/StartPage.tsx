@@ -2,7 +2,7 @@ import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Worship from "../assets/Worship.jpeg";
 import Carousel from "../components/common/slides/Carousel.tsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PauseOnHover from "../components/common/slides/SlickSlider";
 import { useState } from "react";
 import Map from "../apis/googleMap/Map.tsx";
@@ -22,6 +22,7 @@ import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
 import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
 import NewHereSectionGrid from "../components/pageSections/grid/NewHereSectionGrid.tsx";
+import { HashLink } from "react-router-hash-link";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -32,7 +33,7 @@ export default function StartPage() {
   const handleCloseMap = () => {
     setOpenMap(false);
   };
-
+  const navigate = useNavigate();
   return (
     <Box>
       <Grid
@@ -224,12 +225,13 @@ export default function StartPage() {
 
         {/* --------------WELCOME NEW----------- */}
         <SectionLine text="Welcome" useWhiteStroke={true} />
+        <button onClick={() => navigate("/services#connect-your-purpose")}
+ > connect</button >
         <NewHereSectionGrid
         id={newHere.id}
           title={newHere.title}
          description={newHere.description}
           images={newHere.images}
-          links={newHere.links}
           subtitle={newHere.subtitle}
         />
       </Box>

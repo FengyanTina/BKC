@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { User } from "../../models/User";
+import { useEffect, useState } from "react";
 import { Box, Button, Link, Modal, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import IntroCard from "../../components/common/cards/IntroCard";
@@ -7,48 +6,32 @@ import { Pastor } from "../../data";
 import SectionLine from "../../components/pageSections/SectionLine";
 import UserTable from "../../components/common/Tables/userTable";
 
-
-
 const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
 };
 const AboutUsPage = () => {
- 
-    
-  
-    useEffect(() => {
-        // Scroll to the user table when the component mounts
-        // const hash = window.location.hash;
-        // if (hash) {
-        //   const element = document.getElementById(hash.substring(1));
-        //   if (element) {
-        //     element.scrollIntoView({ behavior: "smooth" });
-        //   }
-        // }
-        const hash = window.location.hash;
-        if (hash) {
-          const element = document.getElementById(hash.substring(1));
-          if (element) {
-            // Jump directly to the target element's offset position
-            const yOffset = element.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({ top: yOffset, behavior: 'auto' }); // Use 'auto' for no smooth scrolling
-          }
-        }
-      }, []);
-  
-
-
   const [modalOpen, setModalOpen] = useState(false); // State for modal visibility
-
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => setModalOpen(false);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.getElementById(hash.substring(1));
+      if (element) {
+        // Jump directly to the target element's offset position
+        const yOffset = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: yOffset, behavior: "auto" }); // Use 'auto' for no smooth scrolling
+      }
+    }
+  }, []);
 
   return (
     <Box
@@ -97,6 +80,7 @@ const AboutUsPage = () => {
             justifyContent: "space-between", // Space between the title/content and "Read More" button
           }}
           size={{ xs: 12, md: 6 }}
+          id="mainPastor"
         >
           <Typography variant="h2">{Pastor.title}</Typography>
           <Typography
@@ -112,21 +96,19 @@ const AboutUsPage = () => {
             sx={{
               marginTop: "20px",
               flexGrow: 1, // This makes the content expand to fill the available space
-              display: '-webkit-box',
-              overflow: 'hidden',
-              WebkitBoxOrient: 'vertical',
+              display: "-webkit-box",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
               WebkitLineClamp: 11, // Limit to 7 lines
-              position: 'relative',
+              position: "relative",
             }}
           >
-                {/* Directly using Box to prevent wrapping issues with Typography */}
-                {Pastor.content.split('\n').map((paragraph, index) => (
-                    <Box key={index} sx={{ display: 'block', mb: 2 }}>
-                        <Typography variant="body1">{paragraph}</Typography>
-                    </Box>
-                ))}
-               
-                
+            {/* Directly using Box to prevent wrapping issues with Typography */}
+            {Pastor.content.split("\n").map((paragraph, index) => (
+              <Box key={index} sx={{ display: "block", mb: 2 }}>
+                <Typography variant="body1">{paragraph}</Typography>
+              </Box>
+            ))}
           </Box>
           <Box sx={{ marginTop: "20px" }}>
             <Typography variant="body1">
@@ -152,8 +134,8 @@ const AboutUsPage = () => {
           </Box>
           <Box sx={{ marginTop: "20px" }}>
             <Link
-              onClick={handleOpen} 
-              sx={{ cursor: 'pointer', marginTop: 1 }}
+              onClick={handleOpen}
+              sx={{ cursor: "pointer", marginTop: 1 }}
               target="_blank"
               rel="noopener"
               underline="hover"
@@ -163,33 +145,30 @@ const AboutUsPage = () => {
           </Box>
         </Grid>
         <Modal
-                open={modalOpen}
-                onClose={handleClose}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-            >
-                <Box sx={modalStyle}>
-                    <Typography id="modal-title" variant="h4" >
-                        {Pastor.title}
-                    </Typography>
-                    <Typography variant="h5">
-                        {Pastor.subTitle}
-                        </Typography>
+          open={modalOpen}
+          onClose={handleClose}
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+        >
+          <Box sx={modalStyle}>
+            <Typography id="modal-title" variant="h4">
+              {Pastor.title}
+            </Typography>
+            <Typography variant="h5">{Pastor.subTitle}</Typography>
 
-                    <Box sx={{ mt: 2 }}>
-                        {/* Displaying full content in modal */}
-                        {Pastor.content.split('\n').map((paragraph, index) => (
-                            <Box key={index} sx={{ display: 'block', mb: 2 }}>
-                                {paragraph}
-                            </Box>
-                        ))}
-                    </Box>
-                    <Button onClick={handleClose} sx={{ mt: 2 }} variant="contained">
-                        Close
-                    </Button>
+            <Box sx={{ mt: 2 }}>
+              {/* Displaying full content in modal */}
+              {Pastor.content.split("\n").map((paragraph, index) => (
+                <Box key={index} sx={{ display: "block", mb: 2 }}>
+                  {paragraph}
                 </Box>
-            </Modal>
-        {/* <ImgInforCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image}/> */}
+              ))}
+            </Box>
+            <Button onClick={handleClose} sx={{ mt: 2 }} variant="contained">
+              Close
+            </Button>
+          </Box>
+        </Modal>
       </Grid>
       <SectionLine text="Leadership" />
       <Box
@@ -202,12 +181,31 @@ const AboutUsPage = () => {
           },
           gap: "50px",
         }}
+        id="leaderShip"
       >
-        <IntroCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image} onOpen={handleOpen}/>
-        <IntroCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image} onOpen={handleOpen}/>
-        <IntroCard title= {Pastor.title} subTitle={Pastor.subTitle} content={Pastor.content} image={Pastor.image} onOpen={handleOpen}/>
+        <IntroCard
+          title={Pastor.title}
+          subTitle={Pastor.subTitle}
+          content={Pastor.content}
+          image={Pastor.image}
+          onOpen={handleOpen}
+        />
+        <IntroCard
+          title={Pastor.title}
+          subTitle={Pastor.subTitle}
+          content={Pastor.content}
+          image={Pastor.image}
+          onOpen={handleOpen}
+        />
+        <IntroCard
+          title={Pastor.title}
+          subTitle={Pastor.subTitle}
+          content={Pastor.content}
+          image={Pastor.image}
+          onOpen={handleOpen}
+        />
       </Box>
-      <SectionLine text="Our History"/>
+      <SectionLine text="Our History" />
       <Box
         sx={{
           marginTop: "50px",
@@ -217,17 +215,11 @@ const AboutUsPage = () => {
           alignItems: "center",
         }}
         id="userTable"
-        
       >
-        <SectionLine text="Membership Mangement"/>
-        <Box sx={{with:'60%'}} >
-
-        </Box>
-        
+        <SectionLine text="Membership Mangement" />
+        <Box sx={{ with: "60%" }}></Box>
         <UserTable />
       </Box>
-
-
     </Box>
   );
 };

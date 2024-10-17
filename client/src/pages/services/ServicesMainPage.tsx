@@ -14,7 +14,7 @@ import {
 import { SocialIcon } from "react-social-icons";
 import ImgTextCard from "../../components/pageSections/cards/texAndImgCards/ImgTextCard.tsx";
 import SectionLine from "../../components/pageSections/SectionLine.tsx";
-import ImageTextWithStepsCard from "../../components/pageSections/cards/customizedCards/ImageTextWithSteps.tsx";
+import BaptismServiceSectionCard from "../../components/pageSections/cards/customizedCards/BaptismServiceSectionCard.tsx";
 import WantServeSectionCard from "../../components/pageSections/cards/customizedCards/WantServeSectionCard.tsx";
 
 export default function ServicesMainPage() {
@@ -103,8 +103,8 @@ export default function ServicesMainPage() {
         </Grid>
       </Grid>
       {/* --------------SundayService ----------- */}
+      <div id="sundayService"></div>
       <SectionLine text="Sunday Scervice" />
-
       <ImgTextCard
         id={sundayServiceSection.id}
         title={sundayServiceSection.title}
@@ -115,7 +115,7 @@ export default function ServicesMainPage() {
 
       {/* --------------PrayerService ----------- */}
       <SectionLine text="Prayer Services" />
-
+      <div id="prayerService"></div>
       <ImgTextCard
         id={prayerService.id}
         title={prayerService.title}
@@ -127,7 +127,8 @@ export default function ServicesMainPage() {
 
       {/* -------------BaptismService----------- */}
       <SectionLine text="Baptism Scervices" />
-      <ImageTextWithStepsCard
+      <div id="baptismService"></div>
+      <BaptismServiceSectionCard
         id={baptismService.id}
         title={baptismService.title}
         description={""}
@@ -135,12 +136,12 @@ export default function ServicesMainPage() {
         images={baptismService.image}
       />
       {/* -------------FindYourVision----------- */}
+      <div id="serve"></div>
       <SectionLine text="Want To Serve The Lord" />
       <WantServeSectionCard
         id={findYourVision.id}
         title={findYourVision.title}
         steps={findYourVision.steps}
-       
         description={findYourVision.description}
         images={findYourVision.images}
       />

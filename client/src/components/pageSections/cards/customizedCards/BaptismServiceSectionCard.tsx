@@ -16,7 +16,7 @@ const Item = styled("div")(({ theme }) => ({
   ...theme.applyStyles("dark", {}),
 }));
 
-const ImageTextWithStepsCard = ({
+const BaptismServiceSectionCard = ({
   title,
   subtitle,
   images,
@@ -150,4 +150,4 @@ const ImageTextWithStepsCard = ({
   );
 };
 
-export default ImageTextWithStepsCard;
+export default BaptismServiceSectionCard;

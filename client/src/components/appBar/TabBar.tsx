@@ -24,18 +24,14 @@ import "./appBar.css";
 import { useState } from "react";
 import LoginModal from "../login/LoginModal";
 import { useAuth } from "../../context/AuthContext";
-import RegisterModal from "../register/RegisterModal";
+
 
 export default function TabBar() {
   const { user, logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [logOutFormOpen, setlogOutFormOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false); 
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-
-
-
 
   const handleLoginOpen = () => {
     setIsLoginOpen(true);
@@ -92,7 +88,8 @@ export default function TabBar() {
             onClick={handleDrawerToggle}
             sx={{
               mr: 2,
-              display: { sm: "none" },
+            //   display: { sm: "none" },
+            display: { lg: "none", md: "block", sm: "block", xs: "block" },
               color: "white",
               "& svg": {
                 fontSize: "2rem",
@@ -107,7 +104,8 @@ export default function TabBar() {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "none", sm: "block" },
+            //   display: { xs: "none", sm: "block" },
+            display: { md: "block", sm: "block", xs: "none" }, 
               fontSize: "4rem",
             }}
           >
@@ -115,7 +113,8 @@ export default function TabBar() {
           </Typography>
           <Box
             sx={{
-              display: { xs: "none", sm: "flex" },
+              //display: { xs: "none", sm: "flex" },
+              display: { lg: "flex", md: "none", sm: "none", xs: "none" },
               gap: "50px",
               fontSize: "4rem",
               justifyContent: "center", // Center the MenuItems
