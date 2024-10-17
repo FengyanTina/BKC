@@ -14,6 +14,7 @@ import { Activity, ActivityCategory } from "./models/Activity";
 import { PageSection } from "./models/PageSection";
 import { ImageInforCardModel } from "./models/ImageInforCard";
 import { ActivitySocialMediaScetionCardModel } from "./models/ActivitySocialMediaScetionCard";
+import { images } from "./components/common/slides/SlickSlider";
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -234,21 +235,60 @@ export const news:Activity[] = [
 
   export const steps = [
     {
+        id:"s1",
       title: "Step 1",
-      description: "Register You",
+      description: "Register You here",
+      linkName:"Register",
       link: "http://example.com/register",
     },
     {
+        id:"s2",
       title: "Step 2",
       description:
         "After you register, you will receive a follow-up email with a video explaining the meaning and significance of water baptism.",
     },
-    { title: "Step 3", description: "Schedule the baptism." },
+    { id:"s3", title: "Step 3", description: "Schedule the baptism." },
+  ];
+  export const servings = [
+    {
+        id:"s1",
+      title: "SundayService",
+      description: "Gifted in music? Sunday Service you can serve the Lord in worship team. Or if you are good at tech, use your skills to service in tech team. If you are interested,",
+      linkName:"Register you here",
+      link: "http://example.com/register",
+    },
+    {
+        id:"s2",
+        title: "SundaySchoole",
+        description: "Have a vision in young children? Want to help the next generation growing in the knowlege of the Bible?. Our sunday school has two groups, young children and older group",
+        linkName:"Register you here",
+        link: "http://example.com/register",
+    },
+    { id:"s3",
+        title: "UsherTeam",
+        description: "Recive people or help with fika prepareation, you can share your love and your smile with people coming to church. Give them the bigest welcome to the house of the Lord in the sunday morning",
+        linkName:"Register you here",
+        link: "http://example.com/register",
+     },
+     { id:"s4",
+        title: "YouthGroup",
+        description: "Have passion in youth?",
+        linkName:"Register you here",
+        link: "http://example.com/register",
+     },
   ];
   export const baptismService = {
-    title: "If you would like to be baptized, follow these simple steps.",
+    id:"102",
+    title: "Want to be baptized?",
     steps: steps,
     image: Mission,
+  };
+  export const findYourVision = {
+    id:"103",
+    title: "Want to Serve",
+    description:"You can find your vision and purpose, and serve the Lord in different ways.",
+    steps: servings,
+    images:[Mission, Prayer,Conference,]
   };
 export const sundayServiceSection  = {
   id: "1",

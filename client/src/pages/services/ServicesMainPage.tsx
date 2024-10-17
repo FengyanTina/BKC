@@ -4,12 +4,18 @@ import Grid from "@mui/material/Grid2";
 import worshipHands from "../../assets/worshipHands.jpg";
 import Map from "../../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { prayerService, baptismService, sundayServiceSection } from "../../data.ts";
+import {
+  prayerService,
+  baptismService,
+  sundayServiceSection,
+  findYourVision,
+} from "../../data.ts";
 // import LiveService from "../../apis/youtube/LiveService.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImgTextCard from "../../components/pageSections/cards/texAndImgCards/ImgTextCard.tsx";
 import SectionLine from "../../components/pageSections/SectionLine.tsx";
-import BaptismSectionCard from "../../components/pageSections/cards/customizedCards/BaptismSectionCard.tsx";
+import ImageTextWithStepsCard from "../../components/pageSections/cards/customizedCards/ImageTextWithSteps.tsx";
+import WantServeSectionCard from "../../components/pageSections/cards/customizedCards/WantServeSectionCard.tsx";
 
 export default function ServicesMainPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -49,13 +55,13 @@ export default function ServicesMainPage() {
         }}
       >
         <Grid size={{ xs: 6, md: 10 }}>
-          <Typography variant="h3" sx={{ color: "white", }}>
+          <Typography variant="h3" sx={{ color: "white" }}>
             Sunday services
           </Typography>
-          <Typography variant="h6" sx={{ color: "white",marginTop: "10px" }}>
+          <Typography variant="h6" sx={{ color: "white", marginTop: "10px" }}>
             Sunday 11:00-13:00
           </Typography>
-          <Typography variant="h6" sx={{ color: "white",marginTop: "10px" }}>
+          <Typography variant="h6" sx={{ color: "white", marginTop: "10px" }}>
             Albanoliden 5, vån 3, 50630 Borås{" "}
             <FaMapMarkerAlt
               onClick={handleOpenMap}
@@ -80,7 +86,7 @@ export default function ServicesMainPage() {
             Live: Sunday 11:00 on Youtube
           </Typography>
           {/* <LiveService /> */}
-          <Typography variant="h6" sx={{ color: "white",marginTop: "20px" }}>
+          <Typography variant="h6" sx={{ color: "white", marginTop: "20px" }}>
             <a
               href="https://www.youtube.com/c/Bor%C3%A5sKristnaCenter"
               style={{ color: "white" }}
@@ -100,7 +106,7 @@ export default function ServicesMainPage() {
       <SectionLine text="Sunday Scervice" />
 
       <ImgTextCard
-      id={sundayServiceSection.id}
+        id={sundayServiceSection.id}
         title={sundayServiceSection.title}
         subtitle={sundayServiceSection.subTitle}
         description={sundayServiceSection.description}
@@ -111,7 +117,7 @@ export default function ServicesMainPage() {
       <SectionLine text="Prayer Services" />
 
       <ImgTextCard
-      id={prayerService.id}
+        id={prayerService.id}
         title={prayerService.title}
         linkSubtitle={prayerService.linkSubtitle}
         description={prayerService.description}
@@ -121,110 +127,23 @@ export default function ServicesMainPage() {
 
       {/* -------------BaptismService----------- */}
       <SectionLine text="Baptism Scervices" />
-      <BaptismSectionCard
+      <ImageTextWithStepsCard
+        id={baptismService.id}
         title={baptismService.title}
+        description={""}
         steps={baptismService.steps}
-        image={baptismService.image}
+        images={baptismService.image}
       />
-
-      {/* <Box sx={{ flexGrow: 1 }}>
-        <Grid
-          container
-          spacing={{ xs: 0, md: 0 }}
-          columns={{ xs: 1, sm: 12, md: 12 }}
-        >
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            <Item>
-              <img src={Mission} style={{ width: "100%" }} alt="" />
-            </Item>
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6, md: 6 }}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start", // Ensures that the `h3` stays at the top
-              height: "100%", // Full height grid for vertical centering
-            }}
-          >
-            <Typography
-              variant="h3"
-              sx={{
-                textAlign: "center", // Align the text to the center
-                mx: "auto", // Horizontal margin to center it within the container
-                px: 3, // Add padding on the sides
-              }}
-            >
-              If you would like to be baptized, follow these simple steps.
-            </Typography>
-            <Typography
-              variant="h4"
-              sx={{
-                textAlign: "center", // Align the text to the center
-                mx: "auto", // Horizontal margin to center it within the container
-                px: 3, // Add padding on the sides
-                mt: 5,
-              }}
-            ></Typography>
-            <Box
-              sx={{
-                display: "flex", // Make it a flex container
-                flexDirection: "column", // Stack items
-                alignItems: "start", // Center horizontally
-                justifyContent: "center", // Center vertically
-
-                mt: 5, // Optional margin top if needed
-                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
-                maxHeight: "300px", // Match the max height to prevent too much height difference
-                overflowY: "auto",
-                "@media (max-width: 1430px)": {
-                  maxHeight: "200px", // Cap the height at 1330px width
-                },
-              }}
-            >
-              <Typography
-                variant="h5"
-                sx={{
-                  textAlign: "center", // Align text in the center
-                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
-                  overflowY: "auto", // Enable scroll if text is too long
-                  px: 3, // Padding for left and right space
-                  lineHeight: 2,
-                }}
-              >
-                <strong>Step1:</strong>:<a href="http://">Register You</a>
-              </Typography>
-              <Typography
-                variant="h5"
-                sx={{
-                  textAlign: "left", // Align text in the center
-                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
-                  overflowY: "auto", // Enable scroll if text is too long
-                  px: 3, // Padding for left and right space
-                  lineHeight: 2,
-                }}
-              >
-                <strong>Step2:</strong> After you register, you will receive a
-                follow-up email with a video explaining the meaning and
-                significance of water baptism.
-              </Typography>
-              <Typography
-                variant="h5"
-                sx={{
-                  textAlign: "center", // Align text in the center
-                  maxHeight: { lg: "350px", md: "100px", sm: "100px" },
-                  overflowY: "auto", // Enable scroll if text is too long
-                  px: 3, // Padding for left and right space
-                  lineHeight: 2,
-                }}
-              >
-                <strong>Step3:</strong>: Schedule the baptism.
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box> */}
-
+      {/* -------------FindYourVision----------- */}
+      <SectionLine text="Want To Serve The Lord" />
+      <WantServeSectionCard
+        id={findYourVision.id}
+        title={findYourVision.title}
+        steps={findYourVision.steps}
+       
+        description={findYourVision.description}
+        images={findYourVision.images}
+      />
       {/*******YoutubeVideoLink***********/}
       <SectionLine text="Service Videos" />
 

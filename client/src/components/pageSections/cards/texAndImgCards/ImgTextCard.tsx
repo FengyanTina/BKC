@@ -1,8 +1,9 @@
 import { Box, styled, Typography } from '@mui/material';
 import  Grid  from '@mui/material/Grid2';
 import ImageGallary from '../../../common/ImageGallary';
-import  "./textImageText.css"
+import './imageText.css'
 import { ImageTextCardModal } from '../../../../models/ImageTex';
+
 
 const Item = styled("div")(({ theme }) => ({
     ...theme.typography.body2,
@@ -26,15 +27,17 @@ const ImgTextCard = ({
             }
     
             return (
-                <img
-                    src={images}
-                    style={{
-                        width: '100%', 
-                        objectFit: 'cover',
-                        maxHeight: '380px',
-                    }}
-                    alt=""
-                />
+                <div style={{
+                    width: '100%',
+                    position: 'relative',
+                    overflow: 'hidden', // Prevent overflow
+                }}>
+                    <img
+                        src={images}
+                        className="image-responsive"
+                        alt=""
+                    />
+                </div>
             );
         };
   return (
@@ -48,21 +51,6 @@ const ImgTextCard = ({
                     <>
           <Grid size={{ xs: 12, sm: 12, md: 6 }}>
             <Item>
-            {/* {Array.isArray(images) ? (
-  
-            <ImageGallary itemData={images.map(img => ({ img: img }))}/>
-            ) : (
-              // Otherwise, render a single image
-              <img 
-              src={images} 
-              style={{ 
-                width: '100%', 
-                objectFit: 'cover',
-                maxHeight: '380px', 
-            }} 
-            alt="" 
-            />
-            )} */}
              {renderImage()}
             </Item>
           </Grid>
@@ -90,113 +78,11 @@ const ImgTextCard = ({
             }}
           >
             {renderTextPart(title, description, subtitle, linkSubtitle)}
-            {/* <Typography
-              variant="h3"
-              sx={{
-                textAlign: "center", // Align the text to the center
-                mx: "auto", // Horizontal margin to center it within the container
-                px: 3, // Add padding on the sides
-                fontSize:{
-                    lg: 30, 
-                    md: 28, 
-                    sm: 25
-                 },
-              }}
-            >
-             {title}
-            </Typography>
-            {linkSubtitle &&(
-         <Typography
-          variant="h4"
-          sx={{
-            textAlign: "center", // Align the text to the center
-            mx: "auto", // Horizontal margin to center it within the container
-            px: 3, // Add padding on the sides
-            mt: 2,
-          }}
-        >
-          <a href=""   
-          style={{
-            fontSize: window.innerWidth >= 
-            1200 ? "25px" : window.innerWidth >= 960 ? 
-            "25px" 
-            : "20px",
-          }}>{linkSubtitle}</a>
-        </Typography>   
-        )}
-            {subtitle && (
-                <Typography
-                variant="h4"
-                sx={{
-                    textAlign: "center", // Align the text to the center
-                    mx: "auto", // Horizontal margin to center it within the container
-                    px: 3, // Add padding on the sides
-                    mt: 3,
-                    fontSize:{
-                        lg: 25, 
-                        md: 20, 
-                        sm: 20
-                     },
-                  }}
-              >
-                {subtitle}
-              </Typography> 
-            )}
-          
-            <Box
-               sx={{
-                display: "flex", // Make it a flex container
-                mt: 3,
-                alignItems: "center", // Center horizontally
-                justifyContent: "center", // Center vertically
-                alignContent: "center",
-               
-                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
-                maxHeight: "300px", // Match the max height to prevent too much height difference
-                overflowY: "auto",
-                "@media (max-width: 1430px)": {
-                  maxHeight: "200px", // Cap the height at 1330px width
-                },
-              }}
-            >
-              <Typography
-                variant="h5"
-                sx={{
-                    textAlign: "left", // Align text in the center
-                    maxHeight: { 
-                        lg: "350px", 
-                        md: "100px", 
-                        sm: "100px" },
-                    overflowY: "auto", // Enable scroll if text is too long
-                    px: 3, // Padding for left and right space
-                    fontSize:{
-                        lg: 20, 
-                        md: 20, 
-                        sm: 18
-                     },
-                  }}
-              >
-                {description}
-              </Typography>
-            </Box> */}
+            
           </Grid>
           <Grid size={{ xs: 12, sm: 12, md: 6 }}>
             <Item>
-            {/* {Array.isArray(images) ? (
-  
-            <ImageGallary itemData={images.map(img => ({ img: img }))}/>
-            ) : (
-              // Otherwise, render a single image
-              <img 
-              src={images} 
-              style={{ 
-                width: '100%', 
-                objectFit: 'cover',
-                maxHeight: '380px', 
-            }} 
-            alt="" 
-            />
-            )} */}
+            
              {renderImage()}
             </Item>
           </Grid>
@@ -214,11 +100,14 @@ const renderTextPart = (title: string, description: string, subtitle?: string, l
                 textAlign: "center", // Align the text to the center
                 mx: "auto", // Horizontal margin to center it within the container
                 px: 3, // Add padding on the sides
-                fontSize:{
-                    lg: 30, 
-                    md: 28, 
-                    sm: 25
-                 },
+               
+                fontSize: {
+                    lg: "40px",
+                    md: "30px",
+                    sm: "30px",
+                    xs: "28px", // Adjust font size on smaller screens
+                  },
+                 
               }}
             >
              {title}
@@ -231,15 +120,20 @@ const renderTextPart = (title: string, description: string, subtitle?: string, l
             mx: "auto", // Horizontal margin to center it within the container
             px: 3, // Add padding on the sides
             mt: 2,
+            marginBottom: "10px", // Add margin to separate from description
+            fontSize: {
+              lg: "30px",
+              md: "22px",
+              sm: "22px",
+              xs: "20px", // Adjust font size for small screens
+            },
           }}
         >
           <a href=""   
-          style={{
-            fontSize: window.innerWidth >= 
-            1200 ? "25px" : window.innerWidth >= 960 ? 
-            "25px" 
-            : "20px",
-          }}>{linkSubtitle}</a>
+           style={{
+            fontSize: "inherit", // Inherit the font size from Typography
+          }}
+          >{linkSubtitle}</a>
         </Typography>   
         )}
             {subtitle && (
@@ -250,11 +144,14 @@ const renderTextPart = (title: string, description: string, subtitle?: string, l
                     mx: "auto", // Horizontal margin to center it within the container
                     px: 3, // Add padding on the sides
                     mt: 3,
-                    fontSize:{
-                        lg: 25, 
-                        md: 20, 
-                        sm: 20
-                     },
+                    marginBottom: "10px",
+                    fontSize: {
+                        lg: "30px",
+                        md: "22px",
+                        sm: "22px",
+                        xs: "20px", // Adjust font size for smaller screens
+                    },
+                   
                   }}
               >
                 {subtitle}
@@ -265,33 +162,32 @@ const renderTextPart = (title: string, description: string, subtitle?: string, l
                sx={{
                 display: "flex", // Make it a flex container
                 mt: 3,
-                alignItems: "center", // Center horizontally
-                justifyContent: "center", // Center vertically
-                alignContent: "center",
-               
-                minHeight: "100px", // Ensure the text grid is at least as tall as the image grid
+                alignItems: "center", // Center vertically
+                justifyContent: "center", // Center horizontally
+                marginTop: "10px",
+                marginbottom: "10px",
+                minHeight: "200px", // Ensure the text grid is at least as tall as the image grid
                 maxHeight: "300px", // Match the max height to prevent too much height difference
-                overflowY: "auto",
-                "@media (max-width: 1430px)": {
-                  maxHeight: "200px", // Cap the height at 1330px width
+                overflowY: "auto", // Enable scrolling if the text overflows
+                "@media (max-width: 900px)": {
+                  minHeight: "200px", // Adjust height for smaller screens
+                  maxHeight: "300px",
                 },
               }}
             >
               <Typography
                 variant="h5"
                 sx={{
-                    textAlign: "left", // Align text in the center
-                    maxHeight: { 
-                        lg: "350px", 
-                        md: "100px", 
-                        sm: "100px" },
-                    overflowY: "auto", // Enable scroll if text is too long
+                    textAlign: "left", // Align text to the left
+                    fontSize: {
+                      lg: "25px",
+                      md: "20px",
+                      sm: "20px",
+                      xs: "18px", // Adjust font size for smaller screens
+                    },
+                    lineHeight: 1.5,
                     px: 3, // Padding for left and right space
-                    fontSize:{
-                        lg: 20, 
-                        md: 20, 
-                        sm: 18
-                     },
+                    overflowY: "auto", // Enable scroll if text is too long
                   }}
               >
                 {description}
@@ -299,4 +195,6 @@ const renderTextPart = (title: string, description: string, subtitle?: string, l
         </Box>
     </>
 );
+
+
 export default ImgTextCard;

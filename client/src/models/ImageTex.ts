@@ -1,6 +1,6 @@
-import { BaseModal } from "./BaseModel";
+import { BaseModel } from "./BaseModel";
 
-export interface ImageTextCardModal extends BaseModal {
+export interface ImageTextCardModal extends BaseModel {
     category?: string;
     subtitle?: string;
     linkSubtitle?: string;

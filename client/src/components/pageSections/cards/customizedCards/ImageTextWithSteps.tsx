@@ -7,6 +7,7 @@ import "./customizedCards.css";
 
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
+import { ImageTextWithStepsModel } from "../../../../models/ImageTextWithSteps";
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(2),
@@ -14,30 +15,16 @@ const Item = styled("div")(({ theme }) => ({
 
   ...theme.applyStyles("dark", {}),
 }));
-interface Step {
-  title: string;
-  description: string;
-  link?: string; // Optional link if needed
-}
 
-type BaptismSectionModal = {
-  title: string;
-  subTitle?: string; 
-  image: string | string[]; // Accept either a single string or an array of strings for images
-  steps?: Step[]; // New field for steps
-};
-type ImageLinksInforCardModal = {
-    subTitle?: string;
-    linkSubtitle?: string;
-    image: string | string[]; // Accept either a single string or an array of strings for images
-    linkBody?: string;
-  };
-const BaptismSectionCard = ({
+const ImageTextWithStepsCard = ({
   title,
-  subTitle,
-  image,
+  subtitle,
+  images,
   steps,
-}: BaptismSectionModal) => {
+  showAllAsFeatured = false,
+}: ImageTextWithStepsModel) => {
+
+    
   return (
     <Box sx={{ flexGrow: 1, width: "80%" }}>
       <Grid
@@ -46,14 +33,23 @@ const BaptismSectionCard = ({
         columns={{ xs: 1, sm: 12, md: 12 }}
       >
         <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-          <Item>
-            {Array.isArray(image) ? (
-              <ImageGallary itemData={image.map((img) => ({ img: img }))} />
-            ) : (
+          <Item
+          >
+            {Array.isArray(images) ? (
+              <ImageGallary itemData={images.map((img) => ({ img: img }))} showAllAsFeatured={showAllAsFeatured} />
+            ) : (     
               // Otherwise, render a single image
-              <img src={image} style={{ width: '100%', 
-                objectFit: 'cover',
-                maxHeight: '380px',}} alt="" />
+              <div style={{
+                width: '100%',
+                position: 'relative',
+                overflow: 'hidden', // Prevent overflow
+            }}>
+                <img
+                    src={images}
+                    className="image-responsive"
+                    alt=""
+                />
+            </div>
             )}
           </Item>
         </Grid>
@@ -72,16 +68,19 @@ const BaptismSectionCard = ({
               textAlign: "center",
               mx: "auto",
               px: 3,
+              marginBottom:"10px",
+            
               fontSize: {
-                lg: 30,
-                md: 28,
-                sm: 25,
+                lg: "40px",
+                md: "30px",
+                sm: "30px",
+                xs: "28px", // Adjust font size on smaller screens
               },
             }}
           >
             {title}
           </Typography>
-          {subTitle && (
+          {subtitle && (
             <Typography
               variant="h4"
               sx={{
@@ -90,26 +89,27 @@ const BaptismSectionCard = ({
                 px: 3, // Add padding on the sides
                 mt: 3,
                 fontSize: {
-                  lg: 25,
-                  md: 20,
-                  sm: 20,
-                },
+                    lg: "30px",
+                    md: "22px",
+                    sm: "22px",
+                    xs: "20px", // Adjust font size for small screens
+                  },
               }}
             >
-              {subTitle}
+              {subtitle}
             </Typography>
           )}
 
           <Box
             sx={{
               maxHeight: {
-                md: "200px",
-                lg: "350px",
+                xs:"300px",
+                sm:"350px",
+                md: "350px",
+                lg: "400px",
               },
+              marginTop:"10px",
               overflowY: "auto",
-              px: 3,
-              pt: 2,
-              pb: 2,
             }}
           >
             <ol>
@@ -121,16 +121,21 @@ const BaptismSectionCard = ({
                       sx={{
                         textAlign: "left",
                         fontSize: {
-                          lg: 20,
-                          md: 20,
-                          sm: 18,
-                        },
-                        lineHeight: 2,
+                            lg: "25px",
+                            md: "20px",
+                            sm: "20px",
+                            xs: "18px", // Adjust font size for smaller screens
+                          },
+                          lineHeight: 1.5,
+    
                         mb: 1,
                       }}
                     >
-                      {step.link ? (
-                        <a href={step.link}>{step.description}</a>
+                      {step.link && step.linkName ? (
+                        <>
+                        {step.description} &nbsp; {/* Non-breaking space */}
+                        <a href={step.link}>{step.linkName}</a> {/* Render the link */}
+                      </>
                       ) : (
                         step.description
                       )}
@@ -145,4 +150,4 @@ const BaptismSectionCard = ({
   );
 };
 
-export default BaptismSectionCard;
+export default ImageTextWithStepsCard;
