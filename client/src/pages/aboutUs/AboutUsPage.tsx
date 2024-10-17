@@ -43,6 +43,9 @@ const AboutUsPage = () => {
         flexDirection: "column",
         alignItems: "center",
         gap: "50px",
+        width: "100%", // Full width of the container
+        height: "100%",
+        overflowX: "hidden",
       }}
     >
       <Grid
@@ -50,18 +53,27 @@ const AboutUsPage = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
+          width: "100%", // Full width of the container
+          height: "100%",
           flexDirection: {
             md: "row",
             sm: "column",
           },
           marginBottom: "50px",
-          width: "80%", // Set the width to 80% of the screen
+
           margin: "0 auto", // Center it horizontally
-          alignItems: "stretch", // Ensure both the image and text grid have the same height
+
           flexGrow: "1",
         }}
       >
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Grid
+          size={{ xs: 12, md: 6 }}
+          sx={{
+            display: "flex",
+            justifyContent: "center", // Center the image horizontally
+            alignItems: "center", // Center the image vertically
+          }}
+        >
           <img
             style={{
               width: "100%", // Make the image take up full width of its container
@@ -78,15 +90,34 @@ const AboutUsPage = () => {
             display: "flex",
             flexDirection: "column", // Stack elements vertically
             justifyContent: "space-between", // Space between the title/content and "Read More" button
+            px: { xs: 3, sm: 4, md: 6 },
           }}
           size={{ xs: 12, md: 6 }}
           id="mainPastor"
         >
-          <Typography variant="h2">{Pastor.title}</Typography>
+          <Typography
+            sx={{
+              textAlign: {
+                xs: "center",
+                sm: "center",
+                lg: "left",
+              },
+              marginTop: "10px",
+              width: "100%", // Optional: make it take full width
+            }}
+            variant="h2"
+          >
+            {Pastor.title}
+          </Typography>
           <Typography
             sx={{
               marginTop: "10px",
-              // This makes the content expand to fill the available space
+              textAlign: {
+                xs: "center",
+                sm: "center",
+                lg: "left",
+              },
+              width: "100%",
             }}
             variant="h4"
           >
@@ -178,6 +209,7 @@ const AboutUsPage = () => {
           flexDirection: {
             md: "row",
             sm: "column",
+            xs: "column",
           },
           gap: "50px",
         }}
@@ -205,21 +237,20 @@ const AboutUsPage = () => {
           onOpen={handleOpen}
         />
       </Box>
-      <SectionLine text="Our History" />
+      <SectionLine text="MemberShip" />
+      <div id="userTable"></div>
+      <UserTable />
       <Box
         sx={{
           marginTop: "50px",
+          marginBottom: "50px",
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
           alignItems: "center",
         }}
         id="userTable"
-      >
-        <SectionLine text="Membership Mangement" />
-        <Box sx={{ with: "60%" }}></Box>
-        <UserTable />
-      </Box>
+      ></Box>
     </Box>
   );
 };

@@ -15,18 +15,19 @@ const SectionLine = ({text,  useWhiteStroke}: Props) => {
       textAlign: "center", // Center text
       width: "100vw", // Full width of the screen
       marginTop: "30px",
-      marginBottom:'30px'
+      marginBottom:'30px',
+      
     }}
   >
     <Typography
-      variant="h1"
+      variant="h2"
       sx={{
         fontWeight: {
           xs: 700, // Lighter font weight for small screens (mobile devices)
           sm: 900, // Default font weight for larger screens
         },
         fontSize: {
-          xs: "4rem", // Smaller font size for small screens (mobile devices)
+          xs: "3rem", // Smaller font size for small screens (mobile devices)
           sm: "6rem", // Default font size for larger screens (tablets and up)
         },
         lineHeight: "1em",

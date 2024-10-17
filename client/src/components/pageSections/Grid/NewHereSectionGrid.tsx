@@ -32,7 +32,7 @@ export default function NewHereSectionGrid({
     >
       <Box
         sx={{
-          maxWidth: "1100px", // Set a maximum width for the content
+           // Set a maximum width for the content
           width: "100%", // Make sure it scales for smaller screens
           textAlign: "center",
           justifyContent: "center", // Center horizontally

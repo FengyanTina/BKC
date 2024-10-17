@@ -360,7 +360,12 @@ export default function UserTable() {
   );
 
   return (
-    <Box sx={{ width: "80%" }}>
+    <Box sx={{ width: {
+        lg:"90%",
+        md:"80%",
+        sm:"70%",
+        xs:"70%"
+    }, overflowX: "auto" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar
           numSelected={selected.length}
@@ -369,7 +374,7 @@ export default function UserTable() {
         />
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth:650 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -395,7 +400,12 @@ export default function UserTable() {
                     tabIndex={-1}
                     key={row.id}
                     selected={isItemSelected}
-                    sx={{ cursor: "pointer" }}
+                    sx={{
+                        cursor: "pointer",
+                        '& td': {
+                          padding: { xs: '8px', sm: '16px' }, // Adjust padding based on screen size
+                        }
+                      }}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox

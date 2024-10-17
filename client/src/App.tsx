@@ -17,7 +17,7 @@ export default function App() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          minHeight: "100vh", // Ensure the container takes up the full height of the viewport
+          // Ensure the container takes up the full height of the viewport
           backgroundColor: "#f0f4f8", // Background color that covers the whole screen
         }}
       >

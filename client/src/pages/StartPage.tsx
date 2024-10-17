@@ -33,9 +33,8 @@ export default function StartPage() {
   const handleCloseMap = () => {
     setOpenMap(false);
   };
-  const navigate = useNavigate();
   return (
-    <Box>
+    <Box >
       <Grid
         container
         spacing={2}
@@ -48,7 +47,7 @@ export default function StartPage() {
           alignItems: "center",
           justifyContent: "space-evenly",
           width: "100%", // Full width of the container
-          height: "100vh", // Full viewport height
+         height:"100%",
           backgroundAttachment: "fixed",
         }}
       >
@@ -88,7 +87,7 @@ export default function StartPage() {
               alignItems: "center", // Center horizontally
               textAlign: "center", // Center text content
               position: "relative", // To move the box up
-              top: { sm: "-30px" },
+              marginTop: { xs: "100px",  },
             }}
           >
             {/* First Typography - Borås Kristna Center */}
@@ -105,11 +104,10 @@ export default function StartPage() {
                 },
                 lineHeight: {
                   xs: "0.5em", // Smaller font size for small screens (mobile devices)
-
                   sm: "1em", // Default font size for larger screens (tablets and up)
                 },
                 color: "white",
-
+               
                 marginBottom: "30px",
               }}
             >
@@ -124,7 +122,12 @@ export default function StartPage() {
                 alignItems: "flex-start", // Align links to the left
                 textAlign: "left", // Ensure text aligns left
                 width: "100%", // Take full width so alignment works properly
-                maxWidth: "400px", // You can adjust max width for better control
+                maxWidth: {
+                    md:"400px",
+                    sm:"300px",
+                    xs:"200px",
+                }
+                 // You can adjust max width for better control
               }}
             >
               <Typography
@@ -181,7 +184,10 @@ export default function StartPage() {
 
         <Grid
           sx={{
-            marginRight: "0",
+            maxWidth: {
+                xs: "90%", // Apply 10px margin on small screens (mobile devices)
+                sm: "90%", // Apply 350px margin on larger screens (tablets and up)
+              },
             marginTop: {
               xs: "10px", // Apply 10px margin on small screens (mobile devices)
               sm: "340px", // Apply 350px margin on larger screens (tablets and up)
@@ -194,10 +200,12 @@ export default function StartPage() {
             },
             marginBottom: {
               md: "10px",
+              sm:"10px",
+              xs:"10px",
             },
             overflowY: "auto",
           }}
-          size={{ xs: 12, sm: 3, md: 2 }}
+          size={{ xs: 12, sm: 12, md: 3 }}
         >
           <CurrentWeekEventCalendar />
         </Grid>
@@ -225,8 +233,6 @@ export default function StartPage() {
 
         {/* --------------WELCOME NEW----------- */}
         <SectionLine text="Welcome" useWhiteStroke={true} />
-        <button onClick={() => navigate("/services#connect-your-purpose")}
- > connect</button >
         <NewHereSectionGrid
         id={newHere.id}
           title={newHere.title}
@@ -255,6 +261,7 @@ export default function StartPage() {
         description={sundayServiceCardInfor.description}
         images={sundayServiceCardInfor.images}
         category={sundayServiceCardInfor.category}
+        imageLeft={false}
       />
 
       {/* --------------ACTIVITIES-BKC Kids----------- */}
@@ -265,7 +272,7 @@ export default function StartPage() {
         description={sundaySchoolActivityCardInfor.description}
         images={sundaySchoolActivityCardInfor.images}
         category={sundaySchoolActivityCardInfor.category}
-        imageLeft={false}
+        
       />
       {/* --------------ACTIVITIES-Youth----------- */}
       <ImgInforCard
@@ -275,6 +282,7 @@ export default function StartPage() {
         description={youthActivityCardInfor.description}
         images={youthActivityCardInfor.images}
         category={youthActivityCardInfor.category}
+        imageLeft={false}
       />
 
       {/* --------------ACTIVITIES-Home Group----------- */}
@@ -285,7 +293,7 @@ export default function StartPage() {
         description={homeGroupActivityCardInfor.description}
         images={homeGroupActivityCardInfor.images}
         category={homeGroupActivityCardInfor.category}
-        imageLeft={false}
+       
       />
       {/* --------------NEWS SLIDES----------- */}
       <Box
@@ -295,19 +303,18 @@ export default function StartPage() {
           alignItems: "center",
           flexDirection: "column",
           justifyContent: "center",
-          paddingTop: "50px",
           backgroundColor: "#f0f4f8",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <SectionLine text=" News" />
+       <SectionLine text=" News" />
         <Box
           sx={{
             backgroundColor: "#f0f4f8",
             width: "100%",
             marginBottom: "10px",
           }}
-        >
+        > 
           <PauseOnHover events={news} />
         </Box>
       </Box>

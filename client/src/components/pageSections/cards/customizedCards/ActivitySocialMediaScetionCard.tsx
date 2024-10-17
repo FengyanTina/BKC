@@ -31,6 +31,33 @@ const ActivitySocialMediaScetionCard = ({
         spacing={2}
         sx={{ flexDirection: { xs: "column", sm: "row" } }}
       >
+        
+        <Grid
+          size={{ xs: 12, sm: 6 }}
+          sx={{
+            maxWidth: 500,
+            height: 400,
+            transform: "translateZ(0)",
+            justifyContent: "center",
+            overflow: "hidden",
+          }}
+        >
+          {Array.isArray(images) ? (
+            <ImageGallary itemData={imageGallarytemData} />
+          ) : (
+            // Otherwise, render a single image
+            <img
+              src={images}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                maxHeight: "380px",
+              }}
+              alt=""
+            />
+          )}
+        </Grid>
         <Grid size={{ xs: 12, sm: 6 }}>
           <InforCard
             category={category}
@@ -70,32 +97,6 @@ const ActivitySocialMediaScetionCard = ({
               style={{ height: 25, width: 25 }}
             /> */}
           </Box>
-        </Grid>
-        <Grid
-          size={{ xs: 12, sm: 6 }}
-          sx={{
-            maxWidth: 500,
-            height: 400,
-            transform: "translateZ(0)",
-            justifyContent: "center",
-            overflow: "hidden",
-          }}
-        >
-          {Array.isArray(images) ? (
-            <ImageGallary itemData={imageGallarytemData} />
-          ) : (
-            // Otherwise, render a single image
-            <img
-              src={images}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                maxHeight: "380px",
-              }}
-              alt=""
-            />
-          )}
         </Grid>
       </Grid>
     </Box>
