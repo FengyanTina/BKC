@@ -25,42 +25,39 @@ import { visuallyHidden } from "@mui/utils";
 import { UserContext } from "../../../context/UserContext";
 import { User } from "../../../models/User";
 import { Link } from "react-router-dom";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { useContext, useState } from "react";
 
-
-
-
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-    const aValue = a[orderBy] ?? ""; // Default to empty string if undefined
-    const bValue = b[orderBy] ?? ""; // Default to empty string if undefined
-  
-    if (bValue < aValue) {
-      return -1;
-    }
-    if (bValue > aValue) {
-      return 1;
-    }
-    return 0;
-  }
+  const aValue = a[orderBy] ?? ""; // Default to empty string if undefined
+  const bValue = b[orderBy] ?? ""; // Default to empty string if undefined
 
+  if (bValue < aValue) {
+    return -1;
+  }
+  if (bValue > aValue) {
+    return 1;
+  }
+  return 0;
+}
 
 type Order = "asc" | "desc";
 
 function getComparator<Key extends keyof User>(
   order: Order,
   orderBy: Key
-): (
-    a: User,
-    b: User
-) => number {
+): (a: User, b: User) => number {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
-  
 
 interface HeadCell {
   disablePadding: boolean;
@@ -174,33 +171,32 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 interface EnhancedTableToolbarProps {
-    numSelected: number;
-    selectedIds: readonly string[]; // Add selected IDs prop
-  }
-  
-function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-    const { removeUsers, users } = React.useContext(UserContext);  // Get removeUsers function from context
-  const [open, setOpen] = useState(false);  // State to handle dialog open/close
-  const [idsToDelete, setIdsToDelete] = useState<string[]>([]);  // To store selected IDs for deletion
-  
-    // Open the confirmation dialog
-    const handleOpenDialog = () => {
-      setIdsToDelete([...selectedIds]);  // Store the selected IDs
-      setOpen(true);
-    };
-  
-    // Close the confirmation dialog
-    const handleCloseDialog = () => {
-      setOpen(false);
-    };
-  
-    // Confirm deletion
-    const handleConfirmDelete = () => {
-      removeUsers(idsToDelete);  // Call the delete function in the context
-      setOpen(false);  // Close dialog after deletion
-    };
+  numSelected: number;
+  selectedIds: readonly string[]; 
+  setSelected: React.Dispatch<React.SetStateAction<readonly string[]>>;
+}
 
-  const { numSelected,selectedIds } = props;
+function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
+  const { numSelected, selectedIds, setSelected } = props;
+  const { removeUsers } = React.useContext(UserContext); 
+  const [open, setOpen] = useState(false); 
+  const [idsToDelete, setIdsToDelete] = useState<string[]>([]); // To store selected IDs for deletion
+
+  const handleOpenDialog = () => {
+    setIdsToDelete([...selectedIds]); // Store the selected IDs
+    setOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    removeUsers(idsToDelete); 
+    setSelected([]); 
+    setOpen(false);
+  };
+
   return (
     <Toolbar
       sx={[
@@ -237,7 +233,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
             Members
           </Typography>
           <Tooltip title="Add">
-          <IconButton component={Link} to="/user/new"> 
+            <IconButton component={Link} to="/user/new">
               <AddIcon />
             </IconButton>
           </Tooltip>
@@ -247,36 +243,38 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       {numSelected > 0 ? (
         <>
           <Tooltip title="Edit">
-          <IconButton component={Link}  to={`/user/${selectedIds[0]}`} >
-              <EditIcon/>
+            <IconButton component={Link} to={`/user/${selectedIds[0]}`}>
+              <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-           <IconButton onClick={handleOpenDialog}>
+            <IconButton onClick={handleOpenDialog}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
           <Dialog
-        open={open}
-        onClose={handleCloseDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Confirm Delete"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete the selected user(s)?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleConfirmDelete} color="secondary" autoFocus>
-            Confirm
-          </Button>
-        </DialogActions>
-      </Dialog>
+            open={open}
+            onClose={handleCloseDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Confirm Delete"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete the selected user(s)?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={handleConfirmDelete} color="secondary" autoFocus>
+                Confirm
+              </Button>
+            </DialogActions>
+          </Dialog>
         </>
       ) : (
         <Tooltip title="Filter list">
@@ -295,10 +293,10 @@ export default function UserTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { users} = useContext(UserContext);
+  const { users } = useContext(UserContext);
 
   const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
+    _: React.MouseEvent<unknown>,
     property: keyof User
   ) => {
     const isAsc = orderBy === property && order === "asc";
@@ -314,8 +312,8 @@ export default function UserTable() {
     }
     setSelected([]);
   };
-
-  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+  //const handleClick = (event: React.MouseEvent<unknown>, id: string) event is indicating as not used, but it is still needed, so in this case, to get rid of the yellow line, use _. Same for the other _ .
+  const handleClick = (_: React.MouseEvent<unknown>, id: string) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected: readonly string[] = [];
 
@@ -334,7 +332,7 @@ export default function UserTable() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -358,14 +356,17 @@ export default function UserTable() {
       [...users]
         .sort(getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage]
+    [users, order, orderBy, page, rowsPerPage]
   );
-  
 
   return (
     <Box sx={{ width: "80%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length}selectedIds={selected} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          selectedIds={selected}
+          setSelected={setSelected}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -412,7 +413,8 @@ export default function UserTable() {
                       padding="none"
                       align="left"
                     >
-                      {row.firstName}{row.lastName}
+                      {row.firstName}
+                      {row.lastName}
                     </TableCell>
                     <TableCell align="left">{row.phoneNumber}</TableCell>
                     <TableCell align="left">{row.email}</TableCell>
