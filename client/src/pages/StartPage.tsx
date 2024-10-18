@@ -2,7 +2,7 @@ import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Worship from "../assets/Worship.jpeg";
 import Carousel from "../components/common/slides/Carousel.tsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PauseOnHover from "../components/common/slides/SlickSlider";
 import { useState } from "react";
 import Map from "../apis/googleMap/Map.tsx";
@@ -22,7 +22,6 @@ import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
 import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
 import NewHereSectionGrid from "../components/pageSections/grid/NewHereSectionGrid.tsx";
-import { HashLink } from "react-router-hash-link";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -185,17 +184,17 @@ export default function StartPage() {
         <Grid
           sx={{
             maxWidth: {
-                xs: "90%", // Apply 10px margin on small screens (mobile devices)
-                sm: "90%", // Apply 350px margin on larger screens (tablets and up)
+                xs: "90%", 
+                sm: "90%", 
               },
             marginTop: {
-              xs: "10px", // Apply 10px margin on small screens (mobile devices)
-              sm: "340px", // Apply 350px margin on larger screens (tablets and up)
+              xs: "10px", 
+              sm: "340px", 
             },
             height: {
-              xs: "40vh", // Set height to 40% of the viewport height for small screens
-              sm: "50vh", // 50% of viewport height for medium screens
-              md: "50vh", // Default height for larger screens
+              xs: "40vh", 
+              sm: "50vh", 
+              md: "50vh", 
               lg: "60vh",
             },
             marginBottom: {

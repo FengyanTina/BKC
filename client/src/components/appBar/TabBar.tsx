@@ -27,14 +27,18 @@ import { useAuth } from "../../context/AuthContext";
 
 
 export default function TabBar() {
-  const { user, logout } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation(); // Get the current location
+    const currentTab = location.pathname;
+  const { currentUser, logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [logOutFormOpen, setlogOutFormOpen] = useState(false);
-
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const handleLoginOpen = () => {
     setIsLoginOpen(true);
+  
+    setDrawerOpen(false);
   };
 
   const handleLoginClose = () => {
@@ -44,9 +48,6 @@ export default function TabBar() {
   const handleDrawerToggle = () => {
     setDrawerOpen((prevOpen) => !prevOpen);
   };
-  const navigate = useNavigate();
-  const location = useLocation(); // Get the current location
-  const currentTab = location.pathname;
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     navigate(newValue); // Navigate to the new route
@@ -184,7 +185,7 @@ export default function TabBar() {
                 }}
               />
 
-              {user ? (
+              {currentUser ? (
                 <Box
                   sx={{
                     display: "flex",
@@ -203,7 +204,7 @@ export default function TabBar() {
                       fontSize: "1.5rem",
                     }}
                   >
-                    {user.firstName} {/* Safe access to user.name */}
+                    {currentUser.firstName} {/* Safe access to user.name */}
                   </Typography>
                   <Typography
                     variant="h5"
@@ -243,7 +244,8 @@ export default function TabBar() {
      
       <LoginModal open={isLoginOpen} handleClose={handleLoginClose} />
       <nav>
-        <TabDrawer open={drawerOpen} onClose={handleDrawerToggle} />
+        <TabDrawer open={drawerOpen} onClose={handleDrawerToggle}  handleLogin={handleLoginOpen} // Pass login function
+          handleLogout={handleLogout} />
       </nav>
       {/* Modal for confirm delte */}
       <Dialog open={logOutFormOpen} onClose={handleClose}>

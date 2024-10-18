@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -6,20 +5,22 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
-import DavidB from "../../../assets/DavidB.jpg";
 import Leader from "../../../assets/leader.jpg";
 interface IntroCardProps{
 title:string;
 subTitle:string;
 content:string;
-image:string;
+image?:string;
 onOpen: () => void;
 }
 export default function IntroCard({title,subTitle,content,image,onOpen}:IntroCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        <CardMedia component="img" height="240" image={Leader} alt="" />
+        {image &&(
+ <CardMedia component="img" height="240" image={image} alt="" />
+        )}
+       
         <CardContent>
           <Typography gutterBottom variant="h4" component="div">
           {title}

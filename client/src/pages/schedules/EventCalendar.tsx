@@ -25,7 +25,7 @@ import {
 } from "@mui/material";
 import EventAddAndEditForm from "./EventAddAndEditForm";
 import "./schedule.css"
-import { AuthContext, AuthContextType } from "../../context/AuthContext";
+import { AuthContext, AuthContextType, } from "../../context/AuthContext";
 import {  UserCategory } from "../../models/User";
 
 // Custom event interface
@@ -315,10 +315,10 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   }
 
   renderSidebar() {
-    const { user } = this.context; 
+    const { currentUser } = this.context; 
   // Check if action buttons exist
-    const isAdmin = user?.category === UserCategory.Admin;
-console.log("logedin user",user)
+    const isAdmin = currentUser?.category === UserCategory.Admin;
+console.log("logedin user",currentUser)
     // Set sizes based on whether the user is an admin
     const dateColumnSize = isAdmin ? 2 : 3;
     const timeColumnSize = isAdmin ? 2 : 3;
@@ -350,7 +350,7 @@ console.log("logedin user",user)
               <Grid size={ titleColumnSize}>
                 <strong>Event</strong>
               </Grid>
-              {user?.category === UserCategory.Admin && (
+              {currentUser?.category === UserCategory.Admin && (
               <Grid size={actionColumnSize}>
                 <strong>Action</strong>
               </Grid> 
@@ -363,8 +363,8 @@ console.log("logedin user",user)
              {this.state.currentEvents.map((event) =>
             renderSidebarEvent(
               event,
-               user?.category === UserCategory.Admin ? this.handleEdit : null,
-               user?.category === UserCategory.Admin ? this.handleDelete : null
+               currentUser?.category === UserCategory.Admin ? this.handleEdit : null,
+               currentUser?.category === UserCategory.Admin ? this.handleDelete : null
             //   isAdmin ? this.handleEdit : null,
             //     isAdmin ? this.handleDelete : null,
                
@@ -602,22 +602,7 @@ function renderSidebarEvent(
       </Grid>
       
       <Grid size={actionColumnSize} style={{ textAlign: "left" }}>
-      {/* <Grid size={2} style={{ textAlign: "left" }}>
-        <Button
-          onClick={() => onEdit(event)}
-          variant="outlined"
-          style={{ marginRight: "5px" }}
-        >
-          Edit
-        </Button>
-        <Button
-          onClick={() => onDelete(event)}
-          variant="contained"
-          color="error"
-        >
-          Delete
-        </Button>
-      </Grid> */}
+    
       {onEdit && (
           <Button
             onClick={() => onEdit(event)}

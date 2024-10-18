@@ -5,6 +5,8 @@ import IntroCard from "../../components/common/cards/IntroCard";
 import { Pastor } from "../../data";
 import SectionLine from "../../components/pageSections/SectionLine";
 import UserTable from "../../components/common/Tables/userTable";
+import Leader from "../../assets/leader.jpg";
+import DavidB from "../../assets/DavidB.jpg";
 
 const modalStyle = {
   position: "absolute",
@@ -42,7 +44,6 @@ const AboutUsPage = () => {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-        gap: "50px",
         width: "100%", // Full width of the container
         height: "100%",
         overflowX: "hidden",
@@ -59,10 +60,8 @@ const AboutUsPage = () => {
             md: "row",
             sm: "column",
           },
-          marginBottom: "50px",
-
+          marginBottom: "20px",
           margin: "0 auto", // Center it horizontally
-
           flexGrow: "1",
         }}
       >
@@ -90,20 +89,27 @@ const AboutUsPage = () => {
             display: "flex",
             flexDirection: "column", // Stack elements vertically
             justifyContent: "space-between", // Space between the title/content and "Read More" button
-            px: { xs: 3, sm: 4, md: 6 },
+            px: { xs: 5, sm: 10, md: 10 },
+            fontSize: {
+              lg: "40px",
+              md: "30px",
+              sm: "30px",
+              xs: "28px",
+            },
           }}
           size={{ xs: 12, md: 6 }}
           id="mainPastor"
         >
           <Typography
             sx={{
-              textAlign: {
-                xs: "center",
-                sm: "center",
-                lg: "left",
+              marginTop: {xs:"20px",sm:"30px",},
+              width: "100%",
+              fontSize: {
+                lg: "40px",
+                md: "36px",
+                sm: "32px",
+                xs: "28px",
               },
-              marginTop: "10px",
-              width: "100%", // Optional: make it take full width
             }}
             variant="h2"
           >
@@ -112,12 +118,13 @@ const AboutUsPage = () => {
           <Typography
             sx={{
               marginTop: "10px",
-              textAlign: {
-                xs: "center",
-                sm: "center",
-                lg: "left",
-              },
               width: "100%",
+              fontSize: {
+                lg: "30px",
+                md: "25px",
+                sm: "24px",
+                xs: "20px",
+              },
             }}
             variant="h4"
           >
@@ -130,14 +137,26 @@ const AboutUsPage = () => {
               display: "-webkit-box",
               overflow: "hidden",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 11, // Limit to 7 lines
+              WebkitLineClamp: 11,
               position: "relative",
             }}
           >
             {/* Directly using Box to prevent wrapping issues with Typography */}
             {Pastor.content.split("\n").map((paragraph, index) => (
               <Box key={index} sx={{ display: "block", mb: 2 }}>
-                <Typography variant="body1">{paragraph}</Typography>
+                <Typography
+                  sx={{
+                    fontSize: {
+                      lg: "22px",
+                      md: "24px",
+                      sm: "20px",
+                      xs: "20px",
+                    },
+                  }}
+                  variant="body1"
+                >
+                  {paragraph}
+                </Typography>
               </Box>
             ))}
           </Box>
@@ -164,15 +183,17 @@ const AboutUsPage = () => {
             </Typography>
           </Box>
           <Box sx={{ marginTop: "20px" }}>
-            <Link
-              onClick={handleOpen}
-              sx={{ cursor: "pointer", marginTop: 1 }}
-              target="_blank"
-              rel="noopener"
-              underline="hover"
-            >
-              Read More
-            </Link>
+            <Typography variant="body1">
+              <Link
+                onClick={handleOpen}
+                sx={{ cursor: "pointer", marginTop: 1 }}
+                target="_blank"
+                rel="noopener"
+                underline="hover"
+              >
+                Read More
+              </Link>
+            </Typography>
           </Box>
         </Grid>
         <Modal
@@ -219,27 +240,28 @@ const AboutUsPage = () => {
           title={Pastor.title}
           subTitle={Pastor.subTitle}
           content={Pastor.content}
-          image={Pastor.image}
+          image={DavidB}
           onOpen={handleOpen}
         />
         <IntroCard
           title={Pastor.title}
           subTitle={Pastor.subTitle}
           content={Pastor.content}
-          image={Pastor.image}
+          image={Leader}
           onOpen={handleOpen}
         />
         <IntroCard
           title={Pastor.title}
           subTitle={Pastor.subTitle}
           content={Pastor.content}
-          image={Pastor.image}
+          image={DavidB}
           onOpen={handleOpen}
         />
       </Box>
       <SectionLine text="MemberShip" />
       <div id="userTable"></div>
       <UserTable />
+      <SectionLine text="Our History" />
       <Box
         sx={{
           marginTop: "50px",

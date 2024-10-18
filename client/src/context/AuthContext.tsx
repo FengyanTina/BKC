@@ -1,65 +1,53 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { User } from "../models/User";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocalStorage } from "../hooks/UseLocalStorage";
+import { User } from "../models/User";
+import useInactivityLogout from "../hooks/UserInactiveLogout";
 
 
 export interface AuthContextType {
-  user: User | null; // User data from the User interface
-  token: string | null; // Token stored separately, not part of User
-  login: (user: User, token: string) => void;
+  currentUser: User | null;
+  login: (userName: string, password: string) => void;
   logout: () => void;
+  error: string | null;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null); // Separate state for token
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentUser, setCurrentUser] = useLocalStorage<User | null>("currentUser", null);
+  const [storedUsers] = useLocalStorage<User[]>("users", []);
+  const [error, setError] = useState<string | null>(null);
+  const timeoutDuration = 30 * 60 * 1000; // 30 minutes
 
-//   const [user, setUser] = useLocalStorage<User | null>("user", null); // Use custom hook
-//   const [token, setToken] = useLocalStorage<string | null>("token", null); // Use custom hook
+  // Handle login logic with error handling
+  const login = (userName: string, password: string) => {
+    const user = storedUsers.find((user) => user.userName === userName && user.userId === password);
 
-  // Load user and token from localStorage on initial mount
-//   useEffect(() => {
-//     const storedUser = localStorage.getItem("user");
-//     const storedToken = localStorage.getItem("token"); // Load token from localStorage
-//     if (storedUser && storedToken) {
-//       setUser(JSON.parse(storedUser));
-//       setToken(storedToken);
-//     }
-//   }, []);
+    if (!user) {
+      setError('Login failed. Please check your credentials.');
+      return;
+    }
 
-  const login = (user: User, token: string) => {
-    setUser(user);
-    setToken(token); // Set token separately
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("token", token); // Store token in localStorage
+    setCurrentUser(user); // Store the user in localStorage
+    setError(null); // Clear any error
   };
-
+  // Handle logout
   const logout = () => {
-    setUser(null);
-    setToken(null); // Clear token
-    localStorage.removeItem("user");
-    localStorage.removeItem("token"); // Remove token from localStorage
+    setCurrentUser(null); // Clear current user
+    setError(null); // Optionally clear any error message
   };
 
-// const login = (user: User, token: string) => {
-//     setUser(user);
-//     setToken(token);
-//   };
+  // Auto-logout after inactivity
+  useInactivityLogout(timeoutDuration, logout);
 
-//   const logout = () => {
-//     setUser(null);
-//     setToken(null);
-//   };
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ currentUser, login, logout, error }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use the Auth context
+// Custom hook to access the AuthContext
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
