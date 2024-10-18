@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useLocalStorage } from "../hooks/UseLocalStorage";
 import { User } from "../models/User";
 import useInactivityLogout from "../hooks/UserInactiveLogout";

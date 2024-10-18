@@ -21,6 +21,7 @@ interface EventFormProps {
     end: string;
     allDay: boolean;
     description?: string;
+    location?:string;
   }
 const EventAddAndEditForm = ({ 
   isModalOpen, 
@@ -58,7 +59,17 @@ const EventAddAndEditForm = ({
             rows={4}
             disabled={!isEditing} // Disable in view mode
           />
-
+<TextField
+            label="Location"
+            name="location"
+            value={selectedEvent.location|| ""}
+            onChange={handleFieldChange}
+            fullWidth
+            margin="normal"
+            multiline
+            rows={4}
+            disabled={!isEditing} // Disable in view mode
+          />
           <Button
             onClick={handleSaveEvent}
             color="primary"

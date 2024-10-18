@@ -6,7 +6,6 @@ import {
   EventContentArg,
   EventChangeArg,
   EventRemoveArg,
-  formatDate,
 } from "@fullcalendar/core";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -15,6 +14,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import svLocale from "@fullcalendar/core/locales/sv"; // Swedish locale
 import Grid from "@mui/material/Grid2";
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -24,9 +24,10 @@ import {
   Typography,
 } from "@mui/material";
 import EventAddAndEditForm from "./EventAddAndEditForm";
-import "./schedule.css"
-import { AuthContext, AuthContextType, } from "../../context/AuthContext";
-import {  UserCategory } from "../../models/User";
+import "./schedule.css";
+import { AuthContext, AuthContextType } from "../../context/AuthContext";
+import { UserCategory } from "../../models/User";
+import { formatDate, formatTime } from "../../utils/FormatDateAndTime";
 
 // Custom event interface
 interface CustomEvent {
@@ -36,6 +37,7 @@ interface CustomEvent {
   end: string;
   allDay: boolean;
   description?: string;
+  location?: string;
 }
 
 interface DemoAppState {
@@ -58,8 +60,8 @@ const saveEventsToLocalStorage = (events: CustomEvent[]) => {
 };
 
 export default class EventsCalendar extends React.Component<{}, DemoAppState> {
-    static contextType = AuthContext; // Set context type
-    declare context: AuthContextType;
+  static contextType = AuthContext; // Set context type
+  declare context: AuthContextType;
   state: DemoAppState = {
     weekendsVisible: true,
     currentEvents: getStoredEvents(), // Load from localStorage
@@ -106,6 +108,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         description: "",
+        location: "",
         allDay: selectInfo.allDay,
       },
     }));
@@ -130,6 +133,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
                 start: selectedEvent.start || newEventInfo.start, // Use selectedEvent's start if available
                 end: selectedEvent.end || newEventInfo.end, // Use selectedEvent's end if available
                 description: selectedEvent.description || "",
+                location: selectedEvent.location || "",
                 allDay: selectedEvent.allDay,
               }
             : event
@@ -142,6 +146,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
           start: newEventInfo.start,
           end: newEventInfo.end,
           description: selectedEvent.description || "",
+          location: selectedEvent.location || "",
           allDay: newEventInfo.allDay,
         };
         updatedEvents = [...currentEvents, newEvent]; // Add new event
@@ -170,6 +175,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
         id: prevState.selectedEvent?.id || "", // Ensure id is always a string
         title: prevState.selectedEvent?.title || "", // Ensure title is always a string
         description: prevState.selectedEvent?.description || "", // Ensure description is always a string
+        location: prevState.selectedEvent?.location || "",
         start: prevState.selectedEvent?.start || "", // Ensure start is always a string
         end: prevState.selectedEvent?.end || "", // Ensure end is always a string
         allDay: prevState.selectedEvent?.allDay ?? false, // Ensure allDay is always a boolean
@@ -194,6 +200,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
       end: event.end,
       allDay: event.allDay,
       description: event.description,
+      location: event.location,
     }));
   }
 
@@ -202,7 +209,6 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
       this.state;
     return (
       <div className="demo-app">
-       
         <div className="demo-app-main">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -240,13 +246,12 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
           />
           {/* Modal for adding/viewing events */}
           <EventAddAndEditForm
-          isModalOpen={isModalOpen} 
-          handleCloseModal={this.handleCloseModal} 
-          selectedEvent={selectedEvent}
-          isEditing={isEditing}
-          handleFieldChange={this.handleFieldChange}
-          handleSaveEvent ={this.handleSaveEvent}
-         
+            isModalOpen={isModalOpen}
+            handleCloseModal={this.handleCloseModal}
+            selectedEvent={selectedEvent}
+            isEditing={isEditing}
+            handleFieldChange={this.handleFieldChange}
+            handleSaveEvent={this.handleSaveEvent}
           />
           {/* <EventFormWithTimeSelection
             open={isModalOpen}
@@ -260,25 +265,62 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
             <DialogTitle>Event Details</DialogTitle>
             <DialogContent>
               {selectedEvent ? (
-                <div>
-                  <Typography variant="body1">
+                <Box>
+                  {/* Title Section */}
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    sx={{
+                      fontWeight: "bold",
+                      marginBottom: "10px",
+                      color: "#3f51b5",
+                    }}
+                  >
                     <strong>Title:</strong> {selectedEvent.title}
                   </Typography>
-                  <Typography variant="body1">
-                    <strong>Start:</strong>{" "}
-                    {new Date(selectedEvent.start).toLocaleString()}
+                  {/* Date Section */}
+                  {/* Event Date */}
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: "bold", color: "#1976d2", mb: 1 }}
+                  >
+                    {selectedEvent.allDay
+                      ? `Whole Day Event on ${formatDate(selectedEvent.start)}`
+                      : `Event Date: ${formatDate(selectedEvent.start)}`}
                   </Typography>
-                  {selectedEvent.end && (
-                    <Typography variant="body1">
-                      <strong>End:</strong>{" "}
-                      {new Date(selectedEvent.end).toLocaleString()}
+
+                  {/* If not all day, show the start and end times */}
+                  {!selectedEvent.allDay && (
+                    <Typography variant="body1" sx={{ mt: 1 }}>
+                      <strong>Time:</strong>{" "}
+                      {selectedEvent.end
+                        ? `${formatTime(selectedEvent.start)} - ${formatTime(
+                            selectedEvent.end
+                          )}`
+                        : `${formatTime(selectedEvent.start)}`}{" "}
+                      {/* Display end time if available */}
                     </Typography>
                   )}
-                  <Typography variant="body1">
+
+                  {/* Description Section */}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      marginTop: "20px",
+                      marginBottom: "10px",
+                      fontSize: "1rem",
+                    }}
+                  >
                     <strong>Description:</strong>{" "}
-                    {selectedEvent.description || "No description"}
+                    {selectedEvent.description || "No description provided."}
                   </Typography>
-                </div>
+
+                  {/* Location Section */}
+                  <Typography variant="body2" sx={{ fontSize: "1rem" }}>
+                    <strong>Location:</strong>{" "}
+                    {selectedEvent.location || "No location specified."}
+                  </Typography>
+                </Box>
               ) : (
                 <Typography variant="body1">No event selected.</Typography>
               )}
@@ -315,17 +357,18 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   }
 
   renderSidebar() {
-    const { currentUser } = this.context; 
-  // Check if action buttons exist
+    const { currentUser } = this.context;
+    // Check if action buttons exist
     const isAdmin = currentUser?.category === UserCategory.Admin;
-console.log("logedin user",currentUser)
+    console.log("logedin user", currentUser);
     // Set sizes based on whether the user is an admin
-    const dateColumnSize = isAdmin ? 2 : 3;
-    const timeColumnSize = isAdmin ? 2 : 3;
-    const titleColumnSize = isAdmin ? 6 : 4;
-    const actionColumnSize = isAdmin ? 2: 0;
+    const dateColumnSize = isAdmin ? 2 : 2;
+    const timeColumnSize = isAdmin ? 2 : 2;
+    const titleColumnSize = isAdmin ? 3 : 4;
+    const locationColumnSize = isAdmin ? 3 : 4;
+    const actionColumnSize = isAdmin ? 2 : 0;
     // Set sizes based on whether action buttons are available
- 
+
     return (
       <div className="demo-app-sidebar">
         <div className="demo-app-sidebar-section">
@@ -339,7 +382,7 @@ console.log("logedin user",currentUser)
         <div className="demo-app-sidebar-section">
           <h2>All Events ({this.state.currentEvents.length})</h2>
           <Paper elevation={1} style={{ marginBottom: "30px" }}>
-            <Grid container spacing={0} style={{ padding: "10px" , }}>
+            <Grid container spacing={0} style={{ padding: "10px" }}>
               {/* Header Row */}
               <Grid size={dateColumnSize}>
                 <strong>Date</strong>
@@ -347,36 +390,40 @@ console.log("logedin user",currentUser)
               <Grid size={timeColumnSize}>
                 <strong>Time</strong>
               </Grid>
-              <Grid size={ titleColumnSize}>
+              <Grid size={titleColumnSize}>
                 <strong>Event</strong>
               </Grid>
+              <Grid size={locationColumnSize}>
+                <strong>Location</strong>
+              </Grid>
               {currentUser?.category === UserCategory.Admin && (
-              <Grid size={actionColumnSize}>
-                <strong>Action</strong>
-              </Grid> 
-            )}
+                <Grid size={actionColumnSize}>
+                  <strong>Action</strong>
+                </Grid>
+              )}
             </Grid>
             {/* Action Rows */}
             {/* {this.state.currentEvents.map((event) =>
               renderSidebarEvent(event, this.handleEdit, this.handleDelete)
             )} */}
-             {this.state.currentEvents.map((event) =>
-            renderSidebarEvent(
-              event,
-               currentUser?.category === UserCategory.Admin ? this.handleEdit : null,
-               currentUser?.category === UserCategory.Admin ? this.handleDelete : null
-            //   isAdmin ? this.handleEdit : null,
-            //     isAdmin ? this.handleDelete : null,
-               
-            )
-          )}
+            {this.state.currentEvents.map((event) =>
+              renderSidebarEvent(
+                event,
+                currentUser?.category === UserCategory.Admin
+                  ? this.handleEdit
+                  : null,
+                currentUser?.category === UserCategory.Admin
+                  ? this.handleDelete
+                  : null
+                //   isAdmin ? this.handleEdit : null,
+                //     isAdmin ? this.handleDelete : null,
+              )
+            )}
           </Paper>
         </div>
       </div>
     );
   }
-
- 
 
   //   handleEdit = (event: CustomEvent) => {
   //     const newTitle = prompt(
@@ -400,7 +447,7 @@ console.log("logedin user",currentUser)
   //       );
   //     }
   //   };
- 
+
   //   handleDelete = (event: CustomEvent) => {
   //     const confirmDelete = confirm(
   //       `Are you sure you want to delete the event '${event.title}'?`
@@ -556,54 +603,37 @@ function renderEventContent(eventContent: EventContentArg) {
 }
 
 function renderSidebarEvent(
-    event: CustomEvent,
-    onEdit: ((event: CustomEvent) => void) | null, // Accept null
-    onDelete: ((event: CustomEvent) => void) | null ,
-    
+  event: CustomEvent,
+  onEdit: ((event: CustomEvent) => void) | null, // Accept null
+  onDelete: ((event: CustomEvent) => void) | null
 ) {
-    
+  const hasActionColumn = !!(onEdit || onDelete); // Check if action buttons exist
+  const dateColumnSize = hasActionColumn ? 2 : 2;
+  const timeColumnSize = hasActionColumn ? 2 : 2;
+  const titleColumnSize = hasActionColumn ? 3 : 4;
+  const locationColumnSize = hasActionColumn ? 3 : 4;
+  const actionColumnSize = hasActionColumn ? 2 : 0;
 
-    const hasActionColumn = !!(onEdit || onDelete); // Check if action buttons exist
-
-    // Set sizes based on whether action buttons are available
-    const dateColumnSize = hasActionColumn ? 2 : 3;
-    const timeColumnSize = hasActionColumn ? 2 : 3;
-    const titleColumnSize = hasActionColumn ? 6 : 4;
-    const actionColumnSize = hasActionColumn ? 2 : 0;
-    
   return (
     <Grid
       container
       key={event.id}
-      style={{ padding: "10px", borderBottom: "1px solid #ddd",  }}
+      style={{ padding: "10px", borderBottom: "1px solid #ddd" }}
     >
       <Grid size={dateColumnSize} style={{ textAlign: "left" }}>
-        {formatDate(event.start, {
-          day: "2-digit",
-          month: "2-digit",
-          locale: "sv-SE",
-        })}
+        {formatDate(event.start)}
       </Grid>
       <Grid size={timeColumnSize} style={{ textAlign: "left" }}>
-        {formatDate(event.start, {
-          hour: "2-digit",
-          minute: "2-digit",
-          locale: "sv-SE",
-        })}{" "}
-        -{" "}
-        {formatDate(event.end, {
-          hour: "2-digit",
-          minute: "2-digit",
-          locale: "sv-SE",
-        })}
+        {formatDate(event.start)} - {formatDate(event.end)}
       </Grid>
       <Grid size={titleColumnSize} style={{ textAlign: "left" }}>
         {event.title}
       </Grid>
-      
+      <Grid size={locationColumnSize} style={{ textAlign: "left" }}>
+        {event.location}
+      </Grid>
       <Grid size={actionColumnSize} style={{ textAlign: "left" }}>
-    
-      {onEdit && (
+        {onEdit && (
           <Button
             onClick={() => onEdit(event)}
             variant="outlined"
@@ -621,8 +651,7 @@ function renderSidebarEvent(
             Delete
           </Button>
         )}
-        </Grid>
-    
+      </Grid>
     </Grid>
   );
 }
