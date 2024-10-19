@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./news.css";
 import { Box, Slider } from "@mui/material";
 import formatDateTime from "../../utils/FormatDateTime";
-import { Activity } from "../../models/Activity";
+import { Event } from "../../models/Event";
 
 interface EventProps {
   id: string;
@@ -17,7 +17,7 @@ interface EventProps {
 interface NewsDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  event: Activity | null; // Define your Event type accordingly
+  event: Event | null; // Define your Event type accordingly
 }
 
 export default function NewsDetailsModal({
@@ -51,9 +51,9 @@ export default function NewsDetailsModal({
         </>
       )}
         <p>{event.description}</p>
-        {event.time&&(
+        {event.startTime&&(
 
-        <p>{formatDateTime(event.time)}</p>
+        <p>{formatDateTime(event.startTime)}</p>
         )}
         <Box style={{ marginTop: "20px", textAlign: "center" }}>
           <label htmlFor="font-size-slider">Adjust text size:</label>

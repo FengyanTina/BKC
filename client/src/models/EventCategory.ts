@@ -1,4 +1,4 @@
-export enum ActivityCategory {
+export enum EventCategory {
     Service ='Service',
     Activity = 'Activity',
     Event ='Event',

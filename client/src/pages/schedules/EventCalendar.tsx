@@ -28,6 +28,7 @@ import "./schedule.css";
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
 import { UserCategory } from "../../models/User";
 import { formatDate, formatTime } from "../../utils/FormatDateAndTime";
+import EventDetailDialog from "../../components/common/Forms/EventDetailDialog";
 
 // Custom event interface
 interface CustomEvent {
@@ -261,74 +262,8 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
             onSave={this.handleSaveEvent}
           /> */}
           {/* Modal for event details */}
-          <Dialog open={isDetailModalOpen} onClose={this.handleCloseModal}>
-            <DialogTitle>Event Details</DialogTitle>
-            <DialogContent>
-              {selectedEvent ? (
-                <Box>
-                  {/* Title Section */}
-                  <Typography
-                    variant="h5"
-                    component="h2"
-                    sx={{
-                      fontWeight: "bold",
-                      marginBottom: "10px",
-                      color: "#3f51b5",
-                    }}
-                  >
-                    <strong>Title:</strong> {selectedEvent.title}
-                  </Typography>
-                  {/* Date Section */}
-                  {/* Event Date */}
-                  <Typography
-                    variant="subtitle1"
-                    sx={{ fontWeight: "bold", color: "#1976d2", mb: 1 }}
-                  >
-                    {selectedEvent.allDay
-                      ? `Whole Day Event on ${formatDate(selectedEvent.start)}`
-                      : `Event Date: ${formatDate(selectedEvent.start)}`}
-                  </Typography>
-
-                  {/* If not all day, show the start and end times */}
-                  {!selectedEvent.allDay && (
-                    <Typography variant="body1" sx={{ mt: 1 }}>
-                      <strong>Time:</strong>{" "}
-                      {selectedEvent.end
-                        ? `${formatTime(selectedEvent.start)} - ${formatTime(
-                            selectedEvent.end
-                          )}`
-                        : `${formatTime(selectedEvent.start)}`}{" "}
-                      {/* Display end time if available */}
-                    </Typography>
-                  )}
-
-                  {/* Description Section */}
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      marginTop: "20px",
-                      marginBottom: "10px",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    <strong>Description:</strong>{" "}
-                    {selectedEvent.description || "No description provided."}
-                  </Typography>
-
-                  {/* Location Section */}
-                  <Typography variant="body2" sx={{ fontSize: "1rem" }}>
-                    <strong>Location:</strong>{" "}
-                    {selectedEvent.location || "No location specified."}
-                  </Typography>
-                </Box>
-              ) : (
-                <Typography variant="body1">No event selected.</Typography>
-              )}
-              <Button onClick={this.handleCloseModal} color="primary">
-                Close
-              </Button>
-            </DialogContent>
-          </Dialog>
+          <EventDetailDialog event={selectedEvent } open={isDetailModalOpen} onClose={this.handleCloseModal}/>
+          
           {/* Modal for confirm delte */}
           <Dialog
             open={this.state.isConfirmDeleteOpen}

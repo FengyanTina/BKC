@@ -10,14 +10,14 @@ import InforCard from "../../components/common/cards/InforCard.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImageGallary from "../../components/common/ImageGallary";
 import { imageGallarytemData } from "../../data.ts";
-import { ActivityCategory } from "../../models/ActivityCategory.ts";
+import { EventCategory } from "../../models/EventCategory.ts";
 
 const events = [
   {
     id: "1",
     time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
     title: "Reaching out ",
-    category:ActivityCategory.Event,
+    category:EventCategory.Event,
     image: PrayerBible,
     description:
       "An exhibition featuring contemporary art pieces from local artists.",
@@ -26,7 +26,7 @@ const events = [
     id: "2",
     time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
     title: "Tech Conference",
-    category:ActivityCategory.Event,
+    category:EventCategory.Event,
     image: edward,
     description:
       "Join the biggest technology conference of the year with keynote speakers.",
@@ -35,7 +35,7 @@ const events = [
     id: "3",
     time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
     title: "Charity Run",
-    category:ActivityCategory.Event,
+    category:EventCategory.Event,
     image: Worship,
     description:
       "Participate in the annual charity run to support a good cause.",
@@ -44,7 +44,7 @@ const events = [
     id: "4",
     time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
     title: "Food Festival",
-    category:ActivityCategory.Event,
+    category:EventCategory.Event,
     image: BethelWorship,
     description:
       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",

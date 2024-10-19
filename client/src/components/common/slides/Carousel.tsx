@@ -6,12 +6,12 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import { Activity } from "../../../models/Activity";
+import { Event } from "../../../models/Event";
 
 
 
 
-const Carousel = ({  events }:{ events: Activity[] }) => {
+const Carousel = ({  events }:{ events: Event[] }) => {
     
     const displayEvents = events.map((event) => {
         let imageUrl: string | undefined;
@@ -28,10 +28,10 @@ const Carousel = ({  events }:{ events: Activity[] }) => {
           <SwiperSlide className="single-slide" key={event.id}>
             {imageUrl && <img src={imageUrl} alt={event.title} />} {/* Display image */}
             <h2>{event.title}</h2>
-            {event.time && (
+            {event.startTime && (
               <h5>
-                {event.time.toLocaleDateString("sv-SE")}{" "}
-                {event.time.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })}
+                {event.startTime.toLocaleDateString("sv-SE")}{" "}
+                {event.startTime.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })}
               </h5>
             )}
             {event.description && <p>{event.description}</p>} {/* Render description if available */}

@@ -1,9 +1,9 @@
-import { ActivityCategory } from "./ActivityCategory";
+import { EventCategory } from "./EventCategory";
 import { BaseModel } from "./BaseModel";
 import { ImageGallaryItemData } from "./ImgGallary";
 
 export interface ActivitySocialMediaScetionCardModel extends BaseModel {
     subtitle?: string;
-    category?:ActivityCategory;
+    category?:EventCategory;
     images?: ImageGallaryItemData[]; // Accept either a single string or an array of strings for images   
   }

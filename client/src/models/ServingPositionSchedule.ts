@@ -1,5 +1,5 @@
 
-import { ActivityCategory } from "./Activity";
+import { ActivityCategory } from "./Event";
 import { Job } from "./Job";
 
 export interface ServingPositionSchedule {

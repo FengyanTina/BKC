@@ -10,11 +10,12 @@ import Bible from "./assets/Bible.jpg";
 import Varhistoria from "./assets/Varhistoria.jpg"
 import DavidB from "./assets/DavidB.jpg"
 import welcome2 from "./assets/welcome2.jpg"
-import { Activity, ActivityCategory } from "./models/Activity";
+import { Event} from "./models/Event";
 import { PageSection } from "./models/PageSection";
 import { ImageInforCardModel } from "./models/ImageInforCard";
 import { ActivitySocialMediaScetionCardModel } from "./models/ActivitySocialMediaScetionCard";
 import { images } from "./components/common/slides/SlickSlider";
+import { EventCategory } from "./models/EventCategory";
 export interface Video {
   id: { videoId: string };
   snippet: {
@@ -31,7 +32,7 @@ export interface Video {
     title: "For Congregation",
     subtitle:"välkommen till vår kyrka nu på söndag!",
     time:new Date(2024, 9, 22, 14, 30),
-    category:ActivityCategory.SundayService,
+    category:EventCategory.SundayService,
     description:"Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!",
     images: Worship 
   }
@@ -40,7 +41,7 @@ export interface Video {
     title: "For Small Kids",
     subtitle:"BKC-KIDS",
     time:new Date(2024, 9, 22, 14, 30),
-    category:ActivityCategory.SundaySchoole,
+    category:EventCategory.SundaySchoole,
     description:"BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!",
     images: edward ,
   }
@@ -50,7 +51,7 @@ export interface Video {
     title: "For Young Adult",
     subtitle:"Bkc Ungdom",
     time:new Date(2024, 9, 22, 14, 30),
-    category: ActivityCategory.YouthService,
+    category: EventCategory.YouthService,
     description:"Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!",
     images: worshipHands ,
   }
@@ -59,7 +60,7 @@ export interface Video {
     title: "Your Small Community",
     subtitle:"Together,Stronger!",
     time:new Date(2024, 9, 22, 14, 30),
-    category: ActivityCategory.HomeGroup,
+    category:EventCategory.HomeGroup,
     description:"Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn.",
     images:Varhistoria 
   }
@@ -114,7 +115,7 @@ export const imageGallarytemData = [
     id: "1",
     title: "All activities on Social media",
     subtitle:"Together,Stronger!",
-    category: ActivityCategory.SocialMedia,
+    category: EventCategory.SocialMedia,
     description:"Under höstens tre första veckor (36-38) kommer vi uppmuntra till bön och fasta.Under höstens tre Under höstens tre Under höstens tre Under höstens tre tre Under höstens tre - auto updating activies from our social media",
     images:imageGallarytemData ,
   }
@@ -142,7 +143,7 @@ export interface Job {
 export interface ServingPosition {
   startTime: string;
   endTime: string;
-  activityCategory: ActivityCategory;
+  activityCategory: EventCategory;
   team: string;
   memberNeeded?: number;
   scheduleStatus: "open" | "closed"; // Union for specific values
@@ -158,75 +159,75 @@ export interface ServingPosition {
     images:welcome2,
   }
 
-export const comingEvents:Activity[] = [
+export const comingEvents:Event[] = [
   {
     id: "1",
     title: "Sunday Worship",
-    category:ActivityCategory.Event,
-    time: new Date("2024-09-22T10:00:00"),
+    category:EventCategory.Event,
+    startTime: new Date("2024-09-22T10:00:00"),
     description: "Join us for a special Sunday worship service.",
     image: worshipHands, // Use actual image URL
   },
   {
     id: "2",
     title: "Community Outreach",
-    category:ActivityCategory.Event,
-    time: new Date("2024-09-25T14:00:00"),
+    category:EventCategory.Event,
+    startTime: new Date("2024-09-25T14:00:00"),
     description: "Participate in our community outreach program.",
     image: edward, // Use actual image URL
   },
   {
     id: "3",
     title: "Bible Study Group",
-    category:ActivityCategory.Event,
-    time: new Date("2024-09-27T19:00:00"),
+    category:EventCategory.Event,
+    startTime: new Date("2024-09-27T19:00:00"),
     description: "Deep dive into the scriptures with our study group.",
     image: BethelWorship, // Use actual image URL
   },
   {
     id: "4",
     title: "Prayer Meeting",
-    category:ActivityCategory.Event,
-    time: new Date("2024-09-30T08:00:00"),
+    category:EventCategory.Event,
+    startTime: new Date("2024-09-30T08:00:00"),
     description: "Come together for our weekly prayer meeting.",
     image: Worship, // Use actual image URL
   },
 ];
 
-export const news:Activity[] = [
+export const news:Event[] = [
   {
     id: "1",
-    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+    startTime: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
     title: "Reaching out ",
     image: PrayerBible,
-    category:ActivityCategory.News,
+    category:EventCategory.News,
     description:
       "An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.An exhibition featuring contemporary art pieces from local artists.",
   },
   {
     id: "2",
-    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+    startTime: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
     title: "Easter camp",
-    category:ActivityCategory.News,
+    category:EventCategory.News,
     image: edward,
     description:
       "Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.Join the biggest technology conference of the year with keynote speakers.",
   },
   {
     id: "3",
-    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+    startTime: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
     title: "Charity Run",
-    category:ActivityCategory.News,
+    category:EventCategory.News,
     image: Worship,
     description:
       "Participate in the annual charity run to support a good cause.",
   },
   {
     id: "4",
-    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+    startTime: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
     title: "Food Festival",
     image: BethelWorship,
-    category:ActivityCategory.News,
+    category:EventCategory.News,
     description:
       "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
   },
@@ -294,7 +295,7 @@ export const sundayServiceSection  = {
   time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
   title: "Welcom to our Sunday Service! ",
   subTitle: "  Come as you are !",
-  category: ActivityCategory.SundayService,
+  category:EventCategory.SundayService,
   images: Conference,
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",

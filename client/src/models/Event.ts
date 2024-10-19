@@ -1,18 +1,20 @@
-import { ActivityCategory } from "./ActivityCategory";
+import { EventCategory } from "./EventCategory";
 import { BaseModel } from "./BaseModel";
 import { Schedule } from "./Schedule";
 
 
-export interface Activity extends BaseModel{
+export interface Event extends BaseModel{
    
     subTitle?: string;
-    time?: Date;
+ 
+    endTime?:Date;
+    startTime?: Date;
     location?: string;
-    category: ActivityCategory;
+    category: EventCategory;
     image?: string | string[];
     extraDetails?: string;//only member can see
     scheduleList?:Schedule | Schedule[]  
   }
 
-export { ActivityCategory };
+
  
