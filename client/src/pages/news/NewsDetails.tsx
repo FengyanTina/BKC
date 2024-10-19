@@ -5,14 +5,6 @@ import { Box, Slider } from "@mui/material";
 import formatDateTime from "../../utils/FormatDateTime";
 import { Event } from "../../models/Event";
 
-interface EventProps {
-  id: string;
-  time: Date;
-  title: string;
-  image: string;
-  description: string;
-  details?: string;
-}
 
 interface NewsDetailsModalProps {
   isOpen: boolean;

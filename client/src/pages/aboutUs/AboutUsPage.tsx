@@ -7,6 +7,7 @@ import SectionLine from "../../components/pageSections/SectionLine";
 import UserTable from "../../components/common/Tables/userTable";
 import Leader from "../../assets/leader.jpg";
 import DavidB from "../../assets/DavidB.jpg";
+import ReadMoreDialogs from "../../components/common/Forms/ReadMoreDialog";
 
 const modalStyle = {
   position: "absolute",
@@ -196,31 +197,9 @@ const AboutUsPage = () => {
             </Typography>
           </Box>
         </Grid>
-        <Modal
-          open={modalOpen}
-          onClose={handleClose}
-          aria-labelledby="modal-title"
-          aria-describedby="modal-description"
-        >
-          <Box sx={modalStyle}>
-            <Typography id="modal-title" variant="h4">
-              {Pastor.title}
-            </Typography>
-            <Typography variant="h5">{Pastor.subTitle}</Typography>
-
-            <Box sx={{ mt: 2 }}>
-              {/* Displaying full content in modal */}
-              {Pastor.content.split("\n").map((paragraph, index) => (
-                <Box key={index} sx={{ display: "block", mb: 2 }}>
-                  {paragraph}
-                </Box>
-              ))}
-            </Box>
-            <Button onClick={handleClose} sx={{ mt: 2 }} variant="contained">
-              Close
-            </Button>
-          </Box>
-        </Modal>
+        <ReadMoreDialogs open={modalOpen}
+          onClose={handleClose} title={Pastor.title} subtitle={Pastor.subTitle} content={Pastor.content} />
+        
       </Grid>
       <SectionLine text="Leadership" />
       <Box

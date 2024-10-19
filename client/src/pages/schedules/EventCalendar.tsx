@@ -14,21 +14,16 @@ import interactionPlugin from "@fullcalendar/interaction";
 import svLocale from "@fullcalendar/core/locales/sv"; // Swedish locale
 import Grid from "@mui/material/Grid2";
 import {
-  Box,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   Paper,
-  Typography,
 } from "@mui/material";
 import EventAddAndEditForm from "./EventAddAndEditForm";
 import "./schedule.css";
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
 import { UserCategory } from "../../models/User";
-import { formatDate, formatTime } from "../../utils/FormatDateAndTime";
+import { formatDate } from "../../utils/FormatDateAndTime";
 import EventDetailDialog from "../../components/common/Forms/EventDetailDialog";
+import ConfirmDeleteDialog from "../../components/common/Forms/ConfirmDeleteDialog";
 
 // Custom event interface
 interface CustomEvent {
@@ -261,30 +256,13 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
             isEditing={isEditing}
             onSave={this.handleSaveEvent}
           /> */}
+
           {/* Modal for event details */}
           <EventDetailDialog event={selectedEvent } open={isDetailModalOpen} onClose={this.handleCloseModal}/>
           
           {/* Modal for confirm delte */}
-          <Dialog
-            open={this.state.isConfirmDeleteOpen}
-            onClose={this.handleCloseConfirmDelete}
-          >
-            <DialogTitle>Confirm Deletion</DialogTitle>
-            <DialogContent>
-              <p>
-                Are you sure you want to delete the event '
-                {this.state.selectedEvent?.title}'?
-              </p>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleCloseConfirmDelete} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.handleConfirmDelete} color="secondary">
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
+          <ConfirmDeleteDialog open={this.state.isConfirmDeleteOpen}
+            onClose={this.handleCloseConfirmDelete} onConfirm={this.handleConfirmDelete} title= {this.state.selectedEvent?.title}/>
         </div>
         {this.renderSidebar()}
       </div>
@@ -350,8 +328,6 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
                 currentUser?.category === UserCategory.Admin
                   ? this.handleDelete
                   : null
-                //   isAdmin ? this.handleEdit : null,
-                //     isAdmin ? this.handleDelete : null,
               )
             )}
           </Paper>
