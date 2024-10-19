@@ -14,7 +14,7 @@ import { Event} from "./models/Event";
 import { PageSection } from "./models/PageSection";
 import { ImageInforCardModel } from "./models/ImageInforCard";
 import { ActivitySocialMediaScetionCardModel } from "./models/ActivitySocialMediaScetionCard";
-import { images } from "./components/common/slides/SlickSlider";
+
 import { EventCategory } from "./models/EventCategory";
 export interface Video {
   id: { videoId: string };
@@ -198,6 +198,7 @@ export const news:Event[] = [
   {
     id: "1",
     startTime: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+    endTime:new Date(2024, 9, 22, 15, 30),
     title: "Reaching out ",
     image: PrayerBible,
     category:EventCategory.News,
@@ -207,6 +208,7 @@ export const news:Event[] = [
   {
     id: "2",
     startTime: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+    endTime:new Date(2024, 9, 25, 20, 0),
     title: "Easter camp",
     category:EventCategory.News,
     image: edward,
@@ -216,6 +218,7 @@ export const news:Event[] = [
   {
     id: "3",
     startTime: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+    endTime:new Date(2024, 9, 27, 10, 0), 
     title: "Charity Run",
     category:EventCategory.News,
     image: Worship,
@@ -225,6 +228,7 @@ export const news:Event[] = [
   {
     id: "4",
     startTime: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+   endTime: new Date(2024, 9, 30, 19, 30), 
     title: "Food Festival",
     image: BethelWorship,
     category:EventCategory.News,

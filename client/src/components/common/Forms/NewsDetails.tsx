@@ -1,9 +1,10 @@
 // NewsDetailsModal.tsx
 import { useState } from "react";
-import "./news.css";
+import "./form.css";
 import { Box, Slider } from "@mui/material";
-import formatDateTime from "../../utils/FormatDateTime";
-import { Event } from "../../models/Event";
+import formatDateTime from "../../../utils/FormatDateTime";
+import { Event } from "../../../models/Event";
+import { formatTime } from "../../../utils/FormatDateAndTime";
 
 
 interface NewsDetailsModalProps {
@@ -43,9 +44,9 @@ export default function NewsDetailsModal({
         </>
       )}
         <p>{event.description}</p>
-        {event.startTime&&(
+        {event.startTime&& (
 
-        <p>{formatDateTime(event.startTime)}</p>
+        <p>{formatDateTime(event.startTime)}{event.endTime && ` - ${formatTime(event.endTime)}`}</p>
         )}
         <Box style={{ marginTop: "20px", textAlign: "center" }}>
           <label htmlFor="font-size-slider">Adjust text size:</label>

@@ -12,9 +12,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
-import { Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { formatDate, formatTime } from "../../../utils/FormatDateAndTime";
-
+import './form.css'
 interface CustomEvent {
   id: string;
   title: string;
@@ -38,13 +38,7 @@ export default function EventDetailDialog({
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState<DialogProps["maxWidth"]>("sm");
 
-  //   const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
 
-  //   const handleClose = () => {
-  //     setOpen(false);
-  //   };
 
   const handleMaxWidthChange = (event: SelectChangeEvent<typeof maxWidth>) => {
     setMaxWidth(
@@ -78,18 +72,26 @@ export default function EventDetailDialog({
         <DialogContent dividers>
           {/* Event Date */}
           <Typography variant="h6" gutterBottom>  
-            {event
-              ? event.allDay
-                ? `Whole Day Event on ${formatDate(event.start)}`
-                : `Date: ${formatDate(event.start)}`
-              : "No event date available"}{" "}
+          {event ? (
+        event.allDay ? (
+            <>
+                <strong>Whole Day Event on</strong> {formatDate(event.start)}
+            </>
+        ) : (
+            <>
+                <strong>Date:</strong> {formatDate(event.start)}
+            </>
+        )
+    ) : (
+        "No event date available"
+    )}
          </Typography>
 
           {/* Event Time (if not all day) */}
           {event && !event.allDay && (
             <>
               <Typography variant="h6" gutterBottom>
-              Time: {event.end
+             <strong>Time: </strong> {event.end
                   ? `${formatTime(event.start)} - ${formatTime(event.end)}`
                   : `${formatTime(event.start)}`}
               </Typography>
@@ -98,12 +100,17 @@ export default function EventDetailDialog({
 
           {/* Event Location */}
           <Typography variant="h6" gutterBottom>
-           Location: {event?.location || "No location specified."}
+          <strong>Location: </strong>  {event?.location || "No location specified."}
           </Typography>
         </DialogContent>
 
         {/* Description Section */}
         <DialogContent dividers>
+            <Typography variant="h6"  sx={{
+            display: "flex",
+            m: "auto",
+            width: "fit-content",
+          }}> Details</Typography>
           <Typography variant="body1"gutterBottom>
             {event?.description || "No description provided."}
           </Typography>
@@ -119,7 +126,7 @@ export default function EventDetailDialog({
               width: "fit-content",
             }}
           >
-            <FormControl sx={{ mt: 2, minWidth: 120 }}>
+            <FormControl sx={{ mt:1, minWidth: 120 }}>
               <InputLabel htmlFor="max-width">maxWidth</InputLabel>
               <Select
                 autoFocus

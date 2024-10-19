@@ -21,7 +21,7 @@ import EventAddAndEditForm from "./EventAddAndEditForm";
 import "./schedule.css";
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
 import { UserCategory } from "../../models/User";
-import { formatDate } from "../../utils/FormatDateAndTime";
+import { formatDate, formatTime } from "../../utils/FormatDateAndTime";
 import EventDetailDialog from "../../components/common/Forms/EventDetailDialog";
 import ConfirmDeleteDialog from "../../components/common/Forms/ConfirmDeleteDialog";
 
@@ -535,7 +535,7 @@ function renderSidebarEvent(
         {formatDate(event.start)}
       </Grid>
       <Grid size={timeColumnSize} style={{ textAlign: "left" }}>
-        {formatDate(event.start)} - {formatDate(event.end)}
+        {formatTime(event.start)} - {formatTime(event.end)}
       </Grid>
       <Grid size={titleColumnSize} style={{ textAlign: "left" }}>
         {event.title}
