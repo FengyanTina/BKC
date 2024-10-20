@@ -1,8 +1,7 @@
 .map{
     align-content: center;
-    padding: 30px;
-  
-    width:85%;
+
+    width:100%;
 }
 .map-h2 {
     text-transform: uppercase;
@@ -44,7 +43,11 @@
     .google-map {
       height: 80vh;
     }
-  
+  .map{
+   
+
+    width:90%;
+}
     .map-h2 {
       font-size: 1.3rem;
       font-weight: 400;

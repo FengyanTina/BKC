@@ -89,33 +89,7 @@ const formInputs = [
   },
 ]
 
-// const Form = () => (
-//   <Box className="form" sx={{zIndex: 20, position: 'relative' }}>
-//     <h2 className="form-h2">Send us a message</h2>
 
-//     {formInputs.map(input => (
-//       <label key={input.label} id={input.id} className="form-label">
-//         {input.label}
-
-//         {input.type === 'textarea' ? (
-//           <textarea className="form-textarea" placeholder={input.placeholder} />
-//         ) : (
-//           <input
-//             className="form-input"
-//             type={input.type}
-//             placeholder={input.placeholder}
-//           />
-//         )}
-//       </label>
-//     ))}
-
-   
-
-//     <button className="form-submit" type="submit">
-//       <SendIcon className="form-submit-icon" />
-//     </button>
-//   </Box>
-// )
 
 const Form = () => (
     <form className="form">
