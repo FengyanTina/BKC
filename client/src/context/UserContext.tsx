@@ -1,20 +1,21 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { User } from '../models/User';
 import { useLocalStorage } from '../hooks/UseLocalStorage';
+import initialUsers from '../data';
 
 export const UserContext = createContext({
     users: [] as User[],
-    setUsers: (_users: User[]) => {},
-    addUser: (_newUser: User) => {},
-    removeUser: (_id: string) => {},
-    removeUsers: (_id: string[]) => {},
+    setUsers: (users: User[]) => {},
+    addUser: (newUser: User) => {},
+    removeUser: (id: string) => {},
+    removeUsers: (id: string[]) => {},
   });
   
 export function UserProvider({ children }: { children: React.ReactNode }) {
     // const { setIsSnackbarOpen, setSnackbarActionType } =
     //   useContext(SnackbarContext);
   
-    const [users, setUsers] = useLocalStorage<User[]>("users", []);
+    const [users, setUsers] = useLocalStorage<User[]>("users", initialUsers);
 
     //when using real db, only need this one useEffect
     // useEffect(() => {
