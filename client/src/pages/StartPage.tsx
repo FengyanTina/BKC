@@ -150,7 +150,7 @@ export default function StartPage() {
                 A place to pray
                 <br />A place to learn the word
               </Typography>
-              <Link style={{ color: "white", textDecoration: "none" }} to="/">
+              <Link style={{ color: "white", textDecoration: "none" }} to="/aboutUs">
                 About Us
               </Link>
               <Link
