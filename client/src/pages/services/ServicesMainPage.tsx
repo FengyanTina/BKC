@@ -12,7 +12,7 @@ import {
 } from "../../data.ts";
 // import LiveService from "../../apis/youtube/LiveService.tsx";
 import { SocialIcon } from "react-social-icons";
-import ImgTextCard from "../../components/pageSections/cards/texAndImgCards/ImgTextCard.tsx";
+import ImgTextSection from "../../components/pageSections/cards/texAndImgCards/ImgTextSection.tsx";
 import SectionLine from "../../components/pageSections/SectionLine.tsx";
 import BaptismServiceSectionCard from "../../components/pageSections/cards/customizedCards/BaptismServiceSectionCard.tsx";
 import WantServeSectionCard from "../../components/pageSections/cards/customizedCards/WantServeSectionCard.tsx";
@@ -105,7 +105,7 @@ export default function ServicesMainPage() {
       {/* --------------SundayService ----------- */}
       <div id="sundayService"></div>
       <SectionLine text="Sunday Scervice" />
-      <ImgTextCard
+      <ImgTextSection
         id={sundayServiceSection.id}
         title={sundayServiceSection.title}
         subtitle={sundayServiceSection.subTitle}
@@ -116,7 +116,7 @@ export default function ServicesMainPage() {
       {/* --------------PrayerService ----------- */}
       <SectionLine text="Prayer Services" />
       <div id="prayerService"></div>
-      <ImgTextCard
+      <ImgTextSection
         id={prayerService.id}
         title={prayerService.title}
         linkSubtitle={prayerService.linkSubtitle}

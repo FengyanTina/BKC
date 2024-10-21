@@ -20,7 +20,6 @@ import HuvudloggaBKC3 from "../../assets/Huvudlogga-BKC3.png";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./appBar.css";
 import { useState } from "react";
 import LoginModal from "../login/LoginModal";
 import { useAuth } from "../../context/AuthContext";

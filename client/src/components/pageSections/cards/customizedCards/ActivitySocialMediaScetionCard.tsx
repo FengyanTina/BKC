@@ -1,12 +1,13 @@
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
-import InforCard from "../../../common/cards/InforCard";
+import PageInforCard from "../../../common/cards/PageInforCard";
 import { SocialIcon } from "react-social-icons";
 import { imageGallarytemData } from "../../../../data";
 import { ActivitySocialMediaScetionCardModel } from "../../../../models/ActivitySocialMediaScetionCard";
 
 const ActivitySocialMediaScetionCard = ({
+inforSectionId,
   title,
   category,
   subtitle,
@@ -59,7 +60,8 @@ const ActivitySocialMediaScetionCard = ({
           )}
         </Grid>
         <Grid size={{ xs: 12, sm: 6 }}>
-          <InforCard
+          <PageInforCard
+          id={inforSectionId}
             category={category}
             title={title}
             subtitle={subtitle}

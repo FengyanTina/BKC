@@ -19,9 +19,9 @@ import {
   newHere,
 } from "../data.ts";
 import SectionLine from "../components/pageSections/SectionLine.tsx";
-import ImgInforCard from "../components/pageSections/cards/InforCardImgSections/ImgInforCard.tsx";
 import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
 import NewHereSectionGrid from "../components/pageSections/grid/NewHereSectionGrid.tsx";
+import ImgInforCardSection from "../components/pageSections/cards/InforCardImgSections/ImgInforCardSection.tsx";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -233,6 +233,7 @@ export default function StartPage() {
         {/* --------------WELCOME NEW----------- */}
         <SectionLine text="Welcome" useWhiteStroke={true} />
         <NewHereSectionGrid
+        inforSectionId=""
         id={newHere.id}
           title={newHere.title}
          description={newHere.description}
@@ -244,6 +245,7 @@ export default function StartPage() {
 
       <SectionLine text=" Activities And Services" />
       <ActivitySocialMediaScetionCard
+      inforSectionId=""
       id={socialMediaActivityCardInfor.id}
         title={socialMediaActivityCardInfor.title}
         subtitle={socialMediaActivityCardInfor.subtitle}
@@ -253,7 +255,8 @@ export default function StartPage() {
       />
 
       {/* --------------ACTIVITIES-Sunday Service----------- */}
-      <ImgInforCard
+      <ImgInforCardSection
+      inforSectionId=""
       id={sundayServiceCardInfor.id}
         title={sundayServiceCardInfor.title}
         subtitle={sundayServiceCardInfor.subtitle}
@@ -264,7 +267,8 @@ export default function StartPage() {
       />
 
       {/* --------------ACTIVITIES-BKC Kids----------- */}
-      <ImgInforCard
+      <ImgInforCardSection
+      inforSectionId=""
       id={sundaySchoolActivityCardInfor.id}
         title={sundaySchoolActivityCardInfor.title}
         subtitle={sundaySchoolActivityCardInfor.subtitle}
@@ -274,7 +278,8 @@ export default function StartPage() {
         
       />
       {/* --------------ACTIVITIES-Youth----------- */}
-      <ImgInforCard
+      <ImgInforCardSection
+      inforSectionId=""
       id={youthActivityCardInfor.id}
         title={youthActivityCardInfor.title}
         subtitle={youthActivityCardInfor.subtitle}
@@ -285,8 +290,9 @@ export default function StartPage() {
       />
 
       {/* --------------ACTIVITIES-Home Group----------- */}
-      <ImgInforCard
+      <ImgInforCardSection
       id={homeGroupActivityCardInfor.id}
+      inforSectionId=""
         title={homeGroupActivityCardInfor.title}
         subtitle={homeGroupActivityCardInfor.subtitle}
         description={homeGroupActivityCardInfor.description}

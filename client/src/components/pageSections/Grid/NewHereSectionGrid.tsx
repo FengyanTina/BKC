@@ -1,17 +1,14 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import { ImageGallaryItemData } from "../../../models/ImgGallary";
-import { PageSection } from "../../../models/PageSection";
-import { ImageInforCardModel } from "../../../models/ImageInforCard";
+import { ImageInforSectionModel } from "../../../models/ImageInforSection.ts";
 import { HashLink } from "react-router-hash-link";
-import { useNavigate } from "react-router-dom";
 
 export default function NewHereSectionGrid({
   title,
   description,
   images,
   subtitle,
-}: ImageInforCardModel) {
+}: ImageInforSectionModel) {
   return (
     <Box
       sx={{

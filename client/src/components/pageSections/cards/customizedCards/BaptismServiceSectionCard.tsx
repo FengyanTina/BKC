@@ -1,13 +1,8 @@
-import {
-  Box,
-  styled,
-  Typography,
-} from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 import "./customizedCards.css";
-
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
-import { ImageTextWithStepsModel } from "../../../../models/ImageTextWithSteps";
+import { BaptismSectionModel } from "../../../../models/ImageTextWithSteps";
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(2),
@@ -22,9 +17,7 @@ const BaptismServiceSectionCard = ({
   images,
   steps,
   showAllAsFeatured = false,
-}: ImageTextWithStepsModel) => {
-
-    
+}: BaptismSectionModel) => {
   return (
     <Box sx={{ flexGrow: 1, width: "80%" }}>
       <Grid
@@ -33,23 +26,23 @@ const BaptismServiceSectionCard = ({
         columns={{ xs: 1, sm: 12, md: 12 }}
       >
         <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-          <Item
-          >
+          <Item>
             {Array.isArray(images) ? (
-              <ImageGallary itemData={images.map((img) => ({ img: img }))} showAllAsFeatured={showAllAsFeatured} />
-            ) : (     
+              <ImageGallary
+                itemData={images.map((img) => ({ img: img }))}
+                showAllAsFeatured={showAllAsFeatured}
+              />
+            ) : (
               // Otherwise, render a single image
-              <div style={{
-                width: '100%',
-                position: 'relative',
-                overflow: 'hidden', // Prevent overflow
-            }}>
-                <img
-                    src={images}
-                    className="image-responsive"
-                    alt=""
-                />
-            </div>
+              <div
+                style={{
+                  width: "100%",
+                  position: "relative",
+                  overflow: "hidden", // Prevent overflow
+                }}
+              >
+                <img src={images} className="image-responsive" alt="" />
+              </div>
             )}
           </Item>
         </Grid>
@@ -68,8 +61,8 @@ const BaptismServiceSectionCard = ({
               textAlign: "center",
               mx: "auto",
               px: 3,
-              marginBottom:"10px",
-            
+              marginBottom: "10px",
+
               fontSize: {
                 lg: "40px",
                 md: "30px",
@@ -89,11 +82,11 @@ const BaptismServiceSectionCard = ({
                 px: 3, // Add padding on the sides
                 mt: 3,
                 fontSize: {
-                    lg: "30px",
-                    md: "22px",
-                    sm: "22px",
-                    xs: "20px", // Adjust font size for small screens
-                  },
+                  lg: "30px",
+                  md: "22px",
+                  sm: "22px",
+                  xs: "20px", // Adjust font size for small screens
+                },
               }}
             >
               {subtitle}
@@ -103,12 +96,12 @@ const BaptismServiceSectionCard = ({
           <Box
             sx={{
               maxHeight: {
-                xs:"300px",
-                sm:"350px",
+                xs: "300px",
+                sm: "350px",
                 md: "350px",
                 lg: "400px",
               },
-              marginTop:"10px",
+              marginTop: "10px",
               overflowY: "auto",
             }}
           >
@@ -121,21 +114,22 @@ const BaptismServiceSectionCard = ({
                       sx={{
                         textAlign: "left",
                         fontSize: {
-                            lg: "25px",
-                            md: "20px",
-                            sm: "20px",
-                            xs: "18px", // Adjust font size for smaller screens
-                          },
-                          lineHeight: 1.5,
-    
+                          lg: "25px",
+                          md: "20px",
+                          sm: "20px",
+                          xs: "18px", // Adjust font size for smaller screens
+                        },
+                        lineHeight: 1.5,
+
                         mb: 1,
                       }}
                     >
                       {step.link && step.linkName ? (
                         <>
-                        {step.description} &nbsp; {/* Non-breaking space */}
-                        <a href={step.link}>{step.linkName}</a> {/* Render the link */}
-                      </>
+                          {step.description} &nbsp; {/* Non-breaking space */}
+                          <a href={step.link}>{step.linkName}</a>{" "}
+                          {/* Render the link */}
+                        </>
                       ) : (
                         step.description
                       )}

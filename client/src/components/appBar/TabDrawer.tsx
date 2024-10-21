@@ -6,7 +6,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+
 import MailIcon from "@mui/icons-material/Mail";
 import { Button, Typography } from "@mui/material";
 import HuvudloggaBKC3 from "../../assets/Huvudlogga-BKC3.png";
@@ -16,10 +16,9 @@ import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import LoginIcon from "@mui/icons-material/Login";
 import InfoIcon from "@mui/icons-material/Info";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { useState } from "react";
-import LoginModal from "../login/LoginModal";
+
 interface TabDrawerProps {
   open: boolean;
   onClose: () => void;
@@ -38,31 +37,8 @@ const navItems = ["Home", "About Us", "Schedule", "Services", "Activities"];
 export default function TabDrawer({ open, onClose,handleLogin, handleLogout }: TabDrawerProps) {
   type NavItem = (typeof navItems)[number];
   const navigate = useNavigate();
-  const [logOutFormOpen, setlogOutFormOpen] = useState(false);
-  const location = useLocation(); // Get the current location
-  const { currentUser, logout } = useAuth();
-
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-
-  const handleLoginOpen = () => {
-    setIsLoginOpen(true);
-  };
-
-  const handleLoginClose = () => {
-    setIsLoginOpen(false);
-  };
-
-  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    navigate(newValue); // Navigate to the new route
-  };
-
-//   const handleLogout = () => {
-//     logout(); // Call the logout function from AuthContext to clear the user state
-//     setlogOutFormOpen(true);
-//   };
-  const handleClose = () => {
-    setlogOutFormOpen(false); // Close the dialog
-  };
+ // Get the current location
+  const { currentUser } = useAuth();
 
   // Map icons to each nav item with proper typing
   const icons: Record<NavItem, JSX.Element> = {
@@ -72,15 +48,6 @@ export default function TabDrawer({ open, onClose,handleLogin, handleLogout }: T
     Services: <GroupsIcon />,
     Activities: <LocalActivityIcon />,
     Contact: <MailIcon />,
-  };
-
-  const handleListItemClick = (text: string) => {
-    if (text === "Login") {
-      handleLoginOpen(); // Trigger login when "Login" is clicked
-    } else {
-      // Handle other cases or do nothing
-      console.log(`${text} clicked`);
-    }
   };
 
   const DrawerList = (

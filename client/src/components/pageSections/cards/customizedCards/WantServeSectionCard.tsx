@@ -3,7 +3,7 @@ import "./customizedCards.css";
 
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
-import { ImageTextWithStepsModel } from "../../../../models/ImageTextWithSteps";
+import { BaptismSectionModel } from "../../../../models/ImageTextWithSteps";
 const Item = styled("div")(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(2),
@@ -17,7 +17,7 @@ const WantServeSectionCard = ({
   subtitle,
   images,
   steps,
-}: ImageTextWithStepsModel) => {
+}: BaptismSectionModel) => {
   const imageCount = Array.isArray(images) ? images.length : 1; // Determine the number of images
   const hasLargeImage = imageCount > 2;
   return (

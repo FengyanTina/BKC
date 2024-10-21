@@ -4,10 +4,10 @@ import { useLocalStorage } from '../hooks/UseLocalStorage';
 
 export const UserContext = createContext({
     users: [] as User[],
-    setUsers: (users: User[]) => {},
-    addUser: (newUser: User) => {},
-    removeUser: (id: string) => {},
-    removeUsers: (id: string[]) => {},
+    setUsers: (_users: User[]) => {},
+    addUser: (_newUser: User) => {},
+    removeUser: (_id: string) => {},
+    removeUsers: (_id: string[]) => {},
   });
   
 export function UserProvider({ children }: { children: React.ReactNode }) {

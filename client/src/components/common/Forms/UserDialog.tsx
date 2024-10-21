@@ -4,12 +4,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { useContext, useRef, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Grid from "@mui/material/Grid2";
-import { FormControl, FormHelperText, FormHelperTextProps, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
 import { HashLink } from 'react-router-hash-link';
 import { defaultUser, User, UserCategory, UserDialogMode } from "../../../models/User";
 import { UserContext } from "../../../context/UserContext";

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { useLocalStorage } from "../hooks/UseLocalStorage";
 import { User } from "../models/User";
 import useInactivityLogout from "../hooks/UserInactiveLogout";
@@ -17,7 +17,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [currentUser, setCurrentUser] = useLocalStorage<User | null>("currentUser", null);
   const [storedUsers] = useLocalStorage<User[]>("users", []);
   const [error, setError] = useState<string | null>(null);
-  const timeoutDuration = 30 * 60 * 1000; // 30 minutes
+  const timeoutDuration = 20* 60 * 1000; 
 
   // Handle login logic with error handling
   const login = (userName: string, password: string) => {
@@ -32,10 +32,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setError(null); // Clear any error
   };
   // Handle logout
-  const logout = () => {
+  const logout = useCallback(() => {
     setCurrentUser(null); // Clear current user
+    localStorage.removeItem('currentUser');
     setError(null); // Optionally clear any error message
-  };
+  }, []);
 
   // Auto-logout after inactivity
   useInactivityLogout(timeoutDuration, logout);

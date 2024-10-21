@@ -12,7 +12,7 @@ import DavidB from "./assets/DavidB.jpg"
 import welcome2 from "./assets/welcome2.jpg"
 import { Event} from "./models/Event";
 import { PageSection } from "./models/PageSection";
-import { ImageInforCardModel } from "./models/ImageInforCard";
+import { ImageInforSectionModel } from "./models/ImageInforSection.ts";
 import { ActivitySocialMediaScetionCardModel } from "./models/ActivitySocialMediaScetionCard";
 
 import { EventCategory } from "./models/EventCategory";
@@ -27,39 +27,43 @@ export interface Video {
 }
 
 
-  export const sundayServiceCardInfor:ImageInforCardModel={
+  export const sundayServiceCardInfor:ImageInforSectionModel={
     id: "1",
+    inforSectionId:"",
     title: "For Congregation",
     subtitle:"välkommen till vår kyrka nu på söndag!",
-    time:new Date(2024, 9, 22, 14, 30),
+    startTime:new Date(2024, 9, 22, 14, 30),
     category:EventCategory.SundayService,
     description:"Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!",
     images: Worship 
   }
-  export const sundaySchoolActivityCardInfor:ImageInforCardModel={
+  export const sundaySchoolActivityCardInfor:ImageInforSectionModel={
     id: "1",
+    inforSectionId:"",
     title: "For Small Kids",
     subtitle:"BKC-KIDS",
-    time:new Date(2024, 9, 22, 14, 30),
+    startTime:new Date(2024, 9, 22, 14, 30),
     category:EventCategory.SundaySchoole,
     description:"BKC-Kids är för barn mellan 2-12 år. Barnens egen gudstjänst där vi tillsammans får möta spännande bibelpersoner, lyssna på Guds ord, lekar och tävlingar, vi äter korv och pysslar tillsammans. Kom med du också!",
     images: edward ,
   }
  
-  export const youthActivityCardInfor:ImageInforCardModel={
+  export const youthActivityCardInfor:ImageInforSectionModel={
     id: "1",
+    inforSectionId:"",
     title: "For Young Adult",
     subtitle:"Bkc Ungdom",
-    time:new Date(2024, 9, 22, 14, 30),
+    startTime:new Date(2024, 9, 22, 14, 30),
     category: EventCategory.YouthService,
     description:"Vi kommer att leva, sova och äta på sommargården Solviken som ligger 5 km utanför Fristad precis vid sjön Ärtingen. Det finns tillgång till ca 20 sängplatser så för att alla säkert ska på plats kommer vi även att ställa upp husvagnar eller erbjuda möjlighet att tälta för er som är riktigt äventyrliga! Vill du inte övernatta utan bara vara med dagtid går detta också bra, skriv då detta i anmälan!",
     images: worshipHands ,
   }
-  export const homeGroupActivityCardInfor:ImageInforCardModel={
+  export const homeGroupActivityCardInfor:ImageInforSectionModel={
     id: "1",
+    inforSectionId:"",
     title: "Your Small Community",
     subtitle:"Together,Stronger!",
-    time:new Date(2024, 9, 22, 14, 30),
+    startTime:new Date(2024, 9, 22, 14, 30),
     category:EventCategory.HomeGroup,
     description:"Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn.",
     images:Varhistoria 
@@ -113,6 +117,7 @@ export const imageGallarytemData = [
   
   export const socialMediaActivityCardInfor:ActivitySocialMediaScetionCardModel={
     id: "1",
+    inforSectionId:"",
     title: "All activities on Social media",
     subtitle:"Together,Stronger!",
     category: EventCategory.SocialMedia,
@@ -151,8 +156,9 @@ export interface ServingPosition {
 }
 
 
-  export const newHere:ImageInforCardModel ={
+  export const newHere:ImageInforSectionModel ={
     id:'23',
+    inforSectionId:"",
     title:"New Here? ",
     subtitle:"can't wait to meet you!",
     description:"You may find information you need in below links or feel free to contact us. ",

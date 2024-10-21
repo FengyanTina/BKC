@@ -1,11 +1,13 @@
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ImageGallary from "../../../common/ImageGallary";
-import InforCard from "../../../common/cards/InforCard";
-import { ImageInforCardModel } from "../../../../models/ImageInforCard";
+import PageInforCard from "../../../common/cards/PageInforCard";
+import { ImageInforSectionModel } from "../../../../models/ImageInforSection.ts";
 
 
-const ImgInforCard = ({ title, category, subtitle, description, images,imageLeft = true }: ImageInforCardModel) => {
+const ImgInforCardSection
+
+ = ({ inforSectionId,title, category, subtitle, description, images,imageLeft = true }: ImageInforSectionModel) => {
     const renderImageGallery = () => {
         if (Array.isArray(images)) {
           return (
@@ -154,7 +156,8 @@ const ImgInforCard = ({ title, category, subtitle, description, images,imageLeft
       justifyContent: "center", // Vertically center the content
     }}
   >
-    <InforCard
+    <PageInforCard
+    id={inforSectionId}
       category={category}
       title={title}
       subtitle={subtitle}
@@ -183,4 +186,4 @@ const ImgInforCard = ({ title, category, subtitle, description, images,imageLeft
   );
 };
 
-export default ImgInforCard;
+export default ImgInforCardSection;

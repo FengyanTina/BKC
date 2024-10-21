@@ -6,7 +6,7 @@ import Worship from "../../assets/Worship.jpeg";
 import PrayerBible from "../../assets/spiritual-prayer-hands-holding-bible.jpg";
 import Grid from "@mui/material/Grid2";
 import { Box, Typography } from "@mui/material";
-import InforCard from "../../components/common/cards/InforCard.tsx";
+import PageInforCard from "../../components/common/cards/PageInforCard.tsx";
 import { SocialIcon } from "react-social-icons";
 import ImageGallary from "../../components/common/ImageGallary";
 import { imageGallarytemData } from "../../data.ts";
@@ -102,7 +102,7 @@ export default function ActivitiesMainPage() {
         </Grid>
         <Grid container spacing={2} justifyContent="center">
           <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
+            <PageInforCard
               category="Social Media"
               title="All activities on Social media"
               subtitle="Follow our social media"
@@ -187,7 +187,7 @@ export default function ActivitiesMainPage() {
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
+            <PageInforCard
               category="Sunday Service"
               title="Word of the Day"
               subtitle="välkommen till vår kyrka nu på söndag!"
@@ -219,7 +219,7 @@ export default function ActivitiesMainPage() {
           sx={{ flexDirection: { xs: "column", sm: "row" } }}
         >
           <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
+            <PageInforCard
               category="BKC Kids"
               title="Sunday School"
               subtitle="BKC-KIDS"
@@ -287,7 +287,7 @@ export default function ActivitiesMainPage() {
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
+            <PageInforCard
               category="Youth Group"
               title="Youth"
               subtitle="Bkc Ungdom"
@@ -318,7 +318,7 @@ export default function ActivitiesMainPage() {
           sx={{ flexDirection: { xs: "column", sm: "row" } }}
         >
           <Grid size={{ xs: 12, sm: 6 }}>
-            <InforCard
+            <PageInforCard
               category="Home Group"
               title="Find your community"
               subtitle="subtitle"

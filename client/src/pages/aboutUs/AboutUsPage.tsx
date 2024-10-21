@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Link, Modal, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import IntroCard from "../../components/common/cards/IntroCard";
+import TeamIntroCard from "../../components/common/cards/TeamIntroCard";
 import { Pastor } from "../../data";
 import SectionLine from "../../components/pageSections/SectionLine";
 import UserTable from "../../components/common/Tables/userTable";
@@ -9,16 +9,7 @@ import Leader from "../../assets/leader.jpg";
 import DavidB from "../../assets/DavidB.jpg";
 import ReadMoreDialogs from "../../components/common/Forms/ReadMoreDialog";
 
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-};
+
 const AboutUsPage = () => {
   const [modalOpen, setModalOpen] = useState(false); // State for modal visibility
   const handleOpen = () => setModalOpen(true);
@@ -215,24 +206,24 @@ const AboutUsPage = () => {
         }}
         id="leaderShip"
       >
-        <IntroCard
+        <TeamIntroCard
           title={Pastor.title}
           subTitle={Pastor.subTitle}
-          content={Pastor.content}
+          description={Pastor.content}
           image={DavidB}
           onOpen={handleOpen}
         />
-        <IntroCard
+        <TeamIntroCard
           title={Pastor.title}
           subTitle={Pastor.subTitle}
-          content={Pastor.content}
+          description={Pastor.content}
           image={Leader}
           onOpen={handleOpen}
         />
-        <IntroCard
+        <TeamIntroCard
           title={Pastor.title}
           subTitle={Pastor.subTitle}
-          content={Pastor.content}
+          description={Pastor.content}
           image={DavidB}
           onOpen={handleOpen}
         />

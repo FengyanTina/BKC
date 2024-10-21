@@ -4,45 +4,18 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-interface Step {
-    title: string;
-    description: string;
-    link?: string; // Optional link if needed
-  }
-// type Props = {
-//     category?: string;
-//     title: string;
-//     subTitle?: string;
-//     linkSubtitle?: string;
-//     content: string;
-//     buttonText?: string;
-//     time?: Date;
-//     image:string | string[];
-//     date?: Date;
-//     linkBody?: string;
-//     location?: string;
-//     steps?: Step[];
-// }
-interface CardProps {
-  category?: string;
-  title: string;
-  subtitle?: string;
-   description: string;
-  buttonText?: string;
-  date?: Date;
-  time?: Date;
-  location?: string;
- 
-}
-export default function InforCard({
+import { formatDate, formatTime } from "../../../utils/FormatDateAndTime";
+import { PageInforModel } from "../../../models/PageInforModel";
+export default function PageInforCard({
   category,
   title,
  subtitle,
  description,
   buttonText,
-  time,
+  startTime,
+  endTime,
   location,
-}: CardProps) {
+}: PageInforModel) {
 //   const bull = (
 //     <Box
 //       component="span"
@@ -51,13 +24,12 @@ export default function InforCard({
       
 //     </Box>
 //   );
-  const formattedTime = time ? time.toLocaleString() : null;
+ // const formattedTime = time ? formatDateTime(time) : null;
   return (
     <Card
       sx={{
         maxWidth: 500,
-        height: 350,
-        
+        height: 350,  
         border: "none", // Remove the card border
         backgroundColor: "transparent", // Remove the card background color
         boxShadow: "none", // Remove the card shadow
@@ -89,11 +61,12 @@ export default function InforCard({
             {category}
           </Typography>
         )}
-        {formattedTime && (// Conditionally render time
+        {startTime && (// Conditionally render time
           <Typography 
           variant="caption" 
           sx={{ mt: 2, color: "text.secondary" }}>
-            {formattedTime}
+           {formatDate(startTime)}: {formatTime(startTime)} 
+           {endTime && ` - ${formatTime(endTime)}`} {/* Only render endTime if it exists */}
           </Typography>
         )}
          {location && (// Conditionally render time

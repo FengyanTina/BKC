@@ -5,35 +5,46 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
-import Leader from "../../../assets/leader.jpg";
-interface IntroCardProps{
-title:string;
-subTitle:string;
-content:string;
-image?:string;
-onOpen: () => void;
+interface IntroCardProps {
+  title: string;
+  subTitle: string;
+  description: string;
+  image?: string;
+  onOpen: () => void;
 }
-export default function IntroCard({title,subTitle,content,image,onOpen}:IntroCardProps) {
+export default function TeamIntroCard({
+  title,
+  subTitle,
+  description,
+  image,
+  onOpen,
+}: IntroCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        {image &&(
- <CardMedia component="img" height="240" image={image} alt="" />
+        {image && (
+          <CardMedia component="img" height="240" image={image} alt="" />
         )}
-       
+
         <CardContent>
           <Typography gutterBottom variant="h4" component="div">
-          {title}
+            {title}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-          {subTitle}
+            {subTitle}
           </Typography>
-          <Typography variant="h6" sx={{ color: "text.secondary", display: '-webkit-box',
-              overflow: 'hidden',
-              WebkitBoxOrient: 'vertical',
+          <Typography
+            variant="h6"
+            sx={{
+              color: "text.secondary",
+              display: "-webkit-box",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
               WebkitLineClamp: 3, // Limit to 7 lines
-              position: 'relative', }}>
-           {content}
+              position: "relative",
+            }}
+          >
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
