@@ -1,4 +1,10 @@
-import { Box, Dialog, DialogContent, Typography } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Worship from "../assets/Worship.jpeg";
 import Carousel from "../components/common/slides/Carousel.tsx";
@@ -22,6 +28,7 @@ import SectionLine from "../components/pageSections/SectionLine.tsx";
 import ActivitySocialMediaScetionCard from "../components/pageSections/cards/customizedCards/ActivitySocialMediaScetionCard.tsx";
 import NewHereSectionGrid from "../components/pageSections/grid/NewHereSectionGrid.tsx";
 import ImgInforCardSection from "../components/pageSections/cards/InforCardImgSections/ImgInforCardSection.tsx";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function StartPage() {
   const [openMap, setOpenMap] = useState(false);
@@ -33,7 +40,7 @@ export default function StartPage() {
     setOpenMap(false);
   };
   return (
-    <Box >
+    <Box>
       <Grid
         container
         spacing={2}
@@ -46,7 +53,7 @@ export default function StartPage() {
           alignItems: "center",
           justifyContent: "space-evenly",
           width: "100%", // Full width of the container
-         height:"100%",
+          height: "100%",
           backgroundAttachment: "fixed",
         }}
       >
@@ -86,7 +93,7 @@ export default function StartPage() {
               alignItems: "center", // Center horizontally
               textAlign: "center", // Center text content
               position: "relative", // To move the box up
-              marginTop: { xs: "100px",  },
+              marginTop: { xs: "100px" },
             }}
           >
             {/* First Typography - Borås Kristna Center */}
@@ -106,7 +113,7 @@ export default function StartPage() {
                   sm: "1em", // Default font size for larger screens (tablets and up)
                 },
                 color: "white",
-               
+
                 marginBottom: "30px",
               }}
             >
@@ -122,11 +129,11 @@ export default function StartPage() {
                 textAlign: "left", // Ensure text aligns left
                 width: "100%", // Take full width so alignment works properly
                 maxWidth: {
-                    md:"400px",
-                    sm:"300px",
-                    xs:"200px",
-                }
-                 // You can adjust max width for better control
+                  md: "400px",
+                  sm: "300px",
+                  xs: "200px",
+                },
+                // You can adjust max width for better control
               }}
             >
               <Typography
@@ -150,7 +157,10 @@ export default function StartPage() {
                 A place to pray
                 <br />A place to learn the word
               </Typography>
-              <Link style={{ color: "white", textDecoration: "none" }} to="/aboutUs">
+              <Link
+                style={{ color: "white", textDecoration: "none" }}
+                to="/aboutUs"
+              >
                 About Us
               </Link>
               <Link
@@ -173,6 +183,15 @@ export default function StartPage() {
                 fullWidth
                 style={{ color: "white", textDecoration: "none" }}
               >
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  onClick={handleCloseMap} // Close the dialog when clicked
+                  aria-label="close"
+                  style={{ position: "absolute", right: 30, top: 15 }} // Position the button
+                >
+                  <CloseIcon />
+                </IconButton>
                 <DialogContent>
                   <Map />
                 </DialogContent>
@@ -184,23 +203,23 @@ export default function StartPage() {
         <Grid
           sx={{
             maxWidth: {
-                xs: "90%", 
-                sm: "90%", 
-              },
+              xs: "90%",
+              sm: "90%",
+            },
             marginTop: {
-              xs: "10px", 
-              sm: "340px", 
+              xs: "10px",
+              sm: "340px",
             },
             height: {
-              xs: "40vh", 
-              sm: "50vh", 
-              md: "50vh", 
+              xs: "40vh",
+              sm: "50vh",
+              md: "50vh",
               lg: "60vh",
             },
             marginBottom: {
               md: "10px",
-              sm:"10px",
-              xs:"10px",
+              sm: "10px",
+              xs: "10px",
             },
             overflowY: "auto",
           }}
@@ -233,10 +252,10 @@ export default function StartPage() {
         {/* --------------WELCOME NEW----------- */}
         <SectionLine text="Welcome" useWhiteStroke={true} />
         <NewHereSectionGrid
-        inforSectionId=""
-        id={newHere.id}
+          inforSectionId=""
+          id={newHere.id}
           title={newHere.title}
-         description={newHere.description}
+          description={newHere.description}
           images={newHere.images}
           subtitle={newHere.subtitle}
         />
@@ -245,8 +264,8 @@ export default function StartPage() {
 
       <SectionLine text=" Activities And Services" />
       <ActivitySocialMediaScetionCard
-      inforSectionId=""
-      id={socialMediaActivityCardInfor.id}
+        inforSectionId=""
+        id={socialMediaActivityCardInfor.id}
         title={socialMediaActivityCardInfor.title}
         subtitle={socialMediaActivityCardInfor.subtitle}
         description={socialMediaActivityCardInfor.description}
@@ -256,8 +275,8 @@ export default function StartPage() {
 
       {/* --------------ACTIVITIES-Sunday Service----------- */}
       <ImgInforCardSection
-      inforSectionId=""
-      id={sundayServiceCardInfor.id}
+        inforSectionId=""
+        id={sundayServiceCardInfor.id}
         title={sundayServiceCardInfor.title}
         subtitle={sundayServiceCardInfor.subtitle}
         description={sundayServiceCardInfor.description}
@@ -268,19 +287,18 @@ export default function StartPage() {
 
       {/* --------------ACTIVITIES-BKC Kids----------- */}
       <ImgInforCardSection
-      inforSectionId=""
-      id={sundaySchoolActivityCardInfor.id}
+        inforSectionId=""
+        id={sundaySchoolActivityCardInfor.id}
         title={sundaySchoolActivityCardInfor.title}
         subtitle={sundaySchoolActivityCardInfor.subtitle}
         description={sundaySchoolActivityCardInfor.description}
         images={sundaySchoolActivityCardInfor.images}
         category={sundaySchoolActivityCardInfor.category}
-        
       />
       {/* --------------ACTIVITIES-Youth----------- */}
       <ImgInforCardSection
-      inforSectionId=""
-      id={youthActivityCardInfor.id}
+        inforSectionId=""
+        id={youthActivityCardInfor.id}
         title={youthActivityCardInfor.title}
         subtitle={youthActivityCardInfor.subtitle}
         description={youthActivityCardInfor.description}
@@ -291,14 +309,13 @@ export default function StartPage() {
 
       {/* --------------ACTIVITIES-Home Group----------- */}
       <ImgInforCardSection
-      id={homeGroupActivityCardInfor.id}
-      inforSectionId=""
+        id={homeGroupActivityCardInfor.id}
+        inforSectionId=""
         title={homeGroupActivityCardInfor.title}
         subtitle={homeGroupActivityCardInfor.subtitle}
         description={homeGroupActivityCardInfor.description}
         images={homeGroupActivityCardInfor.images}
         category={homeGroupActivityCardInfor.category}
-       
       />
       {/* --------------NEWS SLIDES----------- */}
       <Box
@@ -312,14 +329,14 @@ export default function StartPage() {
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-       <SectionLine text=" News" />
+        <SectionLine text=" News" />
         <Box
           sx={{
             backgroundColor: "#f0f4f8",
             width: "100%",
             marginBottom: "10px",
           }}
-        > 
+        >
           <PauseOnHover events={news} />
         </Box>
       </Box>

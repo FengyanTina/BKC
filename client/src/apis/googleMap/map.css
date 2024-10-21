@@ -61,3 +61,14 @@
       font-size: 10vw;
     }
   }
+  .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
