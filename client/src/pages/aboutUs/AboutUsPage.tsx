@@ -207,25 +207,25 @@ const AboutUsPage = () => {
         id="leaderShip"
       >
         <TeamIntroCard
-          title={Pastor.title}
-          subTitle={Pastor.subTitle}
+          title={"Senior Pastor"}
+          subTitle={"Senior Pastor"}
           description={Pastor.content}
           image={DavidB}
-          onOpen={handleOpen}
+        //   onOpen={handleOpen}
         />
         <TeamIntroCard
-          title={Pastor.title}
-          subTitle={Pastor.subTitle}
+          title={"Senior Pastor"}
+          subTitle={"Senior Pastor"}
           description={Pastor.content}
           image={Leader}
-          onOpen={handleOpen}
+        //   onOpen={handleOpen}
         />
         <TeamIntroCard
-          title={Pastor.title}
-          subTitle={Pastor.subTitle}
+          title={"Youth Leader"}
+          subTitle={"Youth Pastor"}
           description={Pastor.content}
           image={DavidB}
-          onOpen={handleOpen}
+          
         />
       </Box>
       <SectionLine text="MemberShip" />

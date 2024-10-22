@@ -12,7 +12,7 @@ interface IntroCardProps {
   subTitle: string;
   description: string;
   image?: string;
-  onOpen: () => void;
+//   onOpen: () => void;
 }
 export default function TeamIntroCard({
   title,

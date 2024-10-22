@@ -142,21 +142,21 @@ export default function ActivitiesMainPage() {
           subTitle={"Your Small Community"}
           description={"You can find your own small comminity..."}
           image={Home}
-          onOpen={handleOpen}
+        //   onOpen={handleOpen}
         />
         <TeamIntroCard
           title={"Senior Group"}
           subTitle={"Your Small Community"}
           description={"You can find your own small comminity..."}
           image={Senior}
-          onOpen={handleOpen}
+        //   onOpen={handleOpen}
         />
         <TeamIntroCard
           title={"Woman Group"}
           subTitle={"Your Small Community"}
           description={"You can find your own small comminity..."}
           image={Woman}
-          onOpen={handleOpen}
+        //   onOpen={handleOpen}
         />
          
       </Box>
