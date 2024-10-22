@@ -61,21 +61,7 @@ export default function PageInforCard({
             {category}
           </Typography>
         )}
-        {startTime && (// Conditionally render time
-          <Typography 
-          variant="caption" 
-          sx={{ mt: 2, color: "text.secondary" }}>
-           {formatDate(startTime)}: {formatTime(startTime)} 
-           {endTime && ` - ${formatTime(endTime)}`} {/* Only render endTime if it exists */}
-          </Typography>
-        )}
-         {location && (// Conditionally render time
-          <Typography 
-          variant="caption" 
-          sx={{ mt: 2, color: "text.secondary" }}>
-            {location}
-          </Typography>
-        )}
+       
         <Typography
           variant="h5"
           component="div"
@@ -90,20 +76,24 @@ export default function PageInforCard({
         >
           {title}
         </Typography>
-        <Typography
-          sx={{
-            color: "text.secondary",
-            mb: 1.5,
-            fontSize: 18,
-            WebkitLineClamp: 1,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-          }}
-        >
-          {subtitle}
-        </Typography>
+        {subtitle && ( // Conditionally render category
+          <Typography
+            gutterBottom
+            sx={{
+                color: "text.secondary",
+                mb: 1.5,
+                fontSize: 18,
+                WebkitLineClamp: 1,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+            }}
+          >
+            {subtitle}
+          </Typography>
+        )}
+        
         <Typography
           variant="body2"
           sx={{
@@ -118,6 +108,21 @@ export default function PageInforCard({
         >
           {description}
         </Typography>
+        {startTime && (// Conditionally render time
+          <Typography 
+          variant="h5" 
+          sx={{ mt: 2, color: "text.secondary" }}>
+         <strong>Time: </strong> {formatDate(startTime)}: {formatTime(startTime)} 
+           {endTime && ` - ${formatTime(endTime)}`} {/* Only render endTime if it exists */}
+          </Typography>
+        )}
+         {location && (// Conditionally render time
+          <Typography 
+          variant="h5" 
+          sx={{ mt: 2, color: "text.secondary" }}>
+           <strong>Location:</strong> {location}
+          </Typography>
+        )}
       </CardContent>
       <CardActions>
         <Button size="small">{buttonText}</Button>

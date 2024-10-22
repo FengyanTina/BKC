@@ -106,6 +106,7 @@ export default function ServicesMainPage() {
       <div id="sundayService"></div>
       <SectionLine text="Sunday Scervice" />
       <ImgTextSection
+      inforSectionId=""
         id={sundayServiceSection.id}
         title={sundayServiceSection.title}
         subtitle={sundayServiceSection.subTitle}
@@ -117,6 +118,7 @@ export default function ServicesMainPage() {
       <SectionLine text="Prayer Services" />
       <div id="prayerService"></div>
       <ImgTextSection
+      inforSectionId=""
         id={prayerService.id}
         title={prayerService.title}
         linkSubtitle={prayerService.linkSubtitle}

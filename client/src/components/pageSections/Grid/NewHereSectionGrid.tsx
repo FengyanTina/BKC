@@ -91,7 +91,7 @@ export default function NewHereSectionGrid({
           }}
         >
               <HashLink
-                to="/services#in-church"
+                to="/services#sundayService"
                 style={{
                   display: "block",
                   fontSize: "25px",
@@ -99,7 +99,7 @@ export default function NewHereSectionGrid({
                   fontWeight: "500",
                 }}
               >
-                In Church
+                SundayService
               </HashLink>
               <HashLink
                 to="/services#serve"

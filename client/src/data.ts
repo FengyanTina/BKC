@@ -11,12 +11,26 @@ import Varhistoria from "./assets/Varhistoria.jpg"
 import DavidB from "./assets/DavidB.jpg"
 import welcome2 from "./assets/welcome2.jpg"
 import { Event} from "./models/Event";
-import { PageSection } from "./models/PageSection";
+import SundaySchoolTeaching  from "./assets/sundaySchool/sundayTeaching.jpg"
+import SundaySchool2 from "./assets/sundaySchool/sudaySchool2.jpg"
+import SundaySchool3 from "./assets/sundaySchool/sudaySchool3.jpg"
+import SundaySchool4 from "./assets/sundaySchool/sundayschool4.jpg"
+import SundaySchool5 from "./assets/sundaySchool/sundaySchool5.jpg"
+import SundaySchool6 from "./assets/sundaySchool/sundaySchool6.jpg"
+import SundaySchool7 from "./assets/sundaySchool/sundaySchool7.jpg"
+import SundaySchool8 from "./assets/sundaySchool/sundaySchool8.jpg"
+import SundaySchool9 from "./assets/sundaySchool/SundaySchool9.jpg"
+import SundaySchool10 from "./assets/sundaySchool/sundaySchool10.jpg"
+import SundaySchool11 from "./assets/sundaySchool/sundaySchol11.jpg"
+import SundaySchool12 from "./assets/sundaySchool/sundaySchool12.jpg"
+import SundaySchoo13 from "./assets/sundaySchool/sundaySchool3.jpg"
 import { ImageInforSectionModel } from "./models/ImageInforSection.ts";
 import { ActivitySocialMediaScetionCardModel } from "./models/ActivitySocialMediaScetionCard";
 
 import { EventCategory } from "./models/EventCategory";
 import { User, UserCategory } from "./models/User.ts";
+import { PageInforModel } from "./models/PageInforModel.ts";
+import { ImageGallaryItemData } from "./models/ImgGallary.ts";
 
 
  
@@ -268,6 +282,44 @@ export const comingEvents:Event[] = [
   },
 ];
 
+export const events = [
+  {
+    id: "1",
+    time: new Date(2024, 9, 22, 14, 30), // October 22, 2024, 2:30 PM
+    title: "Reaching out ",
+    category: EventCategory.Event,
+    image: PrayerBible,
+    description:
+      "An exhibition featuring contemporary art pieces from local artists.",
+  },
+  {
+    id: "2",
+    time: new Date(2024, 9, 25, 19, 0), // October 25, 2024, 7:00 PM
+    title: "Tech Conference",
+    category: EventCategory.Event,
+    image: edward,
+    description:
+      "Join the biggest technology conference of the year with keynote speakers.",
+  },
+  {
+    id: "3",
+    time: new Date(2024, 9, 27, 9, 0), // October 27, 2024, 9:00 AM
+    title: "Charity Run",
+    category: EventCategory.Event,
+    image: Worship,
+    description:
+      "Participate in the annual charity run to support a good cause.",
+  },
+  {
+    id: "4",
+    time: new Date(2024, 9, 30, 17, 30), // October 30, 2024, 5:30 PM
+    title: "Food Festival",
+    category: EventCategory.Event,
+    image: BethelWorship,
+    description:
+      "Savor delicious dishes from a variety of food vendors and enjoy live entertainment.",
+  },
+];
 export const news:Event[] = [
   {
     id: "1",
@@ -386,5 +438,86 @@ export const prayerService = {
   description:
     "Live English simultaneous translation is available for theSunday services. Thought-provoking and engaging messages based on the Bible from our senior pastor, Tim Dilena. Each service lasts around 90 minutes. Engaging worship music. Come as you are. There is no dress code.",
 };
+export const BKCkYouth:PageInforModel = {
+    id:"youth",
+    title:"Youth Group",
+    subtitle: "Join Us Every Friday Night",
+    description:"The learn the word, while having fun. They build their little community, and grow together as part of the church family,The learn the word, while having fun. They build their little community, and grow together as part of the church family,The learn the word, while having fun. They build their little community, and grow together as part of the church family.Find a group of friends who you can be yourself with while growing in your relationship with God. By joining us in-person or online you can discover exactly who God intentionally made you to be.", 
+    startTime: new Date(2024, 9, 30, 17, 30),
+
+ location:"BKC",  
+}
+
+export const BKCkIDS2:PageInforModel = {
+    id:"kids",
+      title:"Sunday School",
+      subtitle: "Lets kids come to the Lord",
+      description:"The learn the word, while having fun. They build their little community, and grow together as part of the church family,The learn the word, while having fun. They build their little community, and grow together as part of the church family,The learn the word, while having fun. They build their little community, and grow together as part of the church family", 
+      startTime: new Date(2024, 9, 30, 17, 30),
+
+   location:"BKC",       
+  }
+  
+export const SundaySchoolImageGallary:ImageGallaryItemData [] = [
+    {
+        img: SundaySchoolTeaching ,
+        title:"2",
+        rows: 2,
+        cols: 2,
+      },
+      {
+        img: SundaySchool2,
+        title:"3",
+      },
+      {
+        img: SundaySchool3,
+        title:"4",
+      },
+      {
+        img: SundaySchool4,
+        title:"5",
+        cols: 2,
+      },
+      {
+        img: SundaySchool5,
+        title:"6",
+        cols: 2,
+      },
+      {
+        img: SundaySchool6,
+        title:"7",
+        author: '@arwinneil',
+        rows: 2,
+        cols: 2,
+      },
+      {
+        img: SundaySchool7,
+        title:"8",
+      },
+      {
+        img: SundaySchool8,
+        title: '9',
+      },
+    
+    //   {
+    //     img: SundaySchool9,
+    //     title: '10',
+    //     rows: 2,
+    //     cols: 2,
+    //   },
+    //   {
+    //     img: SundaySchool10,
+    //     title: '11',
+    //   },
+    //   {
+    //     img: SundaySchool11,
+    //     title: '12',
+    //   },
+    //   {
+    //     img: SundaySchool12,
+    //     title: '13',
+    //     cols: 2,
+    //   },
 
 
+];

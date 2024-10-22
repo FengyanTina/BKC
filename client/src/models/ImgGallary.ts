@@ -4,4 +4,6 @@ export interface ImageGallaryItemData
       title?: string,
       author?: string,
       featured?: boolean,
+      rows?: number,
+      cols?:number,
     }

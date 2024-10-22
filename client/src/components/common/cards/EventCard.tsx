@@ -95,8 +95,7 @@ export default function EventCard({
           </Typography>
         )}
       </CardContent>
-      <CardActions>
-    
+      <CardActions> 
         <Button size="small">Get</Button>
       </CardActions>
     </Card>

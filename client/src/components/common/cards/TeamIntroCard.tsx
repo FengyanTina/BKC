@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
+import ReadMoreDialogs from "../Forms/ReadMoreDialog";
+import { useState } from "react";
 interface IntroCardProps {
   title: string;
   subTitle: string;
@@ -17,8 +19,10 @@ export default function TeamIntroCard({
   subTitle,
   description,
   image,
-  onOpen,
 }: IntroCardProps) {
+    const [modalOpen, setModalOpen] = useState(false); // State for modal visibility
+    const handleOpen = () => setModalOpen(true);
+    const handleClose = () => setModalOpen(false);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -49,10 +53,13 @@ export default function TeamIntroCard({
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={onOpen}>
+        <Button size="small" color="primary" onClick={handleOpen}>
           Read More
         </Button>
       </CardActions>
+      <ReadMoreDialogs open={modalOpen}
+          onClose={handleClose} title={title} subtitle={subTitle} content={description} />
     </Card>
+    
   );
 }

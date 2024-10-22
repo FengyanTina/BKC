@@ -81,6 +81,7 @@ const BaptismServiceSectionCard = ({
                 mx: "auto", // Horizontal margin to center it within the container
                 px: 3, // Add padding on the sides
                 mt: 3,
+                marginBottom: "10px",
                 fontSize: {
                   lg: "30px",
                   md: "22px",

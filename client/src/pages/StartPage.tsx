@@ -81,7 +81,8 @@ export default function StartPage() {
               top: "50%",
               width: "5px", // Vertical line width
               height: "100%", // Vertical line height
-              backgroundColor: "purple", // Line color
+            //   backgroundColor: "purple", // Line color
+            backgroundColor:"#00acc1",
               transform: "translateY(-50%)", // Center line vertically
             },
           }}
