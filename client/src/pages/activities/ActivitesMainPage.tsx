@@ -1,30 +1,25 @@
-import PauseOnHover from "../../components/common/slides/SlickSlider.tsx";
+import SlickSlider from "../../components/common/slides/SlickSlider.tsx";
 import Grid from "@mui/material/Grid2";
 import { Box } from "@mui/material";
-import Senior from "../../assets/senior2.jpg"
-import Woman from "../../assets/woman.jpg"
-import Home from "../../assets/homeGroup.jpg"
+import Senior from "../../assets/senior2.jpg";
+import Woman from "../../assets/woman.jpg";
+import Home from "../../assets/homeGroup.jpg";
 import {
   BKCkYouth,
   BKCkIDS2,
   events,
   SundaySchoolImageGallary,
-  Pastor,
 } from "../../data.ts";
-import SudaySchoolImageGallary from "./ImageGallaryWithColsRows.tsx";
+import ImageGallaryWithColsRows from "./ImageGallaryWithColsRows.tsx";
 import PageTextPart from "../../components/pageSections/cards/texAndImgCards/PageText.tsx";
 import SectionLine from "../../components/pageSections/SectionLine.tsx";
 import videoFile from "../../assets/istockphoto-987329642-640_adpp_is.mp4";
 import TeamIntroCard from "../../components/common/cards/TeamIntroCard.tsx";
-import { useState } from "react";
-import ReadMoreDialogs from "../../components/common/Forms/ReadMoreDialog.tsx";
 
 export default function ActivitiesMainPage() {
-    const [modalOpen, setModalOpen] = useState(false); // State for modal visibility
-    const handleOpen = () => setModalOpen(true);
-    const handleClose = () => setModalOpen(false);
   return (
     <Box style={{ marginTop: "80px", backgroundColor: "#f0f4f8" }}>
+      <div id="groups"></div>
       <Box
         style={{
           display: "flex",
@@ -34,24 +29,25 @@ export default function ActivitiesMainPage() {
         }}
       >
         <Box style={{ paddingTop: "20px" }}>
-          <PauseOnHover events={events} />
+          <SlickSlider events={events} />
         </Box>
       </Box>
       {/* --------------ACTIVITIES-BKC Kids----------- */}
+      <div id="sundaySchool"></div>
       <SectionLine text="BKC KIDS" />
       <Box
         sx={{
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          backgroundColor: "#f0f4f8",
-          px: "50px",
+          backgroundColor: "#f0f4f8", 
+          
         }}
       >
         <Grid
           container
           spacing={2}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
+          sx={{ flexDirection: { xs: "column", sm: "row",  marginBottom: "50px",  } }}
         >
           <Grid
             container
@@ -71,12 +67,22 @@ export default function ActivitiesMainPage() {
               location={BKCkIDS2.location}
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-            <SudaySchoolImageGallary imageData={SundaySchoolImageGallary} />
+          <Grid
+            size={{ xs: 12, sm: 12, md: 6 }}
+            sx={{
+                height: {
+                    xs: "200px", // Height for extra small screens
+                    sm: "300px", // Height for small screens
+                    md: "500px", // Height for medium and larger screens
+                  },
+            }}
+          >
+            <ImageGallaryWithColsRows imageData={SundaySchoolImageGallary} />
           </Grid>
         </Grid>
       </Box>
       {/* --------------ACTIVITIES-BKC Youth----------- */}
+      <div id="youth"></div>
       <SectionLine text="BKC YOUTH" />
       <Box
         sx={{
@@ -85,7 +91,6 @@ export default function ActivitiesMainPage() {
           flexDirection: "column",
           justifyContent: "center",
           backgroundColor: "#f0f4f8",
-          px: "50px",
         }}
       >
         <Grid
@@ -99,17 +104,33 @@ export default function ActivitiesMainPage() {
             marginBottom: "50px",
           }}
         >
-          <video
-            src={videoFile} // Use the imported video file
-            controls
-            autoPlay
-            loop
-            muted
-            width="640"
-            height="360"
+          <Box
+            sx={{
+              width: "100%", // Ensure the container takes full width
+              maxWidth: "640px", // Maximum width for large screens
+              position: "relative",
+              paddingTop: {
+                xs: "56.25%", // 16:9 aspect ratio for smaller screens
+                md: "30%", // Less padding for medium screens
+                lg: "20%", // Even less padding for large screens
+              },
+            }}
           >
-            Your browser does not support the video tag.
-          </video>
+            <video
+              src={videoFile} // Use the imported video file
+              controls
+              autoPlay
+              loop
+              muted
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+              }}
+            ></video>
+          </Box>
         </Grid>
         <Grid size={12}>
           <PageTextPart
@@ -123,11 +144,14 @@ export default function ActivitiesMainPage() {
         </Grid>
       </Box>
       {/* --------------ACTIVITIES-ACTIVITIES-BKC Other Groups----------- */}
+      <div id="otherGroups"></div>
       <SectionLine text="Other Groups" />
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
           flexDirection: {
             md: "row",
             sm: "column",
@@ -135,49 +159,25 @@ export default function ActivitiesMainPage() {
           },
           gap: "50px",
         }}
-        id="leaderShip"
       >
         <TeamIntroCard
           title={"Home Group"}
           subTitle={"Your Small Community"}
           description={"You can find your own small comminity..."}
           image={Home}
-        //   onOpen={handleOpen}
         />
         <TeamIntroCard
           title={"Senior Group"}
           subTitle={"Your Small Community"}
           description={"You can find your own small comminity..."}
           image={Senior}
-        //   onOpen={handleOpen}
         />
         <TeamIntroCard
           title={"Woman Group"}
           subTitle={"Your Small Community"}
           description={"You can find your own small comminity..."}
           image={Woman}
-        //   onOpen={handleOpen}
         />
-         
-      </Box>
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-        //   gap: "20px",
-        //   paddingTop: "30px",
-        }}
-      >
-        <Grid
-          container
-          spacing={2}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
-        >
-          <Grid size={{ xs: 12, sm: 6 }}></Grid>
-          <Grid size={{ xs: 12, sm: 6 }}></Grid>
-        </Grid>
       </Box>
       {/* --------------ACTIVITIES-ACTIVITIES-Other Activities----------- */}
       <Box

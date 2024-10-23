@@ -14,7 +14,32 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Button } from "@mui/material";
 import formatDateTime from "../../../utils/FormatDateTime.tsx";
-import { ServingPosition } from "../../../data.ts";
+import { EventCategory } from "../../../models/EventCategory.ts";
+
+
+
+export interface Position {
+    name: string;
+    startTime: string; // ISO format string
+    endTime: string; // ISO format string
+    jobs: Job[]|Job;
+  }
+  export interface Job {
+    name: string;
+    members: string[];
+    totalNumberNeeded: number;
+  }
+  
+  export interface ServingPosition {
+    startTime: string;
+    endTime: string;
+    activityCategory: EventCategory;
+    team: string;
+    memberNeeded?: number;
+    scheduleStatus: "open" | "closed"; // Union for specific values
+    position: Position[]; // Array of categories, each with its own jobs
+  }
+
 
 const getDisplayDateTime = (startTime: string, endTime: string) => {
   const startDate = new Date(startTime);
@@ -69,9 +94,15 @@ function Row({ row }: { row: ServingPosition }) {
     "#e8f5e9",
   ];
   const loggedInUser = "David";
-  const isUserScheduled = row.category.some((category) =>
-    category.jobs.some((job) => job.members.includes(loggedInUser))
-  );
+  const isUserScheduled = row.position.some((pos) => {
+    // Check if jobs is an array or a single Job object
+    if (Array.isArray(pos.jobs)) {
+      return pos.jobs.some((job) => job.members.includes(loggedInUser));
+    } else {
+      // If it's a single Job object, check its members directly
+      return pos.jobs.members.includes(loggedInUser);
+    }
+  });
   const startDate = new Date(row.startTime);
   const endDate = new Date(row.endTime);
   const sameDay = startDate.toDateString() === endDate.toDateString();
@@ -141,7 +172,7 @@ function Row({ row }: { row: ServingPosition }) {
           scope="row"
           sx={{ fontWeight: "bold", fontSize: "1rem" }}
         >
-          {row.event.eventName}
+          {row.activityCategory}
         </TableCell>
         <TableCell align="right" sx={{ fontWeight: "bold", fontSize: "1rem" }}>
           {row.team}
@@ -169,7 +200,7 @@ function Row({ row }: { row: ServingPosition }) {
                 Categories
               </Typography>
 
-              {row.category.map((category, index) => {
+              {row.position.map((category, index) => {
                 const {
                   displayDayAndMonth: displayCategoryDate,
                   displayTime: displayCategoryTime,
@@ -247,51 +278,96 @@ function Row({ row }: { row: ServingPosition }) {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {category.jobs.map((job) => (
-                          <TableRow key={job.name}>
-                            <TableCell component="th" scope="row">
-                              {displayCategoryDate}
-                            </TableCell>{" "}
-                            {/* Show category date */}
-                            <TableCell component="th" scope="row">
-                              {displayCategoryTime}
-                            </TableCell>{" "}
-                            {/* Show category time */}
-                            <TableCell component="th" scope="row">
-                              {job.name}
-                            </TableCell>
-                            <TableCell>
-                              {job.members.join(", ") || "No members yet"}
-                            </TableCell>
-                            <TableCell align="right">
-                              {job.totalNumberNeeded}
-                            </TableCell>
-                            <TableCell align="right">
-                              {job.totalNumberNeeded === 0 &&
-                              !job.members.includes(loggedInUser) ? (
-                                <Typography>No Actions Needed</Typography>
-                              ) : job.members.includes(loggedInUser) ? (
-                                <>
-                                  <Button
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ marginRight: 1 }}
-                                  >
-                                    Confirm
-                                  </Button>
-                                  <Button variant="outlined" color="secondary">
-                                    Help
-                                  </Button>
-                                </>
-                              ) : (
-                                <Button variant="outlined" color="primary">
-                                  Contribute
-                                </Button>
-                              )}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
+  {category.jobs ? (
+    Array.isArray(category.jobs) ? (
+      category.jobs.map((job) => (
+        <TableRow key={job.name}>
+          <TableCell component="th" scope="row">
+            {displayCategoryDate}
+          </TableCell>
+          {/* Show category date */}
+          <TableCell component="th" scope="row">
+            {displayCategoryTime}
+          </TableCell>
+          {/* Show category time */}
+          <TableCell component="th" scope="row">
+            {job.name}
+          </TableCell>
+          <TableCell>
+            {job.members.join(", ") || "No members yet"}
+          </TableCell>
+          <TableCell align="right">
+            {job.totalNumberNeeded}
+          </TableCell>
+          <TableCell align="right">
+            {job.totalNumberNeeded === 0 && !job.members.includes(loggedInUser) ? (
+              <Typography>No Actions Needed</Typography>
+            ) : job.members.includes(loggedInUser) ? (
+              <>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ marginRight: 1 }}
+                >
+                  Confirm
+                </Button>
+                <Button variant="outlined" color="secondary">
+                  Help
+                </Button>
+              </>
+            ) : (
+              <Button variant="outlined" color="primary">
+                Contribute
+              </Button>
+            )}
+          </TableCell>
+        </TableRow>
+      ))
+    ) : (
+      // If it's a single Job object
+      <TableRow key={category.jobs.name}>
+        <TableCell component="th" scope="row">
+          {displayCategoryDate}
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {displayCategoryTime}
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {category.jobs.name}
+        </TableCell>
+        <TableCell>
+          {category.jobs.members.join(", ") || "No members yet"}
+        </TableCell>
+        <TableCell align="right">
+          {category.jobs.totalNumberNeeded}
+        </TableCell>
+        <TableCell align="right">
+          {category.jobs.totalNumberNeeded === 0 && !category.jobs.members.includes(loggedInUser) ? (
+            <Typography>No Actions Needed</Typography>
+          ) : category.jobs.members.includes(loggedInUser) ? (
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginRight: 1 }}
+              >
+                Confirm
+              </Button>
+              <Button variant="outlined" color="secondary">
+                Help
+              </Button>
+            </>
+          ) : (
+            <Button variant="outlined" color="primary">
+              Contribute
+            </Button>
+          )}
+        </TableCell>
+      </TableRow>
+    )
+  ) : null /* Handle the case where jobs is undefined */ }
+</TableBody>
+
                     </Table>
                   </Box>
                 );
@@ -305,19 +381,117 @@ function Row({ row }: { row: ServingPosition }) {
 }
 
 export default function CollapsibleTable() {
-  const rows: ServingPosition[] = [
+//   const rows = [
+//     {
+//       startTime: "2023-10-01T10:00:00", // Start time in ISO format
+//       endTime: "2023-10-01T12:00:00",
+//       event: {
+//         eventName: "Sunday Service",
+//         description: "A regular church service held every Sunday.",
+//         detail: "The service includes worship, prayers, and sermons.",
+//       },
+//       team: "Team A",
+//       memberNeeded: 3,
+//       scheduleStatus: "open",
+//       category: [
+//         {
+//           startTime: "2023-10-01T10:00:00",
+//           endTime: "2023-10-01T12:00:00",
+//           name: "Worship",
+//           jobs: [
+//             {
+//               name: "singing",
+//               members: ["David", "Olivia"],
+//               totalNumberNeeded: 1,
+//             },
+//             { name: "dancing", members: [], totalNumberNeeded: 2 },
+//           ],
+//         },
+//         {
+//           startTime: "2023-10-01T10:00:00",
+//           endTime: "2023-10-02T12:00:00",
+//           name: "Technical",
+//           jobs: [
+//             { name: "sound", members: ["Paul"], totalNumberNeeded: 1 },
+//             { name: "lights", members: [], totalNumberNeeded: 1 },
+//           ],
+//         },
+//       ],
+//     },
+//     {
+//       startTime: "2023-10-01T11:00:00",
+//       endTime: "2023-10-01T13:00:00",
+//       event: {
+//         eventName: "Sunday School",
+//         description: "A gathering for children to learn about the Bible.",
+//         detail: "Divided into age groups for teaching and activities.",
+//       },
+//       team: "Team B",
+//       memberNeeded: 5,
+//       scheduleStatus: "open",
+//       category: [
+//         {
+//           startTime: "2023-10-01T11:00:00",
+//           endTime: "2023-10-01T13:00:00",
+//           name: "5 Year group",
+//           jobs: [
+//             { name: "teaching", members: ["John"], totalNumberNeeded: 0 },
+//             { name: "assisstance", members: [], totalNumberNeeded: 2 },
+//           ],
+//         },
+//         {
+//           startTime: "2023-10-01T11:00:00",
+//           endTime: "2023-10-01T13:00:00",
+//           name: "Baby group",
+//           jobs: [
+//             { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
+//             { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
+//           ],
+//         },
+//       ],
+//     },
+//     {
+//       startTime: "2023-10-01T10:00:00",
+//       endTime: "2023-10-01T12:00:00",
+//       event: {
+//         eventName: "Serving",
+//         description: "Volunteers serving during the church service.",
+//         detail: "Involves preparing food and assisting with various duties.",
+//       },
+//       team: "Team12",
+//       memberNeeded: 2,
+//       scheduleStatus: "open",
+//       category: [
+//         {
+//           startTime: "2023-10-01T12:00:00",
+//           endTime: "2023-10-01T13:00:00",
+//           name: "Fika",
+//           jobs: [
+//             { name: "coffee", members: ["John"], totalNumberNeeded: 0 },
+//             { name: "food", members: [], totalNumberNeeded: 2 },
+//           ],
+//         },
+//         {
+//           startTime: "2023-10-01T11:00:00",
+//           endTime: "2023-10-01T12:00:00",
+//           name: "Communion",
+//           jobs: [
+//             { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
+//             { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
+//           ],
+//         },
+//       ],
+//     },
+//   ];
+const rows: ServingPosition[] = [
     {
       startTime: "2023-10-01T10:00:00", // Start time in ISO format
       endTime: "2023-10-01T12:00:00",
-      event: {
-        eventName: "Sunday Service",
-        description: "A regular church service held every Sunday.",
-        detail: "The service includes worship, prayers, and sermons.",
-      },
+      activityCategory: EventCategory.SundayService, // Example category from the enum
       team: "Team A",
       memberNeeded: 3,
       scheduleStatus: "open",
-      category: [
+      position: [
         {
           startTime: "2023-10-01T10:00:00",
           endTime: "2023-10-01T12:00:00",
@@ -345,15 +519,11 @@ export default function CollapsibleTable() {
     {
       startTime: "2023-10-01T11:00:00",
       endTime: "2023-10-01T13:00:00",
-      event: {
-        eventName: "Sunday School",
-        description: "A gathering for children to learn about the Bible.",
-        detail: "Divided into age groups for teaching and activities.",
-      },
+      activityCategory: EventCategory.SundaySchoole, // Example category from the enum
       team: "Team B",
       memberNeeded: 5,
       scheduleStatus: "open",
-      category: [
+      position: [
         {
           startTime: "2023-10-01T11:00:00",
           endTime: "2023-10-01T13:00:00",
@@ -377,15 +547,11 @@ export default function CollapsibleTable() {
     {
       startTime: "2023-10-01T10:00:00",
       endTime: "2023-10-01T12:00:00",
-      event: {
-        eventName: "Serving",
-        description: "Volunteers serving during the church service.",
-        detail: "Involves preparing food and assisting with various duties.",
-      },
-      team: "Team12",
+      activityCategory: EventCategory.Event, // Example category from the enum
+      team: "Team 12",
       memberNeeded: 2,
       scheduleStatus: "open",
-      category: [
+      position: [
         {
           startTime: "2023-10-01T12:00:00",
           endTime: "2023-10-01T13:00:00",
@@ -407,6 +573,7 @@ export default function CollapsibleTable() {
       ],
     },
   ];
+
 
   return (
     <TableContainer component={Paper}>
@@ -451,7 +618,7 @@ export default function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.event.eventName} row={row} />
+            <Row key={row.activityCategory} row={row} />
           ))}
         </TableBody>
       </Table>

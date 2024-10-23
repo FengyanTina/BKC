@@ -113,7 +113,7 @@ export default function NewHereSectionGrid({
                 Connect To Your Purpose
               </HashLink>
               <HashLink
-                to="/activities"
+                to="/activities#groups"
                 style={{
                   display: "block",
                   fontSize: "25px",

@@ -112,11 +112,11 @@ export interface Video {
   export const sundayServiceCardInfor:ImageInforSectionModel={
     id: "1",
     inforSectionId:"",
-    title: "For Congregation",
-    subtitle:"välkommen till vår kyrka nu på söndag!",
+    title: "Our Services",
+    subtitle:"Check out all our services!",
     startTime:new Date(2024, 9, 22, 14, 30),
     category:EventCategory.SundayService,
-    description:"Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!",
+    description:"Along with sunday service we have other services such as prayers, baptism .. Veckans höjdpunkt i kyrkan är våra gudstjänster! Varje söndag klockan 11 träffas vi i Borås Kristna Center och firar gudstjänst. Syftet är att upphöja och ära Gud tillsammans. Våra gudstjänster är öppna för alla och vi vill vara tydliga med allt vi gör, så att alla kan förstå.Våra gudstjänster innehåller bön och lovsång, predikan och förbön. Givetvis avslutar vi med ett fantastiskt kyrkfika. För dig som besöker oss för första gången är fikat dessutom helt gratis!",
     images: Worship 
   }
   export const sundaySchoolActivityCardInfor:ImageInforSectionModel={
@@ -146,7 +146,7 @@ export interface Video {
     title: "Your Small Community",
     subtitle:"Together,Stronger!",
     startTime:new Date(2024, 9, 22, 14, 30),
-    category:EventCategory.HomeGroup,
+    category:EventCategory.Groups,
     description:"Bibeln beskriver Gud som en Fader. Han älskar och längtar efter en relation med varje människa. Jesus säger att han är vägen, sanningen och livet och var och en som längtar efter livets mening, efter tillvarons själva pulserande centrum, är välkommen in i hans stora famn.",
     images:Varhistoria 
   }

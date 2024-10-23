@@ -12,6 +12,7 @@ export enum EventCategory {
     BibleStudy = 'BibleStudy',
     WorshipService = 'WorshipService',
     HomeGroup='HomeGroup',
+    Groups ="Groups",
     PrayerMeeting ='PrayerMeeting',
     MemeberMeeting ='MemberMeeting',
     SocialMedia ='SocialMedia'

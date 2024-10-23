@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { formatDate, formatTime } from "../../../utils/FormatDateAndTime";
 import { PageInforModel } from "../../../models/PageInforModel";
+import { useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 export default function PageInforCard({
   category,
   title,
@@ -15,7 +17,14 @@ export default function PageInforCard({
   startTime,
   endTime,
   location,
+  buttonLink,
 }: PageInforModel) {
+    const navigate = useNavigate(); 
+    const handleButtonClick = () => {
+        if (buttonLink){
+            navigate(buttonLink); 
+        }   
+      };
 //   const bull = (
 //     <Box
 //       component="span"
@@ -124,9 +133,11 @@ export default function PageInforCard({
           </Typography>
         )}
       </CardContent>
-      <CardActions>
-        <Button size="small">{buttonText}</Button>
+      {buttonLink&&(
+         <CardActions>
+        <HashLink   to= {buttonLink}>{buttonText}</HashLink>
       </CardActions>
+      )}
     </Card>
   );
 }

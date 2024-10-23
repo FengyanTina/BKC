@@ -7,7 +7,7 @@ import { ImageInforSectionModel } from "../../../../models/ImageInforSection.ts"
 
 const ImgInforCardSection
 
- = ({ inforSectionId,title, category, subtitle, description, images,imageLeft = true }: ImageInforSectionModel) => {
+ = ({ inforSectionId,title, category, subtitle, description, images,imageLeft = true,buttonLink }: ImageInforSectionModel) => {
     const renderImageGallery = () => {
         if (Array.isArray(images)) {
           return (
@@ -163,6 +163,7 @@ const ImgInforCardSection
       subtitle={subtitle}
       description={description}
       buttonText="Learn More"
+      buttonLink={buttonLink}
     />
   </Grid>
 

@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid2";
 import Worship from "../assets/Worship.jpeg";
 import Carousel from "../components/common/slides/Carousel.tsx";
 import { Link } from "react-router-dom";
-import PauseOnHover from "../components/common/slides/SlickSlider";
+import SlickSlider from "../components/common/slides/SlickSlider";
 import { useState } from "react";
 import Map from "../apis/googleMap/Map.tsx";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -272,6 +272,7 @@ export default function StartPage() {
         description={socialMediaActivityCardInfor.description}
         images={socialMediaActivityCardInfor.images}
         category={socialMediaActivityCardInfor.category}
+        buttonLink={"/activities#groups"}
       />
 
       {/* --------------ACTIVITIES-Sunday Service----------- */}
@@ -284,6 +285,7 @@ export default function StartPage() {
         images={sundayServiceCardInfor.images}
         category={sundayServiceCardInfor.category}
         imageLeft={false}
+        buttonLink={"/services#sundayService"}
       />
 
       {/* --------------ACTIVITIES-BKC Kids----------- */}
@@ -295,6 +297,7 @@ export default function StartPage() {
         description={sundaySchoolActivityCardInfor.description}
         images={sundaySchoolActivityCardInfor.images}
         category={sundaySchoolActivityCardInfor.category}
+        buttonLink={"/activities#sundaySchool"}
       />
       {/* --------------ACTIVITIES-Youth----------- */}
       <ImgInforCardSection
@@ -306,9 +309,10 @@ export default function StartPage() {
         images={youthActivityCardInfor.images}
         category={youthActivityCardInfor.category}
         imageLeft={false}
+        buttonLink={"/activities#youth"}
       />
 
-      {/* --------------ACTIVITIES-Home Group----------- */}
+      {/* --------------ACTIVITIES-Groups----------- */}
       <ImgInforCardSection
         id={homeGroupActivityCardInfor.id}
         inforSectionId=""
@@ -317,6 +321,7 @@ export default function StartPage() {
         description={homeGroupActivityCardInfor.description}
         images={homeGroupActivityCardInfor.images}
         category={homeGroupActivityCardInfor.category}
+        buttonLink={"/activities#otherGroups"}
       />
       {/* --------------NEWS SLIDES----------- */}
       <Box
@@ -338,7 +343,7 @@ export default function StartPage() {
             marginBottom: "10px",
           }}
         >
-          <PauseOnHover events={news} />
+          <SlickSlider events={news} />
         </Box>
       </Box>
     </Box>

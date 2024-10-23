@@ -13,7 +13,7 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 interface QuiltedImageListProps {
     imageData: ImageGallaryItemData[];
   }
-export default function QuiltedImageList({ imageData }: QuiltedImageListProps) {
+export default function ImageGallaryWithColsRows({ imageData }: QuiltedImageListProps) {
   return (
     
    

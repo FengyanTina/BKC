@@ -28,19 +28,7 @@ const AboutUsPage = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        marginTop: "150px",
-        backgroundColor: "#f0f4f8",
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "100%", // Full width of the container
-        height: "100%",
-        overflowX: "hidden",
-      }}
-    >
+    <Box sx={{ marginTop: "150px",backgroundColor: "#f0f4f8",  }}>
       <Grid
         container
         sx={{
@@ -189,43 +177,43 @@ const AboutUsPage = () => {
           </Box>
         </Grid>
         <ReadMoreDialogs open={modalOpen}
-          onClose={handleClose} title={Pastor.title} subtitle={Pastor.subTitle} content={Pastor.content} />
-        
+          onClose={handleClose} title={Pastor.title} subtitle={Pastor.subTitle} content={Pastor.content} />   
       </Grid>
+      <div id="leaderShip"></div>
       <SectionLine text="Leadership" />
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: {
-            md: "row",
-            sm: "column",
-            xs: "column",
-          },
-          gap: "50px",
-        }}
-        id="leaderShip"
+           
+            display: "flex",
+            justifyContent: "center",
+            alignContent:"center",
+            alignItems:"center",
+            flexDirection: {
+              md: "row",
+              sm: "column",
+              xs: "column",
+            },
+            gap: "50px",
+          }}
+       
       >
         <TeamIntroCard
           title={"Senior Pastor"}
           subTitle={"Senior Pastor"}
           description={Pastor.content}
           image={DavidB}
-        //   onOpen={handleOpen}
         />
         <TeamIntroCard
           title={"Senior Pastor"}
           subTitle={"Senior Pastor"}
           description={Pastor.content}
           image={Leader}
-        //   onOpen={handleOpen}
         />
         <TeamIntroCard
           title={"Youth Leader"}
           subTitle={"Youth Pastor"}
           description={Pastor.content}
-          image={DavidB}
-          
+          image={DavidB}      
         />
       </Box>
       <SectionLine text="MemberShip" />
@@ -242,7 +230,9 @@ const AboutUsPage = () => {
           alignItems: "center",
         }}
         id="userTable"
-      ></Box>
+      >
+
+      </Box>
     </Box>
   );
 };

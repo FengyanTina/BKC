@@ -1,12 +1,13 @@
 
-import { ActivityCategory } from "./Event";
+
+import { EventCategory } from "./EventCategory";
 import { Job } from "./Job";
 
 export interface ServingPositionSchedule {
     id:string;
     startTime: string;
     endTime: string;
-    activityCategory: ActivityCategory;
+    activityCategory: EventCategory;
     team: string;
     memberNeeded?: number;
     scheduleStatus: "open" | "closed"; // Union for specific values

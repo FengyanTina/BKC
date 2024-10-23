@@ -360,7 +360,7 @@ export default function UserTable() {
   );
 
   return (
-    <Box sx={{ width: "90%", overflowX: "auto" }}>
+    <Box sx={{ width: "100%", overflowX: "auto", }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar
           numSelected={selected.length}

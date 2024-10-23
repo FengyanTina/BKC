@@ -25,16 +25,16 @@ interface CustomEvent {
   location?: string;
 }
 
-interface EventDetailsDialogProps {
+interface ScheduleEventDetailsDialogProps {
   open: boolean;
   event: CustomEvent | null;
   onClose: () => void;
 }
-export default function EventDetailDialog({
+export default function ScheduleEventDetailDialog({
   open,
   event,
   onClose,
-}: EventDetailsDialogProps) {
+}: ScheduleEventDetailsDialogProps) {
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState<DialogProps["maxWidth"]>("sm");
 

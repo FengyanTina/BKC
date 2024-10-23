@@ -18,12 +18,14 @@ import {
   Paper,
 } from "@mui/material";
 import EventAddAndEditForm from "./EventAddAndEditForm";
-import "./schedule.css";
+
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
 import { UserCategory } from "../../models/User";
 import { formatDate, formatTime } from "../../utils/FormatDateAndTime";
-import EventDetailDialog from "../../components/common/Forms/EventDetailDialog";
+import ScheduleEventDetailDialog from "../../components/common/Forms/ScheduleEventDetailDialog";
 import ConfirmDeleteDialog from "../../components/common/Forms/ConfirmDeleteDialog";
+import { createEventId} from "./Events";
+
 
 // Custom event interface
 interface CustomEvent {
@@ -35,7 +37,25 @@ interface CustomEvent {
   description?: string;
   location?: string;
 }
-
+export const INITIAL_EVENTS: CustomEvent[] = [
+    {
+        id: createEventId(),
+        title: "All-day event",
+        start: new Date().toISOString().split("T")[0], // Today
+        end: new Date().toISOString().split("T")[0], // All-day event ends at the same day
+        description: "This is an all-day event.",
+        allDay: true,
+    },
+    {
+        id: createEventId(),
+        title: "Timed event",
+        start: new Date().toISOString().split("T")[0] + "T12:00:00",
+        end: new Date().toISOString().split("T")[0] + "T13:00:00", // Event ends 1 hour later
+        description: "This is a timed event.",
+        allDay: false
+    },
+  ];
+  
 interface DemoAppState {
   weekendsVisible: boolean;
   currentEvents: CustomEvent[];
@@ -60,7 +80,8 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   declare context: AuthContextType;
   state: DemoAppState = {
     weekendsVisible: true,
-    currentEvents: getStoredEvents(), // Load from localStorage
+    //currentEvents: getStoredEvents(), // Load from localStorage, after 
+    currentEvents: getStoredEvents().length > 0 ? getStoredEvents() : INITIAL_EVENTS,
     selectedEvent: null, // Track the clicked event
     isModalOpen: false, // Modal state
     isDetailModalOpen: false,
@@ -89,7 +110,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
   };
   handleDateSelect = (selectInfo: any) => {
     // Store selected date information for the new event
-    this.setState((prevState) => ({
+    this.setState(() => ({
       newEventInfo: {
         start: selectInfo.startStr,
         end: selectInfo.endStr,
@@ -258,7 +279,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
           /> */}
 
           {/* Modal for event details */}
-          <EventDetailDialog event={selectedEvent } open={isDetailModalOpen} onClose={this.handleCloseModal}/>
+          <ScheduleEventDetailDialog event={selectedEvent } open={isDetailModalOpen} onClose={this.handleCloseModal}/>
           
           {/* Modal for confirm delte */}
           <ConfirmDeleteDialog open={this.state.isConfirmDeleteOpen}

@@ -12,10 +12,10 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useRef, useState } from "react";
-import NewsDetailsModal from "../Forms/NewsDetails";
+import EventDetailsModal from "../Forms/EventDetails";
 import formatDateTime from "../../../utils/FormatDateTime";
 import { Event } from "../../../models/Event";
-function PauseOnHover({ events }: { events: Event[] }) {
+function SlickSlider({ events }: { events: Event[] }) {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const settings = {
@@ -92,7 +92,7 @@ function PauseOnHover({ events }: { events: Event[] }) {
           </button>
         </div>
       </section>
-      <NewsDetailsModal
+      <EventDetailsModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         event={selectedEvent}
@@ -101,4 +101,4 @@ function PauseOnHover({ events }: { events: Event[] }) {
   );
 }
 
-export default PauseOnHover;
+export default SlickSlider;

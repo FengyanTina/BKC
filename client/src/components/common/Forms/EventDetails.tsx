@@ -7,17 +7,17 @@ import { Event } from "../../../models/Event";
 import { formatTime } from "../../../utils/FormatDateAndTime";
 
 
-interface NewsDetailsModalProps {
+interface EventDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
   event: Event | null; // Define your Event type accordingly
 }
 
-export default function NewsDetailsModal({
+export default function EventDetailsModal({
   isOpen,
   onClose,
   event,
-}: NewsDetailsModalProps) {
+}: EventDetailsModalProps) {
   if (!isOpen || !event) return null;
 
   const [fontSize, setFontSize] = useState(16);
