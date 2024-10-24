@@ -22,6 +22,7 @@ import EventAddAndEditForm from "./EventAddAndEditForm";
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
 import { UserCategory } from "../../models/User";
 
+import { RRule } from 'rrule';
 import ScheduleEventDetailDialog from "../../components/common/Forms/ScheduleEventDetailDialog";
 import ConfirmDeleteDialog from "../../components/common/Forms/ConfirmDeleteDialog";
 import { createEventId} from "./Events";
@@ -37,6 +38,8 @@ interface CustomEvent {
   allDay: boolean;
   description?: string;
   location?: string;
+  repeatCount?: number; // Number of times to repeat
+  selectedDays?: boolean[];
 }
 export const INITIAL_EVENTS: CustomEvent[] = [
     {
