@@ -5,14 +5,39 @@ import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Button } from "@mui/material";
-import formatDateTime from "../../../utils/FormatDateTime.tsx";
-import { ServingPosition } from "../../../data.ts";
+import { EventCategory } from "../../../models/EventCategory";
+import formatDateTime from "../../../utils/FormatDateTime";
+
+export interface Position {
+  name: string;
+  startTime: string; // ISO format string
+  endTime: string; // ISO format string
+  jobs: Job[] | Job;
+}
+export interface Job {
+  name: string;
+  members: string[];
+  totalNumberNeeded: number;
+}
+
+export interface ServingPosition {
+  startTime: string;
+  endTime: string;
+  activityCategory: EventCategory;
+  team: string;
+  memberNeeded?: number;
+  scheduleStatus: "open" | "closed"; // Union for specific values
+  position: Position[]; // Array of categories, each with its own jobs
+}
+
 const getDisplayDateTime = (startTime: string, endTime: string) => {
   const startDate = new Date(startTime);
   const endDate = new Date(endTime);
@@ -35,7 +60,8 @@ const getDisplayDateTime = (startTime: string, endTime: string) => {
   return { displayDayAndMonth, displayTime };
 };
 
-export function Row({ row }: { row: ServingPosition }) {
+const loggedInUser = "David";
+function Row({ row }: { row: ServingPosition }) {
   const [open, setOpen] = React.useState(false);
   const categoryColors = [
     "#f5f5f5",
@@ -45,9 +71,15 @@ export function Row({ row }: { row: ServingPosition }) {
     "#e8f5e9",
   ];
   const loggedInUser = "David";
-  const isUserScheduled = row.category.some((category) =>
-    category.jobs.some((job) => job.members.includes(loggedInUser))
-  );
+  const isUserScheduled = row.position.some((pos) => {
+    // Check if jobs is an array or a single Job object
+    if (Array.isArray(pos.jobs)) {
+      return pos.jobs.some((job) => job.members.includes(loggedInUser));
+    } else {
+      // If it's a single Job object, check its members directly
+      return pos.jobs.members.includes(loggedInUser);
+    }
+  });
   const startDate = new Date(row.startTime);
   const endDate = new Date(row.endTime);
   const sameDay = startDate.toDateString() === endDate.toDateString();
@@ -56,12 +88,6 @@ export function Row({ row }: { row: ServingPosition }) {
     : `${formatDateTime(startDate).split(" ")[0]} - ${
         formatDateTime(endDate).split(" ")[0]
       }`; // Start date - End date
-
-//   const displayDayAndMonth = sameDay
-//     ? `${startDate.getDate()}/${startDate.getMonth() + 1}` // Only show start date in Day/Month format
-//     : `${startDate.getDate()}/${
-//         startDate.getMonth() + 1
-//       } - ${endDate.getDate()}/${endDate.getMonth() + 1}`;
 
   const displayTime = sameDay
     ? `${formatDateTime(startDate).split(" ")[1]} - ${
@@ -117,7 +143,7 @@ export function Row({ row }: { row: ServingPosition }) {
           scope="row"
           sx={{ fontWeight: "bold", fontSize: "1rem" }}
         >
-          {row.event.eventName}
+          {row.activityCategory}
         </TableCell>
         <TableCell align="right" sx={{ fontWeight: "bold", fontSize: "1rem" }}>
           {row.team}
@@ -145,7 +171,7 @@ export function Row({ row }: { row: ServingPosition }) {
                 Categories
               </Typography>
 
-              {row.category.map((category, index) => {
+              {row.position.map((category, index) => {
                 const {
                   displayDayAndMonth: displayCategoryDate,
                   displayTime: displayCategoryTime,
@@ -223,50 +249,112 @@ export function Row({ row }: { row: ServingPosition }) {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {category.jobs.map((job) => (
-                          <TableRow key={job.name}>
-                            <TableCell component="th" scope="row">
-                              {displayCategoryDate}
-                            </TableCell>{" "}
-                            {/* Show category date */}
-                            <TableCell component="th" scope="row">
-                              {displayCategoryTime}
-                            </TableCell>{" "}
-                            {/* Show category time */}
-                            <TableCell component="th" scope="row">
-                              {job.name}
-                            </TableCell>
-                            <TableCell>
-                              {job.members.join(", ") || "No members yet"}
-                            </TableCell>
-                            <TableCell align="right">
-                              {job.totalNumberNeeded}
-                            </TableCell>
-                            <TableCell align="right">
-                              {job.totalNumberNeeded === 0 &&
-                              !job.members.includes(loggedInUser) ? (
-                                <Typography>No Actions Needed</Typography>
-                              ) : job.members.includes(loggedInUser) ? (
-                                <>
-                                  <Button
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ marginRight: 1 }}
-                                  >
-                                    Confirm
-                                  </Button>
-                                  <Button variant="outlined" color="secondary">
-                                    Help
-                                  </Button>
-                                </>
-                              ) : (
-                                <Button variant="outlined" color="primary">
-                                  Contribute
-                                </Button>
-                              )}
-                            </TableCell>
-                          </TableRow>
-                        ))}
+                        {
+                          category.jobs ? (
+                            Array.isArray(category.jobs) ? (
+                              category.jobs.map((job) => (
+                                <TableRow key={job.name}>
+                                  <TableCell component="th" scope="row">
+                                    {displayCategoryDate}
+                                  </TableCell>
+                                  {/* Show category date */}
+                                  <TableCell component="th" scope="row">
+                                    {displayCategoryTime}
+                                  </TableCell>
+                                  {/* Show category time */}
+                                  <TableCell component="th" scope="row">
+                                    {job.name}
+                                  </TableCell>
+                                  <TableCell>
+                                    {job.members.join(", ") || "No members yet"}
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    {job.totalNumberNeeded}
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    {job.totalNumberNeeded === 0 &&
+                                    !job.members.includes(loggedInUser) ? (
+                                      <Typography>No Actions Needed</Typography>
+                                    ) : job.members.includes(loggedInUser) ? (
+                                      <>
+                                        <Button
+                                          variant="contained"
+                                          color="primary"
+                                          sx={{ marginRight: 1 }}
+                                        >
+                                          Confirm
+                                        </Button>
+                                        <Button
+                                          variant="outlined"
+                                          color="secondary"
+                                        >
+                                          Help
+                                        </Button>
+                                      </>
+                                    ) : (
+                                      <Button
+                                        variant="outlined"
+                                        color="primary"
+                                      >
+                                        Contribute
+                                      </Button>
+                                    )}
+                                  </TableCell>
+                                </TableRow>
+                              ))
+                            ) : (
+                              // If it's a single Job object
+                              <TableRow key={category.jobs.name}>
+                                <TableCell component="th" scope="row">
+                                  {displayCategoryDate}
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                  {displayCategoryTime}
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                  {category.jobs.name}
+                                </TableCell>
+                                <TableCell>
+                                  {category.jobs.members.join(", ") ||
+                                    "No members yet"}
+                                </TableCell>
+                                <TableCell align="right">
+                                  {category.jobs.totalNumberNeeded}
+                                </TableCell>
+                                <TableCell align="right">
+                                  {category.jobs.totalNumberNeeded === 0 &&
+                                  !category.jobs.members.includes(
+                                    loggedInUser
+                                  ) ? (
+                                    <Typography>No Actions Needed</Typography>
+                                  ) : category.jobs.members.includes(
+                                      loggedInUser
+                                    ) ? (
+                                    <>
+                                      <Button
+                                        variant="contained"
+                                        color="primary"
+                                        sx={{ marginRight: 1 }}
+                                      >
+                                        Confirm
+                                      </Button>
+                                      <Button
+                                        variant="outlined"
+                                        color="secondary"
+                                      >
+                                        Help
+                                      </Button>
+                                    </>
+                                  ) : (
+                                    <Button variant="outlined" color="primary">
+                                      Contribute
+                                    </Button>
+                                  )}
+                                </TableCell>
+                              </TableRow>
+                            )
+                          ) : null /* Handle the case where jobs is undefined */
+                        }
                       </TableBody>
                     </Table>
                   </Box>
@@ -277,5 +365,149 @@ export function Row({ row }: { row: ServingPosition }) {
         </TableCell>
       </TableRow>
     </React.Fragment>
+  );
+}
+
+export default function CollapsibleTable() {
+  
+  const rows: ServingPosition[] = [
+    {
+      startTime: "2023-10-01T10:00:00", // Start time in ISO format
+      endTime: "2023-10-01T12:00:00",
+      activityCategory: EventCategory.SundayService, // Example category from the enum
+      team: "Team A",
+      memberNeeded: 3,
+      scheduleStatus: "open",
+      position: [
+        {
+          startTime: "2023-10-01T10:00:00",
+          endTime: "2023-10-01T12:00:00",
+          name: "Worship",
+          jobs: [
+            {
+              name: "singing",
+              members: ["David", "Olivia"],
+              totalNumberNeeded: 1,
+            },
+            { name: "dancing", members: [], totalNumberNeeded: 2 },
+          ],
+        },
+        {
+          startTime: "2023-10-01T10:00:00",
+          endTime: "2023-10-02T12:00:00",
+          name: "Technical",
+          jobs: [
+            { name: "sound", members: ["Paul"], totalNumberNeeded: 1 },
+            { name: "lights", members: [], totalNumberNeeded: 1 },
+          ],
+        },
+      ],
+    },
+    {
+      startTime: "2023-10-01T11:00:00",
+      endTime: "2023-10-01T13:00:00",
+      activityCategory: EventCategory.SundaySchoole, // Example category from the enum
+      team: "Team B",
+      memberNeeded: 5,
+      scheduleStatus: "open",
+      position: [
+        {
+          startTime: "2023-10-01T11:00:00",
+          endTime: "2023-10-01T13:00:00",
+          name: "5 Year group",
+          jobs: [
+            { name: "teaching", members: ["John"], totalNumberNeeded: 0 },
+            { name: "assisstance", members: [], totalNumberNeeded: 2 },
+          ],
+        },
+        {
+          startTime: "2023-10-01T11:00:00",
+          endTime: "2023-10-01T13:00:00",
+          name: "Baby group",
+          jobs: [
+            { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
+            { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
+          ],
+        },
+      ],
+    },
+    {
+      startTime: "2023-10-01T10:00:00",
+      endTime: "2023-10-01T12:00:00",
+      activityCategory: EventCategory.Event, // Example category from the enum
+      team: "Team 12",
+      memberNeeded: 2,
+      scheduleStatus: "open",
+      position: [
+        {
+          startTime: "2023-10-01T12:00:00",
+          endTime: "2023-10-01T13:00:00",
+          name: "Fika",
+          jobs: [
+            { name: "coffee", members: ["John"], totalNumberNeeded: 0 },
+            { name: "food", members: [], totalNumberNeeded: 2 },
+          ],
+        },
+        {
+          startTime: "2023-10-01T11:00:00",
+          endTime: "2023-10-01T12:00:00",
+          name: "Communion",
+          jobs: [
+            { name: "singing", members: ["Alice"], totalNumberNeeded: 1 },
+            { name: "assisstance", members: ["Alice"], totalNumberNeeded: 0 },
+          ],
+        },
+      ],
+    },
+  ];
+
+  return (
+    <TableContainer component={Paper}>
+      <Table aria-label="collapsible table">
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell sx={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+              Date
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+              Time
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+              Event
+            </TableCell>
+            <TableCell
+              sx={{ fontWeight: "bold", fontSize: "1.1rem" }}
+              align="right"
+            >
+              Team
+            </TableCell>
+            <TableCell
+              sx={{ fontWeight: "bold", fontSize: "1.1rem" }}
+              align="right"
+            >
+              Members Needed
+            </TableCell>
+            <TableCell
+              sx={{ fontWeight: "bold", fontSize: "1.1rem" }}
+              align="right"
+            >
+              Schedule Status
+            </TableCell>
+            <TableCell
+              sx={{ fontWeight: "bold", fontSize: "1.1rem" }}
+              align="right"
+            >
+              {loggedInUser} Status
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <Row key={row.activityCategory} row={row} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

@@ -21,10 +21,11 @@ import EventAddAndEditForm from "./EventAddAndEditForm";
 
 import { AuthContext, AuthContextType } from "../../context/AuthContext";
 import { UserCategory } from "../../models/User";
-import { formatDate, formatTime } from "../../utils/FormatDateAndTime";
+
 import ScheduleEventDetailDialog from "../../components/common/Forms/ScheduleEventDetailDialog";
 import ConfirmDeleteDialog from "../../components/common/Forms/ConfirmDeleteDialog";
 import { createEventId} from "./Events";
+import { formatDate, formatTime } from "../../utils/FormatDateAndTime";
 
 
 // Custom event interface
@@ -56,7 +57,7 @@ export const INITIAL_EVENTS: CustomEvent[] = [
     },
   ];
   
-interface DemoAppState {
+interface CalendarState {
   weekendsVisible: boolean;
   currentEvents: CustomEvent[];
   selectedEvent: CustomEvent | null;
@@ -75,10 +76,10 @@ const saveEventsToLocalStorage = (events: CustomEvent[]) => {
   localStorage.setItem("calendarEvents", JSON.stringify(events));
 };
 
-export default class EventsCalendar extends React.Component<{}, DemoAppState> {
+export default class EventsCalendar extends React.Component<{}, CalendarState> {
   static contextType = AuthContext; // Set context type
   declare context: AuthContextType;
-  state: DemoAppState = {
+  state: CalendarState = {
     weekendsVisible: true,
     //currentEvents: getStoredEvents(), // Load from localStorage, after 
     currentEvents: getStoredEvents().length > 0 ? getStoredEvents() : INITIAL_EVENTS,
@@ -181,6 +182,8 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
     }
   };
 
+  
+
   // Handle form field changes (title/description)
   handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -225,8 +228,8 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
     const { selectedEvent, isModalOpen, isDetailModalOpen, isEditing } =
       this.state;
     return (
-      <div className="demo-app">
-        <div className="demo-app-main">
+      <div>
+        <div >
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -243,11 +246,11 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
             events={this.convertCustomEventsToEventInput()} // Convert and pass CustomEvent[] to EventInput[]
             select={this.handleDateSelect}
             // eventAdd={this.handleEventAdd}
-            eventChange={this.handleEventChange}
-            eventRemove={this.handleEventRemove}
+            // eventChange={this.handleEventChange}
+            // eventRemove={this.handleEventRemove}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // Update state and localStorage when events change
+            // eventsSet={this.handleEvents} // Update state and localStorage when events change
             locale={svLocale}
             eventTimeFormat={{
               hour: "2-digit",
@@ -357,46 +360,7 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
     );
   }
 
-  //   handleEdit = (event: CustomEvent) => {
-  //     const newTitle = prompt(
-  //       "Please enter a new title for your event",
-  //       event.title
-  //     );
-  //     if (newTitle) {
-  //       const updatedEvent: CustomEvent = {
-  //         ...event,
-  //         title: newTitle,
-  //       };
-
-  //       this.setState(
-  //         (prevState) => {
-  //           const updatedEvents = prevState.currentEvents.map((e) =>
-  //             e.id === updatedEvent.id ? updatedEvent : e
-  //           );
-  //           return { currentEvents: updatedEvents };
-  //         },
-  //         () => saveEventsToLocalStorage(this.state.currentEvents)
-  //       );
-  //     }
-  //   };
-
-  //   handleDelete = (event: CustomEvent) => {
-  //     const confirmDelete = confirm(
-  //       `Are you sure you want to delete the event '${event.title}'?`
-  //     );
-  //     if (confirmDelete) {
-  //       this.setState(
-  //         (prevState) => {
-  //           const updatedEvents = prevState.currentEvents.filter(
-  //             (e) => e.id !== event.id
-  //           );
-  //           return { currentEvents: updatedEvents };
-  //         },
-  //         () => saveEventsToLocalStorage(this.state.currentEvents)
-  //       );
-  //     }
-  //   };
-  handleDelete = (event: CustomEvent) => {
+    handleDelete = (event: CustomEvent) => {
     this.setState({
       selectedEvent: event, // Store the event to be deleted
       isConfirmDeleteOpen: true, // Open the confirmation modal
@@ -457,72 +421,24 @@ export default class EventsCalendar extends React.Component<{}, DemoAppState> {
       saveEventsToLocalStorage(this.state.currentEvents)
     );
   };
-  handleEventsSet = (events: EventApi[]) => {
-    // Sync state with FullCalendar
-    const eventList = events.map((event: EventApi) => ({
-      id: event.id,
-      title: event.title,
-      start: event.startStr,
-      end: event.endStr,
-      allDay: event.allDay,
-    }));
+//   handleEventsSet = (events: EventApi[]) => {
+//     // Sync state with FullCalendar
+//     const eventList = events.map((event: EventApi) => ({
+//       id: event.id,
+//       title: event.title,
+//       start: event.startStr,
+//       end: event.endStr,
+//       allDay: event.allDay,
+//     }));
 
-    this.setState({ currentEvents: eventList }, () =>
-      saveEventsToLocalStorage(this.state.currentEvents)
-    );
-  };
+//     this.setState({ currentEvents: eventList }, () =>
+//       saveEventsToLocalStorage(this.state.currentEvents)
+//     );
+//   };
 
-  //   handleDateSelect = (selectInfo: DateSelectArg) => {
-  //     let title = prompt("Please enter a new title for your event");
-  //     let calendarApi = selectInfo.view.calendar;
-
-  //     calendarApi.unselect(); // clear date selection
-
-  //     if (title) {
-  //       const newEvent: CustomEvent = {
-  //         id: createEventId(),
-  //         title,
-  //         start: selectInfo.startStr,
-  //         end: selectInfo.endStr,
-  //         allDay: selectInfo.allDay,
-  //       };
-
-  //       // Add event to the calendar
-  //       calendarApi.addEvent(newEvent);
-
-  //       // Update local state and localStorage
-  //       this.setState(
-  //         (prevState) => ({
-  //           currentEvents: [...prevState.currentEvents, newEvent],
-  //         }),
-  //         () => saveEventsToLocalStorage(this.state.currentEvents)
-  //       );
-  //     }
-  //   };
-
-  //   handleEventClick = (clickInfo: EventClickArg) => {
-  //     if (
-  //       confirm(
-  //         `Are you sure you want to delete the event '${clickInfo.event.title}'`
-  //       )
-  //     ) {
-  //       clickInfo.event.remove();
-
-  //       // Remove event from state and localStorage
-  //       this.setState(
-  //         (prevState) => ({
-  //           currentEvents: prevState.currentEvents.filter(
-  //             (event) => event.id !== clickInfo.event.id
-  //           ),
-  //         }),
-  //         () => saveEventsToLocalStorage(this.state.currentEvents)
-  //       );
-  //     }
-  //   };
-
-  handleEvents = () => {
-    // This function could be used to sync changes to external sources if needed
-  };
+//   handleEvents = () => {
+//     // This function could be used to sync changes to external sources if needed
+//   };
 }
 
 function renderEventContent(eventContent: EventContentArg) {

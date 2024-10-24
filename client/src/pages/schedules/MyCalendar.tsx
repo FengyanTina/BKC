@@ -1,14 +1,26 @@
-
-
+import "./myCalendar.css";
 import React, { useState, useEffect } from "react";
-import FullCalendar  from "@fullcalendar/react"; // Assuming you're using FullCalendar React
-import { EventInput } from "@fullcalendar/core";
+import FullCalendar from "@fullcalendar/react"; // Assuming you're using FullCalendar React
+import { EventClickArg, EventContentArg } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid"; // Example plugin
+import svLocale from "@fullcalendar/core/locales/sv"; // Swedish locale
+import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction"; // for dateClick
+import ScheduleEventDetailDialog from "../../components/common/Forms/ScheduleEventDetailDialog";
+import EventAddAndEditForm from "./EventAddAndEditForm";
+//import Sidebar from "./ScheduleEventTable";
+import { useAuth } from "../../context/AuthContext";
+import Sidebar from "./ScheduleEventTable";
 
 // Custom event interface with optional description
-interface CustomEvent extends EventInput {
+interface CustomEvent {
+  id: string;
+  title: string;
+  start: string;
+  end: string;
+  allDay: boolean;
   description?: string;
+  location?: string;
 }
 
 let eventGuid = 0;
@@ -18,73 +30,234 @@ export function createEventId(): string {
 
 // Retrieve events from localStorage
 const getStoredEvents = (): CustomEvent[] => {
-  const storedEvents = localStorage.getItem("calendarEvents");
+  const storedEvents = localStorage.getItem("events");
   return storedEvents ? JSON.parse(storedEvents) : INITIAL_EVENTS;
 };
+const saveEventsToLocalStorage = (events: CustomEvent[]) => {
+  localStorage.setItem("events", JSON.stringify(events));
+};
 
-// Initial events
 export const INITIAL_EVENTS: CustomEvent[] = [
   {
     id: createEventId(),
     title: "All-day event",
-    start: new Date().toISOString().split("T")[0], // Today
-    end: new Date().toISOString().split("T")[0],
+    start: new Date().toISOString().split("T")[0], // Today (e.g., "2024-10-24")
+    end: new Date().toISOString().split("T")[0], // Same day for all-day event
     description: "This is an all-day event.",
+    allDay: true,
   },
   {
     id: createEventId(),
     title: "Timed event",
-    start: new Date().toISOString().split("T")[0] + "T12:00:00",
-    end: new Date().toISOString().split("T")[0] + "T13:00:00",
+    start: new Date().toISOString().split("T")[0] + "T12:00:00", // Today at 12:00
+    end: new Date().toISOString().split("T")[0] + "T13:00:00", // Today at 13:00
     description: "This is a timed event.",
+    allDay: false,
   },
 ];
 
+
+
 const MyCalendar: React.FC = () => {
   const [currentEvents, setCurrentEvents] = useState<CustomEvent[]>(getStoredEvents());
+  const [selectedEvent, setSelectedEvent] = useState<CustomEvent | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [newEventInfo, setNewEventInfo] = useState<{start: string;end: string;allDay: boolean;} | null>(null);
+  const { currentUser } = useAuth();
+  const [isConfirmDeleteOpen, setConfirmDeleteOpen] = useState<boolean>(false);
 
-  // Store events in localStorage whenever the events change
-  useEffect(() => {
-    localStorage.setItem("calendarEvents", JSON.stringify(currentEvents));
-  }, [currentEvents]);
+  const handleDelete = (event: CustomEvent) => {
+    setSelectedEvent(event); 
+    setConfirmDeleteOpen(true); 
+  };
 
-  // Handle new event creation
-  const handleDateSelect = (selectInfo: any) => {
-    const title = prompt("Please enter a new title for your event");
-    const description = prompt("Please enter a description for your event");
-    const calendarApi = selectInfo.view.calendar;
+  const handleCloseConfirmDelete = () => {
+    setConfirmDeleteOpen(false);
+    setSelectedEvent(null); 
+  };
 
-    calendarApi.unselect(); // Clear date selection
-
-    if (title) {
-      const newEvent: CustomEvent = {
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-        description: description || "", // Optional description field
-      };
-
-      // Add event using calendar API
-      calendarApi.addEvent(newEvent);
-
-      // Update the state and persist in localStorage
-      setCurrentEvents((prevEvents) => [...prevEvents, newEvent]);
+  const handleConfirmDelete = () => {
+    if (selectedEvent) {
+      const updatedEvents = currentEvents.filter(
+        (e) => e.id !== selectedEvent.id
+      ); 
+      setCurrentEvents(updatedEvents);
+      setConfirmDeleteOpen(false); 
+      setSelectedEvent(null); 
+      saveEventsToLocalStorage(updatedEvents);
     }
   };
 
+ 
+  useEffect(() => {
+    localStorage.setItem("events", JSON.stringify(currentEvents));
+  }, [currentEvents]);
+
+  const handleDateSelect = (selectInfo: any) => {
+    setNewEventInfo({
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: selectInfo.allDay,
+    });
+
+    setSelectedEvent({
+      id: "", 
+      title: "",
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      description: "",
+      location: "",
+      allDay: selectInfo.allDay,
+    });
+
+    setIsModalOpen(true); 
+    setIsEditing(true); 
+  };
+
+
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSelectedEvent((prevEvent) => ({
+      ...prevEvent!,
+      id: prevEvent?.id || "", // Ensure id is always a string
+      title: prevEvent?.title || "", // Ensure title is always a string
+      description: prevEvent?.description || "", // Ensure description is always a string
+      location: prevEvent?.location || "",
+      start: prevEvent?.start || "", // Ensure start is always a string
+      end: prevEvent?.end || "", // Ensure end is always a string
+      allDay: prevEvent?.allDay ?? false, // Ensure allDay is always a boolean
+      [name]: value, // Dynamically update field (title or description)
+    }));
+  };
+
+  const handleEdit = (event: CustomEvent) => {
+    setSelectedEvent({ ...event }); 
+    setIsModalOpen(true); 
+    setIsEditing(true); 
+  };
+
+  const handleSaveEvent = () => {
+    if (selectedEvent && selectedEvent.title) {
+      let updatedEvents: CustomEvent[];
+
+      if (selectedEvent.id && newEventInfo) {
+        updatedEvents = currentEvents.map((event) =>
+          event.id === selectedEvent.id
+            ? {
+                ...event,
+                title: selectedEvent.title,
+                start: selectedEvent.start || newEventInfo.start, 
+                end: selectedEvent.end || newEventInfo.end,
+                description: selectedEvent.description || "",
+                location: selectedEvent.location || "",
+                allDay: selectedEvent.allDay,
+              }
+            : event
+        );
+      } else {
+        const newEvent: CustomEvent = {
+          id: String(new Date().getTime()), 
+          title: selectedEvent.title,
+          start: newEventInfo?.start || "",
+          end: newEventInfo?.end || "",
+          description: selectedEvent.description || "",
+          location: selectedEvent.location || "",
+          allDay: newEventInfo?.allDay || false,
+        };
+        updatedEvents = [...currentEvents, newEvent]; 
+      }
+
+      // Update the state with the updated events array
+      setCurrentEvents(updatedEvents); // Update current events
+      setIsModalOpen(false); 
+      setSelectedEvent(null); 
+      saveEventsToLocalStorage(updatedEvents);
+    }
+  };
+
+  const handleEventClick = (clickInfo: EventClickArg) => {
+    const clickedEvent = currentEvents.find(
+      (event) => event.id === clickInfo.event.id
+    );
+    if (clickedEvent) {
+      setSelectedEvent(clickedEvent);
+      setIsDetailModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setIsDetailModalOpen(false);
+    setSelectedEvent(null);
+  };
+
   return (
-    <div>
+    <div className="calendar-container">
+      <Sidebar
+        currentEvents={currentEvents}
+        handleEdit={handleEdit}
+        currentUser={currentUser}
+        handleDelete={handleDelete}
+        isConfirmDeleteOpen={isConfirmDeleteOpen}
+        onCloseConfirmDelete={handleCloseConfirmDelete}
+        onConfirmDelete={handleConfirmDelete}
+      />
+      <h1>MyCalendar</h1>
       <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        // headerToolbar={headerToolbar}
+        headerToolbar={{
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
+        }}
         initialView="dayGridMonth"
         selectable={true}
         select={handleDateSelect}
-        events={currentEvents} // Load events from state/localStorage
+        events={currentEvents}
+        editable={true}
+        selectMirror={true}
+        dayMaxEvents={true}
+        eventContent={renderEventContent}
+        eventClick={handleEventClick}
+        locale={svLocale}
+        eventTimeFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          meridiem: false, // 24-hour format
+        }}
+        slotLabelFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          omitZeroMinute: false,
+          hour12: false, // 24-hour format
+        }}
+      />
+      <ScheduleEventDetailDialog
+        event={selectedEvent}
+        open={isDetailModalOpen}
+        onClose={handleCloseModal}
+      />
+      <EventAddAndEditForm
+        isModalOpen={isModalOpen}
+        handleCloseModal={handleCloseModal}
+        selectedEvent={selectedEvent}
+        isEditing={isEditing}
+        handleFieldChange={handleFieldChange}
+        handleSaveEvent={handleSaveEvent}
       />
     </div>
   );
 };
+function renderEventContent(eventInfo: EventContentArg) {
+  return (
+    <>
+      <b>{eventInfo.timeText}</b> {/* Display event time */}
+      <i>{eventInfo.event.title}</i> {/* Display event title */}
+    </>
+  );
+}
 
 export default MyCalendar;

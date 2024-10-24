@@ -4,6 +4,8 @@ import { comingEvents } from "../../data";
 import CollapsibleTable from "../../components/pageSections/scheduleManagement/ServingScheduleCollapsibleTable";
 import EventCalendar from "./EventCalendar";
 import SectionLine from "../../components/pageSections/SectionLine";
+import EventSchedule from "../../components/pageSections/scheduleManagement/DatePickerEventSchedule";
+import MyCalendar from "./MyCalendar";
 
 export default function SchedulesMainPage() {
   return (
@@ -64,8 +66,8 @@ export default function SchedulesMainPage() {
           {/* <ServingScheduleCollapsibleTable /> */}
           <CollapsibleTable />
         </Box>
-        {/* <EventSchedule />
-        <Calendar /> */}
+        <EventSchedule />
+        <MyCalendar/>
       </Box>
     </>
   );
