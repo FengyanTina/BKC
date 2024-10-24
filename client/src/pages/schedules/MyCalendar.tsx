@@ -193,6 +193,18 @@ const MyCalendar: React.FC = () => {
     setSelectedEvent(null);
   };
 
+  const handleDetailOnTable = (clickInfo: CustomEvent) => {
+    const clickedEvent = currentEvents.find(
+      (event) => event.id === clickInfo.id
+    );
+    if (clickedEvent) {
+      setSelectedEvent(clickedEvent);
+      setIsDetailModalOpen(true);
+    }
+  };
+
+
+
   return (
     <div className="calendar-container">
       <Sidebar
@@ -203,6 +215,9 @@ const MyCalendar: React.FC = () => {
         isConfirmDeleteOpen={isConfirmDeleteOpen}
         onCloseConfirmDelete={handleCloseConfirmDelete}
         onConfirmDelete={handleConfirmDelete}
+        handleDetail={handleDetailOnTable}
+        isDetailModalOpen={isDetailModalOpen} // Pass the state for the detail modal
+        onCloseDetailModal={handleCloseModal}
       />
       <h1>MyCalendar</h1>
       <FullCalendar

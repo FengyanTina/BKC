@@ -1,4 +1,4 @@
-
+import { EventClickArg, EventContentArg } from "@fullcalendar/core";
 import Grid from "@mui/material/Grid2";
 // Adjust import based on your utility functions
 import { UserCategory } from "../../models/User";
@@ -28,11 +28,17 @@ const Sidebar = ({
  isConfirmDeleteOpen,
  onCloseConfirmDelete,
  onConfirmDelete,
+ handleDetail,
+ isDetailModalOpen,
+ onCloseDetailModal,
   currentUser,
 }: {
   currentEvents: CustomEvent[];
   handleEdit: (event: CustomEvent) => void;
   handleDelete: (event: CustomEvent) => void;
+  isDetailModalOpen: boolean;
+  handleDetail: (event: CustomEvent) => void;
+  onCloseDetailModal: () => void;
   isConfirmDeleteOpen: boolean;
   onCloseConfirmDelete: () => void;
   onConfirmDelete: () => void;
@@ -42,9 +48,9 @@ const Sidebar = ({
 
   const dateColumnSize = isAdmin ? 2 : 2;
   const timeColumnSize = isAdmin ? 2 : 2;
-  const titleColumnSize = isAdmin ? 3 : 4;
-  const locationColumnSize = isAdmin ? 3 : 4;
-  const actionColumnSize = isAdmin ? 2 : 0;
+  const titleColumnSize = isAdmin ? 2 : 3;
+  const locationColumnSize = isAdmin ? 3 : 3;
+  const actionColumnSize = isAdmin ? 3 : 2;
  
 
 
@@ -104,17 +110,18 @@ const Sidebar = ({
             <Grid size={locationColumnSize}>
               <strong>Location</strong>
             </Grid>
-            {isAdmin && (
+            
               <Grid size={actionColumnSize}>
                 <strong>Action</strong>
               </Grid>
-            )}
+           
           </Grid>
           {/* Event Rows */}
           {currentEvents.map((event) => (
             <SidebarEvent
               key={event.id}
               event={event}
+              handleDetail={() => handleDetail(event)} 
               onEdit={isAdmin ? handleEdit : null}
               onDelete={isAdmin ? handleDelete : null}
             />
@@ -132,17 +139,19 @@ const SidebarEvent = ({
   event,
   onEdit,
   onDelete,
+  handleDetail,
 }: {
   event: CustomEvent;
   onEdit: ((event: CustomEvent) => void) | null;
   onDelete: ((event: CustomEvent) => void) | null;
+  handleDetail: (event: CustomEvent) => void;
 }) => {
   const hasActionColumn = !!(onEdit || onDelete); // Check if action buttons exist
   const dateColumnSize = hasActionColumn ? 2 : 2;
   const timeColumnSize = hasActionColumn ? 2 : 2;
-  const titleColumnSize = hasActionColumn ? 3 : 4;
-  const locationColumnSize = hasActionColumn ? 3 : 4;
-  const actionColumnSize = hasActionColumn ? 2 : 0;
+  const titleColumnSize = hasActionColumn ? 2 : 3;
+  const locationColumnSize = hasActionColumn ? 3 : 3;
+  const actionColumnSize = hasActionColumn ? 3 : 2;
 
   return (
     <Grid
@@ -166,6 +175,9 @@ const SidebarEvent = ({
         {event.location}
       </Grid>
       <Grid size={actionColumnSize} style={{ textAlign: "left" }}>
+      <Button onClick={() => handleDetail(event)} variant="outlined" style={{ marginRight: "5px" }}>
+          Detail
+        </Button>
         {onEdit && (
           <Button
             onClick={() => onEdit(event)}
