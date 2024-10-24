@@ -11,6 +11,8 @@ import EventAddAndEditForm from "./EventAddAndEditForm";
 //import Sidebar from "./ScheduleEventTable";
 import { useAuth } from "../../context/AuthContext";
 import Sidebar from "./ScheduleEventTable";
+import ConfirmDeleteDialog from "../../components/common/Forms/ConfirmDeleteDialog";
+import EventForm from "./EventFormWithTimeSelection";
 
 // Custom event interface with optional description
 interface CustomEvent {
@@ -203,26 +205,38 @@ const MyCalendar: React.FC = () => {
     }
   };
 
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [eventTitle, setEventTitle] = useState<string>("");
+  const handleScheduleFromDatePicker = () => {
+    if (selectedDate && eventTitle) {
+      const newEvent: CustomEvent = {
+        id: String(new Date().getTime()),
+        title: eventTitle,
+        start: selectedDate.toISOString(),
+        end: new Date(selectedDate.getTime() + 60 * 60 * 1000).toISOString(), // 1-hour event
+        allDay: false,
+      };
+
+      setCurrentEvents((prevEvents) => {
+        const updatedEvents = [...prevEvents, newEvent];
+        saveEventsToLocalStorage(updatedEvents); // Save to localStorage
+        return updatedEvents;
+      });
+
+      // Clear form after scheduling
+      setEventTitle("");
+      setSelectedDate(null);
+    } else {
+      alert("Please select a date and enter a title.");
+    }
+  };
 
 
   return (
-    <div className="calendar-container">
-      <Sidebar
-        currentEvents={currentEvents}
-        handleEdit={handleEdit}
-        currentUser={currentUser}
-        handleDelete={handleDelete}
-        isConfirmDeleteOpen={isConfirmDeleteOpen}
-        onCloseConfirmDelete={handleCloseConfirmDelete}
-        onConfirmDelete={handleConfirmDelete}
-        handleDetail={handleDetailOnTable}
-        isDetailModalOpen={isDetailModalOpen} // Pass the state for the detail modal
-        onCloseDetailModal={handleCloseModal}
-      />
+    <div className="calendar-container">  
       <h1>MyCalendar</h1>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        // headerToolbar={headerToolbar}
         headerToolbar={{
           left: "prev,next today",
           center: "title",
@@ -250,6 +264,15 @@ const MyCalendar: React.FC = () => {
           hour12: false, // 24-hour format
         }}
       />
+      <Sidebar
+        currentEvents={currentEvents}
+        handleEdit={handleEdit}
+        currentUser={currentUser}
+        handleDelete={handleDelete}
+        handleDetailOnTable={handleDetailOnTable}
+      />
+      <ConfirmDeleteDialog open={isConfirmDeleteOpen}
+            onClose={handleCloseConfirmDelete} onConfirm={handleConfirmDelete} title= {selectedEvent?.title}/>
       <ScheduleEventDetailDialog
         event={selectedEvent}
         open={isDetailModalOpen}
@@ -263,6 +286,7 @@ const MyCalendar: React.FC = () => {
         handleFieldChange={handleFieldChange}
         handleSaveEvent={handleSaveEvent}
       />
+      {/* <EventForm onClose={handleCloseModal} onSave={handleSaveEvent} open={isModalOpen} isEditing={isEditing} /> */}
     </div>
   );
 };

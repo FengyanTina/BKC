@@ -1,89 +1,4 @@
-// import React from 'react';
-// import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
-// import { createEventId } from './Events';
 
-// interface EventFormProps {
-//   open: boolean;
-//   event?: CustomEvent; // Optional because it can be undefined when adding a new event
-//   onClose: () => void;
-//   onSave: (event: CustomEvent) => void; // Callback for saving the event
-// }
-// interface CustomEvent {
-//     id: string;
-//     title: string;
-//     start: string;
-//     end: string;
-//     allDay: boolean;
-//     description?: string;
-//   }
-  
-//   interface DemoAppState {
-//     weekendsVisible: boolean;
-//     currentEvents: CustomEvent[];
-//     selectedEvent?: CustomEvent; 
-//     isModalOpen: boolean;
-//     isEditing: boolean;
-//     newEventInfo: { start: string; end: string; allDay: boolean };
-//   }
-
-// const EventForm: React.FC<EventFormProps> = ({ open, event, onClose, onSave }) => {
-//   const [title, setTitle] = React.useState(event?.title || '');
-//   const [description, setDescription] = React.useState(event?.description || '');
-  
-//   // Optional: If you want to have start and end time inputs, you can also add those
-//   // Here we're just handling title and description for simplicity
-
-//   const handleSave = () => {
-//     const newEvent: CustomEvent = {
-//       id: event ? event.id : createEventId(), // Use existing ID or create a new one
-//       title,
-//       description,
-//       start: event?.start || new Date().toISOString(), // Set default start to now if adding
-//       end: event?.end || new Date(new Date().getTime() + 3600000).toISOString(), // Default end time (1 hour later)
-//       allDay: event?.allDay || false, // Use existing or default to false
-//     };
-
-//     onSave(newEvent);
-//     onClose(); // Close the dialog after saving
-//   };
-
-//   return (
-//     <Dialog open={open} onClose={onClose}>
-//       <DialogTitle>{event ? 'Edit Event' : 'Add Event'}</DialogTitle>
-//       <DialogContent>
-//         <TextField
-//           autoFocus
-//           margin="dense"
-//           label="Title"
-//           type="text"
-//           fullWidth
-//           variant="outlined"
-//           value={title}
-//           onChange={(e) => setTitle(e.target.value)}
-//         />
-//         <TextField
-//           margin="dense"
-//           label="Description"
-//           type="text"
-//           fullWidth
-//           variant="outlined"
-//           value={description}
-//           onChange={(e) => setDescription(e.target.value)}
-//         />
-//       </DialogContent>
-//       <DialogActions>
-//         <Button onClick={onClose} color="primary">
-//           Cancel
-//         </Button>
-//         <Button onClick={handleSave} color="primary">
-//           Save
-//         </Button>
-//       </DialogActions>
-//     </Dialog>
-//   );
-// };
-
-// export default EventForm;
 import React, { useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
 import { createEventId } from './Events';
@@ -103,11 +18,13 @@ interface CustomEvent {
   end: string;
   allDay: boolean;
   description?: string;
+  location?:string;
 }
 
 const EventForm: React.FC<EventFormProps> = ({ open, event, onClose, onSave,isEditing }) => {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [location, setLocation] = React.useState('');
   const [start, setStart] = React.useState('');
   const [end, setEnd] = React.useState('');
   const [allDay, setAllDay] = React.useState(false);
@@ -139,6 +56,7 @@ const EventForm: React.FC<EventFormProps> = ({ open, event, onClose, onSave,isEd
       start,
       end,
       allDay,
+      location,
     };
 
     onSave(newEvent);
@@ -167,6 +85,15 @@ const EventForm: React.FC<EventFormProps> = ({ open, event, onClose, onSave,isEd
           variant="outlined"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+        />
+          <TextField
+          margin="dense"
+          label="Description"
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={description}
+          onChange={(e) => setLocation(e.target.value)}
         />
         <TextField
           margin="dense"

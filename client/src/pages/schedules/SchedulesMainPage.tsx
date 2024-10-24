@@ -6,6 +6,7 @@ import EventCalendar from "./EventCalendar";
 import SectionLine from "../../components/pageSections/SectionLine";
 import EventSchedule from "../../components/pageSections/scheduleManagement/DatePickerEventSchedule";
 import MyCalendar from "./MyCalendar";
+import EventForm from "./EventFormWithTimeSelection";
 
 export default function SchedulesMainPage() {
   return (
@@ -63,10 +64,10 @@ export default function SchedulesMainPage() {
           >
             Comming Week Schedule
           </Typography>
-          {/* <ServingScheduleCollapsibleTable /> */}
           <CollapsibleTable />
         </Box>
         <EventSchedule />
+        
         <MyCalendar/>
       </Box>
     </>

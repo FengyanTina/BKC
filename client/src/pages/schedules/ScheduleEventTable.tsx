@@ -25,23 +25,14 @@ const Sidebar = ({
   currentEvents,
   handleEdit,
  handleDelete,
- isConfirmDeleteOpen,
- onCloseConfirmDelete,
- onConfirmDelete,
- handleDetail,
- isDetailModalOpen,
- onCloseDetailModal,
+
+ handleDetailOnTable: handleDetail,
   currentUser,
 }: {
   currentEvents: CustomEvent[];
   handleEdit: (event: CustomEvent) => void;
   handleDelete: (event: CustomEvent) => void;
-  isDetailModalOpen: boolean;
-  handleDetail: (event: CustomEvent) => void;
-  onCloseDetailModal: () => void;
-  isConfirmDeleteOpen: boolean;
-  onCloseConfirmDelete: () => void;
-  onConfirmDelete: () => void;
+  handleDetailOnTable: (event: CustomEvent) => void;
   currentUser: any; // Adjust type based on your context
 }) => {
   const isAdmin = currentUser?.category === UserCategory.Admin;
@@ -55,31 +46,9 @@ const Sidebar = ({
 
 
   
-  const [selectedEvent, setSelectedEvent] = useState<CustomEvent | null>(null);
-  const [updatedEvents, setUpdatedEvents] = useState<CustomEvent[]>(currentEvents);
+ // const [selectedEvent, setSelectedEvent] = useState<CustomEvent | null>(null);
+
   
-//   const handleDelete = (event: CustomEvent) => {
-//     setSelectedEvent(event); // Store the event to be deleted
-//     setConfirmDeleteOpen(true); // Open the confirmation modal
-//   };
-
-//   const handleCloseConfirmDelete = () => {
-//     setConfirmDeleteOpen(false);
-//     setSelectedEvent(null); // Clear selected event
-//   };
-
-//   const handleConfirmDelete = () => {
-//     if (selectedEvent) {
-//       setUpdatedEvents(prevEvents => 
-//         prevEvents.filter((e) => e.id !== selectedEvent.id)
-//       ); // Use functional update to avoid stale closure
-//       setConfirmDeleteOpen(false); // Close modal
-//       setSelectedEvent(null); // Clear selected event
-
-//       // Save updated events to localStorage
-//       saveEventsToLocalStorage(updatedEvents.filter(e => e.id !== selectedEvent.id)); // Save updated events
-//     }
-//   };
 
 
 
@@ -127,8 +96,7 @@ const Sidebar = ({
             />
           ))}
         </Paper>
-        <ConfirmDeleteDialog open={isConfirmDeleteOpen}
-            onClose={onCloseConfirmDelete} onConfirm={onConfirmDelete} title= {selectedEvent?.title}/>
+        
       </div>
     </div>
   );
